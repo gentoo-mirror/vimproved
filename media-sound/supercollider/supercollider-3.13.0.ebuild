@@ -40,7 +40,6 @@ RDEPEND="
 		dev-qt/qtsvg:5
 		dev-qt/qtwidgets:5
 	)
-	server? ( !app-admin/supernova )
 	sndfile? ( media-libs/libsndfile )
 	webengine? (
 		dev-qt/qtwebchannel:5
