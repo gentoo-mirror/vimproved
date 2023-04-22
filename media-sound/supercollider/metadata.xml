@@ -18,5 +18,6 @@
 		<flag name="gpl3">Build GPL-3 licensed code (recommended)</flag>
 		<flag name="server">Build with internal server</flag>
 		<flag name="webengine">Enable the internal help system using QtWebengine</flag>
+		<flag name="lto">Build using Link Time Optimizations (LTO)</flag>
 	</use>
 </pkgmetadata>

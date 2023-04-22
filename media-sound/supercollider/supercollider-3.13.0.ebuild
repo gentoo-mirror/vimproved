@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake flag-o-matic readme.gentoo-r1 xdg-utils
+inherit cmake flag-o-matic xdg-utils
 
 DESCRIPTION="Environment and programming language for real time audio synthesis"
 HOMEPAGE="https://supercollider.github.io/"
