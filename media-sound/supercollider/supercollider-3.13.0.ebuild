@@ -60,10 +60,6 @@ DEPEND="${RDEPEND}
 	vim? ( app-editors/vim )
 "
 
-PATCHES=(
-#	"${FILESDIR}"/${P}-boost-1.74.patch # bug 760489
-)
-
 S="${WORKDIR}/SuperCollider-${PV}-Source"
 
 src_configure() {
