@@ -1,0 +1,30 @@
+#+title: vimproved's Portage Overlay
+#+author: vimproved
+#+date: 2023-04-22
+
+Hi! This is my portage overlay, containing various ebuilds I use. This is primarily a personal overlay, so please don't expect stability or reasoning for removed packages (although there will be a 1 month last-rite period.)
+
+* ebuilds
+- dev-embedded/
+  - qmk: *[uniq]* A program to help users work with QMK
+  - qmk-udev-rules: *[uniq]* Udev rules for dev-embedded/qmk
+- dev-lua/
+  - StyLua: *[from ambasta, updated]* An opinionated Lua code formatter
+- dev-python/
+  - dotty-dict: *[uniq]* Dictionary wrapper for quick access to deeply nested keys
+  - halo: *[uniq]* Beautiful terminal spinners in Python
+  - hid: *[uniq]* ctypes bindings for hidapi
+  - hjson: *[uniq]* A user interface for JSON
+  - log-symbols: *[uniq]* Colored symbols for various log levels for Python
+  - milc: *[uniq]* Opinionated Batteries-Included Python 3 CLI Framework
+  - spinners: *[uniq]* Spinners for terminals
+- media-sound/
+  - carla: *[from audio-overlay, updated]* Fully-featured audio plugin host, supports many audio drivers and plugin formats
+  - sc3-plugins: *[from audio-overlay, updated]* Third party plugins for SuperCollider
+  - sfizz: *[uniq]* SFZ parser and synth c++ library
+  - supercollider: *[from gentoo, updated]* Environment and programming language for real time audio synthesis
+  - zyn-fusion: *[from fordfrog, release version]* A new interface for ZynAddSubFX
+  - zynaddsubfx: *[from fordfrog, release version]* Software synthesizer capable of making a countless number of instruments
+- x11-themes/
+  - adw-gtk3: *[uniq]* The theme from libadwaita ported to GTK-3
+	
