@@ -8,6 +8,10 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
 - dev-embedded/
   - qmk: *[uniq]* A program to help users work with QMK
   - qmk-udev-rules: *[uniq]* Udev rules for dev-embedded/qmk
+- dev-libs/
+  - libcyaml: *[uniq]* C library for reading and writing YAML
+  - reproc: *[uniq]* A cross-platform (C99/C++11) process library
+  - zix: *[uniq]* A lightweight C99 portability and data structure library
 - dev-lua/
   - StyLua: *[from ambasta, updated]* An opinionated Lua code formatter
 - dev-python/
@@ -18,13 +22,17 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
   - log-symbols: *[uniq]* Colored symbols for various log levels for Python
   - milc: *[uniq]* Opinionated Batteries-Included Python 3 CLI Framework
   - spinners: *[uniq]* Spinners for terminals
+- media-libs/
+  - libaudec: *[uniq]* library for reading and resampling audio files
+  - lsp-dsp-lib: *[uniq]* DSP library for signal processing
+  - pyliblo: *[from audio-overlay]* A Python wrapper for the liblo OSC library
 - media-sound/
   - carla: *[from audio-overlay, updated]* Fully-featured audio plugin host, supports many audio drivers and plugin formats
   - sc3-plugins: *[from audio-overlay, updated]* Third party plugins for SuperCollider
   - sfizz: *[uniq]* SFZ parser and synth c++ library
   - supercollider: *[from gentoo, updated]* Environment and programming language for real time audio synthesis
+  - zrythm: *[uniq]* A highly automated and intuitive digital audio workstation
   - zyn-fusion: *[from fordfrog, release version]* A new interface for ZynAddSubFX
   - zynaddsubfx: *[from fordfrog, release version]* Software synthesizer capable of making a countless number of instruments
 - x11-themes/
   - adw-gtk3: *[uniq]* The theme from libadwaita ported to GTK-3
-	
