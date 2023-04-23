@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>vimproved@inventati.org</email>
+		<name>Violet Purcell</name>
+	</maintainer>
+	<use>
+		<flag name = "optimize">Apply extra aggressive optimization flags</flag>
+		<flag name = "plugins">Build builtin plugins</flag>
+		<flag name = "rtaudio">Use media-libs/rtaudio for realtime audio processing</flag>
+		<flag name = "simd">Use media-libs/lsp-dsp-lib for simd-enabled dsp processing</flag>
+	</use>
+</pkgmetadata>
