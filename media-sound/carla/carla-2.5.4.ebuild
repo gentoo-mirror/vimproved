@@ -12,7 +12,6 @@ SRC_URI="https://github.com/falkTX/Carla/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 RESTRICT="mirror"
 KEYWORDS="~amd64"
 S="${WORKDIR}/Carla-${PV}"
-fi
 LICENSE="GPL-2 LGPL-3"
 SLOT="0"
 
