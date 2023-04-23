@@ -8,10 +8,11 @@ inherit python-single-r1 xdg-utils
 
 DESCRIPTION="Fully-featured audio plugin host, supports many audio drivers and plugin formats"
 HOMEPAGE="http://kxstudio.linuxaudio.org/Applications:Carla"
-SRC_URI="https://github.com/falkTX/Carla/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+MY_PV="3b92085050c3dc00ac304e100ad648d55c067e65"
+SRC_URI="https://github.com/falkTX/Carla/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 RESTRICT="mirror"
 KEYWORDS="~amd64"
-S="${WORKDIR}/Carla-${PV}"
+S="${WORKDIR}/Carla-${MY_PV}"
 LICENSE="GPL-2 LGPL-3"
 SLOT="0"
 
