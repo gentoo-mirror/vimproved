@@ -26,6 +26,7 @@ DEPEND="
 	dev-libs/libpcre2
 	dev-libs/reproc
 	dev-libs/xxhash
+	dev-libs/zix
 	guile? ( dev-scheme/guile )
 	gui-libs/gtk
 	gui-libs/gtksourceview
