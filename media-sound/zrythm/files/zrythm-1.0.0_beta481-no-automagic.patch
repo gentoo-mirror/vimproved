@@ -1,0 +1,58 @@
+diff -upr zrythm-1.0.0-beta.4.8.1/meson.build zrythm-1.0.0-beta.4.8.1-tmp/meson.build
+--- zrythm-1.0.0-beta.4.8.1/meson.build	2023-04-14 19:12:52.000000000 -0400
++++ zrythm-1.0.0-beta.4.8.1-tmp/meson.build	2023-04-24 14:34:01.005705814 -0400
+@@ -796,22 +796,26 @@ endif
+ # set config defines
+ x11_dep = dependency (
+   'x11', required: get_option ('x11'), static: all_static)
+-if (x11_dep.found ())
++have_x11 = x11_dep.found () and get_option ('x11').enabled ()
++if (have_x11)
+   cdata.set('HAVE_X11', 1)
+ endif
+ alsa_dep = dependency (
+   'alsa', required: get_option ('alsa'), static: all_static)
+-if (alsa_dep.found ())
++have_alsa = alsa_dep.found () and get_option ('alsa').enabled ()
++if (have_alsa)
+   cdata.set('HAVE_ALSA', 1)
+ endif
+ pulseaudio_dep = dependency (
+   'libpulse', required: get_option ('pulse'), static: all_static)
+-if (pulseaudio_dep.found ())
++have_pulseaudio = pulseaudio_dep.found () and get_option ('pulse').enabled ()
++if (have_pulseaudio)
+   cdata.set('HAVE_PULSEAUDIO', 1)
+ endif
+ libsoundio_dep = cc.find_library (
+   'soundio', required: get_option ('soundio'), static: all_static)
+-if (libsoundio_dep.found ())
++have_libsoundio = libsoundio_dep.found () and get_option ('soundio').enabled ()
++if (have_libsoundio)
+   cdata.set('HAVE_LIBSOUNDIO', 1)
+ endif
+ cyaml_dep = dependency(
+@@ -1581,18 +1585,18 @@ summary ({
+   }, section: 'General')
+ 
+ summary ({
+-  'ALSA': alsa_dep.found (),
++  'ALSA': have_alsa,
+   'Carla': have_carla,
+   'GraphViz': have_graphviz,
+   'Guile': have_guile,
+   'JACK': have_jack,
+-  'SoundIO': libsoundio_dep.found (),
++  'SoundIO': have_libsoundio,
+   'LSP DSP': lsp_dsp_dep.found (),
+-  'PulseAudio': pulseaudio_dep.found (),
++  'PulseAudio': have_pulseaudio,
+   'RtAudio': rtaudio_dep.found (),
+   'RtMidi': rtmidi_dep.found (),
+   'SDL': sdl_dep.found (),
+-  'X11': x11_dep.found (),
++  'X11': have_x11,
+   }, section: 'Features')
+ 
+ if have_carla
+

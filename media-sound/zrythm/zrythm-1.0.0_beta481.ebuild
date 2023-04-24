@@ -28,7 +28,7 @@ DEPEND="
 	dev-libs/xxhash
 	dev-libs/zix
 	guile? ( dev-scheme/guile )
-	gui-libs/gtk
+	gui-libs/gtk[X?]
 	gui-libs/gtksourceview
 	gui-libs/libadwaita
 	gui-libs/libpanel
@@ -52,6 +52,10 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 BDEPEND="x11-misc/xdg-utils"
+
+PATCHES=(
+	"${FILESDIR}/${P}-no-automagic.patch"
+)
 
 src_configure() {
 	local myemesonargs=(
