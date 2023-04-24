@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-inherit gnome2-utils meson
+inherit gnome2-utils meson xdg
 
 DESCRIPTION="A highly automated and intuitive digital audio workstation"
 HOMEPAGE="https://www.zrythm.org/"
@@ -83,8 +83,10 @@ src_configure() {
 
 pkg_postinst() {
 	gnome2_schemas_update
+	xdg_pkg_postinst
 }
 
 pkg_postrm() {
 	gnome2_schemas_update
+	xdg_pkg_postrm
 }
