@@ -15,5 +15,5 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 src_configure() {
-	emake PREFIX="/usr" LIBDIR="$(get_libdir)" config
+	emake PREFIX="/usr" LIBDIR="/usr/$(get_libdir)" config
 }
