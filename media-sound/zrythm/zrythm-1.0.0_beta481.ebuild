@@ -16,7 +16,7 @@ LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 RESTRICT="mirror !test? ( test )"
-IUSE="X alsa doc graphviz +guile +jack man optimize opus +plugins profile pulseaudio sdl +simd rtaudio test"
+IUSE="+X alsa doc graphviz +guile +jack man optimize opus +plugins profile pulseaudio sdl +simd rtaudio test"
 
 DEPEND="
 	app-arch/zstd
@@ -50,6 +50,7 @@ DEPEND="
 	jack? ( virtual/jack )
 "
 RDEPEND="${DEPEND}"
+BDEPEND="x11-misc/xdg-utils"
 
 src_configure() {
 	local myemesonargs=(
