@@ -23,7 +23,7 @@ BV_SPARC_SOLARIS=1.0.23
 DESCRIPTION="Steel Bank Common Lisp (SBCL) is an implementation of ANSI Common Lisp"
 HOMEPAGE="https://www.sbcl.org/ http://sbcl.sourceforge.net/"
 SRC_URI="mirror://sourceforge/sbcl/${P}-source.tar.bz2
-	!clisp-bootstrap? (
+	!system-bootstrap? (
 		x86? ( mirror://sourceforge/sbcl/${PN}-${BV_X86}-x86-linux-binary.tar.bz2 )
 		amd64? ( mirror://sourceforge/sbcl/${PN}-${BV_AMD64}-x86-64-linux-binary.tar.bz2 )
 		ppc? ( mirror://sourceforge/sbcl/${PN}-${BV_PPC}-powerpc-linux-binary.tar.bz2 )
@@ -42,14 +42,15 @@ SRC_URI="mirror://sourceforge/sbcl/${P}-source.tar.bz2
 LICENSE="MIT"
 SLOT="0/${PV}"
 KEYWORDS="-* ~amd64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-solaris"
-IUSE="clisp-bootstrap debug doc source +threads +unicode +zstd"
+IUSE="system-bootstrap debug doc source +threads +unicode +zstd"
 
 CDEPEND=">=dev-lisp/asdf-3.3:= \
 	prefix? ( dev-util/patchelf )"
 # bug #843851
 BDEPEND="${CDEPEND}
 		dev-util/strace
-		doc? ( sys-apps/texinfo >=media-gfx/graphviz-2.26.0 )"
+		doc? ( sys-apps/texinfo >=media-gfx/graphviz-2.26.0 )
+		system-bootstrap? ( || ( dev-lisp/clisp dev-lisp/sbcl ) )"
 RDEPEND="${CDEPEND}
 		zstd? ( app-arch/zstd )
 		!prefix? ( elibc_glibc? ( >=sys-libs/glibc-2.6 ) )"
@@ -95,7 +96,7 @@ sbcl_apply_features() {
 
 src_unpack() {
 	unpack ${A}
-	if ! use clisp-bootstrap ; then
+	if ! use system-bootstrap ; then
 		mv sbcl-*-* sbcl-binary || die
 	fi
 	cd "${S}"
@@ -172,7 +173,13 @@ src_compile() {
 	local bindir="${WORKDIR}"/sbcl-binary
 	local bootstrap_lisp="sh ${bindir}/run-sbcl.sh --no-sysinit --no-userinit --disable-debugger"
 
-	use clisp-bootstrap && bootstrap_lisp="clisp"
+	if use system-bootstrap ; then
+		if has_version "dev-lisp/sbcl" ; then
+			bootstrap_lisp="sbcl --no-sysinit --no-userinit --disable-debugger"
+		else
+			bootstrap_lisp="clisp"
+		fi
+	fi
 
 	# Bug #869434
 	append-cppflags -D_GNU_SOURCE
@@ -182,6 +189,7 @@ src_compile() {
 	env - HOME="${T}" PATH="${PATH}" \
 		CC="$(tc-getCC)" AS="$(tc-getAS)" LD="$(tc-getLD)" \
 		CPPFLAGS="${CPPFLAGS}" CFLAGS="${CFLAGS}" ASFLAGS="${ASFLAGS}" LDFLAGS="${LDFLAGS}" \
+		SBCL_HOME="/usr/$(get_libdir)/sbcl" SBCL_SOURCE_ROOT="/usr/$(get_libdir)/sbcl/src" \
 		GNUMAKE=make ./make.sh \
 		"${bootstrap_lisp}" \
 		|| die "make failed"
