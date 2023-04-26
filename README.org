@@ -12,6 +12,8 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
   - libcyaml: *[uniq]* C library for reading and writing YAML
   - reproc: *[uniq]* A cross-platform (C99/C++11) process library
   - zix: *[uniq]* A lightweight C99 portability and data structure library
+- dev-lisp/
+  - sbcl: *[from gentoo, PR 30752]* Steel Bank Common Lisp (SBCL) is an implementation of ANSI Common Lisp
 - dev-lua/
   - StyLua: *[from ambasta, updated]* An opinionated Lua code formatter
 - dev-python/
