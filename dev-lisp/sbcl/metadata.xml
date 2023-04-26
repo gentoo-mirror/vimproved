@@ -25,7 +25,6 @@
 	</longdescription>
 	<use>
 		<flag name="capstone">Enable disassembly support with <pkg>dev-libs/capstone</pkg></flag>
-		<flag name="clisp-bootstrap">Boostrap SBCL using <pkg>dev-lisp/clisp</pkg></flag>
 	</use>
 	<upstream>
 		<remote-id type="sourceforge">sbcl</remote-id>
