@@ -1,0 +1,22 @@
+diff -upr a/src/Misc/Bank.h b/src/Misc/Bank.h
+--- a/src/Misc/Bank.h	2022-01-21 20:46:21.000000000 -0500
++++ b/src/Misc/Bank.h	2023-04-30 18:59:16.826744887 -0400
+@@ -14,6 +14,7 @@
+ #ifndef BANK_H
+ #define BANK_H
+ 
++#include <cstdint>
+ #include <string>
+ #include <vector>
+ #include "../globals.h"
+diff -upr a/src/Nio/MidiIn.h b/src/Nio/MidiIn.h
+--- a/src/Nio/MidiIn.h	2022-01-21 20:46:21.000000000 -0500
++++ b/src/Nio/MidiIn.h	2023-04-30 19:01:44.146745613 -0400
+@@ -17,6 +17,7 @@
+ #define MIDI_IN_H
+ 
+ #include "Engine.h"
++#include <cstdint>
+ 
+ namespace zyn {
+
