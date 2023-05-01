@@ -16,7 +16,7 @@ S="${WORKDIR}/Carla-${MY_PV}"
 LICENSE="GPL-2 LGPL-3"
 SLOT="0"
 
-IUSE="alsa gtk gtk2 opengl osc pulseaudio rdf sf2 sndfile X"
+IUSE="+X alsa gtk gtk2 opengl osc pulseaudio rdf sf2 sndfile"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
@@ -33,7 +33,7 @@ RDEPEND="${PYTHON_DEPS}
 	rdf? ( dev-python/rdflib )
 	sf2? ( media-sound/fluidsynth )
 	sndfile? ( media-libs/libsndfile )
-	X? ( x11-base/xorg-server )"
+	X? ( x11-libs/libX11 )"
 DEPEND=${RDEPEND}
 
 PATCHES=(
