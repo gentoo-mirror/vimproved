@@ -46,6 +46,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}"/${P}-docs.patch
+	"${FILESDIR}"/${P}-cstdint.patch
 )
 
 DOCS=( AUTHORS.txt NEWS.txt README.adoc )

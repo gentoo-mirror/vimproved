@@ -27,6 +27,10 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+PATCHES=(
+	"${FILESDIR}/${P}-cstdint.patch"
+)
+
 src_configure() {
 	local mycmakeargs=(
 		-DLV2PLUGIN_INSTALL_DIR="/usr/$(get_libdir)/lv2"
