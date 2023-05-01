@@ -44,7 +44,7 @@ DEPEND="
 	)
 	media-libs/rubberband
 	media-libs/vamp-plugin-sdk
-	media-sound/carla
+	media-sound/carla[X?]
 	net-misc/curl
 	sci-libs/fftw[threads]
 	sys-libs/libbacktrace
