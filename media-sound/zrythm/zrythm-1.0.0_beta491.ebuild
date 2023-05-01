@@ -16,7 +16,7 @@ LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 RESTRICT="mirror !test? ( test )"
-IUSE="+X alsa doc graphviz +guile +jack man optimize opus +plugins profile pulseaudio sdl +simd rtaudio test"
+IUSE="X alsa doc graphviz +guile +jack man optimize opus +plugins profile pulseaudio sdl +simd rtaudio test"
 
 DEPEND="
 	app-arch/zstd
@@ -44,7 +44,7 @@ DEPEND="
 	)
 	media-libs/rubberband
 	media-libs/vamp-plugin-sdk
-	media-sound/carla[X?]
+	media-sound/carla
 	net-misc/curl
 	sci-libs/fftw[threads]
 	sys-libs/libbacktrace
@@ -54,7 +54,8 @@ RDEPEND="${DEPEND}"
 BDEPEND="x11-misc/xdg-utils"
 
 PATCHES=(
-	"${FILESDIR}/${P}-no-automagic.patch"
+	"${FILESDIR}/${PN}-1.0.0_beta481-no-automagic.patch"
+	"${FILESDIR}/${PN}-1.0.0_beta491-cstdint.patch"
 )
 
 src_configure() {
