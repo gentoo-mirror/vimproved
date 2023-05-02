@@ -37,7 +37,7 @@ RDEPEND="${PYTHON_DEPS}
 DEPEND=${RDEPEND}
 
 PATCHES=(
-	"${FILESDIR}/${P}-clang-fix.patch"
+	"${FILESDIR}/${PN}-2.6.0_pre20230422-clang-fix.patch"
 )
 
 src_prepare() {
