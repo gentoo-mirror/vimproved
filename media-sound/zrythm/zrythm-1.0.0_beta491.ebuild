@@ -28,7 +28,7 @@ DEPEND="
 	dev-libs/xxhash
 	dev-libs/zix
 	guile? ( dev-scheme/guile )
-	gui-libs/gtk[X?]
+	gui-libs/gtk[X]
 	gui-libs/gtksourceview
 	gui-libs/libadwaita
 	gui-libs/libpanel
@@ -58,7 +58,7 @@ PATCHES=(
 )
 
 src_configure() {
-	local myemesonargs=(
+	local emesonargs=(
 		$(meson_use profile profiling)
 		$(meson_use test tests)
 		$(meson_use test gui_tests)
