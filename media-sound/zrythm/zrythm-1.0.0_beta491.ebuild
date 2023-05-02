@@ -54,7 +54,6 @@ RDEPEND="${DEPEND}"
 BDEPEND="x11-misc/xdg-utils"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-1.0.0_beta481-no-automagic.patch"
 	"${FILESDIR}/${PN}-1.0.0_beta491-cstdint.patch"
 )
 
