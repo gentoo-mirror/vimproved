@@ -15,6 +15,14 @@ RDEPEND="
 	gnome-base/gsettings-desktop-schemas
 	gui-apps/foot
 	gui-apps/fuzzel
+	gui-apps/grim
+	gui-apps/mako
+	gui-apps/slurp
+	gui-apps/swaybg
+	gui-apps/swayidle
+	gui-apps/swaylock
+	gui-apps/yambar
+	gui-apps/wl-clipboard
 	gui-apps/wob
 	river? ( gui-wm/river )
 	sway? ( gui-wm/sway )
