@@ -11,5 +11,6 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
+	games-action/prismlauncher
 	games-misc/aisleriot
 "
