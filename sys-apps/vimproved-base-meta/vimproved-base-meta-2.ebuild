@@ -15,5 +15,6 @@ RDEPEND="
 	app-admin/doas
 	app-admin/pass
 	portage? ( app-portage/gentoolkit )
+	app-shells/fish
 	sys-process/btop
 "
