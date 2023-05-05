@@ -11,6 +11,6 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	media-fonts/catarell
+	media-fonts/cantarell
 	media-fonts/hack
 "
