@@ -15,8 +15,10 @@ RDEPEND="
 	app-admin/doas
 	app-admin/pass
 	app-admin/yadm
+	app-eselect/eselect-repository
 	portage? ( app-portage/gentoolkit )
 	app-shells/fish
+	dev-vcs/git
 	sys-process/btop
 	systemd? ( sys-process/systemd-cron )
 "
