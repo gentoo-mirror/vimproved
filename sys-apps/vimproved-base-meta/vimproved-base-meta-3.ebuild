@@ -14,6 +14,7 @@ KEYWORDS="~amd64"
 RDEPEND="
 	app-admin/doas
 	app-admin/pass
+	app-admin/yadm
 	portage? ( app-portage/gentoolkit )
 	app-shells/fish
 	sys-process/btop
