@@ -11,6 +11,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
+	dev-java/openjdk-bin:8
 	games-action/prismlauncher
 	games-misc/aisleriot
 "
