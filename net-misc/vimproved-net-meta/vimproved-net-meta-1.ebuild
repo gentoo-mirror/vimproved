@@ -11,6 +11,9 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	www-client/firefox-bin
+	|| (
+		www-client/firefox-bin
+		www-client/firefox
+	)
 	www-plugins/browserpass
 "
