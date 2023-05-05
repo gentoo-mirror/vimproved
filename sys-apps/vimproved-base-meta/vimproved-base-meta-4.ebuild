@@ -8,7 +8,7 @@ HOMEPAGE="https://codeberg.org/vimproved"
 
 LICENSE="metapackage"
 SLOT="0"
-IUSE="+portage"
+IUSE="+portage systemd"
 KEYWORDS="~amd64"
 
 RDEPEND="
@@ -18,4 +18,5 @@ RDEPEND="
 	portage? ( app-portage/gentoolkit )
 	app-shells/fish
 	sys-process/btop
+	systemd? ( sys-process/systemd-cron )
 "
