@@ -1,0 +1,207 @@
+Upstream PR: https://github.com/aristocratos/btop/pull/510/
+
+From cd27ae6fa656f119be9ddc424ea71d46f4cb5a79 Mon Sep 17 00:00:00 2001
+From: zackiloco <steffen.winter@proton.me>
+Date: Thu, 4 May 2023 13:39:54 +0200
+Subject: [PATCH] Allow clang as a compiler.
+
+Allow clang as a compiler if passed to the Makefile by calling
+`CXX=clang make` and pass the right `-flto` option depending on the
+compiler. Supported versions of LLVM are 16.0.0 and upwards.
+---
+ Makefile | 85 +++++++++++++++++++++++++++++++++++---------------------
+ 1 file changed, 53 insertions(+), 32 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 064397e8..3731539d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,5 +1,4 @@
+-#* Btop++ makefile v1.5
+-
++#* Btop++ makefile v1.6
+ BANNER  = \n \033[38;5;196m██████\033[38;5;240m╗ \033[38;5;196m████████\033[38;5;240m╗ \033[38;5;196m██████\033[38;5;240m╗ \033[38;5;196m██████\033[38;5;240m╗\n \033[38;5;160m██\033[38;5;239m╔══\033[38;5;160m██\033[38;5;239m╗╚══\033[38;5;160m██\033[38;5;239m╔══╝\033[38;5;160m██\033[38;5;239m╔═══\033[38;5;160m██\033[38;5;239m╗\033[38;5;160m██\033[38;5;239m╔══\033[38;5;160m██\033[38;5;239m╗   \033[38;5;160m██\033[38;5;239m╗    \033[38;5;160m██\033[38;5;239m╗\n \033[38;5;124m██████\033[38;5;238m╔╝   \033[38;5;124m██\033[38;5;238m║   \033[38;5;124m██\033[38;5;238m║   \033[38;5;124m██\033[38;5;238m║\033[38;5;124m██████\033[38;5;238m╔╝ \033[38;5;124m██████\033[38;5;238m╗\033[38;5;124m██████\033[38;5;238m╗\n \033[38;5;88m██\033[38;5;237m╔══\033[38;5;88m██\033[38;5;237m╗   \033[38;5;88m██\033[38;5;237m║   \033[38;5;88m██\033[38;5;237m║   \033[38;5;88m██\033[38;5;237m║\033[38;5;88m██\033[38;5;237m╔═══╝  ╚═\033[38;5;88m██\033[38;5;237m╔═╝╚═\033[38;5;88m██\033[38;5;237m╔═╝\n \033[38;5;52m██████\033[38;5;236m╔╝   \033[38;5;52m██\033[38;5;236m║   ╚\033[38;5;52m██████\033[38;5;236m╔╝\033[38;5;52m██\033[38;5;236m║        ╚═╝    ╚═╝\n \033[38;5;235m╚═════╝    ╚═╝    ╚═════╝ ╚═╝      \033[1;3;38;5;240mMakefile v1.5\033[0m
+ 
+ override BTOP_VERSION := $(shell head -n100 src/btop.cpp 2>/dev/null | grep "Version =" | cut -f2 -d"\"" || echo " unknown")
+@@ -39,6 +38,39 @@ endif
+ 
+ override PLATFORM_LC := $(shell echo $(PLATFORM) | tr '[:upper:]' '[:lower:]')
+ 
++#? Compiler and Linker
++ifeq ($(shell $(CXX) --version | grep clang >/dev/null 2>&1; echo $$?),0)
++	override CXX_IS_CLANG := true
++endif
++override CXX_VERSION := $(shell $(CXX) -dumpfullversion -dumpversion || echo 0)
++override CXX_VERSION_MAJOR := $(shell echo $(CXX_VERSION) | cut -d '.' -f 1)
++
++#? We only support Clang-16+ or GCC-10+
++ifeq ($(CXX_IS_CLANG),true)
++	ifeq ($(shell test $(CXX_VERSION_MAJOR) -lt 16; echo $$?),0)
++$(error $(shell printf "\033[1;91mERROR: \033[97m$(CXX): Version minimum is 16.0.0\033[0m"))
++	endif
++
++	override ADDFLAGS += -Wno-deprecated-builtins -Wno-deprecated-declarations
++else
++	#? Try to find a newer GCC version
++	ifeq ($(shell command -v g++-12 >/dev/null; echo $$?),0)
++		CXX := g++-12
++	else ifeq ($(shell command -v g++-11 >/dev/null; echo $$?),0)
++		CXX := g++-11
++	else ifeq ($(shell command -v g++11 >/dev/null; echo $$?),0)
++		CXX := g++11
++	else ifeq ($(shell command -v g++ >/dev/null; echo $$?),0)
++		CXX := g++
++	endif
++	override CXX_VERSION := $(shell $(CXX) -dumpfullversion -dumpversion || echo 0)
++	override CXX_VERSION_MAJOR := $(shell echo $(CXX_VERSION) | cut -d '.' -f 1)
++
++	ifeq ($(shell test $(CXX_VERSION_MAJOR) -lt 10; echo $$?),0)
++$(error $(shell printf "\033[1;91mERROR: \033[97m$(CXX): Version minimum is 10.1.0\033[0m"))
++	endif
++endif
++
+ #? Any flags added to TESTFLAGS must not contain whitespace for the testing to work
+ override TESTFLAGS := -fexceptions -fstack-clash-protection -fcf-protection
+ ifneq ($(PLATFORM) $(ARCH),macos arm64)
+@@ -46,9 +78,18 @@ ifneq ($(PLATFORM) $(ARCH),macos arm64)
+ endif
+ 
+ ifeq ($(STATIC),true)
+-	override ADDFLAGS += -static-libgcc -static-libstdc++
++	ifeq ($(CXX_IS_CLANG),true)
++		ifeq ($(shell $(CXX) -print-target-triple | grep gnu >/dev/null; echo $$?),0)
++$(error $(shell printf "\033[1;91mERROR: \033[97m$(CXX) can't statically link glibc\033[0m"))
++		endif
++	else
++		override ADDFLAGS += -static-libgcc -static-libstdc++
++	endif
+ 	ifneq ($(PLATFORM),macos)
+-		override ADDFLAGS += -DSTATIC_BUILD -static -Wl,--fatal-warnings
++		override ADDFLAGS += -DSTATIC_BUILD -static
++		ifneq ($(CXX_IS_CLANG),true)
++			override ADDFLAGS += -Wl,--fatal-warnings
++		endif
+ 	endif
+ endif
+ 
+@@ -62,33 +103,6 @@ else
+ 	override VERBOSE := true
+ endif
+ 
+-#? Compiler and Linker
+-ifeq ($(shell command -v g++-12 >/dev/null; echo $$?),0)
+-	CXX := g++-12
+-else ifeq ($(shell command -v g++-11 >/dev/null; echo $$?),0)
+-	CXX := g++-11
+-else ifeq ($(shell command -v g++11 >/dev/null; echo $$?),0)
+-	CXX := g++11
+-else ifeq ($(shell command -v g++ >/dev/null; echo $$?),0)
+-	CXX := g++
+-endif
+-override CXX_VERSION := $(shell $(CXX) -dumpfullversion -dumpversion || echo 0)
+-
+-#? Try to make sure we are using GCC/G++ version 11 or later if not instructed to use g++-10
+-ifeq ($(CXX),g++)
+-	ifeq ($(shell g++ --version | grep clang >/dev/null 2>&1; echo $$?),0)
+-		V_MAJOR := 0
+-	else
+-		V_MAJOR := $(shell echo $(CXX_VERSION) | cut -f1 -d".")
+-	endif
+-	ifneq ($(shell test $(V_MAJOR) -ge 11; echo $$?),0)
+-		ifeq ($(shell command -v g++-11 >/dev/null; echo $$?),0)
+-			override CXX := g++-11
+-			override CXX_VERSION := $(shell $(CXX) -dumpfullversion -dumpversion || echo 0)
+-		endif
+-	endif
+-endif
+-
+ #? Pull in platform specific source files and get thread count
+ ifeq ($(PLATFORM_LC),linux)
+ 	PLATFORM_DIR := linux
+@@ -115,6 +129,13 @@ ifeq ($(THREADS),1)
+ 	override THREADS := auto
+ endif
+ 
++#? LTO command line
++ifeq ($(CXX_IS_CLANG),true)
++	LTO := thin
++else
++	LTO := $(THREADS)
++endif
++
+ #? The Directories, Source, Includes, Objects and Binary
+ SRCDIR		:= src
+ INCDIR		:= include
+@@ -130,7 +151,7 @@ override GOODFLAGS := $(foreach flag,$(TESTFLAGS),$(strip $(shell echo "int main
+ #? Flags, Libraries and Includes
+ override REQFLAGS   := -std=c++20
+ WARNFLAGS			:= -Wall -Wextra -pedantic
+-OPTFLAGS			:= -O2 -ftree-loop-vectorize -flto=$(THREADS)
++OPTFLAGS			:= -O2 -ftree-vectorize -flto=$(LTO)
+ LDCXXFLAGS			:= -pthread -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS $(GOODFLAGS) $(ADDFLAGS)
+ override CXXFLAGS	+= $(REQFLAGS) $(LDCXXFLAGS) $(OPTFLAGS) $(WARNFLAGS)
+ override LDFLAGS	+= $(LDCXXFLAGS) $(OPTFLAGS) $(WARNFLAGS)
+
+ From 426fcca9dfd043ee8804e73177e478a27dad67bc Mon Sep 17 00:00:00 2001
+From: Steffen <steffen.winter@proton.me>
+Date: Wed, 22 Mar 2023 14:33:26 +0100
+Subject: [PATCH] Add include of <codecvt> required by libcxx and fix typo.
+
+---
+ src/btop_tools.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/btop_tools.cpp b/src/btop_tools.cpp
+index 6e8becbc..05ed3d77 100644
+--- a/src/btop_tools.cpp
++++ b/src/btop_tools.cpp
+@@ -17,6 +17,7 @@ tab-size = 4
+ */
+ 
+ #include <cmath>
++#include <codecvt>
+ #include <iostream>
+ #include <fstream>
+ #include <ctime>
+@@ -151,7 +152,7 @@ namespace Term {
+ 
+ //? --------------------------------------------------- FUNCTIONS -----------------------------------------------------
+ 
+-// ! Dsiabled due to issue when compiling with musl, reverted back to using regex
++// ! Disabled due to issue when compiling with musl, reverted back to using regex
+ // namespace Fx {
+ // 	string uncolor(const string& s) {
+ // 		string out = s;
+
+From 99f16733f636545926a73ddc8cbf4c0a110d6c16 Mon Sep 17 00:00:00 2001
+From: Steffen <steffen.winter@proton.me>
+Date: Wed, 22 Mar 2023 13:18:05 +0100
+Subject: [PATCH] Silence more "warning: unqualified call to 'std::move'" in
+ Clang-16.
+
+---
+ src/btop_config.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/btop_config.cpp b/src/btop_config.cpp
+index 700cc449..b4bdec23 100644
+--- a/src/btop_config.cpp
++++ b/src/btop_config.cpp
+@@ -332,7 +332,7 @@ namespace Config {
+ 			new_presets.push_back(preset);
+ 		}
+ 
+-		preset_list = move(new_presets);
++		preset_list = std::move(new_presets);
+ 		return true;
+ 	}
+ 
+@@ -515,7 +515,7 @@ namespace Config {
+ 		for (auto& box : new_boxes) {
+ 			if (not v_contains(valid_boxes, box)) return false;
+ 		}
+-		current_boxes = move(new_boxes);
++		current_boxes = std::move(new_boxes);
+ 		return true;
+ 	}
+ 
