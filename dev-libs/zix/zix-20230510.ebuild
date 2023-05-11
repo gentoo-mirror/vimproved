@@ -6,9 +6,9 @@ inherit meson
 
 DESCRIPTION="A lightweight C99 portability and data structure library"
 HOMEPAGE="https://gitlab.com/drobilla/zix"
-MY_PV="262d4a1522c38be0588746e874159da5c7bb457d"
-SRC_URI="https://gitlab.com/drobilla/zix/-/archive/${MY_PV}/zix-${MY_PV}.tar.bz2 -> ${P}.tar.bz2"
-S="${WORKDIR}/zix-${MY_PV}"
+ZIX_COMMIT="71b215560249747a2f1c3d16f9d372e5b668c45e"
+SRC_URI="https://gitlab.com/drobilla/zix/-/archive/${ZIX_COMMIT}/zix-${ZIX_COMMIT}.tar.bz2 -> ${P}.tar.bz2"
+S="${WORKDIR}/zix-${ZIX_COMMIT}"
 
 LICENSE="ISC"
 SLOT="0"
