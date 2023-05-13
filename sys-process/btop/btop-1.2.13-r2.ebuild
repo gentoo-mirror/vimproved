@@ -22,6 +22,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${P}-allow-clang.patch"
+	"${FILESDIR}/${P}-musl-lfs64.patch"
 
 	# Backported fixes for https://bugs.gentoo.org/884005,
 	# can be removed in 1.2.14 or later
