@@ -1,0 +1,5 @@
+# Violet Purcell <vimproved@inventati.org> (2023-05-17)
+# Buggy. Don't feel like maintaining, doesn't compile on musl.
+# Removal on 2023-06-17.
+media-sound/zyn-fusion
+media-sound/zynaddsubfx
