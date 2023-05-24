@@ -5,7 +5,7 @@ EAPI=8
 
 if [[ ${PV} != *9999* ]]; then
 	QT5_KDEPATCHSET_REV=1
-	KEYWORDS="amd64 ~arm ~arm64 ~hppa ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86"
+	KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
 QT5_MODULE="qtbase"
@@ -74,6 +74,8 @@ PDEPEND="
 	ibus? ( app-i18n/ibus )
 	wayland? ( =dev-qt/qtwayland-${QT5_PV}* )
 "
+
+PATCHES=( "${FILESDIR}/${P}-CVE-2023-32763.patch" )
 
 QT5_TARGET_SUBDIRS=(
 	src/tools/qvkgen
