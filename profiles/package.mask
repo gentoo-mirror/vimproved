@@ -8,4 +8,3 @@ dev-libs/reproc
 dev-libs/zix
 media-libs/libaudec
 media-libs/lsp-dsp-lib
-media-libs/pyliblo
