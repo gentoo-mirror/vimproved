@@ -4,7 +4,7 @@
 media-sound/zrythm
 media-sound/carla
 dev-libs/libcyaml
-dev-libs/reprox
+dev-libs/reproc
 dev-libs/zix
 media-libs/libaudec
 media-libs/lsp-dsp-lib
