@@ -1,0 +1,11 @@
+# Violet Purcell <vimproved@inventati.org> (2023-05-26)
+# Not interested in maintaining anymore. Requires snapshot version of carla,
+# which is just irritating to maintain. Removal on 2023-06-26.
+media-sound/zrythm
+media-sound/carla
+dev-libs/libcyaml
+dev-libs/reprox
+dev-libs/zix
+media-libs/libaudec
+media-libs/lsp-dsp-lib
+media-libs/pyliblo
