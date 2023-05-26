@@ -2,7 +2,7 @@
 # Not interested in maintaining anymore. Requires snapshot version of carla,
 # which is just irritating to maintain. Removal on 2023-06-26.
 media-sound/zrythm
-media-sound/carla
+=media-sound/carla-2.6.0_pre20230511
 dev-libs/libcyaml
 dev-libs/reproc
 dev-libs/zix
