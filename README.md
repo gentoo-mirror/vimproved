@@ -8,7 +8,7 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
 - dev-java/
     - graalvm-ce-bin: **[uniq]** Prebuilt GraalVM JDK binaries
 - dev-lang/
-    - rust: **[PR 31205, fixed for musl 1.2.4]** Systems programming language from Mozilla
+    - rust: **[from gentoo PR 31205]** Systems programming language from Mozilla
 - dev-lua/
     - StyLua: **[uniq]** A code formatter for Lua
 - dev-python/
@@ -20,7 +20,7 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
     - milc: **[uniq]** Opinionated Batteries-Included Python 3 CLI Framework
     - spinners: **[uniq]** Spinners for terminals
 - dev-qt/
-    - qtgui: **[PR 30740, wayland use added to options for platform plugins]** The GUI module and platform plugins for the Qt5 framework
+    - qtgui: **[from gentoo PR 30740]** The GUI module and platform plugins for the Qt5 framework
 - games-misc/
     - aisleriot: **[uniq]** Collection of card games
 - gui-apps/
