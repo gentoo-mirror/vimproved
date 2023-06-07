@@ -8,15 +8,10 @@ inherit meson
 DESCRIPTION="Linux ports of Distrho plugins"
 HOMEPAGE="https://github.com/DISTRHO/DISTRHO-Ports"
 EGIT_REPO_URI="https://github.com/DISTRHO/DISTRHO-Ports"
-if [[ ${PV} == *9999 ]]; then
-	inherit git-r3
-	KEYWORDS=""
-else
-	MY_PN="${PV:0:4}-${PV:4:2}-${PV:6:2}"
-	SRC_URI="https://github.com/DISTRHO/DISTRHO-Ports/archive/${MY_PN}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64"
-	S="${WORKDIR}/DISTRHO-Ports-${MY_PN}"
-fi
+DISTRHO_PORTS_COMMIT="f2dbaded0a05732e3499fa374a586e5b32370da5"
+SRC_URI="https://github.com/DISTRHO/DISTRHO-Ports/archive/${DISTRHO_PORTS_COMMIT}.tar.gz -> ${P}.tar.gz"
+KEYWORDS="~amd64"
+S="${WORKDIR}/DISTRHO-Ports-${DISTRHO_PORTS_COMMIT}"
 LICENSE="GPL-2"
 SLOT="0"
 RESTRICT="mirror"
@@ -32,6 +27,11 @@ RDEPEND="media-libs/alsa-lib
 	x11-libs/libXcursor
 	x11-libs/libXrender"
 DEPEND="${RDEPEND}"
+
+PATCHES=(
+	"${FILESDIR}/${PN}-20220713-clang.patch"
+	"${FILESDIR}/${PN}-20220713-musl.patch"
+)
 
 src_prepare() {
 	# Remove stripping of binaries
