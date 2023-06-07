@@ -1,0 +1,59 @@
+From 3242babe85993ead16b11ca8c5a5b35ae15ba045 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Wed, 7 Jun 2023 18:28:18 +0000
+Subject: [PATCH] Fix build on musl 1.2.4
+
+---
+ .../source/modules/juce_core/native/juce_posix_SharedCode.h   | 4 ++--
+ .../source/modules/juce_core/native/juce_posix_SharedCode.h   | 4 ++--
+ .../source/modules/juce_core/native/juce_posix_SharedCode.h   | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/libs/juce5/source/modules/juce_core/native/juce_posix_SharedCode.h b/libs/juce5/source/modules/juce_core/native/juce_posix_SharedCode.h
+index d9bfed03..8c70ed68 100644
+--- a/libs/juce5/source/modules/juce_core/native/juce_posix_SharedCode.h
++++ b/libs/juce5/source/modules/juce_core/native/juce_posix_SharedCode.h
+@@ -239,8 +239,8 @@ int juce_siginterrupt (int sig, int flag)
+ namespace
+ {
+    #if JUCE_LINUX || (JUCE_IOS && ! __DARWIN_ONLY_64_BIT_INO_T) // (this iOS stuff is to avoid a simulator bug)
+-    typedef struct stat64 juce_statStruct;
+-    #define JUCE_STAT     stat64
++    typedef struct stat juce_statStruct;
++    #define JUCE_STAT     stat
+    #else
+     typedef struct stat   juce_statStruct;
+     #define JUCE_STAT     stat
+diff --git a/libs/juce6/source/modules/juce_core/native/juce_posix_SharedCode.h b/libs/juce6/source/modules/juce_core/native/juce_posix_SharedCode.h
+index f8892081..f2be3ec4 100644
+--- a/libs/juce6/source/modules/juce_core/native/juce_posix_SharedCode.h
++++ b/libs/juce6/source/modules/juce_core/native/juce_posix_SharedCode.h
+@@ -160,8 +160,8 @@ int juce_siginterrupt (int sig, int flag)
+ namespace
+ {
+    #if JUCE_LINUX || (JUCE_IOS && ! __DARWIN_ONLY_64_BIT_INO_T) // (this iOS stuff is to avoid a simulator bug)
+-    using juce_statStruct = struct stat64;
+-    #define JUCE_STAT  stat64
++    using juce_statStruct = struct stat;
++    #define JUCE_STAT  stat
+    #else
+     using juce_statStruct = struct stat;
+     #define JUCE_STAT  stat
+diff --git a/libs/juce7/source/modules/juce_core/native/juce_posix_SharedCode.h b/libs/juce7/source/modules/juce_core/native/juce_posix_SharedCode.h
+index efe1bda7..c038f10e 100644
+--- a/libs/juce7/source/modules/juce_core/native/juce_posix_SharedCode.h
++++ b/libs/juce7/source/modules/juce_core/native/juce_posix_SharedCode.h
+@@ -168,8 +168,8 @@ int juce_siginterrupt (int sig, int flag)
+ namespace
+ {
+    #if JUCE_LINUX || (JUCE_IOS && ! __DARWIN_ONLY_64_BIT_INO_T) // (this iOS stuff is to avoid a simulator bug)
+-    using juce_statStruct = struct stat64;
+-    #define JUCE_STAT  stat64
++    using juce_statStruct = struct stat;
++    #define JUCE_STAT  stat
+    #else
+     using juce_statStruct = struct stat;
+     #define JUCE_STAT  stat
+-- 
+2.41.0
+

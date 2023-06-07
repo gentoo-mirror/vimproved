@@ -31,6 +31,7 @@ DEPEND="${RDEPEND}"
 PATCHES=(
 	"${FILESDIR}/${PN}-20220713-clang.patch"
 	"${FILESDIR}/${PN}-20220713-musl.patch"
+	"${FILESDIR}/${PN}-20220713-musl-1.2.4.patch"
 )
 
 src_prepare() {
