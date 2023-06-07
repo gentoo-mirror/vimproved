@@ -1,0 +1,48 @@
+# vimproved's Portage Overlay
+Hi! This is my portage overlay, containing various ebuilds I use. This is primarily a personal overlay, so please don't expect stability or reasoning for removed packages (although there will be a 1 month last-rite period.)
+
+## ebuilds
+- dev-embedded/
+    - qmk: **[uniq]** A program to help users work with QMK.
+    - qmk-udev-rules: **[uniq]** Udev rules for QMK's CLI
+- dev-java/
+    - graalvm-ce-bin: **[uniq]** Prebuilt GraalVM JDK binaries
+- dev-lang/
+    - rust: **[PR 31205, fixed for musl 1.2.4]** Systems programming language from Mozilla
+- dev-lua/
+    - StyLua: **[uniq]** A code formatter for Lua
+- dev-python/
+    - dotty-dict: **[uniq]** Dictionary wrapper for quick access to deeply nested keys.
+    - halo: **[uniq]** Beautiful terminal spinners in Python
+    - hid: **[uniq]** ctypes bindings for hidapi
+    - hjson: **[uniq]** A user interface for JSON.
+    - log-symbols: **[uniq]** Colored symbols for various log levels for Python
+    - milc: **[uniq]** Opinionated Batteries-Included Python 3 CLI Framework
+    - spinners: **[uniq]** Spinners for terminals
+- dev-qt/
+    - qtgui: **[PR 30740, wayland use added to options for platform plugins]** The GUI module and platform plugins for the Qt5 framework
+- games-misc/
+    - aisleriot: **[uniq]** Collection of card games
+- gui-apps/
+    - gradience: **[uniq]** Change the look of Adwaita, with ease
+- media-libs/
+    - pyliblo: **[from audio-overlay]** A Python wrapper for the liblo OSC library
+    - rubberband: **[from gentoo, GCC dep removed]** An audio time-stretching and pitch-shifting library and utility program
+- media-plugins/
+    - distrho-ports: **[from audio-overlay, updated and fixed for musl and clang]** Linux ports of Distrho plugins
+- media-sound/
+    - carla: **[from audio-overlay, removed xorg-server dep]** Fully-featured audio plugin host, supports many audio drivers and plugin formats
+    - geonkick: **[uniq]** A free software percussion synthesizer for GNU/Linux
+    - sc3-plugins: **[from audio-overlay, updated]** Third party plugins for SuperCollider
+    - sfizz: **[uniq]**: SFZ parser and synth c++ library
+    - supercollider: **[from gentoo, updated]** Environment and programming language for real time audio synthesis
+    - zyn-fusion: **[from fordfrog, release version]** A new interface for ZynAddSubFX
+    - zynaddsubfx: **[from fordfrog, release version]** Software synthesizer capable of making a countless number of instruments
+- media-video/
+    - obs-vkcapture: **[from GURU, updated]** OBS Linux Vulkan/OpenGL game capture
+- sys-process/
+    - btop: **[from gentoo, fixed for clang]** A monitor of resources
+- virtual/
+    - jdk: **[from gentoo, added dev-java/graalvm-ce-bin]** Virtual for Java Development Kit (JDK)
+- x11-themes/
+    - adw-gtk3: **[uniq]** The theme from libadwaita ported to GTK-3
