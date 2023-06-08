@@ -5,4 +5,7 @@
 		<email>vimproved@inventati.org</email>
 		<name>Violet Purcell</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">resslinux/libexecinfo</remote-id>
+	</upstream>
 </pkgmetadata>
