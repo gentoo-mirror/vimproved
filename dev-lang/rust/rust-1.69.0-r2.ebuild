@@ -306,7 +306,6 @@ src_prepare() {
 	eapply_crate vendor/getrandom "${FILESDIR}"/1.69.0-musl-1.2.4-getrandom.patch
 	eapply_crate vendor/libc-0.2.137 "${FILESDIR}"/1.69.0-musl-1.2.4-libc-0.2.137.patch
 	eapply_crate vendor/libc-0.2.138 "${FILESDIR}"/1.69.0-musl-1.2.4-libc-0.2.138.patch
-	eapply_crate vendor/libc-0.2.139 "${FILESDIR}"/1.69.0-musl-1.2.4-libc.patch
 	eapply_crate vendor/libc "${FILESDIR}"/1.69.0-musl-1.2.4-libc.patch
 
 	if ! use system-bootstrap; then
