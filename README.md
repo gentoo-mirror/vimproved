@@ -9,8 +9,6 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
     - graalvm-ce-bin: **[uniq]** Prebuilt GraalVM JDK binaries
 - dev-lang/
     - rust: **[from gentoo PR 31205]** Systems programming language from Mozilla
-- dev-libs/
-    - nspr: **[from gentoo PR 31370]** Netscape Portable Runtime
 - dev-lua/
     - StyLua: **[uniq]** A code formatter for Lua
 - dev-python/
