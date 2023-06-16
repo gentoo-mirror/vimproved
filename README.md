@@ -21,6 +21,8 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
     - spinners: **[uniq]** Spinners for terminals
 - dev-qt/
     - qtgui: **[from gentoo PR 30740]** The GUI module and platform plugins for the Qt5 framework
+- dev-util/
+    - lua-language-server: **[from GURU, fixed build with libc++]** Lua language server
 - games-misc/
     - aisleriot: **[uniq]** Collection of card games
 - gui-apps/
