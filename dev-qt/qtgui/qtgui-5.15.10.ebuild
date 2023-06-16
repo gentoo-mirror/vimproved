@@ -75,8 +75,6 @@ PDEPEND="
 	wayland? ( =dev-qt/qtwayland-${QT5_PV}* )
 "
 
-PATCHES=( "${FILESDIR}/${P}-CVE-2023-32763.patch" )
-
 QT5_TARGET_SUBDIRS=(
 	src/tools/qvkgen
 	src/gui
