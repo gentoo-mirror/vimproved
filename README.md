@@ -5,8 +5,6 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
 - dev-embedded/
     - qmk: **[uniq]** A program to help users work with QMK.
     - qmk-udev-rules: **[uniq]** Udev rules for QMK's CLI
-- dev-java/
-    - graalvm-ce-bin: **[uniq]** Prebuilt GraalVM JDK binaries
 - dev-lang/
     - rust: **[from gentoo PR 31205]** Systems programming language from Mozilla
 - dev-lua/
@@ -20,6 +18,7 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
     - milc: **[uniq]** Opinionated Batteries-Included Python 3 CLI Framework
     - spinners: **[uniq]** Spinners for terminals
 - dev-qt/
+    - qtbase: **[from gentoo, wayland added to platform required use]** The GUI module and platform plugins for the Qt5 framework
     - qtgui: **[from gentoo PR 30740]** The GUI module and platform plugins for the Qt5 framework
 - dev-util/
     - lua-language-server: **[from GURU, fixed build with libc++]** Lua language server
@@ -40,11 +39,7 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
     - supercollider: **[from gentoo, updated]** Environment and programming language for real time audio synthesis
     - zyn-fusion: **[from fordfrog, release version]** A new interface for ZynAddSubFX
     - zynaddsubfx: **[from fordfrog, release version]** Software synthesizer capable of making a countless number of instruments
-- media-video/
-    - obs-vkcapture: **[from GURU, updated]** OBS Linux Vulkan/OpenGL game capture
 - sys-process/
     - btop: **[from gentoo, fixed for clang]** A monitor of resources
-- virtual/
-    - jdk: **[from gentoo, added dev-java/graalvm-ce-bin]** Virtual for Java Development Kit (JDK)
 - x11-themes/
     - adw-gtk3: **[uniq]** The theme from libadwaita ported to GTK-3
