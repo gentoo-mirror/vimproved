@@ -35,7 +35,7 @@ RDEPEND="${PYTHON_DEPS}
 		media-libs/liblo
 		media-libs/pyliblo
 	)
-	pulseaudio? ( media-sound/pulseaudio )
+	pulseaudio? ( media-libs/libpulse )
 	rdf? ( dev-python/rdflib )
 	sf2? ( media-sound/fluidsynth )
 	sndfile? ( media-libs/libsndfile )
