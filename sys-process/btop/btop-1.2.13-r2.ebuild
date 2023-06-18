@@ -13,10 +13,6 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc ~ppc64 ~riscv ~x86"
 
-BDEPEND="
-	>=sys-devel/gcc-8
-"
-
 PATCHES=(
 	# Backported fixes for https://bugs.gentoo.org/884005,
 	# can be removed in 1.2.14 or later
