@@ -3,43 +3,42 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
 
 ## ebuilds
 - dev-embedded/
-    - qmk: **[uniq]** A program to help users work with QMK.
-    - qmk-udev-rules: **[uniq]** Udev rules for QMK's CLI
+    - qmk: Original
+    - qmk-udev-rules: Original, dependency of dev-embedded/qmk
 - dev-lang/
-    - rust: **[from gentoo PR 31205]** Systems programming language from Mozilla
+    - rust: From gentoo PR 31205, patched for musl 1.2.4
 - dev-lua/
-    - StyLua: **[uniq]** A code formatter for Lua
+    - StyLua: Original
 - dev-python/
-    - dotty-dict: **[uniq]** Dictionary wrapper for quick access to deeply nested keys.
-    - halo: **[uniq]** Beautiful terminal spinners in Python
-    - hid: **[uniq]** ctypes bindings for hidapi
-    - hjson: **[uniq]** A user interface for JSON.
-    - log-symbols: **[uniq]** Colored symbols for various log levels for Python
-    - milc: **[uniq]** Opinionated Batteries-Included Python 3 CLI Framework
-    - spinners: **[uniq]** Spinners for terminals
+    - dotty-dict: Original, dependency of dev-embedded/qmk
+    - halo: Original, dependency of dev-python/milc
+    - hid: Original, dependency of dev-embedded/qmk
+    - hjson: Original, dependency of dev-embedded/qmk
+    - log-symbols: Original, dependency of dev-python/halo
+    - milc: Original, dependency of dev-embedded/qmk
+    - spinners: Original, dependency of dev-python/halo
 - dev-qt/
-    - qtbase: **[from gentoo, wayland added to platform required use]** The GUI module and platform plugins for the Qt5 framework
-    - qtgui: **[from gentoo PR 30740]** The GUI module and platform plugins for the Qt5 framework
+    - qtwebengine: From musl PR 481, patched for musl
 - dev-util/
-    - lua-language-server: **[from GURU, fixed build with libc++]** Lua language server
+    - lua-language-server: From GURU, patched for libc++
 - games-misc/
-    - aisleriot: **[uniq]** Collection of card games
+    - aisleriot: Original
 - gui-apps/
-    - gradience: **[uniq]** Change the look of Adwaita, with ease
+    - gradience: Original
 - media-libs/
-    - pyliblo: **[from audio-overlay]** A Python wrapper for the liblo OSC library
-    - rubberband: **[from gentoo, GCC dep removed]** An audio time-stretching and pitch-shifting library and utility program
+    - pyliblo: From audio-overlay, dependency of media-sound/carla
+    - rubberband: From gentoo, removed RDEPEND on GCC
 - media-plugins/
-    - distrho-ports: **[from audio-overlay, updated and fixed for musl and clang]** Linux ports of Distrho plugins
+    - distrho-ports: From audio-overlay, patched for musl/llvm and updated to latest HEAD
 - media-sound/
-    - carla: **[from audio-overlay, removed xorg-server dep]** Fully-featured audio plugin host, supports many audio drivers and plugin formats
-    - geonkick: **[uniq]** A free software percussion synthesizer for GNU/Linux
-    - sc3-plugins: **[from audio-overlay, updated]** Third party plugins for SuperCollider
-    - sfizz: **[uniq]**: SFZ parser and synth c++ library
-    - supercollider: **[from gentoo, updated]** Environment and programming language for real time audio synthesis
-    - zyn-fusion: **[from fordfrog, release version]** A new interface for ZynAddSubFX
-    - zynaddsubfx: **[from fordfrog, release version]** Software synthesizer capable of making a countless number of instruments
+    - carla: From audio-overlay, replaced x11-base/xorg-server dependency with x11-libs/libX11
+    - geonkick: Original
+    - sc3-plugins: From audio-overlay, updated to 3.13.0
+    - sfizz: Original
+    - supercollider: From gentoo, updated to 3.13.0
+    - zyn-fusion: From fordfrog, version for latest release
+    - zynaddsubfx: From fordfrog, version for latest release
 - sys-process/
-    - btop: **[from gentoo, fixed for clang]** A monitor of resources
+    - btop: From gentoo, backported clang fix
 - x11-themes/
-    - adw-gtk3: **[uniq]** The theme from libadwaita ported to GTK-3
+    - adw-gtk3: Original
