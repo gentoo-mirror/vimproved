@@ -39,6 +39,6 @@ Hi! This is my portage overlay, containing various ebuilds I use. This is primar
     - zyn-fusion: From fordfrog, version for latest release
     - zynaddsubfx: From fordfrog, version for latest release
 - sys-process/
-    - btop: From gentoo, backported clang fix
+    - btop: From gentoo PR 31534, backported clang and musl fix
 - x11-themes/
     - adw-gtk3: Original
