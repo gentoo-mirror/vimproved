@@ -1,0 +1,8 @@
+#!/bin/execlineb -P
+envfile /etc/s6.conf
+importas S6_DBDIR S6_DBDIR
+importas S6_SRCDIR S6_SRCDIR
+backtick -E date { date +%s }
+foreground { s6-rc-compile ${S6_DBDIR}/${date} ${S6_SRCDIR} }
+foreground { ln -sf ${S6_DBDIR}/current ${S6_DBDIR}/${date} }
+s6-rc-update ${S6_DBDIR}/current
