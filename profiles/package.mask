@@ -1,6 +1,0 @@
-# Violet Purcell <vimproved@inventati.org> (2023-06-17)
-# Binary package linked against glibc, can't test or use on my musl setup.
-# Trivial to copy and maintain in another overlay.
-# Removal on 2023-06-27
-dev-java/graalvm-ce-bin
-virtual/jdk
