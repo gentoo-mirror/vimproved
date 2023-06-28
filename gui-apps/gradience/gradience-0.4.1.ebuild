@@ -55,6 +55,8 @@ src_install() {
 	meson_src_install
 	python_optimize
 	mv "${ED}"/usr/share/appdata "${ED}"/usr/share/metainfo || die
+	python_doscript "${ED}/usr/bin/gradience"
+	python_doscript "${ED}/usr/bin/gradience-cli"
 }
 
 pkg_postinst() {
