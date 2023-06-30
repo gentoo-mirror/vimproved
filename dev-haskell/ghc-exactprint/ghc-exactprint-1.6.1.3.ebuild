@@ -34,9 +34,3 @@ DEPEND="${RDEPEND}
 		>=dev-haskell/silently-1.2
 	)
 "
-
-src_configure() {
-	haskell-cabal_src_configure \
-		--flag=-dev \
-		--flag=-roundtrip
-}
