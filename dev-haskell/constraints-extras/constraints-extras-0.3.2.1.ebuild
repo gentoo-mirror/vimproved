@@ -12,7 +12,6 @@ inherit haskell-cabal
 
 DESCRIPTION="Utility package for constraints"
 HOMEPAGE="https://github.com/obsidiansystems/constraints-extras"
-SRC_URI="https://hackage.haskell.org/package/${P}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
