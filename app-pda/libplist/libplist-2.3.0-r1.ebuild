@@ -102,4 +102,7 @@ src_install() {
 	fi
 
 	find "${ED}" -name '*.la' -delete || die
+	dosym ./libplist-2.0.pc /usr/$(get_libdir)/pkgconfig/libplist.pc
+	dosym ./libplist++-2.0.so.4.3.0 /usr/$(get_libdir)/libplist++.so
+	dosym ./libplist-2.0.so.4.3.0 /usr/$(get_libdir)/libplist.so
 }
