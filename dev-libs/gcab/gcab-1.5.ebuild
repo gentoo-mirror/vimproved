@@ -2,11 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+
+RESTRICT="!test? ( test )"
 inherit meson vala
 
 DESCRIPTION="A GObject library to create cabinet files"
 HOMEPAGE="https://gitlab.gnome.org/GNOME/gcab"
-SRC_URI="https://gitlab.gnome.org/GNOME/gcab/-/archive/v1.5/gcab-v1.5.tar.bz2 -> ${P}.tar.bz2"
+SRC_URI="https://gitlab.gnome.org/GNOME/gcab/-/archive/v${PV}/gcab-v${PV}.tar.bz2 -> ${P}.tar.bz2"
 S="${WORKDIR}/${PN}-v${PV}"
 
 LICENSE="GPL-2"
