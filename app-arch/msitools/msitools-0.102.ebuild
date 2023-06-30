@@ -5,7 +5,7 @@ EAPI=8
 inherit gnome.org meson vala
 
 DESCRIPTION="A set of programs to inspect and build Windows Installer (.MSI) files"
-HOMEPAGE="https://gitlab.gnome.org/GNOME/msitools"
+HOMEPAGE="https://wiki.gnome.org/msitools"
 
 LICENSE="GPL-2"
 SLOT="0"
