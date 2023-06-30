@@ -14,7 +14,7 @@ S="${WORKDIR}/${PN}-v${PV}"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="gtk-doc introspection nls test vala"
+IUSE="gtk-doc +introspection nls test +vala"
 
 DEPEND="
 	introspection? ( dev-libs/gobject-introspection )
