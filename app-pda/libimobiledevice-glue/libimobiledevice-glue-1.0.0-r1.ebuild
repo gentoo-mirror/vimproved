@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND="
-	app-pda/libplist
+	>=app-pda/libplist-2.3
 "
 RDEPEND="${DEPEND}"
 BDEPEND="virtual/pkgconfig"
