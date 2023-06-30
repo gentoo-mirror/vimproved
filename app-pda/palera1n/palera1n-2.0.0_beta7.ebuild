@@ -40,6 +40,7 @@ BDEPEND="
 "
 
 PATCHES=(
+	"${FILESDIR}/${P}-pedantic-errors.patch"
 	"${FILESDIR}/${P}-unbundle.patch"
 )
 
