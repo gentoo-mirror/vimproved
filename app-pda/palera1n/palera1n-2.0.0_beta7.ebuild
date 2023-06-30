@@ -45,12 +45,12 @@ PATCHES=(
 )
 
 src_prepare() {
-	mv "${DISTDIR}/checkra1n-linux-x86_64-${CHECKRA1N_VERSION}" "${S}/src/checkra1n-linux-x86_64"
-	mv "${DISTDIR}/checkra1n-macos-${CHECKRA1N_VERSION}" "${S}/src/checkra1n-macos"
-	mv "${DISTDIR}/ramdisk.dmg" "${S}/src/ramdisk.dmg"
-	mv "${DISTDIR}/binpack.dmg" "${S}/src/binpack.dmg"
-	mv "${DISTDIR}/checkra1n-kpf-pongo" "${S}/src/checkra1n-kpf-pongo"
-	mv "${DISTDIR}/Pongo.bin" "${S}/src/Pongo.bin"
+	cp "${DISTDIR}/checkra1n-linux-x86_64-${CHECKRA1N_VERSION}" "${S}/src/checkra1n-linux-x86_64"
+	cp "${DISTDIR}/checkra1n-macos-${CHECKRA1N_VERSION}" "${S}/src/checkra1n-macos"
+	cp "${DISTDIR}/ramdisk.dmg" "${S}/src/ramdisk.dmg"
+	cp "${DISTDIR}/binpack.dmg" "${S}/src/binpack.dmg"
+	cp "${DISTDIR}/checkra1n-kpf-pongo" "${S}/src/checkra1n-kpf-pongo"
+	cp "${DISTDIR}/Pongo.bin" "${S}/src/Pongo.bin"
 	default
 }
 
