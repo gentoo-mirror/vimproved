@@ -53,7 +53,7 @@ RDEPEND="
 	dev-haskell/hashable:=[profile?]
 	>=dev-haskell/hie-bios-0.12.0:=[profile?] <dev-haskell/hie-bios-0.13:=[profile?]
 	>=dev-haskell/hie-compat-0.3.0.0:=[profile?] <dev-haskell/hie-compat-0.4:=[profile?]
-	>=dev-haskell/hiedb-0.4.2:=[profile?] <dev-haskell/hiedb-0.4.3:=[profile?]
+	>=dev-haskell/hiedb-0.4.3:=[profile?] <dev-haskell/hiedb-0.4.4:=[profile?]
 	~dev-haskell/hls-graph-${PV}:=[profile?]
 	~dev-haskell/hls-plugin-api-${PV}:=[profile?]
 	dev-haskell/hslogger:=[profile?]
