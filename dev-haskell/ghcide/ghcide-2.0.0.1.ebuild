@@ -51,7 +51,7 @@ RDEPEND="
 	dev-haskell/glob:=[profile?]
 	>=dev-haskell/haddock-library-1.8:=[profile?] <dev-haskell/haddock-library-1.12:=[profile?]
 	dev-haskell/hashable:=[profile?]
-	>=dev-haskell/hie-bios-0.11.0:=[profile?] <dev-haskell/hie-bios-0.12:=[profile?]
+	>=dev-haskell/hie-bios-0.12.0:=[profile?] <dev-haskell/hie-bios-0.13:=[profile?]
 	>=dev-haskell/hie-compat-0.3.0.0:=[profile?] <dev-haskell/hie-compat-0.4:=[profile?]
 	>=dev-haskell/hiedb-0.4.2:=[profile?] <dev-haskell/hiedb-0.4.3:=[profile?]
 	~dev-haskell/hls-graph-${PV}:=[profile?]
