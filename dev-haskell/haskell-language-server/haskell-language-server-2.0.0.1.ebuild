@@ -44,7 +44,6 @@ IUSE_HLS_PLUGINS="
 	+hls_plugins_rename
 	+hls_plugins_retrie
 	+hls_plugins_splice
-	+hls_plugins_wingman
 "
 
 IUSE_HLS_FORMATTERS="
@@ -68,6 +67,7 @@ CABAL_TEST_REQUIRED_BINS=(
 # hls_plugins_cabal-fmt? ( ~dev-haskell/hls-cabal-fmt-plugin-${PV}:=[profile?] )
 # hls_plugins_haddock-comments? ( ~dev-haskell/hls-haddock-comments-plugin-${PV}:=[profile?] )
 # hls_plugins_stan? ( ~dev-haskell/hls-stan-plugin-${PV}:=[profile?] )
+# hls_plugins_wingman? ( ~dev-haskell/hls-tactics-plugin-${PV}:=[profile?] )
 RDEPEND="
 	dev-haskell/aeson:=[profile?]
 	dev-haskell/aeson-pretty:=[profile?]
@@ -123,7 +123,6 @@ RDEPEND="
 	hls_plugins_rename? ( ~dev-haskell/hls-rename-plugin-${PV}:=[profile?] )
 	hls_plugins_retrie? ( ~dev-haskell/hls-retrie-plugin-${PV}:=[profile?] )
 	hls_plugins_splice? ( ~dev-haskell/hls-splice-plugin-${PV}:=[profile?] )
-	hls_plugins_wingman? ( ~dev-haskell/hls-tactics-plugin-${PV}:=[profile?] )
 "
 
 DEPEND="${RDEPEND}
