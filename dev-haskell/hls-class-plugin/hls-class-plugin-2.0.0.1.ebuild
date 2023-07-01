@@ -18,7 +18,7 @@ KEYWORDS="~amd64"
 RDEPEND="
 	dev-haskell/aeson:=[profile?]
 	dev-haskell/extra:=[profile?]
-	>=dev-haskell/ghc-exactprint-0.6.4:=[profile?] <dev-haskell/ghc-exactprint-1.1:=[profile?]
+	>=dev-haskell/ghc-exactprint-1.5:=[profile?]
 	~dev-haskell/ghcide-${PV}:=[profile?]
 	~dev-haskell/hls-graph-${PV}:=[profile?]
 	~dev-haskell/hls-plugin-api-${PV}:=[profile?]
