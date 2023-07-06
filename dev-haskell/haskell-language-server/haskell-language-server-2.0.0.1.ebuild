@@ -38,6 +38,7 @@ IUSE_HLS_PLUGINS="
 	+hls_plugins_import-lens
 	+hls_plugins_gadt
 	+hls_plugins_module-name
+	+hls_plugins_overloaded-record-dot
 	+hls_plugins_pragmas
 	+hls_plugins_qualify-imported-names
 	+hls_plugins_refine-imports
@@ -117,6 +118,7 @@ RDEPEND="
 	hls_plugins_hlint? ( ~dev-haskell/hls-hlint-plugin-${PV}:=[profile?] )
 	hls_plugins_import-lens? ( ~dev-haskell/hls-explicit-imports-plugin-${PV}:=[profile?] )
 	hls_plugins_module-name? ( ~dev-haskell/hls-module-name-plugin-${PV}:=[profile?] )
+	hls_plugins_overloaded-record-dot? ( ~dev-haskell/hls-overloaded-record-dot-plugin-${PV}:=[profile?] )
 	hls_plugins_pragmas? ( ~dev-haskell/hls-pragmas-plugin-${PV}:=[profile?] )
 	hls_plugins_qualify-imported-names? ( ~dev-haskell/hls-qualify-imported-names-plugin-${PV}:=[profile?] )
 	hls_plugins_refine-imports? ( ~dev-haskell/hls-refine-imports-plugin-${PV}:=[profile?] )
