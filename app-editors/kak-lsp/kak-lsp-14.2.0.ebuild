@@ -46,7 +46,7 @@ CRATES="
 	futures-util@0.3.24
 	futures@0.3.24
 	getopts@0.2.21
-	getrandom@0.2.7
+	getrandom@0.2.10
 	glob@0.3.0
 	hashbrown@0.12.3
 	hermit-abi@0.1.19
@@ -63,7 +63,7 @@ CRATES="
 	kqueue-sys@1.0.3
 	kqueue@1.0.7
 	lazy_static@1.4.0
-	libc@0.2.138
+	libc@0.2.147
 	libflate@1.2.0
 	libflate_lz77@1.1.0
 	linux-raw-sys@0.0.46
@@ -179,7 +179,10 @@ SRC_URI="https://github.com/kak-lsp/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 LICENSE="Apache-2.0 Apache-2.0-with-LLVM-exceptions Boost-1.0 MIT MPL-2.0 Unlicense ZLIB"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
+
+PATCHES=(
+	"${FILESDIR}/${P}-update-getrandom.patch"
+)
 
 QA_FLAGS_IGNORED="usr/bin/kak-lsp"
 
