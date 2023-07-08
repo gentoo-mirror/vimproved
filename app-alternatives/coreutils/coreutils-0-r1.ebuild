@@ -124,8 +124,3 @@ src_install() {
 			USERLAND=${USERLAND}
 	EOF
 }
-
-pkg_postinst() {
-	ewarn "Please log out and back in after updating this alternative to set the USERLAND variable to the correct"
-	ewarn "value. Otherwise, portage may break."
-}
