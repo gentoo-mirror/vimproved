@@ -5,4 +5,8 @@
 		<email>vimproved@inventati.org</email>
 		<name>Violet Purcell</name>
 	</maintainer>
+	<use>
+		<flag name="gpatch">Symlink to /usr/bin/gpatch.</flag>
+		<flag name="chimera">Symlink to /usr/bin/patch-chimera</flag>
+	</use>
 </pkgmetadata>
