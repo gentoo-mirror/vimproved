@@ -8,6 +8,8 @@ ALTERNATIVES=(
 	chimera:sys-apps/chimerautils
 )
 
+inherit app-alternatives
+
 DESCRIPTION="/usr/bin/patch symlink"
 KEYWORDS="~amd64"
 
