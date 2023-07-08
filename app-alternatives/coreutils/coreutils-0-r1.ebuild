@@ -113,4 +113,19 @@ src_install() {
 		dosym "${x}-${suffix}" "/usr/bin/${x}"
 		newman - "${x}.1" <<<".so ${x}-${suffix}.1"
 	done
+
+	if use chimera ; then
+		USERLAND="BSD"
+	else
+		USERLAND="GNU"
+	fi
+
+	newenvd - 90userland <<-EOF
+			USERLAND=${USERLAND}
+	EOF
+}
+
+pkg_postinst() {
+	ewarn "Please log out and back in after updating this alternative to set the USERLAND variable to the correct"
+	ewarn "value. Otherwise, portage may break."
 }
