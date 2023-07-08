@@ -15,7 +15,7 @@ KEYWORDS="~amd64"
 
 src_install() {
 	local suffix=$(get_alternative)
-	case "${alt}" in
+	case "${suffix}" in
 		gpatch)
 			alt="${suffix}"
 			;;
