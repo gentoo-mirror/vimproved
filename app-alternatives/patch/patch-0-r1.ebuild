@@ -11,7 +11,7 @@ ALTERNATIVES=(
 inherit app-alternatives
 
 DESCRIPTION="/usr/bin/patch symlink"
-KEYWORDS="~amd64"
+#KEYWORDS="~amd64"
 
 src_install() {
 	local suffix=$(get_alternative)
