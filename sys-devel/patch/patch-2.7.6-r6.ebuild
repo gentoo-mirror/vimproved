@@ -13,7 +13,7 @@ SRC_URI+=" verify-sig? ( mirror://gnu/patch/${P}.tar.xz.sig )"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~amd64"
+#KEYWORDS="~amd64"
 IUSE="static test xattr"
 RESTRICT="!test? ( test )"
 
