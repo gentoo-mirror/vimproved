@@ -19,7 +19,7 @@ else
 	SLOT="stable/${ABI_VER}"
 	MY_P="rustc-${PV}"
 	SRC="${MY_P}-src.tar.xz"
-	#KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
+	KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
 RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
@@ -109,9 +109,6 @@ DEPEND="
 		${LLVM_DEPEND}
 		llvm-libunwind? ( sys-libs/llvm-libunwind:= )
 	)
-	!system-bootstrap? (
-		elibc_musl? ( <sys-libs/musl-1.2.4 )
-	)
 	!system-llvm? (
 		!llvm-libunwind? (
 			elibc_musl? ( sys-libs/libunwind:= )
@@ -127,6 +124,7 @@ RDEPEND="${DEPEND}
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 	miri? ( nightly )
 	parallel-compiler? ( nightly )
+	rust-analyzer? ( rust-src )
 	test? ( ${ALL_LLVM_TARGETS[*]} )
 	wasm? ( llvm_targets_WebAssembly )
 	x86? ( cpu_flags_x86_sse2 )
@@ -314,6 +312,25 @@ src_prepare() {
 		has_version sys-devel/gcc || esetup_unwind_hack
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
+
+		# Hack for musl 1.2.4 compatability. Can be removed when upstream stage0 tarballs are rebuilt with musl 1.2.4
+		# fixes.
+		if use elibc_musl; then
+			LIBSTD_FILENAME="libstd-7f310e4c1ed052dc.rlib"
+			RUST_STDLIB="${WORKDIR}/${rust_stage0}/rust-std-$(rust_abi)/lib/rustlib/$(rust_abi)/lib/${LIBSTD_FILENAME}"
+			"$(tc-getOBJCOPY)" \
+				--redefine-sym=stat64=stat \
+				--redefine-sym=lstat64=lstat \
+				--redefine-sym=fstat64=fstat \
+				--redefine-sym=fstatat64=fstatat \
+				--redefine-sym=open64=open \
+				--redefine-sym=ftruncate64=ftruncate \
+				--redefine-sym=readdir64=readdir \
+				--redefine-sym=lseek64=lseek \
+				"${RUST_STDLIB}" \
+				"${RUST_STDLIB}.out" || die
+			mv "${RUST_STDLIB}.out" "${RUST_STDLIB}" || die
+		fi
 
 		"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig \
 			--without=rust-docs-json-preview,rust-docs --destdir="${rust_stage0_root}" --prefix=/ || die
