@@ -41,7 +41,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/(-)?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug dist doc llvm-libunwind +lto miri nightly parallel-compiler profiler rustfmt rust-analyzer rust-src system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="big-endian clippy cpu_flags_x86_sse2 debug dist doc llvm-libunwind +lto miri nightly parallel-compiler profiler rustfmt rust-analyzer rust-src system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
 
 # Please keep the LLVM dependency block separate. Since LLVM is slotted,
 # we need to *really* make sure we're not pulling more than one slot
@@ -162,6 +162,8 @@ RESTRICT="test"
 VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
+	"${FILESDIR}"/1.71.0-fix-bashcomp-installation.patch
+	"${FILESDIR}"/1.71.0-lint-docs-libpath.patch
 	"${FILESDIR}"/1.70.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/1.62.1-musl-dynamic-linking.patch
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
@@ -303,7 +305,7 @@ esetup_unwind_hack() {
 }
 
 src_prepare() {
-	eapply_crate vendor/getrandom "${FILESDIR}"/1.69.0-musl-1.2.4-getrandom.patch
+	eapply_crate vendor/getrandom-0.2.8 "${FILESDIR}"/1.69.0-musl-1.2.4-getrandom.patch
 	eapply_crate vendor/libc-0.2.138 "${FILESDIR}"/1.69.0-musl-1.2.4-libc-0.2.138.patch
 	eapply_crate vendor/libc-0.2.139 "${FILESDIR}"/1.69.0-musl-1.2.4-libc.patch
 	eapply_crate vendor/libc "${FILESDIR}"/1.69.0-musl-1.2.4-libc.patch
@@ -316,7 +318,7 @@ src_prepare() {
 		# Hack for musl 1.2.4 compatability. Can be removed when upstream stage0 tarballs are rebuilt with musl 1.2.4
 		# fixes.
 		if use elibc_musl; then
-			LIBSTD_FILENAME="libstd-7f310e4c1ed052dc.rlib"
+			LIBSTD_FILENAME="libstd-a9e9fdf6bd876a9c.rlib"
 			RUST_STDLIB="${WORKDIR}/${rust_stage0}/rust-std-$(rust_abi)/lib/rustlib/$(rust_abi)/lib/${LIBSTD_FILENAME}"
 			"$(tc-getOBJCOPY)" \
 				--redefine-sym=stat64=stat \
