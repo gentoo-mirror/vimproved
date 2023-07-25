@@ -26,4 +26,6 @@ src_install() {
 	dobin "${S}/traefik"
 	systemd_dounit "${FILESDIR}/traefik.service"
 	newinitd "${FILESDIR}/traefik.init" traefik
+	insinto /etc/traefik
+	newins "${S}/traefik.sample.toml" traefik.toml
 }
