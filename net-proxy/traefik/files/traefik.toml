@@ -1,0 +1,27 @@
+[global]
+checkNewVersion = false
+sendAnonymousUsage = false
+
+[log]
+filePath = "/var/log/traefik/traefik.log"
+compress = 3
+
+[accessLog]
+filePath = "/var/log/traefik/access.log"
+compress = 3
+
+[entryPoints.http]
+address = ":80"
+
+[entryPoints.https]
+address = ":443"
+
+[entryPoints.traefik]
+address = "localhost:8080"
+
+[api]
+insecure = true
+dashboard = true
+
+[pilot]
+dashboard = false
