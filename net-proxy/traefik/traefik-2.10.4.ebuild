@@ -25,5 +25,5 @@ src_compile() {
 src_install() {
 	dobin "${S}/traefik"
 	systemd_dounit "${FILESDIR}/traefik.service"
-	doinitd "${FILESDIR}/traefik.init"
+	newinitd "${FILESDIR}/traefik.init" traefik
 }
