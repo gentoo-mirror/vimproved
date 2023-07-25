@@ -5,8 +5,8 @@ EAPI=8
 
 inherit acct-user
 
-DESCRIPTION=""
-ACCT_USER_ID=
+DESCRIPTION="User for the traefik daemon"
+ACCT_USER_ID=0
 ACCT_USER_GROUPS=( traefik )
 
 acct-user_add_deps
