@@ -1,0 +1,17 @@
+#!/sbin/openrc-run
+# Copyright 2023 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="Traefik"
+description=""
+command=/usr/bin/traefik
+command_args="--configFile=/etc/traefik/traefik.toml"
+command_user=traefik:traefik
+
+depend() {
+	need localmount net
+}
+
+start_pre() {
+	checkpath -d -o $command_user "/etc/traefik/traefik.toml"
+}

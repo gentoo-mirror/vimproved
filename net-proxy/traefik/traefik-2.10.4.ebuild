@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-inherit go-module
+inherit go-module systemd
 
 DESCRIPTION="The Cloud Native Application Proxy"
 HOMEPAGE="https://traefik.io/"
@@ -13,10 +13,17 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 
+DEPEND="
+	acct-group/traefik
+	acct-user/traefik
+"
+
 src_compile() {
 	ego build
 }
 
 src_install() {
 	dobin "${S}/traefik"
+	systemd_dounit "${FILESDIR}/traefik.service"
+	doinitd "${FILESDIR}/traefik.init"
 }
