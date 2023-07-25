@@ -3,7 +3,7 @@
 
 EAPI=8
 PYTHON_COMPAT=( python3_{10..11} )
-DISTUTILS_USE_PEP517=hatchling
+DISTUTILS_USE_PEP517=setuptools
 inherit distutils-r1 pypi
 
 DESCRIPTION="Plugin for certbot to obtain certificates for Porkbun domains"
@@ -17,5 +17,7 @@ KEYWORDS="~amd64"
 DEPEND="
 	app-crypt/certbot[${PYTHON_USEDEP}]
 	dev-python/dnspython[${PYTHON_USEDEP}]
+	dev-python/httpcore[${PYTHON_USEDEP}]
 	dev-python/pkb-client[${PYTHON_USEDEP}]
+	dev-python/sniffio[${PYTHON_USEDEP}]
 "
