@@ -4,11 +4,9 @@ sendAnonymousUsage = false
 
 [log]
 filePath = "/var/log/traefik/traefik.log"
-compress = 3
 
 [accessLog]
 filePath = "/var/log/traefik/access.log"
-compress = 3
 
 [entryPoints.http]
 address = ":80"
