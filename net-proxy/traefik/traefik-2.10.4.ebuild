@@ -19,7 +19,8 @@ DEPEND="
 "
 
 src_compile() {
-	ego build
+	ego generate
+	ego build "${S}/cmd/traefik"
 }
 
 src_install() {
