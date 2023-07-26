@@ -58,6 +58,10 @@ DEPEND="${RDEPEND}"
 CHECKREQS_MEMORY="8G"
 CHECKREQS_DISK_BUILD="22G"
 
+PATCHES=(
+	"${FILESDIR}"/"${PN}"-16.10.0-libcxx-dont-link-libatomic.patch
+	)
+
 pkg_pretend() {
 	if [[ ${MERGE_TYPE} != "binary" ]]; then
 		if is-flagq "-g*" && ! is-flagq "-g*0" ; then

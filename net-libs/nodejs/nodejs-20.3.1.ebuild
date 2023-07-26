@@ -61,6 +61,7 @@ CHECKREQS_DISK_BUILD="22G"
 PATCHES=(
 	"${FILESDIR}"/"${PN}"-20.3.0-gcc14.patch
 	"${FILESDIR}"/"${PN}"-20.3.0-simdutf-2.3.14.patch
+	"${FILESDIR}"/"${PN}"-16.10.0-libcxx-dont-link-libatomic.patch
 	)
 
 pkg_pretend() {
