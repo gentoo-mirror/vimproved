@@ -155,9 +155,10 @@ inherit cargo
 DESCRIPTION="A code formatter for Lua"
 HOMEPAGE="https://github.com/JohnnyMorganz/StyLua"
 SRC_URI="
-	https://github.com/JohnnyMorganz/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
+	https://github.com/JohnnyMorganz/StyLua/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
 	$(cargo_crate_uris)
 "
+S="${WORKDIR}/StyLua-${PV}"
 
 LICENSE="MPL-2.0"
 LICENSE+=" Apache-2.0 MIT MPL-2.0"
