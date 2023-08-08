@@ -32,3 +32,9 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Violet Purcell <vimproved@inventati.org> (2023-07-30)
+# Use version from audio-overlay instead.
+# Masked for removal on 2023-08-30.
+media-libs/pyliblo
+media-sound/carla
