@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=poetry
-PYTHON_COMPAT=( python3_{9..11} pypy3 )
+PYTHON_COMPAT=( python3_{9..12} pypy3 )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Dictionary wrapper for quick access to deeply nested keys."
