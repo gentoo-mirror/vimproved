@@ -148,7 +148,7 @@ DESCRIPTION="A code formatter for Lua"
 HOMEPAGE="https://github.com/JohnnyMorganz/StyLua"
 SRC_URI="
 	https://github.com/JohnnyMorganz/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
-	$(cargo_crate_uris)
+	${CARGO_CRATE_URIS}
 "
 
 LICENSE="MPL-2.0"
