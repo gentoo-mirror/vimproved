@@ -16,7 +16,7 @@ LICENSE="GPL-2"
 SLOT="0"
 RESTRICT="mirror"
 
-IUSE="lv2 vst"
+IUSE="+lv2 vst"
 REQUIRED_USE="|| ( lv2 vst )"
 
 RDEPEND="media-libs/alsa-lib
