@@ -1,0 +1,25 @@
+From edb225d4384f26179c9c788dac84261212adc9d3 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Thu, 10 Aug 2023 18:51:41 -0400
+Subject: [PATCH] musl 1.2.4
+
+---
+ src/util_libc.rs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/util_libc.rs b/src/util_libc.rs
+index 3cecb1d..2aab4f1 100644
+--- a/src/util_libc.rs
++++ b/src/util_libc.rs
+@@ -100,7 +100,7 @@ impl Weak {
+ }
+ 
+ cfg_if! {
+-    if #[cfg(any(target_os = "linux", target_os = "emscripten"))] {
++    if #[cfg(any(target_os = "emscripten"))] {
+         use libc::open64 as open;
+     } else {
+         use libc::open;
+-- 
+2.41.0
+
