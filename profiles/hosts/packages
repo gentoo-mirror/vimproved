@@ -1,0 +1,11 @@
+# Remove packages covered by app-alternatives from system profile
+-*app-arch/bzip2
+-*app-arch/gzip
+-*app-arch/tar
+-*sys-apps/gawk
+
+# which-hunt
+-*sys-apps/which
+
+# remove e2fsprogs
+-*sys-fs/e2fsprogs

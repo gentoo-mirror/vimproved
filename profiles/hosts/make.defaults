@@ -1,0 +1,21 @@
+# Violet Purcell <vimproved@inventati.org> (2023-08-26)
+# Default Ruby build target(s)
+RUBY_TARGETS="ruby32"
+
+# Violet Purcell <vimproved@inventati.org> (2023-08-26)
+# Default target(s) for python-r1.eclass
+PYTHON_SINGLE_TARGET="python3_12"
+PYTHON_TARGETS="python3_12"
+
+# Violet Purcell <vimproved@inventati.org> (2023-08-26)
+# Default targets for lua{,-single}.eclass
+LUA_SINGLE_TARGET="luajit"
+LUA_TARGETS="luajit"
+
+# Violet Purcell <vimproved@inventati.org> (2023-08-26)
+# Default Ninja implementation for ninja-utils.eclass
+NINJA="samu"
+
+# Violet Purcell <vimproved@inventati.org> (2023-08-26)
+# Enable additional portage features by default
+FEATURES="candy ipc-sandbox network-sandbox pid-sandbox"
