@@ -1,0 +1,9 @@
+MARCH="icelake-client"
+
+CFLAGS="-march=${MARCH} -O3 -pipe -flto=thin"
+CXXFLAGS="${CFLAGS}"
+MAKEOPTS="-j8"
+RUSTFLAGS="-C target-cpu=${MARCH}"
+
+BRCMFMAC_CARDS="trinidad"
+VIDEO_CARDS="intel"
