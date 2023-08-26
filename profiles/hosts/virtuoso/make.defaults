@@ -1,0 +1,14 @@
+# Set to march value for compiler
+MARCH="znver4"
+
+# Set default compiler flags
+CFLAGS="-march=${MARCH} -O3 -pipe -flto=thin"
+CXXFLAGS="${CFLAGS}"
+MAKEOPTS="-j16"
+RUSTFLAGS="-C target-cpu=${MARCH}"
+
+# Use testing branch
+ACCEPT_KEYWORDS="~amd64"
+
+# Machine-specific USE_EXPAND
+VIDEO_CARDS="amdgpu radeonsi"
