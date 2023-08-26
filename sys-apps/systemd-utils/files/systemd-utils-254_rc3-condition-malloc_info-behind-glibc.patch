@@ -1,0 +1,41 @@
+From 443b7d1bf395b6ac2aefa6cf82456457541de54e Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Thu, 27 Jul 2023 21:08:14 -0400
+Subject: [PATCH] condition malloc_info behind __GLIBC__
+
+--- a/src/shared/bus-util.c
++++ b/src/shared/bus-util.c
+@@ -623,10 +623,11 @@ static int method_dump_memory_state_by_fd(sd_bus_message *message, void *userdat
+         f = memstream_init(&m);
+         if (!f)
+                 return -ENOMEM;
+-
++#ifdef __GLIBC__
+         r = RET_NERRNO(malloc_info(/* options= */ 0, f));
+         if (r < 0)
+                 return r;
++#endif
+ 
+         r = memstream_finalize(&m, &dump, &dump_size);
+         if (r < 0)
+--- a/src/shared/common-signal.c
++++ b/src/shared/common-signal.c
+@@ -56,6 +56,7 @@ int sigrtmin18_handler(sd_event_source *s, const struct signalfd_siginfo *si, vo
+                 sd_event_trim_memory();
+                 break;
+ 
++#ifdef __GLIBC__
+         case COMMON_SIGNAL_COMMAND_MALLOC_INFO: {
+                 _cleanup_(memstream_done) MemStream m = {};
+                 FILE *f;
+@@ -74,6 +75,7 @@ int sigrtmin18_handler(sd_event_source *s, const struct signalfd_siginfo *si, vo
+                 (void) memstream_dump(LOG_INFO, &m);
+                 break;
+         }
++#endif
+ 
+         default:
+                 log_notice("Received control signal %s with unknown command 0x%08x, ignoring.",
+-- 
+2.41.0
+

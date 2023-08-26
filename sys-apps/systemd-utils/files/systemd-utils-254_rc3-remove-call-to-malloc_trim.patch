@@ -1,0 +1,25 @@
+From d011941636c09094fd77cfea9a7298a69fdff2b6 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Thu, 27 Jul 2023 21:06:28 -0400
+Subject: [PATCH] remove call to malloc_trim
+
+--- a/src/libsystemd/sd-event/sd-event.c
++++ b/src/libsystemd/sd-event/sd-event.c
+@@ -1888,14 +1888,8 @@ _public_ int sd_event_trim_memory(void) {
+ 
+         usec_t before_timestamp = now(CLOCK_MONOTONIC);
+         hashmap_trim_pools();
+-        r = malloc_trim(0);
+         usec_t after_timestamp = now(CLOCK_MONOTONIC);
+ 
+-        if (r > 0)
+-                log_debug("Successfully trimmed some memory.");
+-        else
+-                log_debug("Couldn't trim any memory.");
+-
+         usec_t period = after_timestamp - before_timestamp;
+ 
+ #if HAVE_GENERIC_MALLINFO
+-- 
+2.41.0
+
