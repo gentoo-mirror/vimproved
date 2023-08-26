@@ -17,3 +17,9 @@ FEATURES="candy ipc-sandbox network-sandbox pid-sandbox"
 
 # Use the newer and superior gpkg format
 BINPKG_FORMAT="gpkg"
+
+# Disable some unneeded default USE flags
+USE="-acl -nls -pam"
+
+# Always disable these flags unless specified otherwise in package.use
+USE="${USE} -X -cxx -debug -doc -xv"
