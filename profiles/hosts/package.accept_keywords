@@ -1,10 +1,10 @@
 # Use unkeyworded packages from this overlay
-app-arch/p7zip::vimproved **
-dev-lang/rust::vimproved **
-dev-libs/jansson::vimproved **
-media-libs/rubberband::vimproved **
-media-sound/zynaddsubfx::vimproved **
-net-libs/nodejs::vimproved **
+app-arch/p7zip **
+dev-lang/rust **
+dev-libs/jansson **
+media-libs/rubberband **
+media-sound/zynaddsubfx **
+net-libs/nodejs **
 
 # Accept next LLVM release for testing, keep one major version ahead of last keyworded
 =dev-libs/libclc-17.0.0_rc* **
