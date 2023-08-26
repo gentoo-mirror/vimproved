@@ -1,13 +1,13 @@
 # Default Ruby build target(s)
-RUBY_TARGETS="-* ruby32"
+RUBY_TARGETS="-ruby31 ruby32"
 
 # Default target(s) for python-r1.eclass
-PYTHON_SINGLE_TARGET="-* python3_12"
-PYTHON_TARGETS="-* python3_12"
+PYTHON_SINGLE_TARGET="-python3_11 python3_12"
+PYTHON_TARGETS="-python3_11 python3_12"
 
 # Default targets for lua{,-single}.eclass
-LUA_SINGLE_TARGET="-* luajit"
-LUA_TARGETS="-* luajit"
+LUA_SINGLE_TARGET="-lua5-1 luajit"
+LUA_TARGETS="-lua5-1 luajit"
 
 # Default Ninja implementation for ninja-utils.eclass
 NINJA="samu"
