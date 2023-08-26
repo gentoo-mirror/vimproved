@@ -1,0 +1,12 @@
+diff -upr a/build_config.rb b/build_config.rb
+--- a/build_config.rb	2021-11-15 00:00:52.000000000 -0000
++++ b/build_config.rb	2023-05-21 03:27:14.466192660 -0000
+@@ -152,7 +152,7 @@ build_type.new(build_name) do |conf|
+           linker.libraries << 'X11'
+           linker.flags_after_libraries << `pkg-config --libs libuv`.strip
+         else
+-          linker.flags_after_libraries  << "#{`pwd`.strip}/../deps/libuv.a"
++          linker.flags_after_libraries  << "-luv "
+         end
+         linker.flags_after_libraries  << "-lpthread -ldl -lm"
+       else
