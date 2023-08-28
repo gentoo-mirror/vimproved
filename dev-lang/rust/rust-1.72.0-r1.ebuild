@@ -19,10 +19,12 @@ else
 	SLOT="stable/${ABI_VER}"
 	MY_P="rustc-${PV}"
 	SRC="${MY_P}-src.tar.xz"
-	#KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
+	#KEYWORDS="~amd64 ~arm ~arm64 ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
+# Temporarily set to 1.72.0 since it fixed issues in the stdlib that prevented bootstrapping on musl 1.2.4. Set back to
+# normal in 1.73.0.
+RUST_STAGE0_VERSION="${PV}"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
@@ -162,33 +164,16 @@ RESTRICT="test"
 VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
-	"${FILESDIR}"/1.71.1-fix-bootstrap-version-comparison.patch
+	"${FILESDIR}"/1.72.0-bump-libc-deps-to-0.2.146.patch
 	"${FILESDIR}"/1.70.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/1.62.1-musl-dynamic-linking.patch
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
-	"${FILESDIR}"/1.69.0-musl-1.2.4.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
 
-eapply_crate() {
-	pushd "${1:?}" > /dev/null || die
-
-	local patch="${2:?}"
-	eapply "${patch}"
-
-	local cargo='.cargo-checksum.json'
-	local _ f
-	grep -- '+++' "${patch}" | while read -r _ f; do
-		local file="${f#*/}"
-		local orig_sum="$(grep -Po "(?<=\"${file}\":\")[0-9a-fA-F]+(?=\")" "${cargo}")" || die
-		if [ -n "${orig_sum}" ]; then
-			local sum="$(sha256sum "${file}")" || die
-			sed -i "s|${orig_sum}|${sum%% *}|" "${cargo}" || die
-		fi
-	done
-
-	popd > /dev/null || die
+clear_vendor_checksums() {
+	sed -i 's/\("files":{\)[^}]*/\1/' "vendor/${1}/.cargo-checksum.json" || die
 }
 
 toml_usex() {
@@ -304,34 +289,16 @@ esetup_unwind_hack() {
 }
 
 src_prepare() {
-	eapply_crate vendor/getrandom-0.2.8 "${FILESDIR}"/1.69.0-musl-1.2.4-getrandom.patch
-	eapply_crate vendor/libc-0.2.138 "${FILESDIR}"/1.69.0-musl-1.2.4-libc-0.2.138.patch
-	eapply_crate vendor/libc-0.2.139 "${FILESDIR}"/1.69.0-musl-1.2.4-libc.patch
-	eapply_crate vendor/libc "${FILESDIR}"/1.69.0-musl-1.2.4-libc.patch
+	# Clear vendor checksums for crates that we patched to bump libc.
+	for i in addr2line-0.20.0 bstr cranelift-jit crossbeam-channel elasticlunr-rs handlebars icu_locid libffi \
+		terminal_size tracing-tree; do
+		clear_vendor_checksums "${i}"
+	done
 
 	if ! use system-bootstrap; then
 		has_version sys-devel/gcc || esetup_unwind_hack
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
-
-		# Hack for musl 1.2.4 compatability. Can be removed when upstream stage0 tarballs are rebuilt with musl 1.2.4
-		# fixes.
-		if use elibc_musl; then
-			LIBSTD_FILENAME="libstd-a9e9fdf6bd876a9c.rlib"
-			RUST_STDLIB="${WORKDIR}/${rust_stage0}/rust-std-$(rust_abi)/lib/rustlib/$(rust_abi)/lib/${LIBSTD_FILENAME}"
-			"$(tc-getOBJCOPY)" \
-				--redefine-sym=stat64=stat \
-				--redefine-sym=lstat64=lstat \
-				--redefine-sym=fstat64=fstat \
-				--redefine-sym=fstatat64=fstatat \
-				--redefine-sym=open64=open \
-				--redefine-sym=ftruncate64=ftruncate \
-				--redefine-sym=readdir64=readdir \
-				--redefine-sym=lseek64=lseek \
-				"${RUST_STDLIB}" \
-				"${RUST_STDLIB}.out" || die
-			mv "${RUST_STDLIB}.out" "${RUST_STDLIB}" || die
-		fi
 
 		"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig \
 			--without=rust-docs-json-preview,rust-docs --destdir="${rust_stage0_root}" --prefix=/ || die
