@@ -7,7 +7,7 @@ libc++ 17 renamed __is_cpp17_contiguous_iterator to __libcpp_is_contiguous_itera
  #if defined(_LIBCPP_VERSION) && !BUILDFLAG(IS_NACL)
 +#if _LIBCPP_VERSION >= 170000
 +// libc++ 17 renamed __is_cpp17_contiguous_iterator to __libcpp_is_contiguous_iterator.
-+#define __is_cpp17_contiguous_iterator __libcpp_is_contiguous_iterator'
++#define __is_cpp17_contiguous_iterator __libcpp_is_contiguous_iterator
 +#endif
  // Specialize both std::__is_cpp17_contiguous_iterator and std::pointer_traits
  // for CCI in case we compile with libc++ outside of NaCl. The former is
