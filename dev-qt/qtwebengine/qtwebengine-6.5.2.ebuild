@@ -107,6 +107,9 @@ PATCHES=(
 	"${FILESDIR}/${PN}-6.5.1-musl-remove-decls-usage.patch"
 	## runtime
 	"${FILESDIR}/${PN}-6.5.1-musl-sandbox.patch"
+
+	# libc++ patch
+	"${FILESDIR}/${PN}-6.5.2-libcxx-17.patch"
 )
 
 python_check_deps() {
@@ -193,6 +196,8 @@ src_prepare() {
 			eapply "${FILESDIR}/${PN}-6.5.1-clang-libc++.patch"
 		fi
 	fi
+
+	[[ "$(tc-get-cxx-stdlib)" = "libc++" ]] && append-cppflags "-D__is_cpp17_contiguous_iterator=__libcpp_is_contiguous_iterator"
 
 	# bug 620444 - ensure local headers are used
 	find . -type f -name "*.pr[fio]" -exec \
