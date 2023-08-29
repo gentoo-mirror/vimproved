@@ -88,8 +88,6 @@ DEPEND="${RDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-6.5.1-normalise-clipboard-permissions.patch"
-
 	# Patches for musl support
 	"${FILESDIR}/${PN}-6.5.1-musl-disable-glibc-check.patch"
 	"${FILESDIR}/${PN}-6.5.1-musl-temp-retry-failure.patch"
