@@ -5,8 +5,8 @@ EAPI=8
 inherit cmake xdg
 
 DESCRIPTION="A free software percussion synthesizer for GNU/Linux"
-HOMEPAGE="https://gitlab.com/iurie-sw/geonkick"
-SRC_URI="https://gitlab.com/iurie-sw/geonkick/-/archive/v${PV}/geonkick-v${PV}.tar.bz2 -> ${P}.tar.bz2"
+HOMEPAGE="https://gitlab.com/geonkick/geonkick"
+SRC_URI="https://gitlab.com/geonkick/geonkick/-/archive/v${PV}/geonkick-v${PV}.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -22,6 +22,10 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+PATCHES=(
+	"${FILESDIR}/${PN}-2.9.2-libcxx.patch"
+)
+
 src_configure() {
 	local mycmakeargs=(
 		-DGKICK_STANDALONE=$(usex standalone)
@@ -34,6 +38,4 @@ src_configure() {
 
 pkg_postinst() {
 	xdg_pkg_postinst
-	ewarn "Unfortunately, Geonkick has been dropped by its maintainer. It's still very much usable for now, but"
-	ewarn "if something breaks and there is no viable fork, this package will be last-rited and removed."
 }
