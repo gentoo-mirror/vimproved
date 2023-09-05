@@ -1,0 +1,27 @@
+From 98e559d0a77cd57cc2083b11e951e91b977fe711 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Tue, 5 Sep 2023 11:29:24 -0400
+Subject: [PATCH] Fix build with musl libc 1.2.4
+
+Musl 1.2.4 gated the LFS64 compatibility shims behind the
+_LARGEFILE64_SOURCE macro, and they will be removed entirely in musl
+1.2.5. Use stat64 only when __GLIBC__ is defined.
+
+Signed-off-by: Violet Purcell <vimproved@inventati.org>
+---
+ source/modules/water/files/File.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/source/modules/water/files/File.cpp b/source/modules/water/files/File.cpp
+index e0c00d1ca3..7a2a0ba5eb 100644
+--- a/source/modules/water/files/File.cpp
++++ b/source/modules/water/files/File.cpp
+@@ -1265,7 +1265,7 @@ class DirectoryIterator::NativeIterator::Pimpl
+ //=====================================================================================================================
+ namespace
+ {
+-   #ifdef CARLA_OS_LINUX
++   #ifdef __GLIBC__
+     typedef struct stat64 water_statStruct;
+     #define WATER_STAT    stat64
+    #else
