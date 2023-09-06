@@ -4,13 +4,13 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
+PYPI_NO_NORMALIZE=1
 PYTHON_COMPAT=( python3_{11..12} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="A Python package which creates simple interactive menus on the command line."
 HOMEPAGE="https://pypi.org/project/simple-term-menu/"
-SRC_URI="https://github.com/IngoMeyer441/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE=""
 SLOT="0"
