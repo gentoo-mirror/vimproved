@@ -15,7 +15,6 @@ EGIT_BRANCH="dev"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
 
 # Required packaging extra stuff. Can't be assed.
 RESTRICT="test"
