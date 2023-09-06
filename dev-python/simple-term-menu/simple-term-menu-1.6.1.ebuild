@@ -12,6 +12,6 @@ inherit distutils-r1 pypi
 DESCRIPTION="A Python package which creates simple interactive menus on the command line."
 HOMEPAGE="https://pypi.org/project/simple-term-menu/"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
