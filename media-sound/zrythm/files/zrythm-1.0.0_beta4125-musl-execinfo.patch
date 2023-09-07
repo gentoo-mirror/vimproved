@@ -1,0 +1,44 @@
+From 90490756a0433d8a3d0f1db8ccf2ec679dbf1e52 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Thu, 7 Sep 2023 08:40:53 -0400
+Subject: [PATCH] Only use execinfo.h if __GLIBC__ is defined
+
+Signed-off-by: Violet Purcell <vimproved@inventati.org>
+---
+ src/utils/backtrace.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/utils/backtrace.c b/src/utils/backtrace.c
+index 93ed227..39a52f7 100644
+--- a/src/utils/backtrace.c
++++ b/src/utils/backtrace.c
+@@ -33,7 +33,7 @@
+ #  include <windows.h>
+ /*#define DBGHELP_TRANSLATE_TCHAR*/
+ #  include <dbghelp.h>
+-#else
++#elif defined(__GLIBC__)
+ #  include <execinfo.h>
+ #endif
+ 
+@@ -410,7 +410,7 @@ read_traditional_bt:
+     }
+   free (symbol);
+   free (line);
+-#else /* else if not _WOE32 */
++#elif defined(__GLIBC__) /* else if not _WOE32 */
+   void *  array[max_lines];
+   char ** strings;
+ 
+@@ -433,6 +433,8 @@ read_traditional_bt:
+       strcat (message, current_line);
+     }
+   free (strings);
++#else
++#warning "No backtrace implementation available!"
+ #endif
+ 
+   return g_strdup (message);
+-- 
+2.42.0
+
