@@ -12,6 +12,9 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="debug static-libs"
 
+DEPEND="dev-libs/libyaml"
+RDEPEND="${DEPEND}"
+
 src_compile() {
 	emake VARIANT=$(usex debug debug release)
 }
