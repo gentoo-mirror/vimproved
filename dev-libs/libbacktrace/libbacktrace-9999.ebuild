@@ -8,6 +8,5 @@ DESCRIPTION="A C library to produce symbolic backtraces"
 HOMEPAGE="https://github.com/ianlancetaylor/libbacktrace"
 EGIT_REPO_URI="https://github.com/ianlancetaylor/libbacktrace.git"
 
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
-KEYWORDS=""
