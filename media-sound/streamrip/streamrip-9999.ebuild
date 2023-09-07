@@ -37,3 +37,11 @@ RDEPEND="
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	media-libs/mutagen[${PYTHON_USEDEP}]
 "
+
+src_prepare() {
+	sed -i 's/Cryptodome/Crypto/' \
+		"${S}/streamrip/downloadtools.py" \
+		"${S}/streamrip/clients.py"
+
+	default
+}
