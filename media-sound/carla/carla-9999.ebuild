@@ -18,6 +18,7 @@ IUSE="+X alsa opengl +osc pulseaudio rdf sf2 +sndfile"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="
+	dev-python/PyQt5[opengl?,widgets]
 	virtual/jack
 	X? ( x11-libs/libX11 )
 	alsa? ( media-libs/alsa-lib )
