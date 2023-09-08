@@ -20,6 +20,6 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${ED}" INCDIR="/usr/include" LIBDIR="/usr/$(get_libdir)" install
 	if ! use static-libs; then
-		rm "${ED}/usr/$(get_libdir)/lib${P}.a" || die
+		rm "${ED}/usr/$(get_libdir)/lib${PN}"{,-${PV}}.a || die
 	fi
 }
