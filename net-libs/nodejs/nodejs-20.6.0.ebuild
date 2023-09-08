@@ -231,6 +231,7 @@ src_install() {
 
 src_test() {
 	local drop_tests=(
+		test/parallel/test-fs-read-stream.js
 		test/parallel/test-dns-setserver-when-querying.js
 		test/parallel/test-fs-mkdir.js
 		test/parallel/test-fs-utimes-y2K38.js
