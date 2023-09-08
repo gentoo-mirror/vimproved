@@ -13,6 +13,10 @@ SLOT="0"
 KEYWORDS="~amd64"
 S="${WORKDIR}/${PN}"
 
+PATCHES=(
+	"${FILESDIR}/${P}-c-api-fix-backport.patch"
+)
+
 src_configure() {
 	emake config
 }
