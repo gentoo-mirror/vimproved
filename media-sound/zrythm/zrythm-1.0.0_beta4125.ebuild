@@ -10,6 +10,7 @@ DESCRIPTION="highly automated and intuitive digital audio workstation"
 HOMEPAGE="https://zrythm.org/"
 SRC_URI="https://www.zrythm.org/releases/${PN}-${MY_PV}.tar.xz -> ${P}.tar.xz"
 
+IUSE="X alsa graphviz +guile +jack opus +plugins pulseaudio rtaudio rtmidi sdl +simd"
 LICENSE="AGPL-3+"
 SLOT="0"
 S="${WORKDIR}/${PN}-${MY_PV}"
@@ -23,7 +24,7 @@ DEPEND="
 	dev-libs/reproc
 	dev-libs/xxhash
 	dev-libs/zix
-	gui-libs/gtk
+	gui-libs/gtk[X?]
 	gui-libs/gtksourceview
 	gui-libs/libadwaita
 	gui-libs/libpanel
@@ -35,6 +36,17 @@ DEPEND="
 	>=media-sound/carla-2.6.0
 	net-misc/curl
 	sci-libs/fftw[threads]
+	X? ( x11-libs/libX11 )
+	alsa? ( media-libs/alsa-lib )
+	graphviz? ( media-gfx/graphviz )
+	guile? ( dev-scheme/guile )
+	jack? ( virtual/jack )
+	opus? ( >=media-libs/libsndfile-1.0.29 )
+	plugins? ( dev-libs/boost )
+	rtaudio? ( media-libs/rtaudio )
+	rtmidi? ( media-libs/rtmidi )
+	sdl? ( media-libs/libsdl2 )
+	simd? ( media-libs/lsp-dsp-lib )
 "
 RDEPEND="
 	${DEPEND}
@@ -52,19 +64,31 @@ PATCHES=(
 
 src_configure() {
 	local emesonargs=(
-		-Dalsa=disabled
 		-Dbuild_plugins_with_static_libs=false
-		-Dbundled_plugins=false
 		-Dcompletions=false
-		-Dgraphviz=disabled
-		-Dguile=disabled
-		-Djack=disabled
-		-Dlsp_dsp=disabled
-		-Dpulse=disabled
-		-Dx11=disabled
+		$(meson_feature X x11)
+		$(meson_feature alsa)
+		$(meson_use plugins bundled_plugins)
+		$(meson_feature graphviz)
+		$(meson_feature guile)
+		$(meson_feature jack)
+		$(meson_feature pulseaudio pulse)
+		$(meson_feature rtaudio)
+		$(meson_feature rtmidi)
+		$(meson_feature sdl)
+		$(meson_feature simd lsp_dsp)
 	)
 
 	meson_src_configure
+}
+
+src_install() {
+	meson_src_install
+
+	for file in "${ED}/usr/$(get_libdir)/zrythm/carla/"*; do
+		rm "${file}" || die
+		dosym "../../carla/${file##*/}" "${file##${ED}}"
+	done
 }
 
 pkg_postinst() {

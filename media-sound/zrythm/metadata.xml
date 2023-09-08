@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>vimproved@inventati.org</email>
+		<name>Violet Purcell</name>
+	</maintainer>
+	<use>
+		<flag name="plugins">Build and install bundled plugins.</flag>
+		<flag name="rtaudio">Build with support for <pkg>media-libs/rtaudio</pkg></flag>
+		<flag name="rtmidi">Build with support for <pkg>media-libs/rtmidi</pkg></flag>
+		<flag name="simd">Use <pkg>media-libs/lsp-dsp-lib</pkg> for DSP with SIMD support.</flag>
+	</use>
+</pkgmetadata>
