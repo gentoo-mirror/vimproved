@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{10..11} )
 
 QA_PKGCONFIG_VERSION=$(ver_cut 1)
 
@@ -17,20 +17,22 @@ if [[ ${PV} == *.* ]]; then
 	S="${WORKDIR}/${MY_P}"
 	SRC_URI="https://github.com/systemd/systemd-stable/archive/refs/tags/v${PV}.tar.gz -> ${MY_P}.tar.gz"
 else
-	MY_PV="${PV/_/-}"
-	MY_P="systemd-${MY_PV}"
+	MY_P="systemd-${PV}"
 	S="${WORKDIR}/${MY_P}"
-	SRC_URI="https://github.com/systemd/systemd/archive/refs/tags/v${MY_PV}.tar.gz -> ${MY_P}.tar.gz"
+	SRC_URI="https://github.com/systemd/systemd/archive/refs/tags/v${PV}.tar.gz -> ${MY_P}.tar.gz"
 fi
 
-MUSL_PATCHSET="systemd-musl-patches-253.3"
-SRC_URI+=" elibc_musl? ( https://dev.gentoo.org/~floppym/dist/${MUSL_PATCHSET}.tar.gz )"
+MUSL_PATCHSET="systemd-musl-patches-254.3"
+SRC_URI+=" elibc_musl? ( https://github.com/vimproved/systemd-musl-patches/archive/refs/tags/${MUSL_PATCHSET##*-}.tar.gz -> ${MUSL_PATCHSET}.tar.gz )"
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0"
-#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 IUSE="+acl boot +kmod selinux split-usr sysusers +tmpfiles test +udev"
-REQUIRED_USE="|| ( boot tmpfiles sysusers udev ) ${PYTHON_REQUIRED_USE}"
+REQUIRED_USE="
+	|| ( boot tmpfiles sysusers udev )
+	${PYTHON_REQUIRED_USE}
+"
 RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="
@@ -60,9 +62,9 @@ PEFILE_DEPEND='dev-python/pefile[${PYTHON_USEDEP}]'
 
 RDEPEND="${COMMON_DEPEND}
 	boot? (
+		!<sys-boot/systemd-boot-250
 		${PYTHON_DEPS}
 		$(python_gen_cond_dep "${PEFILE_DEPEND}")
-		!<sys-boot/systemd-boot-250
 	)
 	tmpfiles? ( !<sys-apps/systemd-tmpfiles-250 )
 	udev? (
@@ -100,22 +102,18 @@ BDEPEND="
 	>=sys-apps/coreutils-8.16
 	sys-devel/gettext
 	virtual/pkgconfig
-	${PYTHON_DEPEND}
 	$(python_gen_cond_dep "
 		dev-python/jinja[\${PYTHON_USEDEP}]
+		dev-python/lxml[\${PYTHON_USEDEP}]
 		boot? (
-			dev-python/pyelftools[\${PYTHON_USEDEP}]
+			>=dev-python/pyelftools-0.30[\${PYTHON_USEDEP}]
+			test? ( ${PEFILE_DEPEND} )
 		)
 	")
 "
 
 TMPFILES_OPTIONAL=1
 UDEV_OPTIONAL=1
-
-python_check_deps() {
-	python_has_version "dev-python/jinja[${PYTHON_USEDEP}]"
-	python_has_version "dev-python/pyelftools[${PYTHON_USEDEP}]"
-}
 
 QA_EXECSTACK="usr/lib/systemd/boot/efi/*"
 QA_FLAGS_IGNORED="usr/lib/systemd/boot/efi/.*"
@@ -128,30 +126,16 @@ pkg_setup() {
 		linux-info_pkg_setup
 	fi
 	use boot && secureboot_pkg_setup
-	python_setup
 }
 
 src_prepare() {
 	local PATCHES=(
+		"${FILESDIR}/${PN}-254.3-add-link-kernel-install-shared-option.patch"
 	)
 
 	if use elibc_musl; then
-		# Applied upstream
-		rm "${WORKDIR}/${MUSL_PATCHSET}/0015-test-sizeof.c-Disable-tests-for-missing-typedefs-in-.patch" || die
-
-		# Needed rebasing for 254
-		rm "${WORKDIR}/${MUSL_PATCHSET}/0011-src-basic-missing.h-check-for-missing-strndupa.patch"
-		rm "${WORKDIR}/${MUSL_PATCHSET}/0021-do-not-disable-buffer-in-writing-files.patch"
 		PATCHES+=(
 			"${WORKDIR}/${MUSL_PATCHSET}"
-			"${FILESDIR}/${PN}-254_rc3-src-basic-missing.h-check-for-missing-strndupa.patch"
-			"${FILESDIR}/${PN}-254_rc3-do-not-disable-buffer-in-writing-files.patch"
-			"${FILESDIR}/${PN}-254_rc3-remove-call-to-malloc_trim.patch"
-			"${FILESDIR}/${PN}-254_rc3-condition-malloc_info-behind-glibc.patch"
-			"${FILESDIR}/${PN}-254_rc3-add-missing-linux-types-h-include.patch"
-			"${FILESDIR}/${PN}-254_rc3-un-force-bfd-and-libgcc.patch"
-			"${FILESDIR}/${PN}-254_rc3-link-kernel-install-statically.patch"
-			"${FILESDIR}/${PN}-254.1-wchar_t.patch"
 		)
 	fi
 	default
@@ -175,7 +159,6 @@ multilib_src_configure() {
 		-Drootlibdir="${EPREFIX}/usr/$(get_libdir)"
 		-Dsysvinit-path=
 		$(meson_native_use_bool boot bootloader)
-		$(meson_native_use_bool boot kernel-install)
 		$(meson_native_use_bool selinux)
 		$(meson_native_use_bool sysusers)
 		$(meson_use test tests)
@@ -184,6 +167,7 @@ multilib_src_configure() {
 
 		# Link staticly with libsystemd-shared
 		-Dlink-boot-shared=false
+		-Dlink-kernel-install-shared=false
 		-Dlink-udev-shared=false
 
 		# systemd-tmpfiles has a separate "systemd-tmpfiles.standalone" target
@@ -302,7 +286,8 @@ multilib_src_compile() {
 				man/bootctl.1
 				man/kernel-install.8
 				90-loaderentry.install
-				systemd-boot
+				src/boot/efi/linux$(efi_arch).efi.stub
+				src/boot/efi/systemd-boot$(efi_arch).efi
 			)
 		fi
 		if use sysusers; then
