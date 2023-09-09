@@ -34,6 +34,7 @@ src_configure() {
 		# CMake target to install libc-hdrgen only.
 		-DBUILD_SHARED_LIBS=OFF
 
+		-DLLVM_ENABLE_BACKTRACES=OFF
 		-DLLVM_INCLUDE_TESTS=$(usex test)
 		-DLLVM_INCLUDE_BENCHMARKS=OFF
 		-DPython3_EXECUTABLE="${PYTHON}"
