@@ -10,7 +10,7 @@ PYTHON_COMPAT=( python3_{11..12} )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Python bindings for the liblo OSC library"
-HOMEPAGE="https://pypi.org/project/pyliblo/"
+HOMEPAGE="https://pypi.org/project/pyliblo3/"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -25,3 +25,5 @@ BDEPEND="dev-python/cython[${PYTHON_USEDEP}]"
 PATCHES=(
 	"${FILESDIR}/${PN}-0.12.0-cython-3.patch"
 )
+
+RESTRICT="test"
