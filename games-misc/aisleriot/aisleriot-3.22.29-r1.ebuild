@@ -7,20 +7,20 @@ inherit gnome2-utils meson
 DESCRIPTION="Collection of card games"
 HOMEPAGE="https://wiki.gnome.org/Apps/Aisleriot"
 SRC_URI="https://gitlab.gnome.org/GNOME/aisleriot/-/archive/${PV}/${P}.tar.bz2"
-IUSE="debug doc kde sound +svg"
 
+IUSE="debug doc kde sound +svg"
 LICENSE="GPL-3+ LGPL-3+"
 SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND="
 	dev-libs/glib:2
-	kde? ( dev-qt/qtsvg )
 	dev-scheme/guile
-	svg? ( gnome-base/librsvg )
-	sound? ( media-libs/libcanberra[gtk3] )
 	x11-libs/cairo
 	x11-libs/gtk+:3
+	kde? ( dev-qt/qtsvg )
+	svg? ( gnome-base/librsvg )
+	sound? ( media-libs/libcanberra[gtk3] )
 "
 RDEPEND="${DEPEND}"
 BDEPEND="dev-util/itstool"
