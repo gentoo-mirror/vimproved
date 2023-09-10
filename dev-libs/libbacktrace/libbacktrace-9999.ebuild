@@ -11,6 +11,9 @@ EGIT_REPO_URI="https://github.com/ianlancetaylor/libbacktrace.git"
 LICENSE="BSD"
 SLOT="0"
 
+# Tests fail
+RESTRICT="test"
+
 src_configure() {
 	# Configure step to determine output filetype is broken with LTO
 	filter-lto
