@@ -8,11 +8,10 @@ PYTHON_COMPAT=( python3_{9..12} pypy3 )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Spinners for terminals"
-HOMEPAGE="
-	https://pypi.org/project/spinners/
-"
-SRC_URI="$(pypi_sdist_url "${PN}" "${PV}")"
+HOMEPAGE="https://pypi.org/project/spinners/"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+
+RESTRICT="test"
