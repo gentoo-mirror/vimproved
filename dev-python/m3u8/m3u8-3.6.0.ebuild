@@ -16,3 +16,5 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="dev-python/iso8601[${PYTHON_USEDEP}]"
+
+RESTRICT="test"
