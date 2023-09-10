@@ -7,5 +7,6 @@
 	</maintainer>
 	<upstream>
 		<remote-id type="pypi">dotty-dict</remote-id>
+		<remote-id type="github">pawelzny/dotty_dict</remote-id>
 	</upstream>
 </pkgmetadata>
