@@ -15,3 +15,5 @@ HOMEPAGE="https://pypi.org/project/simple-term-menu/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+
+RESTRICT="test"
