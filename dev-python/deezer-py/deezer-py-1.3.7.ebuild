@@ -16,6 +16,6 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
-RDEPEND="
-	dev-python/requests[${PYTHON_USEDEP}]
-"
+RDEPEND="dev-python/requests[${PYTHON_USEDEP}]"
+
+RESTRICT="test"
