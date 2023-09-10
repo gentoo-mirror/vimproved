@@ -8,15 +8,13 @@ PYTHON_COMPAT=( python3_{9..12} pypy3 )
 inherit distutils-r1 pypi
 
 DESCRIPTION="ctypes bindings for hidapi"
-HOMEPAGE="
-	https://pypi.org/project/hid/
-"
-SRC_URI="$(pypi_sdist_url "${PN}" "${PV}")"
+HOMEPAGE="https://pypi.org/project/hid/"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 
-RDEPEND="
-	dev-libs/hidapi
-"
+DEPEND="dev-libs/hidapi"
+RDEPEND="${DEPEND}"
+
+RESTRICT="test"
