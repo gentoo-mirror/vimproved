@@ -8,10 +8,7 @@ PYTHON_COMPAT=( python3_{9..12} pypy3 )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Beautiful terminal spinners in Python"
-HOMEPAGE="
-	https://pypi.org/project/halo/
-"
-SRC_URI="$(pypi_sdist_url "${PN}" "${PV}")"
+HOMEPAGE="https://pypi.org/project/halo/"
 
 LICENSE="MIT"
 SLOT="0"
@@ -24,3 +21,5 @@ RDEPEND="
 	dev-python/spinners[${PYTHON_USEDEP}]
 	dev-python/termcolor[${PYTHON_USEDEP}]
 "
+
+RESTRICT="test"
