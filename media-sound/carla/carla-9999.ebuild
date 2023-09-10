@@ -11,11 +11,10 @@ HOMEPAGE="http://kxstudio.linuxaudio.org/Applications:Carla"
 EGIT_REPO_URI="https://github.com/falkTX/Carla.git"
 EGIT_SUBMODULES=()
 
-LICENSE="GPL-2+ LGPL-3"
-SLOT="0"
-
 IUSE="+X alsa opengl +osc pulseaudio rdf sf2 +sndfile"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+LICENSE="GPL-2+ LGPL-3"
+SLOT="0"
 
 DEPEND="
 	dev-python/PyQt5[gui,opengl?,svg,widgets]
