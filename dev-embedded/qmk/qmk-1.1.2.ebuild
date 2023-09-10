@@ -5,17 +5,17 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{9..11} )
-inherit distutils-r1 pypi
+inherit distutils-r1 edo pypi
 
 DESCRIPTION="A program to help users work with QMK Firmware."
-HOMEPAGE="
-	https://qmk.fm/
-"
-SRC_URI="$(pypi_sdist_url "${PN}" "${PV}")"
+HOMEPAGE="https://qmk.fm/"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+
+# All tests require qmk_firmware repo
+RESTRICT="test"
 
 RDEPEND="
 	app-mobilephone/dfu-util
