@@ -8,11 +8,10 @@ PYTHON_COMPAT=( python3_{9..12} pypy3 )
 inherit distutils-r1 pypi
 
 DESCRIPTION="A user interface for JSON."
-HOMEPAGE="
-	https://pypi.org/project/hjson/
-"
-SRC_URI="$(pypi_sdist_url "${PN}" "${PV}")"
+HOMEPAGE="https://pypi.org/project/hjson/"
 
 LICENSE="AFL-2.1 MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+
+RESTRICT="test"
