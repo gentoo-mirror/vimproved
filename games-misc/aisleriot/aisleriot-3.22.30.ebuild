@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-inherit gnome2-utils meson xdg-utils
+inherit gnome2-utils meson
 
 DESCRIPTION="Collection of card games"
 HOMEPAGE="https://wiki.gnome.org/Apps/Aisleriot"
