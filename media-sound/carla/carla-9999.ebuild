@@ -14,7 +14,7 @@ EGIT_SUBMODULES=()
 KEYWORDS=""
 LICENSE="GPL-2+ LGPL-3"
 SLOT="0"
-IUSE="X alsa fluidsynth +jsfx +magic +opengl +osc pulseaudio +qt5 rdf sdl sndfile"
+IUSE="+X alsa fluidsynth +jsfx +magic +opengl +osc pulseaudio +qt5 rdf sdl sndfile"
 REQUIRED_USE="
 	opengl? ( X )
 	${PYTHON_REQUIRED_USE}
