@@ -22,6 +22,11 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+PATCHES=(
+	"${FILESDIR}/${PN}-2.10.0-lv2-remove-stdc++fs.patch"
+	"${FILESDIR}/${PN}-2.10.0-standalone-remove-stdc++fs.patch"
+)
+
 src_configure() {
 	local mycmakeargs=(
 		-DGKICK_STANDALONE=$(usex standalone)
