@@ -18,6 +18,7 @@ DEPEND="
 	gnome-extra/zenity
 	media-libs/fontconfig
 	media-libs/freetype
+	media-sound/wavpack
 	x11-libs/cairo
 	x11-libs/libX11
 	x11-libs/libxcb
