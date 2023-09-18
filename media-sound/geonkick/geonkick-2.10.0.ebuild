@@ -22,10 +22,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=(
-	"${FILESDIR}/${PN}-2.9.2-libcxx.patch"
-)
-
 src_configure() {
 	local mycmakeargs=(
 		-DGKICK_STANDALONE=$(usex standalone)
