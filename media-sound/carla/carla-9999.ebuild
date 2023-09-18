@@ -97,10 +97,10 @@ src_compile() {
 		HAVE_SNDFILE=$(usex sndfile true false)
 		HAVE_YSFX=$(usex jsfx true false)
 		HAVE_YSFXGUI=false
-		HAVE_X11=$(usex true false)
-		HAVE_XCURSOR=$(usex true false)
-		HAVE_XEXT=$(usex true false)
-		HAVE_XRANDR=$(usex true false)
+		HAVE_X11=$(usex X true false)
+		HAVE_XCURSOR=$(usex X true false)
+		HAVE_XEXT=$(usex X true false)
+		HAVE_XRANDR=$(usex X true false)
 		JACKBRIDGE_DIRECT=false
 		LIBDIR="/usr/$(get_libdir)"
 		SKIP_STRIPPING=true
