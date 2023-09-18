@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-inherit gnome2-utils meson xdg
+inherit gnome2-utils meson xdg-utils
 
 DESCRIPTION="Collection of card games"
 HOMEPAGE="https://wiki.gnome.org/Apps/Aisleriot"
@@ -40,8 +40,10 @@ src_configure() {
 
 pkg_postinst() {
 	gnome2_schemas_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
 	gnome2_schemas_update
+	xdg_icon_cache_update
 }
