@@ -8,7 +8,7 @@ inherit git-r3 meson
 DESCRIPTION="Linux ports of Distrho plugins"
 HOMEPAGE="https://github.com/DISTRHO/DISTRHO-Ports"
 EGIT_REPO_URI="https://github.com/DISTRHO/DISTRHO-Ports"
-KEYWORDS="~amd64"
+KEYWORDS=""
 LICENSE="GPL-2"
 SLOT="0"
 
