@@ -6,7 +6,8 @@
 		<name>Violet Purcell</name>
 	</maintainer>
 	<use>
+		<flag name="fluidsynth">Use fluidsynth for sf2 soundfont support</flag>
+		<flag name="jsfx">Enable support for the JSFX plugin format</flag>
 		<flag name="rdf">Enable LADSPA-RDF support</flag>
-		<flag name="sf2">Enable builtin SF2 sample support using <pkg>media-sound/fluidsynth</pkg></flag>
 	</use>
 </pkgmetadata>

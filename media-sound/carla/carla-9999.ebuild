@@ -11,26 +11,45 @@ HOMEPAGE="http://kxstudio.linuxaudio.org/Applications:Carla"
 EGIT_REPO_URI="https://github.com/falkTX/Carla.git"
 EGIT_SUBMODULES=()
 
-IUSE="+X alsa opengl +osc pulseaudio rdf sf2 +sndfile"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+KEYWORDS=""
 LICENSE="GPL-2+ LGPL-3"
 SLOT="0"
+IUSE="X alsa fluidsynth +jsfx +magic +opengl +osc pulseaudio +qt5 rdf sdl sndfile"
+REQUIRED_USE="
+	opengl? ( X )
+	${PYTHON_REQUIRED_USE}
+"
 
 DEPEND="
-	dev-python/PyQt5[gui,opengl?,svg,widgets]
-	virtual/jack
-	X? ( x11-libs/libX11 )
-	alsa? ( media-libs/alsa-lib )
-	osc? (
-		dev-python/pyliblo3
-		media-libs/liblo
+	X? (
+		x11-libs/libX11
+		x11-libs/libXcursor
+		x11-libs/libXext
+		x11-libs/libXrandr
 	)
-	pulseaudio? ( media-libs/libpulse )
-	rdf? ( dev-python/rdflib )
-	sf2? ( media-sound/fluidsynth )
-	sndfile? ( media-libs/libsndfile )
+	alsa? ( media-libs/alsa-lib )
+	magic? ( sys-apps/file )
+	opengl? (
+		media-libs/libglvnd
+		qt5? (
+			dev-qt/qtgui:5[egl]
+		)
+	)
+	osc? ( media-libs/liblo )
+	qt5? (
+		dev-qt/qtcore:5
+		dev-qt/qtgui:5
+		dev-qt/qtwidgets:5
+	)
+	sdl? ( media-libs/libsdl2[sound] )
+	sndfile? (
+		media-libs/libsndfile
+	)
 "
 RDEPEND="
+	osc? ( dev-python/pyliblo3 )
+	rdf? ( dev-python/rdflib )
+	qt5? ( dev-python/PyQt5[gui,svg,widgets] )
 	${DEPEND}
 	${PYTHON_DEPS}
 "
@@ -57,20 +76,34 @@ src_compile() {
 	use elibc_musl && append-ldflags "-lfts"
 	myemakeargs=(
 		CLANG=$(tc-is-clang && echo true)
+		HAVE_ALSA=$(usex alsa true false)
+		HAVE_DBUS=false
+		HAVE_DGL=$(usex opengl true false)
+		HAVE_FFMPEG=false
+		HAVE_FLUIDSYNTH=$(usex fluidsynth true false)
+		HAVE_FRONTEND=$(usex qt5 true false)
+		HAVE_JACK=true
+		HAVE_JACKLIB=false
+		HAVE_LIBLO=$(usex osc true false)
+		HAVE_LIBMAGIC=$(usex magic true false)
+		HAVE_LIBMAGICPKG=$(usex magic true false)
+		HAVE_PULSEAUDIO=$(usex pulseaudio true false)
+		HAVE_PYQT=$(usex qt5 true false)
+		HAVE_QT4=false
+		HAVE_QT5=$(usex qt5 true false)
+		HAVE_QT5PKG=$(use opengl && use qt5 && echo true)
+		HAVE_SDL1=false
+		HAVE_SDL2=$(usex sdl true false)
+		HAVE_SNDFILE=$(usex sndfile true false)
+		HAVE_YSFX=$(usex jsfx true false)
+		HAVE_YSFXGUI=false
+		HAVE_X11=$(usex true false)
+		HAVE_XCURSOR=$(usex true false)
+		HAVE_XEXT=$(usex true false)
+		HAVE_XRANDR=$(usex true false)
+		JACKBRIDGE_DIRECT=false
 		LIBDIR="/usr/$(get_libdir)"
 		SKIP_STRIPPING=true
-		HAVE_FFMPEG=false
-		HAVE_ZYN_DEPS=false
-		HAVE_ZYN_UI_DEPS=false
-		HAVE_QT4=false
-		HAVE_QT5=true
-		HAVE_PYQT5=true
-		HAVE_ALSA=$(usex alsa true false)
-		HAVE_FLUIDSYNTH=$(usex sf2 true false)
-		HAVE_LIBLO=$(usex osc true false)
-		HAVE_PULSEAUDIO=$(usex pulseaudio true false)
-		HAVE_SNDFILE=$(usex sndfile true false)
-		HAVE_X11=$(usex X true false)
 	)
 
 	# Print which options are enabled/disabled
