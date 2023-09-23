@@ -32,3 +32,7 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Violet Purcell <vimproved@inventati.org> (2023-09-23)
+# Mask musl in this overlay, unmask in custom profile.
+sys-libs/musl
