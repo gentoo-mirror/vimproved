@@ -3,16 +3,20 @@
 
 EAPI=8
 
-inherit cmake flag-o-matic
+USE_RUBY="ruby31 ruby32"
+inherit cmake flag-o-matic ruby-single toolchain-funcs
 
 DESCRIPTION="Software synthesizer capable of making a countless number of instruments"
 HOMEPAGE="http://zynaddsubfx.sourceforge.net/"
-SRC_URI="mirror://sourceforge/zynaddsubfx/${P}.tar.bz2"
+SRC_URI="
+	mirror://sourceforge/zynaddsubfx/${P}.tar.bz2
+	zyn-fusion? ( mirror://sourceforge/zynaddsubfx/zyn-fusion-ui-src-${PV}.tar.bz2 )
+"
 
 LICENSE="GPL-2"
 SLOT="0"
-#KEYWORDS="~amd64"
-IUSE="+alsa doc dssi fltk jack lash portaudio +zest"
+KEYWORDS="~amd64"
+IUSE="+alsa doc dssi fltk jack lash portaudio +zyn-fusion"
 
 REQUIRED_USE="|| ( alsa jack portaudio )"
 
@@ -36,13 +40,15 @@ DEPEND="
 	jack? ( virtual/jack )
 	lash? ( media-sound/lash )
 	portaudio? ( media-libs/portaudio )
+	zyn-fusion? (
+		dev-libs/libuv
+		x11-libs/libX11
+		x11-libs/libxcb
+		${RUBY_DEPS}
+	)
 "
 RDEPEND="${DEPEND}"
-BDEPEND="
-	dev-lang/ruby:*
-	doc? ( app-doc/doxygen )
-	zest? ( media-sound/zyn-fusion )
-"
+BDEPEND="doc? ( app-doc/doxygen )"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-docs.patch
@@ -69,12 +75,23 @@ src_prepare() {
 
 	# FIXME upstream: sandbox error
 	sed -i -e '/add_subdirectory(bash-completion)/d' doc/CMakeLists.txt || die
+
+	if use zyn-fusion; then
+		# Unbundle libuv: makefile and rake file
+		sed -i -e "s%./deps/\$(UV_DIR)/.libs/libuv.a%`pkg-config --libs libuv`%" \
+			-e 's%-I ../../deps/\$(UV_DIR)/include%-I /usr/include/uv/%' \
+			"${WORKDIR}/zyn-fusion-ui-src-${PV}/Makefile"
+		sed -i -e "/deps\/libuv.a/s/<< .*/<< \"`pkg-config --libs libuv`\"/" \
+			-e 's%../deps/libuv-v1.9.1/include/%usr/include/uv/%' \
+			"${WORKDIR}/zyn-fusion-ui-src-${PV}/build_config.rb"
+		LD="$(tc-getCC)"
+	fi
 }
 
 src_configure() {
 	local UI
 	use fltk && UI=fltk
-	use zest && UI=zest
+	use zyn-fusion && UI=zest
 	append-cxxflags -std=c++11
 
 	local mycmakeargs=(
@@ -90,6 +107,11 @@ src_configure() {
 src_compile() {
 	cmake_src_compile
 	use doc && cmake_src_compile doc
+
+	if use zyn-fusion; then
+		emake -C "${WORKDIR}/zyn-fusion-ui-src-${PV}"
+		emake pack -C "${WORKDIR}/zyn-fusion-ui-src-${PV}"
+	fi
 }
 
 src_install() {
@@ -97,4 +119,17 @@ src_install() {
 	cmake_src_install
 	insinto /usr/share/${PN}
 	doins -r instruments/*
+
+	if use zyn-fusion; then
+		exeinto /opt/zyn-fusion
+		doexe "${WORKDIR}/zyn-fusion-ui-src-${PV}/package/zest"
+		dodir /usr/bin
+		dosym ../../opt/zyn-fusion/zest /usr/bin/zyn-fusion
+
+		insinto /opt/zyn-fusion
+		doins -r "${WORKDIR}/zyn-fusion-ui-src-${PV}/package/font" \
+			"${WORKDIR}/zyn-fusion-ui-src-${PV}/package/qml" \
+			"${WORKDIR}/zyn-fusion-ui-src-${PV}/package/schema" \
+			"${WORKDIR}/zyn-fusion-ui-src-${PV}/package/libzest.so"
+	fi
 }
