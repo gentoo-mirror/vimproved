@@ -7,7 +7,7 @@
 	</maintainer>
 	<use>
 		<flag name="dssi">Enable support for DSSI Soft Synth Interface</flag>
-		<flag name="zest">Enable support for zyn-fusion, a new interface for ZynAddSubFX.</flag>
+		<flag name="zyn-fusion">Enable support for zyn-fusion, a new interface for ZynAddSubFX.</flag>
 	</use>
 	<upstream>
 		<remote-id type="sourceforge">zynaddsubfx</remote-id>
