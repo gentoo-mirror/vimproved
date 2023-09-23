@@ -11,6 +11,5 @@
 	<use>
 		<flag name="lv2">Build LV2 plugin</flag>
 		<flag name="standalone">Build standalone Jack program</flag>
-		<flag name="vst">Build VST3 plugin</flag>
 	</use>
 </pkgmetadata>

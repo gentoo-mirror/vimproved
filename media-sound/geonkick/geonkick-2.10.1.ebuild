@@ -5,13 +5,13 @@ EAPI=8
 inherit cmake xdg
 
 DESCRIPTION="A free software percussion synthesizer for GNU/Linux"
-HOMEPAGE="https://gitlab.com/geonkick/geonkick"
-SRC_URI="https://gitlab.com/geonkick/geonkick/-/archive/v${PV}/geonkick-v${PV}.tar.bz2 -> ${P}.tar.bz2"
+HOMEPAGE="https://geonkick.org"
+SRC_URI="https://gitlab.com/Geonkick-Synthesizer/geonkick/-/archive/v${PV}/geonkick-v${PV}.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+lv2 +standalone vst"
+IUSE="+lv2 +standalone"
 S="${WORKDIR}/geonkick-v${PV}"
 
 DEPEND="
@@ -23,14 +23,12 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-2.10.0-lv2-remove-stdc++fs.patch"
-	"${FILESDIR}/${PN}-2.10.0-standalone-remove-stdc++fs.patch"
+	"${FILESDIR}/${PN}-2.10.1-remove-stdc++fs.patch"
 )
 
 src_configure() {
 	local mycmakeargs=(
 		-DGKICK_STANDALONE=$(usex standalone)
-		-DGKICK_VST3=$(usex vst)
 		-DGKICK_PLUGIN_LV2=$(usex lv2)
 	)
 
