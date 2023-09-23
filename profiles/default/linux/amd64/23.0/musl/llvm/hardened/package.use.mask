@@ -1,0 +1,2 @@
+# Unmask musl w/ scudo here for hardening
+sys-libs/musl -scudo
