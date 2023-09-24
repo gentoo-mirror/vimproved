@@ -1,1 +1,17 @@
 sys-libs/musl scudo
+
+# Un-force LLVM_TARGETS
+sys-devel/clang -llvm_targets_AArch64 -llvm_targets_AMDGPU -llvm_targets_ARM
+sys-devel/clang -llvm_targets_AVR -llvm_targets_BPF -llvm_targets_Hexagon
+sys-devel/clang -llvm_targets_Lanai -llvm_targets_LoongArch -llvm_targets_MSP430
+sys-devel/clang -llvm_targets_Mips -llvm_targets_NVPTX -llvm_targets_PowerPC
+sys-devel/clang -llvm_targets_RISCV -llvm_targets_Sparc -llvm_targets_SystemZ
+sys-devel/clang -llvm_targets_VE -llvm_targets_WebAssembly -llvm_targets_X86
+sys-devel/clang -llvm_targets_XCore
+sys-devel/llvm -llvm_targets_AArch64 -llvm_targets_AMDGPU -llvm_targets_ARM
+sys-devel/llvm -llvm_targets_AVR -llvm_targets_BPF -llvm_targets_Hexagon
+sys-devel/llvm -llvm_targets_Lanai -llvm_targets_LoongArch -llvm_targets_MSP430
+sys-devel/llvm -llvm_targets_Mips -llvm_targets_NVPTX -llvm_targets_PowerPC
+sys-devel/llvm -llvm_targets_RISCV -llvm_targets_Sparc -llvm_targets_SystemZ
+sys-devel/llvm -llvm_targets_VE -llvm_targets_WebAssembly -llvm_targets_X86
+sys-devel/llvm -llvm_targets_XCore
