@@ -2,21 +2,13 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>blueness@gentoo.org</email>
-		<name>Anthony G. Basile</name>
-	</maintainer>
-	<maintainer type="person">
-		<email>lu_zero@gentoo.org</email>
-	</maintainer>
-	<maintainer type="project">
-		<email>toolchain@gentoo.org</email>
-		<name>Gentoo Toolchain Project</name>
-	</maintainer>
-	<maintainer type="project">
-		<email>musl@gentoo.org</email>
-		<name>Musl project</name>
+		<email>vimproved@inventati.org</email>
+		<name>Violet Purcell</name>
 	</maintainer>
 	<use>
 		<flag name="scudo">Use LLVM's Scudo malloc implementation instead of malloc-ng, musl's default.</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">llvm/llvm-project</remote-id>
+	</upstream>
 </pkgmetadata>
