@@ -101,7 +101,8 @@ src_prepare() {
 	cp "${WORKDIR}"/llvm-project-${LLVM_VERSION}.src/compiler-rt/lib/scudo/standalone/*.cpp "${S}/src/malloc/scudo" || die
 	cp "${WORKDIR}"/llvm-project-${LLVM_VERSION}.src/compiler-rt/lib/scudo/standalone/*.h "${S}/src/malloc/scudo" || die
 	cp "${WORKDIR}"/llvm-project-${LLVM_VERSION}.src/compiler-rt/lib/scudo/standalone/*.inc "${S}/src/malloc/scudo" || die
-	cp "${WORKDIR}"/llvm-project-${LLVM_VERSION}.src/compiler-rt/lib/scudo/standalone/include/scudo/interface.h "${S}/src/malloc/scudo/scudo" || die
+	cp "${WORKDIR}"/llvm-project-${LLVM_VERSION}.src/compiler-rt/lib/scudo/standalone/include/scudo/interface.h \
+		"${S}/src/malloc/scudo/scudo" || die
 	rm "${S}/src/malloc/scudo/wrappers_"* || die
 	cp "${FILESDIR}/wrappers.cpp" "${S}/src/malloc/scudo" || die
 
