@@ -32,64 +32,55 @@ if [[ "${ZIG_USE_PIE}" = true ]]; then
 	IUSE="pie"
 fi
 
-# @ECLASS_VARIABLE: EZIG
+# @ECLASS_VARIABLE: ZIG
 # @DESCRIPTION:
 # The Zig binary to use for build. Useful if you have multiple Zig versions
 # installed and want to use a specific version.
-EZIG="${EZIG:-}"
+ZIG="${ZIG:-}"
 
-# @ECLASS_VARIABLE: EZIG_BUILD_EXTRA_FLAGS
+# @ECLASS_VARIABLE: ezigargs
+# @DEFAULT_UNSET
+# @DESCRIPTION:
+# Optional Zig arguments as Bash array; this should be defined before calling
+# zig_src_compile
+
+# @ECLASS_VARIABLE: MYZIGARGS
 # @USER_VARIABLE
 # @DESCRIPTION:
-# Flags to be passed to `zig build`.
+# User-controlled variable containing extra arguments to be passed to
+# `zig build`.
 
-# @ECLASS_VARIABLE: EZIG_BUILD_VERBOSE
+# @ECLASS_VARIABLE: ZIG_BUILD_VERBOSE
 # @DESCRIPTION:
 # If non-empty, build with verbose output.
-EZIG_BUILD_VERBOSE="${EZIG_BUILD_VERBOSE:=1}"
+ZIG_BUILD_VERBOSE="${ZIG_BUILD_VERBOSE:=1}"
 
-# @ECLASS_VARIABLE: EZIG_MIN
+# @ECLASS_VARIABLE: ZIG_MIN
 # @DEFAULT_UNSET
 # @DESCRIPTION:
-# Specifies the minimum version of Zig.
-EZIG_MIN="${EZIG_MIN:-}"
+# Specifies the minimum version of Zig. Must be a minor version (x.y).
+ZIG_MIN="${ZIG_MIN:-}"
 
-# @ECLASS_VARIABLE: EZIG_MAX
+# @ECLASS_VARIABLE: ZIG_MAX
 # @DEFAULT_UNSET
 # @DESCRIPTION:
-# Specifies the maximum version of Zig.
-EZIG_MAX="${EZIG_MAX:-}"
+# Specifies the maximum version of Zig. Must be a minor version (x.y).
+ZIG_MAX="${ZIG_MAX:-}"
 
 BDEPEND="|| (
 	dev-lang/zig
 	dev-lang/zig-bin
 )"
 
-# @FUNCTION: ezig_build
+# @FUNCTION: zig-set_ZIG
 # @DESCRIPTION:
-# Runs `zig build` with the specified arguments and dies on failure.
-ezig_build() {
-	local use_pie
-	if [[ "${ZIG_USE_PIE}" = true ]]; then
-		use_pie=$(usex pie true false)
-	else
-		use_pie=false
-	fi
+# Sets the ZIG environment variable.
+zig-set_ZIG() {
+	# Exit if ZIG is already set by the user or the ebuild.
+	[[ -n ${ZIG} ]] && return
 
-	local ezig_build_flags="-Dpie=${use_pie} ${EZIG_EXTRA_FLAGS}"
-	if [[ -n "${EZIG_BUILD_VERBOSE}" ]]; then
-		ezig_build_flags="${ezig_build_flags} --verbose"
-	fi
-
-	edo "${EZIG}" build ${ezig_build_flags} "$@"
-}
-
-# @FUNCTION: zig-set_EZIG
-# @DESCRIPTION:
-# Sets the EZIG environment variable.
-zig-set_EZIG() {
-	[[ -n ${EZIG} ]] && return
-
+	# Determine suitable Zig version. Will select the highest minor version
+	# that's less than ZIG_MAX.
 	local candidate selected selected_ver ver
 
 	for candidate in "${BROOT}"/usr/bin/zig-*; do
@@ -101,13 +92,13 @@ zig-set_EZIG() {
 
 		ver_minor=${ver%.*}
 
-		if [[ -n ${EZIG_MIN} ]] \
-			&& ver_test "${ver_minor}" -lt "${EZIG_MIN}"; then
+		if [[ -n ${ZIG_MIN} ]] \
+			&& ver_test "${ver_minor}" -lt "${ZIG_MIN}"; then
 			continue
 		fi
 
-		if [[ -n ${EZIG_MAX} ]] \
-			&& ver_test "${ver_minor}" -gt "${EZIG_MAX}"; then
+		if [[ -n ${ZIG_MAX} ]] \
+			&& ver_test "${ver_minor}" -gt "${ZIG_MAX}"; then
 			continue
 		fi
 
@@ -124,31 +115,52 @@ zig-set_EZIG() {
 		die "Could not find (suitable) zig installation in ${BROOT}/usr/bin"
 	fi
 
-	export EZIG="${selected}"
+	export ZIG="${selected}"
 }
 
 # @FUNCTION: zig_pkg_setup
 # @DESCRIPTION:
-# Determines suitable Zig installation and exports EZIG.
+# Determines suitable Zig installation and exports ZIG.
 zig_pkg_setup() {
-	zig-set_EZIG
+	zig-set_ZIG
 }
 
 # @FUNCTION: zig_src_compile
 # @DESCRIPTION:
-# Runs `ezig_build` with no extra arguments.
+# Runs `zig build` with specified arguments..
 zig_src_compile() {
-	ezig_build
+	local zigargs=( "${ZIG}" build )
+
+	if [[ -n "${ZIG_BUILD_VERBOSE}" ]]; then
+		zigargs+=( --verbose )
+	fi
+
+	# Enable PIE if ZIG_USE_PIE is set and use flag is enabled.
+	if [[ "${ZIG_USE_PIE}" = true ]]; then
+		zigargs+=( -Dpie=$(usex pie true false) )
+	fi
+
+	zigargs+=(
+		# Arguments from ebuild
+		"${ezigargs[@]}"
+
+		# Arguments passed to this function
+		"$@"
+
+		# Arguments from user
+		"${MYZIGARGS[@]}"
+	)
+
+	edo "${zigargs[@]}"
 }
 
 # @FUNCTION: zig_src_install
 # @DESCRIPTION:
-# Installs all outputs of zig_src_compile.
+# Copies Zig's default install tree to DESTDIR.
 zig_src_install() {
-	# Zig doesn't have separate commands to build and install, but calling
-	# ezig_build again should use zig's cache instead of completely rebuilding
-	# the program.
-	DESTDIR="${ED}" ezig_build --prefix /usr
+	# Zig has no separate install/compile steps and installs to ${S}/zig-out by
+	# default. We just copy this tree to ${ED} here.
+	cp -a "${S}/zig-out" "${ED}/usr" || die
 }
 
 EXPORT_FUNCTIONS pkg_setup src_compile src_install
