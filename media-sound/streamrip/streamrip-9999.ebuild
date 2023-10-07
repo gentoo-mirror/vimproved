@@ -10,7 +10,7 @@ inherit distutils-r1 git-r3
 
 DESCRIPTION="A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer"
 HOMEPAGE="https://github.com/nathom/streamrip"
-EGIT_REPO_URI="https://github.com/nathom/streamrip.git"
+EGIT_REPO_URI="https://github.com/nathom/${PN}.git"
 EGIT_BRANCH="dev"
 
 LICENSE="GPL-3"
@@ -40,8 +40,8 @@ RDEPEND="
 
 src_prepare() {
 	sed -i 's/Cryptodome/Crypto/' \
-		"${S}/streamrip/downloadtools.py" \
-		"${S}/streamrip/clients.py"
+		"${S}/${PN}/downloadtools.py" \
+		"${S}/${PN}/clients.py"
 
 	default
 }
