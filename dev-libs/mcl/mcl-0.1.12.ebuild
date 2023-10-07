@@ -13,6 +13,8 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 
+RESTRICT="!test? ( test )"
+
 DEPEND=">=dev-libs/libfmt-9:="
 RDEPEND="${DEPEND}"
 BDEPEND="test? ( >=dev-cpp/catch-3 )"
