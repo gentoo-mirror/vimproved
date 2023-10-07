@@ -10,7 +10,7 @@ SRC_URI="https://github.com/zyantific/${PN}/archive/refs/tags/v${PV}.tar.gz -> $
 
 IUSE="doc examples man +tools"
 LICENSE="MIT"
-SLOT="0"
+SLOT="0/4.0"
 KEYWORDS="~amd64"
 
 RESTRICT="test"
