@@ -1,0 +1,45 @@
+# Copyright 2023 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+inherit cmake
+
+DESCRIPTION=""
+HOMEPAGE=""
+SRC_URI="https://github.com/merryhime/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
+LICENSE="BSD"
+SLOT="0"
+KEYWORDS="~amd64"
+
+IUSE="test"
+DEPEND="
+	dev-cpp/robin-map
+	>=dev-libs/boost-1.57
+	>=dev-libs/libfmt-9:=
+	dev-libs/mcl
+	>=dev-libs/xbyak-6
+	>=dev-libs/zydis-4
+"
+RDEPEND="${DEPEND}"
+BDPENED="test? ( >=dev-cpp/catch-3 )"
+
+RESTRICT="!test? ( test )"
+
+src_prepare() {
+	# Remove bundled dependencies
+	for dep in catch fmt mcl robin-map xbyak zycore zydis; do
+		rm -rf "externals/${dep}" || die
+	done
+
+	cmake_src_prepare
+}
+
+src_configure() {
+	local mycmakeargs=(
+		-DDYNARMIC_TESTS=$(usex test)
+		-DDYNARMIC_WARNINGS_AS_ERRORS=OFF
+	)
+
+	cmake_src_configure
+}
