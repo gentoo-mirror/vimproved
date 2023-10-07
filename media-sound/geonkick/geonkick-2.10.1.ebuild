@@ -6,13 +6,13 @@ inherit cmake xdg
 
 DESCRIPTION="A free software percussion synthesizer for GNU/Linux"
 HOMEPAGE="https://geonkick.org"
-SRC_URI="https://gitlab.com/Geonkick-Synthesizer/geonkick/-/archive/v${PV}/geonkick-v${PV}.tar.bz2 -> ${P}.tar.bz2"
+SRC_URI="https://gitlab.com/${PN}-synthesizer/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+lv2 +standalone"
-S="${WORKDIR}/geonkick-v${PV}"
+S="${WORKDIR}/${PN}-v${PV}"
 
 DEPEND="
 	dev-libs/rapidjson
