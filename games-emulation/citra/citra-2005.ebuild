@@ -53,6 +53,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
+		-DBUILD_SHARED_LIBS=OFF
 		-DCITRA_ENABLE_BUNDLE_TARGET=OFF
 		-DENABLE_QT=$(usex qt6)
 		-DENABLE_SDL2=$(usex sdl)
