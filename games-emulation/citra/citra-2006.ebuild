@@ -4,7 +4,7 @@
 EAPI=8
 inherit cmake xdg
 
-MY_PV="20231006-7931aac"
+MY_PV="20231008-f5b8888"
 
 DESCRIPTION="A Nintendo 3DS Emulator"
 HOMEPAGE="https://citra-emu.org/"
@@ -37,11 +37,6 @@ BDEPEND="
 	media-video/ffmpeg
 	x11-libs/libX11
 "
-
-PATCHES=(
-	"${FILESDIR}/${P}-system-dynarmic.patch"
-	"${FILESDIR}/${P}-system-fmt.patch"
-)
 
 src_prepare() {
 	for dep in boost cpp-jwt dynarmic fmt json library-headers/library-headers libressl sdl2 soundtouch; do
