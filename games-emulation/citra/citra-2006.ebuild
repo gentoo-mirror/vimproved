@@ -32,7 +32,6 @@ DEPEND="
 		dev-qt/qtmultimedia:6
 	)
 	sdl? ( media-libs/libsdl2 )
-	telemetry? ( dev-cpp/jwt-cpp )
 	usb? ( virtual/libusb )
 "
 RDEPEND="${DEPEND}"
@@ -43,7 +42,7 @@ BDEPEND="
 "
 
 src_prepare() {
-	for dep in boost cpp-jwt dynarmic fmt json library-headers/library-headers libressl libusb sdl2 soundtouch; do
+	for dep in boost dynarmic fmt json library-headers/library-headers libressl libusb sdl2 soundtouch; do
 		rm -rf "externals/${dep}" || die
 	done
 
@@ -66,7 +65,6 @@ src_configure() {
 		-DENABLE_TESTS=$(usex test)
 		-DENABLE_WEB_SERVICE=$(usex telemetry)
 		-DUSE_SYSTEM_BOOST=ON
-		-DUSE_SYSTEM_CPP_JWT=ON
 		-DUSE_SYSTEM_DYNARMIC=ON
 		-DUSE_SYSTEM_FMT=ON
 		-DUSE_SYSTEM_JSON=ON
