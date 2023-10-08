@@ -1,0 +1,51 @@
+From e16ee0b38b8527bdba250930e20bba650a6745be Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Sat, 7 Oct 2023 19:18:41 -0400
+Subject: [PATCH] externals: allow user to use system catch2
+
+Signed-off-by: Violet Purcell <vimproved@inventati.org>
+---
+ CMakeLists.txt           |  1 +
+ externals/CMakeLists.txt | 14 +++++++++++---
+ 2 files changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bf1fdb1b8..0e6c019a8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -99,6 +99,7 @@ option(USE_SYSTEM_CPP_HTTPLIB "Use the system cpp-httplib (instead of the bundle
+ option(USE_SYSTEM_JSON "Use the system JSON (nlohmann-json3) package (instead of the bundled one)" OFF)
+ option(USE_SYSTEM_DYNARMIC "Use the system dynarmic (instead of the bundled one)" OFF)
+ option(USE_SYSTEM_FMT "Use the system fmt (instead of the bundled one)" OFF)
++option(USE_SYSTEM_CATCH "Use the system catch (instead of the bundled one)" OFF)
+ 
+ if (CITRA_USE_PRECOMPILED_HEADERS)
+     message(STATUS "Using Precompiled Headers.")
+diff --git a/externals/CMakeLists.txt b/externals/CMakeLists.txt
+index 53fb777ea..3f83e193e 100644
+--- a/externals/CMakeLists.txt
++++ b/externals/CMakeLists.txt
+@@ -37,9 +37,17 @@ if (NOT USE_SYSTEM_BOOST)
+ endif()
+ 
+ # Catch2
+-set(CATCH_INSTALL_DOCS OFF CACHE BOOL "")
+-set(CATCH_INSTALL_EXTRAS OFF CACHE BOOL "")
+-add_subdirectory(catch2)
++if (USE_SYSTEM_CATCH)
++    add_library(Catch2 INTERFACE)
++    find_package(Catch2 REQUIRED)
++    if(TARGET Catch2::Catch2)
++        message(STATUS "Found catch2")
++    endif()
++else()
++    set(CATCH_INSTALL_DOCS OFF CACHE BOOL "")
++    set(CATCH_INSTALL_EXTRAS OFF CACHE BOOL "")
++   add_subdirectory(catch2)
++endif()
+ 
+ # Crypto++
+ set(CRYPTOPP_BUILD_DOCUMENTATION OFF CACHE BOOL "")
+-- 
+2.42.0
+
