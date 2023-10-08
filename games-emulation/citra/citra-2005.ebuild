@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-inherit cmake
+inherit cmake xdg
 
 MY_PV="20231006-7931aac"
 
@@ -13,17 +13,18 @@ SRC_URI="https://github.com/${PN}-emu/${PN}-nightly/releases/download/nightly-${
 IUSE="+qt6 +sdl"
 LICENSE="GPL-2"
 SLOT="0"
+KEYWORDS="~amd64"
 S="${WORKDIR}/${PN}-unified-source-${MY_PV}"
 
 DEPEND="
-	dev-cpp/cpp-httplib
 	dev-cpp/nlohmann_json
 	dev-cpp/robin-map
-	dev-libs/boost[nls]
+	dev-libs/boost:=[nls]
 	dev-libs/dynarmic
 	dev-libs/libfmt:=
-	dev-libs/openssl
-	media-libs/libsoundtouch
+	dev-libs/openssl:=
+	dev-util/glslang:=
+	media-libs/libsoundtouch:=
 	qt6? (
 		dev-qt/qtbase:6[concurrent,dbus,widgets]
 		dev-qt/qtmultimedia:6
@@ -31,12 +32,24 @@ DEPEND="
 	sdl? ( media-libs/libsdl2 )
 "
 RDEPEND="${DEPEND}"
-BDEPEND="dev-util/glslang"
+BDEPEND="
+	media-libs/fdk-aac
+	media-video/ffmpeg
+	x11-libs/libX11
+"
 
 PATCHES=(
 	"${FILESDIR}/${P}-system-dynarmic.patch"
 	"${FILESDIR}/${P}-system-fmt.patch"
 )
+
+src_prepare() {
+	for dep in boost cpp-jwt dynarmic fmt json library-headers/library-headers libressl sdl2 soundtouch; do
+		rm -rf "externals/${dep}" || die
+	done
+
+	cmake_src_prepare
+}
 
 src_configure() {
 	local mycmakeargs=(
@@ -45,7 +58,7 @@ src_configure() {
 		-DENABLE_SDL2=$(usex sdl)
 		-DENABLE_WEB_SERVICE=OFF
 		-DUSE_SYSTEM_BOOST=ON
-		-DUSE_SYSTEM_CPP_HTTPLIB=ON
+		-DUSE_SYSTEM_CPP_JWT=ON
 		-DUSE_SYSTEM_DYNARMIC=ON
 		-DUSE_SYSTEM_FMT=ON
 		-DUSE_SYSTEM_JSON=ON
