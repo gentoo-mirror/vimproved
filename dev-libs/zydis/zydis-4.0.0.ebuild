@@ -2,21 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+
 inherit cmake
 
 DESCRIPTION="Fast and lightweight x86/x86-64 disassembler and code generation library"
 HOMEPAGE="https://zydis.re/"
 SRC_URI="https://github.com/zyantific/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
-IUSE="doc examples man +tools"
 LICENSE="MIT"
 SLOT="0/4.0"
 KEYWORDS="~amd64"
-
+IUSE="doc examples man +tools"
 RESTRICT="test"
 
-DEPEND="dev-libs/zycore-c"
-RDEPEND="${DEPEND}"
+RDEPEND="dev-libs/zycore-c"
+DEPEND="${RDEPEND}"
 BDEPEND="
 	doc? ( app-doc/doxygen )
 	man? ( app-text/ronn-ng )
