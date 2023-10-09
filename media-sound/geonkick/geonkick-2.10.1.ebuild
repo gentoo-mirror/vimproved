@@ -2,25 +2,27 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+
 inherit cmake xdg
 
 DESCRIPTION="A free software percussion synthesizer for GNU/Linux"
 HOMEPAGE="https://geonkick.org"
 SRC_URI="https://gitlab.com/${PN}-synthesizer/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.bz2 -> ${P}.tar.bz2"
+S="${WORKDIR}/${PN}-v${PV}"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+lv2 +standalone"
-S="${WORKDIR}/${PN}-v${PV}"
+RESTRICT="test"
 
-DEPEND="
+RDEPEND="
 	dev-libs/rapidjson
 	media-libs/libsndfile
 	media-libs/lv2
 	standalone? ( virtual/jack )
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2.10.1-remove-stdc++fs.patch"

@@ -4,14 +4,6 @@ Date: Sat, 23 Sep 2023 14:23:43 -0400
 Subject: [PATCH] Remove linking against libstdc++fs
 
 Signed-off-by: Violet Purcell <vimproved@inventati.org>
----
- src/plugin/lv2/CMakeLists.txt | 2 --
- src/plugin/vst/CMakeLists.txt | 1 -
- src/standalone/CMakeLists.txt | 1 -
- 3 files changed, 4 deletions(-)
-
-diff --git a/src/plugin/lv2/CMakeLists.txt b/src/plugin/lv2/CMakeLists.txt
-index a1b1fbe..465cdd8 100644
 --- a/src/plugin/lv2/CMakeLists.txt
 +++ b/src/plugin/lv2/CMakeLists.txt
 @@ -7,7 +7,6 @@ add_library(geonkick_lv2 SHARED
@@ -30,8 +22,6 @@ index a1b1fbe..465cdd8 100644
    target_link_libraries(geonkick_single_lv2 "-lX11 -lsndfile -lcrypto -lrt -lm -ldl -lpthread -lcairo")
    add_dependencies(geonkick_single_lv2 api_plugin_single)
    target_compile_options(geonkick_single_lv2 PUBLIC ${GKICK_API_PLUGIN_SINGLE_FLAGS})
-diff --git a/src/plugin/vst/CMakeLists.txt b/src/plugin/vst/CMakeLists.txt
-index 3abb713..13ff244 100644
 --- a/src/plugin/vst/CMakeLists.txt
 +++ b/src/plugin/vst/CMakeLists.txt
 @@ -34,7 +34,6 @@ set_target_properties(${target} PROPERTIES OUTPUT_NAME "Geonkick")
@@ -42,8 +32,6 @@ index 3abb713..13ff244 100644
  target_link_libraries(${target} PRIVATE base sdk sdk_common pluginterfaces)
  target_link_libraries(${target} PRIVATE "-lX11 -lsndfile -lcrypto -lrt -lm -ldl -lpthread -lcairo")
  target_link_libraries(${target} PRIVATE "-Wl,--no-undefined")
-diff --git a/src/standalone/CMakeLists.txt b/src/standalone/CMakeLists.txt
-index 9fa32f3..cc0aba8 100644
 --- a/src/standalone/CMakeLists.txt
 +++ b/src/standalone/CMakeLists.txt
 @@ -8,7 +8,6 @@ add_executable(geonkick
