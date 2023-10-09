@@ -57,7 +57,6 @@ DEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${PN}-9999-clang.patch"
-	"${FILESDIR}/${PN}-9999-musl-1.2.4.patch"
 )
 
 src_prepare() {

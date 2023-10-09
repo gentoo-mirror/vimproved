@@ -8,12 +8,6 @@ not added if BSD was true (presumably to work around FreeBSD support)
 but there is a CLANG variable serving that purpose. Use that instead.
 
 Signed-off-by: Violet Purcell <vimproved@inventati.org>
----
- source/Makefile.mk | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/source/Makefile.mk b/source/Makefile.mk
-index 3692b9f454..ec999b7a58 100644
 --- a/source/Makefile.mk
 +++ b/source/Makefile.mk
 @@ -85,7 +85,7 @@ CXXFLAGS   += -fvisibility-inlines-hidden
