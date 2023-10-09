@@ -8,15 +8,15 @@ DESCRIPTION="merry's common library"
 HOMEPAGE="https://github.com/merryhime/mcl"
 SRC_URI="https://github.com/merryhime/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
-IUSE="test"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-
+IUSE="test"
 RESTRICT="!test? ( test )"
 
-DEPEND=">=dev-libs/libfmt-9:="
-RDEPEND="${DEPEND}"
+
+RDEPEND=">=dev-libs/libfmt-9:="
+DEPEND="${RDEPEND}"
 BDEPEND="test? ( >=dev-cpp/catch-3 )"
 
 src_configure() {
