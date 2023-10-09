@@ -8,12 +8,12 @@ inherit cmake flag-o-matic
 DESCRIPTION="Third party plugins for SuperCollider"
 HOMEPAGE="https://github.com/supercollider/sc3-plugins"
 SRC_URI="https://github.com/supercollider/${PN}/releases/download/Version-${PV}/${P}-Source.tar.bz2 -> ${P}.tar.bz2"
+S="${WORKDIR}/${P}-Source"
 
-IUSE="debug ladspa supernova"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-S="${WORKDIR}/${P}-Source"
+IUSE="debug ladspa supernova"
 
 RDEPEND="media-sound/supercollider"
 DEPEND="${RDEPEND}"
