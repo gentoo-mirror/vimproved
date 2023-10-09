@@ -13,8 +13,6 @@ HOMEPAGE="https://qmk.fm/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-
-# All tests require qmk_firmware repo
 RESTRICT="test"
 
 RDEPEND="
