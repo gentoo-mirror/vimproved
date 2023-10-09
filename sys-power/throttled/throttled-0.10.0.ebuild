@@ -6,14 +6,14 @@ EAPI=8
 PYTHON_COMPAT=( python3_{10..12} )
 inherit python-single-r1 systemd
 
-DESCRIPTION="Workaround for Intel throttling issues in Linux."
+DESCRIPTION="Daemon to work around throttling issues on some Intel laptops"
 HOMEPAGE="https://github.com/erpalma/throttled"
 SRC_URI="https://github.com/erpalma/throttled/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RESTRICT="test"
 
 RDEPEND="
