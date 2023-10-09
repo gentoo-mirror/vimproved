@@ -11,9 +11,10 @@ SRC_URI="https://github.com/merryhime/${PN}/archive/refs/tags/${PV}.tar.gz -> ${
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
-
 IUSE="test"
-DEPEND="
+RESTRICT="!test? ( test )"
+
+RDEPEND="
 	dev-cpp/robin-map
 	>=dev-libs/boost-1.57
 	>=dev-libs/libfmt-9:=
@@ -21,10 +22,9 @@ DEPEND="
 	>=dev-libs/xbyak-6
 	>=dev-libs/zydis-4
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}"
 BDPENED="test? ( >=dev-cpp/catch-3 )"
 
-RESTRICT="!test? ( test )"
 
 src_prepare() {
 	# Remove bundled dependencies
