@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+
 inherit cmake xdg
 
 MY_PV="20231008-f5b8888"
@@ -9,16 +10,16 @@ MY_PV="20231008-f5b8888"
 DESCRIPTION="A Nintendo 3DS Emulator"
 HOMEPAGE="https://citra-emu.org/"
 SRC_URI="https://github.com/${PN}-emu/${PN}-nightly/releases/download/nightly-${PV}/citra-unified-source-${MY_PV}.tar.xz -> ${P}.tar.xz"
+S="${WORKDIR}/${PN}-unified-source-${MY_PV}"
 
-IUSE="cubeb +gui nls openal sdl +telemetry test usb"
-REQUIRED_USE="|| ( gui sdl )"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-S="${WORKDIR}/${PN}-unified-source-${MY_PV}"
+IUSE="cubeb +gui nls openal sdl +telemetry test usb"
+REQUIRED_USE="|| ( gui sdl )"
 RESTRICT="!test? ( test )"
 
-DEPEND="
+RDEPEND="
 	dev-cpp/nlohmann_json
 	dev-cpp/robin-map
 	dev-libs/boost:=[nls]
@@ -34,8 +35,8 @@ DEPEND="
 	sdl? ( media-libs/libsdl2 )
 	usb? ( virtual/libusb )
 "
-RDEPEND="${DEPEND}"
-BDEPEND="
+DEPEND="
+	${RDEPEND}
 	media-libs/fdk-aac
 	media-video/ffmpeg
 	x11-libs/libX11
