@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+
 inherit zig
 
 DESCRIPTION="A dynamic tiling Wayland compositor"
@@ -12,6 +13,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="X +man"
+RESTRICT="test"
 
 DEPEND="
 	dev-libs/libevdev
