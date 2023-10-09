@@ -72,6 +72,7 @@ src_configure() {
 		-DUSE_SYSTEM_OPENSSL=ON
 		-DUSE_SYSTEM_SDL2=ON
 		-DUSE_SYSTEM_SOUNDTOUCH=ON
+		$(cmake_use_find_package sdl SDL2)
 	)
 
 	cmake_src_configure
