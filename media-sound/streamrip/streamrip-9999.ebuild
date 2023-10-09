@@ -5,7 +5,6 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=poetry
 PYTHON_COMPAT=( python3_{10..11} )
-
 inherit distutils-r1 git-r3
 
 DESCRIPTION="A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer"
@@ -15,8 +14,6 @@ EGIT_BRANCH="dev"
 
 LICENSE="GPL-3"
 SLOT="0"
-
-# Required packaging extra stuff. Can't be assed.
 RESTRICT="test"
 
 RDEPEND="
