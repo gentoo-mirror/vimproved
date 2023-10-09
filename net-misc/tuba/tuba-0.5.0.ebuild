@@ -2,18 +2,19 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+
 inherit gnome2-utils meson vala xdg
 
 DESCRIPTION="Browse the Fediverse"
 HOMEPAGE="https://tuba.geopjr.dev/"
 SRC_URI="https://github.com/GeopJr/Tuba/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/${P^}"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-S="${WORKDIR}/${P^}"
 
-DEPEND="
+RDEPEND="
 	app-crypt/libsecret[vala]
 	dev-libs/glib:2
 	dev-libs/json-glib
@@ -26,7 +27,7 @@ DEPEND="
 	x11-libs/gdk-pixbuf:2
 	x11-libs/pango
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}"
 
 pkg_setup() {
 	vala_setup
