@@ -11,7 +11,6 @@ HOMEPAGE="http://kxstudio.linuxaudio.org/Applications:Carla"
 EGIT_REPO_URI="https://github.com/falkTX/Carla.git"
 EGIT_SUBMODULES=()
 
-KEYWORDS=""
 LICENSE="GPL-2+ LGPL-3"
 SLOT="0"
 IUSE="+X alsa fluidsynth +jsfx +magic +opengl +osc pulseaudio +qt5 rdf sdl sndfile"
@@ -20,7 +19,8 @@ REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
 "
 
-DEPEND="
+RDEPEND="
+	${PYTHON_DEPS}
 	X? (
 		x11-libs/libX11
 		x11-libs/libXcursor
@@ -35,23 +35,24 @@ DEPEND="
 			dev-qt/qtgui:5[egl]
 		)
 	)
-	osc? ( media-libs/liblo )
+	osc? (
+		dev-python/pyliblo3
+		media-libs/liblo
+	)
 	qt5? (
+		dev-python/PyQt5[gui,svg,widgets]
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		dev-qt/qtwidgets:5
 	)
+	rdf? ( dev-python/rdflib )
 	sdl? ( media-libs/libsdl2[sound] )
 	sndfile? (
 		media-libs/libsndfile
 	)
 "
-RDEPEND="
-	osc? ( dev-python/pyliblo3 )
-	rdf? ( dev-python/rdflib )
-	qt5? ( dev-python/PyQt5[gui,svg,widgets] )
-	${DEPEND}
-	${PYTHON_DEPS}
+DEPEND="
+	${RDEPEND}
 "
 
 PATCHES=(
