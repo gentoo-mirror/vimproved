@@ -26,7 +26,6 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 BDPENED="test? ( >=dev-cpp/catch-3 )"
 
-
 src_prepare() {
 	# Remove bundled dependencies
 	for dep in catch fmt mcl robin-map xbyak zycore zydis; do
