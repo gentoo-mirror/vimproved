@@ -7,12 +7,11 @@ inherit udev
 DESCRIPTION="udev rules for QMK's CLI"
 HOMEPAGE="https://qmk.fm/"
 SRC_URI="https://github.com/qmk/qmk_firmware/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/qmk_firmware-${PV}"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-S="${WORKDIR}/qmk_firmware-${PV}"
-
 RESTRICT="test"
 
 src_compile() {
