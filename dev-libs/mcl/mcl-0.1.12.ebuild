@@ -15,7 +15,6 @@ KEYWORDS="~amd64"
 IUSE="test"
 RESTRICT="!test? ( test )"
 
-
 RDEPEND=">=dev-libs/libfmt-9:="
 DEPEND="${RDEPEND}"
 BDEPEND="test? ( >=dev-cpp/catch-3 )"
