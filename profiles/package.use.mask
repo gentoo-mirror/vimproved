@@ -1,2 +1,0 @@
-# Mask musl w/ scudo, experimental
-sys-libs/musl scudo
