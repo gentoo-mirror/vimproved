@@ -42,8 +42,12 @@ DEPEND="
 	x11-libs/libX11
 "
 
+PATCHES=(
+	"${FILESDIR}/citra-2006-system-httplib-cmake.patch"
+)
+
 src_prepare() {
-	for dep in boost dynarmic fmt json library-headers/library-headers libressl libusb sdl2 soundtouch; do
+	for dep in boost cpp-jwt dynarmic fmt json httplib library-headers/library-headers libressl libusb sdl2 soundtouch; do
 		rm -rf "externals/${dep}" || die
 	done
 
@@ -66,6 +70,8 @@ src_configure() {
 		-DENABLE_TESTS=$(usex test)
 		-DENABLE_WEB_SERVICE=$(usex telemetry)
 		-DUSE_SYSTEM_BOOST=ON
+		-DUSE_SYSTEM_CPP_HTTPLIB=ON
+		-DUSE_SYSTEM_CPP_JWT=ON
 		-DUSE_SYSTEM_DYNARMIC=ON
 		-DUSE_SYSTEM_FMT=ON
 		-DUSE_SYSTEM_JSON=ON

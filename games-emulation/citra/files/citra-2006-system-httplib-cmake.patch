@@ -1,0 +1,96 @@
+From 7b592fa2e039276dac8ac1b571446998d21e3d9d Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Tue, 10 Oct 2023 12:42:31 -0400
+Subject: [PATCH] externals: fix USE_SYSTEM_CPP_HTTPLIB with httplib installed
+ via cmake
+
+Signed-off-by: Violet Purcell <vimproved@inventati.org>
+---
+ externals/CMakeLists.txt                  |  4 +-
+ externals/cmake-modules/FindCppHttp.cmake | 55 +++++++++++++----------
+ 2 files changed, 33 insertions(+), 26 deletions(-)
+
+diff --git a/externals/CMakeLists.txt b/externals/CMakeLists.txt
+index 1f69d4fa7..df1870d37 100644
+--- a/externals/CMakeLists.txt
++++ b/externals/CMakeLists.txt
+@@ -228,9 +228,9 @@ endif()
+ # httplib
+ add_library(httplib INTERFACE)
+ if(USE_SYSTEM_CPP_HTTPLIB)
+-    find_package(CppHttp 0.14.1)
++    find_package(CppHttp 0.14.0)
+     if(CppHttp_FOUND)
+-        target_link_libraries(httplib INTERFACE cpp-httplib::cpp-httplib)
++        target_link_libraries(httplib INTERFACE httplib::httplib)
+     else()
+         message(STATUS "Cpp-httplib not found or not suitable version! Falling back to bundled...")
+         target_include_directories(httplib INTERFACE ./httplib)
+diff --git a/externals/cmake-modules/FindCppHttp.cmake b/externals/cmake-modules/FindCppHttp.cmake
+index fe17c8bab..36130e293 100644
+--- a/externals/cmake-modules/FindCppHttp.cmake
++++ b/externals/cmake-modules/FindCppHttp.cmake
+@@ -1,29 +1,36 @@
+ if(NOT CppHttp_FOUND)
+-    pkg_check_modules(HTTP_TMP cpp-httplib)
++    pkg_check_modules(CPP_HTTPLIB cpp-httplib)
+ 
+-    find_path(CPP-HTTP_INCLUDE_DIR NAMES httplib.h
+-            PATHS
+-            ${HTTP_TMP_INCLUDE_DIRS}
+-            /usr/include
+-            /usr/local/include
+-        )
+-		
+-    find_library(CPP-HTTP_LIBRARIES NAMES cpp-httplib
+-            PATHS
+-            ${HTTP_TMP_LIBRARY_DIRS}
+-            /usr/lib
+-            /usr/local/lib
+-        )
++    if (CPP_HTTPLIB_FOUND AND NOT HTTPLIB_FOUND)
++        find_path(HTTPLIB_INCLUDE_DIR NAMES httplib.h
++                PATHS
++                ${CPP_HTTPLIB_INCLUDE_DIRS}
++                /usr/include
++                /usr/local/include
++            )
++                    
++        find_library(HTTPLIB_LIBRARY NAMES cpp-httplib
++                PATHS
++                ${CPP_HTTPLIB_LIBRARY_DIRS}
++                /usr/lib
++                /usr/local/lib
++            )
+ 
+-    find_package_handle_standard_args(CppHttp REQUIRED_VARS CPP-HTTP_INCLUDE_DIR CPP-HTTP_LIBRARIES VERSION_VAR HTTP_TMP_VERSION)
+-	
+-endif()
++        set(HTTPLIB_VERSION ${CPP_HTTPLIB_VERSION})
++
++        if (NOT TARGET cpp-httplib::cpp-httplib)
++            add_library(cpp-httplib::cpp-httplib INTERFACE IMPORTED)
++            set_target_properties(cpp-httplib::cpp-httplib PROPERTIES
++                INTERFACE_INCLUDE_DIRECTORIES "${HTTPLIB_INCLUDE_DIR}"
++                INTERFACE_LINK_LIBRARIES "${HTTPLIB_LIBRARY}"
++                IMPORTED_LOCATION "${HTTPLIB_LIBRARY}"
++            )
++            add_library(httplib::httplib ALIAS cpp-httplib::cpp-httplib)
++        endif()
++    else()
++        message(STATUS "Cpp-httplib not found via pkg-config, trying CMake...")
++        find_package(httplib)
++    endif()
+ 
+-if(CppHttp_FOUND AND NOT TARGET cpp-httplib::cpp-httplib)
+-    add_library(cpp-httplib::cpp-httplib INTERFACE IMPORTED)
+-    set_target_properties(cpp-httplib::cpp-httplib PROPERTIES
+-        INTERFACE_INCLUDE_DIRECTORIES "${CPP-HTTP_INCLUDE_DIR}"
+-        INTERFACE_LINK_LIBRARIES "${CPP-HTTP_LIBRARIES}"
+-        IMPORTED_LOCATION "${CPP-HTTP_LIBRARIES}"
+-    )
++    find_package_handle_standard_args(CppHttp REQUIRED_VARS HTTPLIB_INCLUDE_DIR HTTPLIB_LIBRARY VERSION_VAR HTTPLIB_VERSION)
+ endif()
+-- 
+2.42.0
+
