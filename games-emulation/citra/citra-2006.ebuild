@@ -20,6 +20,8 @@ REQUIRED_USE="|| ( gui sdl )"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
+	dev-cpp/cpp-httplib
+	dev-cpp/cpp-jwt
 	dev-cpp/nlohmann_json
 	dev-cpp/robin-map
 	dev-libs/boost:=[nls]
