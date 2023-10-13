@@ -28,7 +28,8 @@ src_compile() {
 }
 
 src_install() {
-	emake WITH_OBSTACK=1 \
+	emake DESTDIR="${D}" \
+		WITH_OBSTACK=1 \
 		WITH_LIBUCONTEXT=1 \
 		LIBGCOMPAT_PATH="/$(get_libdir)/libgcompat.so.0" \
 		LINKER_PATH="/$(get_libdir)/ld-musl-x86_64.so.1" \
