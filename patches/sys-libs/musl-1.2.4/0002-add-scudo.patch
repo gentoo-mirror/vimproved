@@ -1,6 +1,5 @@
-diff -uprN a/src/malloc/scudo/allocator_config.h b/src/malloc/scudo/allocator_config.h
---- a/src/malloc/scudo/allocator_config.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/allocator_config.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/allocator_config.h
++++ b/src/malloc/scudo/allocator_config.h
 @@ -0,0 +1,220 @@
 +//===-- allocator_config.h --------------------------------------*- C++ -*-===//
 +//
@@ -222,9 +221,8 @@ diff -uprN a/src/malloc/scudo/allocator_config.h b/src/malloc/scudo/allocator_co
 +} // namespace scudo
 +
 +#endif // SCUDO_ALLOCATOR_CONFIG_H_
-diff -uprN a/src/malloc/scudo/atomic_helpers.h b/src/malloc/scudo/atomic_helpers.h
---- a/src/malloc/scudo/atomic_helpers.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/atomic_helpers.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/atomic_helpers.h
++++ b/src/malloc/scudo/atomic_helpers.h
 @@ -0,0 +1,145 @@
 +//===-- atomic_helpers.h ----------------------------------------*- C++ -*-===//
 +//
@@ -371,9 +369,8 @@ diff -uprN a/src/malloc/scudo/atomic_helpers.h b/src/malloc/scudo/atomic_helpers
 +} // namespace scudo
 +
 +#endif // SCUDO_ATOMIC_H_
-diff -uprN a/src/malloc/scudo/bytemap.h b/src/malloc/scudo/bytemap.h
---- a/src/malloc/scudo/bytemap.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/bytemap.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/bytemap.h
++++ b/src/malloc/scudo/bytemap.h
 @@ -0,0 +1,43 @@
 +//===-- bytemap.h -----------------------------------------------*- C++ -*-===//
 +//
@@ -418,9 +415,8 @@ diff -uprN a/src/malloc/scudo/bytemap.h b/src/malloc/scudo/bytemap.h
 +} // namespace scudo
 +
 +#endif // SCUDO_BYTEMAP_H_
-diff -uprN a/src/malloc/scudo/checksum.cpp b/src/malloc/scudo/checksum.cpp
---- a/src/malloc/scudo/checksum.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/checksum.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/checksum.cpp
++++ b/src/malloc/scudo/checksum.cpp
 @@ -0,0 +1,83 @@
 +//===-- checksum.cpp --------------------------------------------*- C++ -*-===//
 +//
@@ -505,9 +501,8 @@ diff -uprN a/src/malloc/scudo/checksum.cpp b/src/malloc/scudo/checksum.cpp
 +#endif // defined(__x86_64__) || defined(__i386__)
 +
 +} // namespace scudo
-diff -uprN a/src/malloc/scudo/checksum.h b/src/malloc/scudo/checksum.h
---- a/src/malloc/scudo/checksum.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/checksum.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/checksum.h
++++ b/src/malloc/scudo/checksum.h
 @@ -0,0 +1,59 @@
 +//===-- checksum.h ----------------------------------------------*- C++ -*-===//
 +//
@@ -568,9 +563,8 @@ diff -uprN a/src/malloc/scudo/checksum.h b/src/malloc/scudo/checksum.h
 +} // namespace scudo
 +
 +#endif // SCUDO_CHECKSUM_H_
-diff -uprN a/src/malloc/scudo/chunk.h b/src/malloc/scudo/chunk.h
---- a/src/malloc/scudo/chunk.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/chunk.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/chunk.h
++++ b/src/malloc/scudo/chunk.h
 @@ -0,0 +1,156 @@
 +//===-- chunk.h -------------------------------------------------*- C++ -*-===//
 +//
@@ -728,9 +722,8 @@ diff -uprN a/src/malloc/scudo/chunk.h b/src/malloc/scudo/chunk.h
 +} // namespace scudo
 +
 +#endif // SCUDO_CHUNK_H_
-diff -uprN a/src/malloc/scudo/combined.h b/src/malloc/scudo/combined.h
---- a/src/malloc/scudo/combined.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/combined.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/combined.h
++++ b/src/malloc/scudo/combined.h
 @@ -0,0 +1,1531 @@
 +//===-- combined.h ----------------------------------------------*- C++ -*-===//
 +//
@@ -2263,9 +2256,8 @@ diff -uprN a/src/malloc/scudo/combined.h b/src/malloc/scudo/combined.h
 +} // namespace scudo
 +
 +#endif // SCUDO_COMBINED_H_
-diff -uprN a/src/malloc/scudo/common.cpp b/src/malloc/scudo/common.cpp
---- a/src/malloc/scudo/common.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/common.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/common.cpp
++++ b/src/malloc/scudo/common.cpp
 @@ -0,0 +1,42 @@
 +//===-- common.cpp ----------------------------------------------*- C++ -*-===//
 +//
@@ -2309,9 +2301,8 @@ diff -uprN a/src/malloc/scudo/common.cpp b/src/malloc/scudo/common.cpp
 +#endif
 +
 +} // namespace scudo
-diff -uprN a/src/malloc/scudo/common.h b/src/malloc/scudo/common.h
---- a/src/malloc/scudo/common.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/common.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/common.h
++++ b/src/malloc/scudo/common.h
 @@ -0,0 +1,214 @@
 +//===-- common.h ------------------------------------------------*- C++ -*-===//
 +//
@@ -2527,9 +2518,8 @@ diff -uprN a/src/malloc/scudo/common.h b/src/malloc/scudo/common.h
 +} // namespace scudo
 +
 +#endif // SCUDO_COMMON_H_
-diff -uprN a/src/malloc/scudo/crc32_hw.cpp b/src/malloc/scudo/crc32_hw.cpp
---- a/src/malloc/scudo/crc32_hw.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/crc32_hw.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/crc32_hw.cpp
++++ b/src/malloc/scudo/crc32_hw.cpp
 @@ -0,0 +1,20 @@
 +//===-- crc32_hw.cpp --------------------------------------------*- C++ -*-===//
 +//
@@ -2551,9 +2541,8 @@ diff -uprN a/src/malloc/scudo/crc32_hw.cpp b/src/malloc/scudo/crc32_hw.cpp
 +       // defined(__ARM_FEATURE_CRC32)
 +
 +} // namespace scudo
-diff -uprN a/src/malloc/scudo/flags.cpp b/src/malloc/scudo/flags.cpp
---- a/src/malloc/scudo/flags.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/flags.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/flags.cpp
++++ b/src/malloc/scudo/flags.cpp
 @@ -0,0 +1,73 @@
 +//===-- flags.cpp -----------------------------------------------*- C++ -*-===//
 +//
@@ -2628,9 +2617,8 @@ diff -uprN a/src/malloc/scudo/flags.cpp b/src/malloc/scudo/flags.cpp
 +}
 +
 +} // namespace scudo
-diff -uprN a/src/malloc/scudo/flags.h b/src/malloc/scudo/flags.h
---- a/src/malloc/scudo/flags.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/flags.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/flags.h
++++ b/src/malloc/scudo/flags.h
 @@ -0,0 +1,38 @@
 +//===-- flags.h -------------------------------------------------*- C++ -*-===//
 +//
@@ -2670,9 +2658,8 @@ diff -uprN a/src/malloc/scudo/flags.h b/src/malloc/scudo/flags.h
 +} // namespace scudo
 +
 +#endif // SCUDO_FLAGS_H_
-diff -uprN a/src/malloc/scudo/flags.inc b/src/malloc/scudo/flags.inc
---- a/src/malloc/scudo/flags.inc	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/flags.inc	2023-10-17 09:46:48.225843690 -0400
+--- a/src/malloc/scudo/flags.inc
++++ b/src/malloc/scudo/flags.inc
 @@ -0,0 +1,59 @@
 +//===-- flags.inc -----------------------------------------------*- C++ -*-===//
 +//
@@ -2733,9 +2720,8 @@ diff -uprN a/src/malloc/scudo/flags.inc b/src/malloc/scudo/flags.inc
 +
 +SCUDO_FLAG(int, allocation_ring_buffer_size, 32768,
 +           "Entries to keep in the allocation ring buffer for scudo.")
-diff -uprN a/src/malloc/scudo/flags_parser.cpp b/src/malloc/scudo/flags_parser.cpp
---- a/src/malloc/scudo/flags_parser.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/flags_parser.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/flags_parser.cpp
++++ b/src/malloc/scudo/flags_parser.cpp
 @@ -0,0 +1,164 @@
 +//===-- flags_parser.cpp ----------------------------------------*- C++ -*-===//
 +//
@@ -2901,9 +2887,8 @@ diff -uprN a/src/malloc/scudo/flags_parser.cpp b/src/malloc/scudo/flags_parser.c
 +}
 +
 +} // namespace scudo
-diff -uprN a/src/malloc/scudo/flags_parser.h b/src/malloc/scudo/flags_parser.h
---- a/src/malloc/scudo/flags_parser.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/flags_parser.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/flags_parser.h
++++ b/src/malloc/scudo/flags_parser.h
 @@ -0,0 +1,55 @@
 +//===-- flags_parser.h ------------------------------------------*- C++ -*-===//
 +//
@@ -2960,9 +2945,8 @@ diff -uprN a/src/malloc/scudo/flags_parser.h b/src/malloc/scudo/flags_parser.h
 +} // namespace scudo
 +
 +#endif // SCUDO_FLAGS_PARSER_H_
-diff -uprN a/src/malloc/scudo/fuchsia.cpp b/src/malloc/scudo/fuchsia.cpp
---- a/src/malloc/scudo/fuchsia.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/fuchsia.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/fuchsia.cpp
++++ b/src/malloc/scudo/fuchsia.cpp
 @@ -0,0 +1,220 @@
 +//===-- fuchsia.cpp ---------------------------------------------*- C++ -*-===//
 +//
@@ -3184,9 +3168,8 @@ diff -uprN a/src/malloc/scudo/fuchsia.cpp b/src/malloc/scudo/fuchsia.cpp
 +} // namespace scudo
 +
 +#endif // SCUDO_FUCHSIA
-diff -uprN a/src/malloc/scudo/fuchsia.h b/src/malloc/scudo/fuchsia.h
---- a/src/malloc/scudo/fuchsia.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/fuchsia.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/fuchsia.h
++++ b/src/malloc/scudo/fuchsia.h
 @@ -0,0 +1,32 @@
 +//===-- fuchsia.h -----------------------------------------------*- C++ -*-===//
 +//
@@ -3220,9 +3203,8 @@ diff -uprN a/src/malloc/scudo/fuchsia.h b/src/malloc/scudo/fuchsia.h
 +#endif // SCUDO_FUCHSIA
 +
 +#endif // SCUDO_FUCHSIA_H_
-diff -uprN a/src/malloc/scudo/internal_defs.h b/src/malloc/scudo/internal_defs.h
---- a/src/malloc/scudo/internal_defs.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/internal_defs.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/internal_defs.h
++++ b/src/malloc/scudo/internal_defs.h
 @@ -0,0 +1,166 @@
 +//===-- internal_defs.h -----------------------------------------*- C++ -*-===//
 +//
@@ -3390,9 +3372,8 @@ diff -uprN a/src/malloc/scudo/internal_defs.h b/src/malloc/scudo/internal_defs.h
 +} // namespace scudo
 +
 +#endif // SCUDO_INTERNAL_DEFS_H_
-diff -uprN a/src/malloc/scudo/linux.cpp b/src/malloc/scudo/linux.cpp
---- a/src/malloc/scudo/linux.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/linux.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/linux.cpp
++++ b/src/malloc/scudo/linux.cpp
 @@ -0,0 +1,252 @@
 +//===-- linux.cpp -----------------------------------------------*- C++ -*-===//
 +//
@@ -3646,9 +3627,8 @@ diff -uprN a/src/malloc/scudo/linux.cpp b/src/malloc/scudo/linux.cpp
 +} // namespace scudo
 +
 +#endif // SCUDO_LINUX
-diff -uprN a/src/malloc/scudo/linux.h b/src/malloc/scudo/linux.h
---- a/src/malloc/scudo/linux.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/linux.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/linux.h
++++ b/src/malloc/scudo/linux.h
 @@ -0,0 +1,25 @@
 +//===-- linux.h -------------------------------------------------*- C++ -*-===//
 +//
@@ -3675,9 +3655,8 @@ diff -uprN a/src/malloc/scudo/linux.h b/src/malloc/scudo/linux.h
 +#endif // SCUDO_LINUX
 +
 +#endif // SCUDO_LINUX_H_
-diff -uprN a/src/malloc/scudo/list.h b/src/malloc/scudo/list.h
---- a/src/malloc/scudo/list.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/list.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/list.h
++++ b/src/malloc/scudo/list.h
 @@ -0,0 +1,240 @@
 +//===-- list.h --------------------------------------------------*- C++ -*-===//
 +//
@@ -3919,9 +3898,8 @@ diff -uprN a/src/malloc/scudo/list.h b/src/malloc/scudo/list.h
 +} // namespace scudo
 +
 +#endif // SCUDO_LIST_H_
-diff -uprN a/src/malloc/scudo/local_cache.h b/src/malloc/scudo/local_cache.h
---- a/src/malloc/scudo/local_cache.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/local_cache.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/local_cache.h
++++ b/src/malloc/scudo/local_cache.h
 @@ -0,0 +1,234 @@
 +//===-- local_cache.h -------------------------------------------*- C++ -*-===//
 +//
@@ -4157,9 +4135,8 @@ diff -uprN a/src/malloc/scudo/local_cache.h b/src/malloc/scudo/local_cache.h
 +} // namespace scudo
 +
 +#endif // SCUDO_LOCAL_CACHE_H_
-diff -uprN a/src/malloc/scudo/memtag.h b/src/malloc/scudo/memtag.h
---- a/src/malloc/scudo/memtag.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/memtag.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/memtag.h
++++ b/src/malloc/scudo/memtag.h
 @@ -0,0 +1,335 @@
 +//===-- memtag.h ------------------------------------------------*- C++ -*-===//
 +//
@@ -4496,9 +4473,8 @@ diff -uprN a/src/malloc/scudo/memtag.h b/src/malloc/scudo/memtag.h
 +} // namespace scudo
 +
 +#endif
-diff -uprN a/src/malloc/scudo/mutex.h b/src/malloc/scudo/mutex.h
---- a/src/malloc/scudo/mutex.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/mutex.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/mutex.h
++++ b/src/malloc/scudo/mutex.h
 @@ -0,0 +1,72 @@
 +//===-- mutex.h -------------------------------------------------*- C++ -*-===//
 +//
@@ -4572,9 +4548,8 @@ diff -uprN a/src/malloc/scudo/mutex.h b/src/malloc/scudo/mutex.h
 +} // namespace scudo
 +
 +#endif // SCUDO_MUTEX_H_
-diff -uprN a/src/malloc/scudo/options.h b/src/malloc/scudo/options.h
---- a/src/malloc/scudo/options.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/options.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/options.h
++++ b/src/malloc/scudo/options.h
 @@ -0,0 +1,74 @@
 +//===-- options.h -----------------------------------------------*- C++ -*-===//
 +//
@@ -4650,9 +4625,8 @@ diff -uprN a/src/malloc/scudo/options.h b/src/malloc/scudo/options.h
 +} // namespace scudo
 +
 +#endif // SCUDO_OPTIONS_H_
-diff -uprN a/src/malloc/scudo/platform.h b/src/malloc/scudo/platform.h
---- a/src/malloc/scudo/platform.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/platform.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/platform.h
++++ b/src/malloc/scudo/platform.h
 @@ -0,0 +1,80 @@
 +//===-- platform.h ----------------------------------------------*- C++ -*-===//
 +//
@@ -4734,9 +4708,8 @@ diff -uprN a/src/malloc/scudo/platform.h b/src/malloc/scudo/platform.h
 +#define SCUDO_POINTER_FORMAT_LENGTH FIRST_32_SECOND_64(8, 12)
 +
 +#endif // SCUDO_PLATFORM_H_
-diff -uprN a/src/malloc/scudo/primary32.h b/src/malloc/scudo/primary32.h
---- a/src/malloc/scudo/primary32.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/primary32.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/primary32.h
++++ b/src/malloc/scudo/primary32.h
 @@ -0,0 +1,764 @@
 +//===-- primary32.h ---------------------------------------------*- C++ -*-===//
 +//
@@ -5502,9 +5475,8 @@ diff -uprN a/src/malloc/scudo/primary32.h b/src/malloc/scudo/primary32.h
 +} // namespace scudo
 +
 +#endif // SCUDO_PRIMARY32_H_
-diff -uprN a/src/malloc/scudo/primary64.h b/src/malloc/scudo/primary64.h
---- a/src/malloc/scudo/primary64.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/primary64.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/primary64.h
++++ b/src/malloc/scudo/primary64.h
 @@ -0,0 +1,784 @@
 +//===-- primary64.h ---------------------------------------------*- C++ -*-===//
 +//
@@ -6290,9 +6262,8 @@ diff -uprN a/src/malloc/scudo/primary64.h b/src/malloc/scudo/primary64.h
 +} // namespace scudo
 +
 +#endif // SCUDO_PRIMARY64_H_
-diff -uprN a/src/malloc/scudo/quarantine.h b/src/malloc/scudo/quarantine.h
---- a/src/malloc/scudo/quarantine.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/quarantine.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/quarantine.h
++++ b/src/malloc/scudo/quarantine.h
 @@ -0,0 +1,297 @@
 +//===-- quarantine.h --------------------------------------------*- C++ -*-===//
 +//
@@ -6591,9 +6562,8 @@ diff -uprN a/src/malloc/scudo/quarantine.h b/src/malloc/scudo/quarantine.h
 +} // namespace scudo
 +
 +#endif // SCUDO_QUARANTINE_H_
-diff -uprN a/src/malloc/scudo/release.cpp b/src/malloc/scudo/release.cpp
---- a/src/malloc/scudo/release.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/release.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/release.cpp
++++ b/src/malloc/scudo/release.cpp
 @@ -0,0 +1,16 @@
 +//===-- release.cpp ---------------------------------------------*- C++ -*-===//
 +//
@@ -6611,9 +6581,8 @@ diff -uprN a/src/malloc/scudo/release.cpp b/src/malloc/scudo/release.cpp
 +uptr RegionPageMap::StaticBuffer[RegionPageMap::StaticBufferCount];
 +
 +} // namespace scudo
-diff -uprN a/src/malloc/scudo/release.h b/src/malloc/scudo/release.h
---- a/src/malloc/scudo/release.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/release.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/release.h
++++ b/src/malloc/scudo/release.h
 @@ -0,0 +1,430 @@
 +//===-- release.h -----------------------------------------------*- C++ -*-===//
 +//
@@ -7045,9 +7014,8 @@ diff -uprN a/src/malloc/scudo/release.h b/src/malloc/scudo/release.h
 +} // namespace scudo
 +
 +#endif // SCUDO_RELEASE_H_
-diff -uprN a/src/malloc/scudo/report.cpp b/src/malloc/scudo/report.cpp
---- a/src/malloc/scudo/report.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/report.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/report.cpp
++++ b/src/malloc/scudo/report.cpp
 @@ -0,0 +1,204 @@
 +//===-- report.cpp ----------------------------------------------*- C++ -*-===//
 +//
@@ -7253,9 +7221,8 @@ diff -uprN a/src/malloc/scudo/report.cpp b/src/malloc/scudo/report.cpp
 +}
 +
 +} // namespace scudo
-diff -uprN a/src/malloc/scudo/report.h b/src/malloc/scudo/report.h
---- a/src/malloc/scudo/report.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/report.h	2023-10-17 09:46:45.315810154 -0400
+--- a/src/malloc/scudo/report.h
++++ b/src/malloc/scudo/report.h
 @@ -0,0 +1,59 @@
 +//===-- report.h ------------------------------------------------*- C++ -*-===//
 +//
@@ -7316,9 +7283,8 @@ diff -uprN a/src/malloc/scudo/report.h b/src/malloc/scudo/report.h
 +} // namespace scudo
 +
 +#endif // SCUDO_REPORT_H_
-diff -uprN a/src/malloc/scudo/rss_limit_checker.cpp b/src/malloc/scudo/rss_limit_checker.cpp
---- a/src/malloc/scudo/rss_limit_checker.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/rss_limit_checker.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/rss_limit_checker.cpp
++++ b/src/malloc/scudo/rss_limit_checker.cpp
 @@ -0,0 +1,37 @@
 +//===-- common.cpp ----------------------------------------------*- C++ -*-===//
 +//
@@ -7357,9 +7323,8 @@ diff -uprN a/src/malloc/scudo/rss_limit_checker.cpp b/src/malloc/scudo/rss_limit
 +}
 +
 +} // namespace scudo
-diff -uprN a/src/malloc/scudo/rss_limit_checker.h b/src/malloc/scudo/rss_limit_checker.h
---- a/src/malloc/scudo/rss_limit_checker.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/rss_limit_checker.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/rss_limit_checker.h
++++ b/src/malloc/scudo/rss_limit_checker.h
 @@ -0,0 +1,63 @@
 +//===-- common.h ------------------------------------------------*- C++ -*-===//
 +//
@@ -7424,9 +7389,8 @@ diff -uprN a/src/malloc/scudo/rss_limit_checker.h b/src/malloc/scudo/rss_limit_c
 +} // namespace scudo
 +
 +#endif // SCUDO_RSS_LIMIT_CHECKER_H_
-diff -uprN a/src/malloc/scudo/scudo/interface.h b/src/malloc/scudo/scudo/interface.h
---- a/src/malloc/scudo/scudo/interface.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/scudo/interface.h	2023-10-17 09:46:55.082589372 -0400
+--- a/src/malloc/scudo/scudo/interface.h
++++ b/src/malloc/scudo/scudo/interface.h
 @@ -0,0 +1,160 @@
 +//===-- scudo/interface.h ---------------------------------------*- C++ -*-===//
 +//
@@ -7588,9 +7552,8 @@ diff -uprN a/src/malloc/scudo/scudo/interface.h b/src/malloc/scudo/scudo/interfa
 +} // extern "C"
 +
 +#endif // SCUDO_INTERFACE_H_
-diff -uprN a/src/malloc/scudo/secondary.h b/src/malloc/scudo/secondary.h
---- a/src/malloc/scudo/secondary.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/secondary.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/secondary.h
++++ b/src/malloc/scudo/secondary.h
 @@ -0,0 +1,628 @@
 +//===-- secondary.h ---------------------------------------------*- C++ -*-===//
 +//
@@ -8220,9 +8183,8 @@ diff -uprN a/src/malloc/scudo/secondary.h b/src/malloc/scudo/secondary.h
 +} // namespace scudo
 +
 +#endif // SCUDO_SECONDARY_H_
-diff -uprN a/src/malloc/scudo/size_class_map.h b/src/malloc/scudo/size_class_map.h
---- a/src/malloc/scudo/size_class_map.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/size_class_map.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/size_class_map.h
++++ b/src/malloc/scudo/size_class_map.h
 @@ -0,0 +1,377 @@
 +//===-- size_class_map.h ----------------------------------------*- C++ -*-===//
 +//
@@ -8601,9 +8563,8 @@ diff -uprN a/src/malloc/scudo/size_class_map.h b/src/malloc/scudo/size_class_map
 +} // namespace scudo
 +
 +#endif // SCUDO_SIZE_CLASS_MAP_H_
-diff -uprN a/src/malloc/scudo/stack_depot.h b/src/malloc/scudo/stack_depot.h
---- a/src/malloc/scudo/stack_depot.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/stack_depot.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/stack_depot.h
++++ b/src/malloc/scudo/stack_depot.h
 @@ -0,0 +1,144 @@
 +//===-- stack_depot.h -------------------------------------------*- C++ -*-===//
 +//
@@ -8749,9 +8710,8 @@ diff -uprN a/src/malloc/scudo/stack_depot.h b/src/malloc/scudo/stack_depot.h
 +} // namespace scudo
 +
 +#endif // SCUDO_STACK_DEPOT_H_
-diff -uprN a/src/malloc/scudo/stats.h b/src/malloc/scudo/stats.h
---- a/src/malloc/scudo/stats.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/stats.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/stats.h
++++ b/src/malloc/scudo/stats.h
 @@ -0,0 +1,101 @@
 +//===-- stats.h -------------------------------------------------*- C++ -*-===//
 +//
@@ -8854,9 +8814,8 @@ diff -uprN a/src/malloc/scudo/stats.h b/src/malloc/scudo/stats.h
 +} // namespace scudo
 +
 +#endif // SCUDO_STATS_H_
-diff -uprN a/src/malloc/scudo/string_utils.cpp b/src/malloc/scudo/string_utils.cpp
---- a/src/malloc/scudo/string_utils.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/string_utils.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/string_utils.cpp
++++ b/src/malloc/scudo/string_utils.cpp
 @@ -0,0 +1,255 @@
 +//===-- string_utils.cpp ----------------------------------------*- C++ -*-===//
 +//
@@ -9113,9 +9072,8 @@ diff -uprN a/src/malloc/scudo/string_utils.cpp b/src/malloc/scudo/string_utils.c
 +}
 +
 +} // namespace scudo
-diff -uprN a/src/malloc/scudo/string_utils.h b/src/malloc/scudo/string_utils.h
---- a/src/malloc/scudo/string_utils.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/string_utils.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/string_utils.h
++++ b/src/malloc/scudo/string_utils.h
 @@ -0,0 +1,43 @@
 +//===-- string_utils.h ------------------------------------------*- C++ -*-===//
 +//
@@ -9160,9 +9118,8 @@ diff -uprN a/src/malloc/scudo/string_utils.h b/src/malloc/scudo/string_utils.h
 +} // namespace scudo
 +
 +#endif // SCUDO_STRING_UTILS_H_
-diff -uprN a/src/malloc/scudo/trusty.cpp b/src/malloc/scudo/trusty.cpp
---- a/src/malloc/scudo/trusty.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/trusty.cpp	2023-10-17 09:46:41.735768899 -0400
+--- a/src/malloc/scudo/trusty.cpp
++++ b/src/malloc/scudo/trusty.cpp
 @@ -0,0 +1,100 @@
 +//===-- trusty.cpp ---------------------------------------------*- C++ -*-===//
 +//
@@ -9264,9 +9221,8 @@ diff -uprN a/src/malloc/scudo/trusty.cpp b/src/malloc/scudo/trusty.cpp
 +} // namespace scudo
 +
 +#endif // SCUDO_TRUSTY
-diff -uprN a/src/malloc/scudo/trusty.h b/src/malloc/scudo/trusty.h
---- a/src/malloc/scudo/trusty.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/trusty.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/trusty.h
++++ b/src/malloc/scudo/trusty.h
 @@ -0,0 +1,24 @@
 +//===-- trusty.h -----------------------------------------------*- C++ -*-===//
 +//
@@ -9292,9 +9248,8 @@ diff -uprN a/src/malloc/scudo/trusty.h b/src/malloc/scudo/trusty.h
 +#endif // SCUDO_TRUSTY
 +
 +#endif // SCUDO_TRUSTY_H_
-diff -uprN a/src/malloc/scudo/tsd.h b/src/malloc/scudo/tsd.h
---- a/src/malloc/scudo/tsd.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/tsd.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/tsd.h
++++ b/src/malloc/scudo/tsd.h
 @@ -0,0 +1,66 @@
 +//===-- tsd.h ---------------------------------------------------*- C++ -*-===//
 +//
@@ -9362,9 +9317,8 @@ diff -uprN a/src/malloc/scudo/tsd.h b/src/malloc/scudo/tsd.h
 +} // namespace scudo
 +
 +#endif // SCUDO_TSD_H_
-diff -uprN a/src/malloc/scudo/tsd_exclusive.h b/src/malloc/scudo/tsd_exclusive.h
---- a/src/malloc/scudo/tsd_exclusive.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/tsd_exclusive.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/tsd_exclusive.h
++++ b/src/malloc/scudo/tsd_exclusive.h
 @@ -0,0 +1,152 @@
 +//===-- tsd_exclusive.h -----------------------------------------*- C++ -*-===//
 +//
@@ -9518,9 +9472,8 @@ diff -uprN a/src/malloc/scudo/tsd_exclusive.h b/src/malloc/scudo/tsd_exclusive.h
 +} // namespace scudo
 +
 +#endif // SCUDO_TSD_EXCLUSIVE_H_
-diff -uprN a/src/malloc/scudo/tsd_shared.h b/src/malloc/scudo/tsd_shared.h
---- a/src/malloc/scudo/tsd_shared.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/tsd_shared.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/tsd_shared.h
++++ b/src/malloc/scudo/tsd_shared.h
 @@ -0,0 +1,216 @@
 +//===-- tsd_shared.h --------------------------------------------*- C++ -*-===//
 +//
@@ -9738,9 +9691,8 @@ diff -uprN a/src/malloc/scudo/tsd_shared.h b/src/malloc/scudo/tsd_shared.h
 +} // namespace scudo
 +
 +#endif // SCUDO_TSD_SHARED_H_
-diff -uprN a/src/malloc/scudo/vector.h b/src/malloc/scudo/vector.h
---- a/src/malloc/scudo/vector.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/vector.h	2023-10-17 09:46:45.319143527 -0400
+--- a/src/malloc/scudo/vector.h
++++ b/src/malloc/scudo/vector.h
 @@ -0,0 +1,118 @@
 +//===-- vector.h ------------------------------------------------*- C++ -*-===//
 +//
@@ -9860,9 +9812,8 @@ diff -uprN a/src/malloc/scudo/vector.h b/src/malloc/scudo/vector.h
 +} // namespace scudo
 +
 +#endif // SCUDO_VECTOR_H_
-diff -uprN a/src/malloc/scudo/wrappers.cpp b/src/malloc/scudo/wrappers.cpp
---- a/src/malloc/scudo/wrappers.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/wrappers.cpp	2023-10-17 09:49:10.627423533 -0400
+--- a/src/malloc/scudo/wrappers.cpp
++++ b/src/malloc/scudo/wrappers.cpp
 @@ -0,0 +1,502 @@
 +#include <stdint.h>
 +#include <stdio.h>
