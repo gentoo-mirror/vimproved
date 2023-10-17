@@ -1,3 +1,30 @@
+From fe5b4ca5946e3a8f8ded06762a0d001cb3259317 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Tue, 17 Oct 2023 14:54:57 -0400
+Subject: [PATCH 1/3] scudo: add necessary plumbing
+
+Signed-off-by: Violet Purcell <vimproved@inventati.org>
+---
+ Makefile                    | 31 ++++++++++++++--
+ configure                   | 72 ++++++++++++++++++++++++++++++++++---
+ src/env/__init_tls.c        |  1 +
+ src/include/errno.h         |  8 +++++
+ src/include/features.h      |  2 ++
+ src/include/pthread.h       |  4 +++
+ src/include/sys/stat.h      |  2 ++
+ src/include/time.h          |  4 +++
+ src/internal/atomic.h       |  4 +++
+ src/internal/linux/futex.h  | 31 ++++++++++++++++
+ src/internal/pthread_impl.h |  3 ++
+ src/internal/syscall.h      |  4 +++
+ src/malloc/calloc.c         |  4 +++
+ src/malloc/libc_calloc.c    |  4 +++
+ src/thread/pthread_create.c |  6 ++++
+ 15 files changed, 174 insertions(+), 6 deletions(-)
+ create mode 100644 src/internal/linux/futex.h
+
+diff --git a/Makefile b/Makefile
+index e8cc4436..17158106 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -17,16 +17,19 @@ includedir = $(prefix)/include
@@ -34,7 +61,7 @@
  CFLAGS_ALL += -D_XOPEN_SOURCE=700 -I$(srcdir)/arch/$(ARCH) -I$(srcdir)/arch/generic -Iobj/src/internal -I$(srcdir)/src/include -I$(srcdir)/src/internal -Iobj/include -I$(srcdir)/include
 +
 +CXXFLAGS_ALL = $(CXXFLAGS_FSE)
-+CXXFLAGS_ALL += -D_XOPEN_SOURCE=700 -I$(srcdir)/arch/$(ARCH) -I$(srcdir)/arch/generic -Iobj/src/internal -I$(srcdir)/src/include -I$(srcdir)/src/internal -Iobj/include -I$(srcdir)/include -I/usr/lib/clang/17/include
++CXXFLAGS_ALL += -D_XOPEN_SOURCE=700 -I$(srcdir)/arch/$(ARCH) -I$(srcdir)/arch/generic -Iobj/src/internal -I$(srcdir)/src/include -I$(srcdir)/src/internal -Iobj/include -I$(srcdir)/include
 +
  CFLAGS_ALL += $(CPPFLAGS) $(CFLAGS_AUTO) $(CFLAGS)
 +CXXFLAGS_ALL += $(CPPFLAGS) $(CXXFLAGS_AUTO) $(CXXFLAGS)
@@ -87,6 +114,8 @@
  lib/libc.so: $(LOBJS) $(LDSO_OBJS)
  	$(CC) $(CFLAGS_ALL) $(LDFLAGS_ALL) -nostdlib -shared \
  	-Wl,-e,_dlstart -o $@ $(LOBJS) $(LDSO_OBJS) $(LIBCC)
+diff --git a/configure b/configure
+index 853bf05e..2a0632fa 100755
 --- a/configure
 +++ b/configure
 @@ -63,6 +63,7 @@ fail () { echo "$*" ; exit 1 ; }
@@ -289,6 +318,8 @@
  CPPFLAGS = $CPPFLAGS
  LDFLAGS = $LDFLAGS
  LDFLAGS_AUTO = $LDFLAGS_AUTO
+diff --git a/src/env/__init_tls.c b/src/env/__init_tls.c
+index a93141ed..6347577c 100644
 --- a/src/env/__init_tls.c
 +++ b/src/env/__init_tls.c
 @@ -21,6 +21,7 @@ int __init_tp(void *p)
@@ -299,6 +330,8 @@
  	td->robust_list.head = &td->robust_list.head;
  	td->sysinfo = __sysinfo;
  	td->next = td->prev = td;
+diff --git a/src/include/errno.h b/src/include/errno.h
+index 8ec49377..547e2af0 100644
 --- a/src/include/errno.h
 +++ b/src/include/errno.h
 @@ -3,6 +3,10 @@
@@ -321,6 +354,8 @@
 +#endif
 +
  #endif
+diff --git a/src/include/features.h b/src/include/features.h
+index f17bd151..157f2def 100644
 --- a/src/include/features.h
 +++ b/src/include/features.h
 @@ -3,7 +3,9 @@
@@ -333,6 +368,8 @@
  #define hidden __attribute__((__visibility__("hidden")))
  #define weak_alias(old, new) \
  	extern __typeof(old) new __attribute__((__weak__, __alias__(#old)))
+diff --git a/src/include/pthread.h b/src/include/pthread.h
+index 7167d3e1..0107a704 100644
 --- a/src/include/pthread.h
 +++ b/src/include/pthread.h
 @@ -3,6 +3,8 @@
@@ -351,6 +388,8 @@
 +#endif /* __cplusplus */
 +
  #endif
+diff --git a/src/include/sys/stat.h b/src/include/sys/stat.h
+index 59339bee..cc3af59d 100644
 --- a/src/include/sys/stat.h
 +++ b/src/include/sys/stat.h
 @@ -3,7 +3,9 @@
@@ -363,6 +402,8 @@
 +#endif
  
  #endif
+diff --git a/src/include/time.h b/src/include/time.h
+index cbabde47..8eefd311 100644
 --- a/src/include/time.h
 +++ b/src/include/time.h
 @@ -3,6 +3,8 @@
@@ -381,6 +422,8 @@
 +#endif /* __cplusplus */
 +
  #endif
+diff --git a/src/internal/atomic.h b/src/internal/atomic.h
+index 96c1552d..9c4e720c 100644
 --- a/src/internal/atomic.h
 +++ b/src/internal/atomic.h
 @@ -3,6 +3,8 @@
@@ -399,6 +442,9 @@
 +#endif /* __cplusplus */
 +
  #endif
+diff --git a/src/internal/linux/futex.h b/src/internal/linux/futex.h
+new file mode 100644
+index 00000000..0e216dcc
 --- /dev/null
 +++ b/src/internal/linux/futex.h
 @@ -0,0 +1,31 @@
@@ -433,6 +479,8 @@
 +#define FUTEX_WAKE_PRIVATE (FUTEX_WAKE | FUTEX_PRIVATE_FLAG)
 +
 +#endif
+diff --git a/src/internal/pthread_impl.h b/src/internal/pthread_impl.h
+index de2b9d8b..22b39232 100644
 --- a/src/internal/pthread_impl.h
 +++ b/src/internal/pthread_impl.h
 @@ -56,6 +56,7 @@ struct pthread {
@@ -452,6 +500,8 @@
  extern hidden volatile int __thread_list_lock;
  
  extern hidden volatile int __abort_lock[1];
+diff --git a/src/internal/syscall.h b/src/internal/syscall.h
+index 4a446157..a4ae20b5 100644
 --- a/src/internal/syscall.h
 +++ b/src/internal/syscall.h
 @@ -58,6 +58,7 @@ hidden long __syscall_ret(unsigned long),
@@ -481,6 +531,8 @@
 +#endif
  
  #endif
+diff --git a/src/malloc/calloc.c b/src/malloc/calloc.c
+index bf6bddca..6aa482c6 100644
 --- a/src/malloc/calloc.c
 +++ b/src/malloc/calloc.c
 @@ -32,6 +32,10 @@ weak_alias(allzerop, __malloc_allzerop);
@@ -494,6 +546,8 @@
  	if (n && m > (size_t)-1/n) {
  		errno = ENOMEM;
  		return 0;
+diff --git a/src/malloc/libc_calloc.c b/src/malloc/libc_calloc.c
+index d25eabea..3895c8cf 100644
 --- a/src/malloc/libc_calloc.c
 +++ b/src/malloc/libc_calloc.c
 @@ -1,4 +1,8 @@
@@ -505,6 +559,8 @@
  #include "calloc.c"
 +
 +#endif
+diff --git a/src/thread/pthread_create.c b/src/thread/pthread_create.c
+index 087f6206..b1345b34 100644
 --- a/src/thread/pthread_create.c
 +++ b/src/thread/pthread_create.c
 @@ -68,6 +68,7 @@ _Noreturn void __pthread_exit(void *result)
@@ -531,3 +587,6 @@
 +static void malloc_tsd_teardown(void *p) {}
 +
 +weak_alias(malloc_tsd_teardown, __malloc_tsd_teardown);
+-- 
+2.42.0
+
