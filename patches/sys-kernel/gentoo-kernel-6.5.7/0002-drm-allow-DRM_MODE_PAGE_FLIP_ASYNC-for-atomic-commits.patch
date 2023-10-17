@@ -341,13 +341,3 @@
   */
  #define DRM_MODE_PAGE_FLIP_ASYNC 0x02
  #define DRM_MODE_PAGE_FLIP_TARGET_ABSOLUTE 0x4
---- a/kernel/gen_kheaders.sh
-+++ b/kernel/gen_kheaders.sh
-@@ -84,7 +84,6 @@ find $cpio_dir -type f -print0 |
- 
- # Create archive and try to normalize metadata for reproducibility.
- tar "${KBUILD_BUILD_TIMESTAMP:+--mtime=$KBUILD_BUILD_TIMESTAMP}" \
--    --owner=0 --group=0 --sort=name --numeric-owner \
-     -I $XZ -cf $tarfile -C $cpio_dir/ . > /dev/null
- 
- echo $headers_md5 > kernel/kheaders.md5
