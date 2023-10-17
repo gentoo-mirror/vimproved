@@ -1,0 +1,463 @@
+From: Simon Ser <contact@emersion.fr>
+
+If the driver supports it, allow user-space to supply the
+DRM_MODE_PAGE_FLIP_ASYNC flag to request an async page-flip.
+Set drm_crtc_state.async_flip accordingly.
+
+Document that drivers will reject atomic commits if an async
+flip isn't possible. This allows user-space to fall back to
+something else. For instance, Xorg falls back to a blit.
+Another option is to wait as close to the next vblank as
+possible before performing the page-flip to reduce latency.
+
+Signed-off-by: Simon Ser <contact@emersion.fr>
+Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
+Co-developed-by: André Almeida <andrealmeid@igalia.com>
+Signed-off-by: André Almeida <andrealmeid@igalia.com>
+--- a/drivers/gpu/drm/drm_atomic_uapi.c
++++ b/drivers/gpu/drm/drm_atomic_uapi.c
+@@ -1323,6 +1323,18 @@ static void complete_signaling(struct drm_device *dev,
+ 	kfree(fence_state);
+ }
+ 
++static void
++set_async_flip(struct drm_atomic_state *state)
++{
++	struct drm_crtc *crtc;
++	struct drm_crtc_state *crtc_state;
++	int i;
++
++	for_each_new_crtc_in_state(state, crtc, crtc_state, i) {
++		crtc_state->async_flip = true;
++	}
++}
++
+ int drm_mode_atomic_ioctl(struct drm_device *dev,
+ 			  void *data, struct drm_file *file_priv)
+ {
+@@ -1363,9 +1375,16 @@ int drm_mode_atomic_ioctl(struct drm_device *dev,
+ 	}
+ 
+ 	if (arg->flags & DRM_MODE_PAGE_FLIP_ASYNC) {
+-		drm_dbg_atomic(dev,
+-			       "commit failed: invalid flag DRM_MODE_PAGE_FLIP_ASYNC\n");
+-		return -EINVAL;
++		if (!dev->mode_config.async_page_flip) {
++			drm_dbg_atomic(dev,
++				       "commit failed: DRM_MODE_PAGE_FLIP_ASYNC not supported\n");
++			return -EINVAL;
++		}
++		if (dev->mode_config.atomic_async_page_flip_not_supported) {
++			drm_dbg_atomic(dev,
++				       "commit failed: DRM_MODE_PAGE_FLIP_ASYNC not supported with atomic\n");
++			return -EINVAL;
++		}
+ 	}
+ 
+ 	/* can't test and expect an event at the same time. */
+@@ -1468,6 +1487,9 @@ int drm_mode_atomic_ioctl(struct drm_device *dev,
+ 	if (ret)
+ 		goto out;
+ 
++	if (arg->flags & DRM_MODE_PAGE_FLIP_ASYNC)
++		set_async_flip(state);
++
+ 	if (arg->flags & DRM_MODE_ATOMIC_TEST_ONLY) {
+ 		ret = drm_atomic_check_only(state);
+ 	} else if (arg->flags & DRM_MODE_ATOMIC_NONBLOCK) {
+--- a/include/uapi/drm/drm_mode.h
++++ b/include/uapi/drm/drm_mode.h
+@@ -957,6 +957,15 @@ struct hdr_output_metadata {
+  * Request that the page-flip is performed as soon as possible, ie. with no
+  * delay due to waiting for vblank. This may cause tearing to be visible on
+  * the screen.
++ *
++ * When used with atomic uAPI, the driver will return an error if the hardware
++ * doesn't support performing an asynchronous page-flip for this update.
++ * User-space should handle this, e.g. by falling back to a regular page-flip.
++ *
++ * Note, some hardware might need to perform one last synchronous page-flip
++ * before being able to switch to asynchronous page-flips. As an exception,
++ * the driver will return success even though that first page-flip is not
++ * asynchronous.
+  */
+ #define DRM_MODE_PAGE_FLIP_ASYNC 0x02
+ #define DRM_MODE_PAGE_FLIP_TARGET_ABSOLUTE 0x4
+-- 
+2.42.0
+
+From: Simon Ser <contact@emersion.fr>
+
+This new kernel capability indicates whether async page-flips are
+supported via the atomic uAPI. DRM clients can use it to check
+for support before feeding DRM_MODE_PAGE_FLIP_ASYNC to the kernel.
+
+Make it clear that DRM_CAP_ASYNC_PAGE_FLIP is for legacy uAPI only.
+
+Signed-off-by: Simon Ser <contact@emersion.fr>
+Reviewed-by: André Almeida <andrealmeid@igalia.com>
+Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: André Almeida <andrealmeid@igalia.com>
+--- a/drivers/gpu/drm/drm_ioctl.c
++++ b/drivers/gpu/drm/drm_ioctl.c
+@@ -301,6 +301,11 @@ static int drm_getcap(struct drm_device *dev, void *data, struct drm_file *file_
+ 	case DRM_CAP_CRTC_IN_VBLANK_EVENT:
+ 		req->value = 1;
+ 		break;
++	case DRM_CAP_ATOMIC_ASYNC_PAGE_FLIP:
++		req->value = drm_core_check_feature(dev, DRIVER_ATOMIC) &&
++			     dev->mode_config.async_page_flip &&
++			     !dev->mode_config.atomic_async_page_flip_not_supported;
++		break;
+ 	default:
+ 		return -EINVAL;
+ 	}
+--- a/include/uapi/drm/drm.h
++++ b/include/uapi/drm/drm.h
+@@ -713,7 +713,8 @@ struct drm_gem_open {
+ /**
+  * DRM_CAP_ASYNC_PAGE_FLIP
+  *
+- * If set to 1, the driver supports &DRM_MODE_PAGE_FLIP_ASYNC.
++ * If set to 1, the driver supports &DRM_MODE_PAGE_FLIP_ASYNC for legacy
++ * page-flips.
+  */
+ #define DRM_CAP_ASYNC_PAGE_FLIP		0x7
+ /**
+@@ -773,6 +774,13 @@ struct drm_gem_open {
+  * :ref:`drm_sync_objects`.
+  */
+ #define DRM_CAP_SYNCOBJ_TIMELINE	0x14
++/**
++ * DRM_CAP_ATOMIC_ASYNC_PAGE_FLIP
++ *
++ * If set to 1, the driver supports &DRM_MODE_PAGE_FLIP_ASYNC for atomic
++ * commits.
++ */
++#define DRM_CAP_ATOMIC_ASYNC_PAGE_FLIP	0x15
+ 
+ /* DRM_IOCTL_GET_CAP ioctl argument type */
+ struct drm_get_cap {
+-- 
+2.42.0
+
+From: Simon Ser <contact@emersion.fr>
+
+This new field indicates whether the driver has the necessary logic
+to support async page-flips via the atomic uAPI. This is leveraged by
+the next commit to allow user-space to use this functionality.
+
+All atomic drivers setting drm_mode_config.async_page_flip are updated
+to also set drm_mode_config.atomic_async_page_flip_not_supported. We
+will gradually check and update these drivers to properly handle
+drm_crtc_state.async_flip in their atomic logic.
+
+The goal of this negative flag is the same as
+fb_modifiers_not_supported: we want to eventually get rid of all
+drivers missing atomic support for async flips. New drivers should not
+set this flag, instead they should support atomic async flips (if
+they support async flips at all). IOW, we don't want more drivers
+with async flip support for legacy but not atomic.
+
+Signed-off-by: Simon Ser <contact@emersion.fr>
+Reviewed-by: André Almeida <andrealmeid@igalia.com>
+Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: André Almeida <andrealmeid@igalia.com>
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+@@ -3997,6 +3997,7 @@ static int amdgpu_dm_mode_config_init(struct amdgpu_device *adev)
+ 		adev_to_drm(adev)->mode_config.prefer_shadow = 1;
+ 	/* indicates support for immediate flip */
+ 	adev_to_drm(adev)->mode_config.async_page_flip = true;
++	adev_to_drm(adev)->mode_config.atomic_async_page_flip_not_supported = true;
+ 
+ 	state = kzalloc(sizeof(*state), GFP_KERNEL);
+ 	if (!state)
+--- a/drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_dc.c
++++ b/drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_dc.c
+@@ -639,6 +639,7 @@ static int atmel_hlcdc_dc_modeset_init(struct drm_device *dev)
+ 	dev->mode_config.max_height = dc->desc->max_height;
+ 	dev->mode_config.funcs = &mode_config_funcs;
+ 	dev->mode_config.async_page_flip = true;
++	dev->mode_config.atomic_async_page_flip_not_supported = true;
+ 
+ 	return 0;
+ }
+--- a/drivers/gpu/drm/i915/display/intel_display_driver.c
++++ b/drivers/gpu/drm/i915/display/intel_display_driver.c
+@@ -126,6 +126,7 @@ static void intel_mode_config_init(struct drm_i915_private *i915)
+ 	mode_config->helper_private = &intel_mode_config_funcs;
+ 
+ 	mode_config->async_page_flip = HAS_ASYNC_FLIPS(i915);
++	mode_config->atomic_async_page_flip_not_supported = true;
+ 
+ 	/*
+ 	 * Maximum framebuffer dimensions, chosen to match
+--- a/drivers/gpu/drm/nouveau/nouveau_display.c
++++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+@@ -720,6 +720,7 @@ nouveau_display_create(struct drm_device *dev)
+ 		dev->mode_config.async_page_flip = false;
+ 	else
+ 		dev->mode_config.async_page_flip = true;
++	dev->mode_config.atomic_async_page_flip_not_supported = true;
+ 
+ 	drm_kms_helper_poll_init(dev);
+ 	drm_kms_helper_poll_disable(dev);
+--- a/include/drm/drm_mode_config.h
++++ b/include/drm/drm_mode_config.h
+@@ -918,6 +918,17 @@ struct drm_mode_config {
+ 	 */
+ 	bool async_page_flip;
+ 
++	/**
++	 * @atomic_async_page_flip_not_supported:
++	 *
++	 * If true, the driver does not support async page-flips with the
++	 * atomic uAPI. This is only used by old drivers which haven't yet
++	 * accomodated for &drm_crtc_state.async_flip in their atomic logic,
++	 * even if they have &drm_mode_config.async_page_flip set to true.
++	 * New drivers shall not set this flag.
++	 */
++	bool atomic_async_page_flip_not_supported;
++
+ 	/**
+ 	 * @fb_modifiers_not_supported:
+ 	 *
+-- 
+2.42.0
+
+Given that prop changes may lead to modesetting, which would defeat the
+fast path of the async flip, refuse any atomic prop change for async
+flips in atomic API. The only exceptions are the framebuffer ID to flip
+to and the mode ID, that could be referring to an identical mode.
+
+Signed-off-by: André Almeida <andrealmeid@igalia.com>
+--- a/drivers/gpu/drm/drm_atomic_uapi.c
++++ b/drivers/gpu/drm/drm_atomic_uapi.c
+@@ -1006,13 +1006,28 @@ int drm_atomic_connector_commit_dpms(struct drm_atomic_state *state,
+ 	return ret;
+ }
+ 
++static int drm_atomic_check_prop_changes(int ret, uint64_t old_val, uint64_t prop_value,
++					 struct drm_property *prop)
++{
++	if (ret != 0 || old_val != prop_value) {
++		drm_dbg_atomic(prop->dev,
++			       "[PROP:%d:%s] No prop can be changed during async flip\n",
++			       prop->base.id, prop->name);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
+ int drm_atomic_set_property(struct drm_atomic_state *state,
+ 			    struct drm_file *file_priv,
+ 			    struct drm_mode_object *obj,
+ 			    struct drm_property *prop,
+-			    uint64_t prop_value)
++			    uint64_t prop_value,
++			    bool async_flip)
+ {
+ 	struct drm_mode_object *ref;
++	uint64_t old_val;
+ 	int ret;
+ 
+ 	if (!drm_property_change_valid_get(prop, prop_value, &ref))
+@@ -1029,6 +1044,13 @@ int drm_atomic_set_property(struct drm_atomic_state *state,
+ 			break;
+ 		}
+ 
++		if (async_flip) {
++			ret = drm_atomic_connector_get_property(connector, connector_state,
++								prop, &old_val);
++			ret = drm_atomic_check_prop_changes(ret, old_val, prop_value, prop);
++			break;
++		}
++
+ 		ret = drm_atomic_connector_set_property(connector,
+ 				connector_state, file_priv,
+ 				prop, prop_value);
+@@ -1037,6 +1059,7 @@ int drm_atomic_set_property(struct drm_atomic_state *state,
+ 	case DRM_MODE_OBJECT_CRTC: {
+ 		struct drm_crtc *crtc = obj_to_crtc(obj);
+ 		struct drm_crtc_state *crtc_state;
++		struct drm_mode_config *config = &crtc->dev->mode_config;
+ 
+ 		crtc_state = drm_atomic_get_crtc_state(state, crtc);
+ 		if (IS_ERR(crtc_state)) {
+@@ -1044,6 +1067,13 @@ int drm_atomic_set_property(struct drm_atomic_state *state,
+ 			break;
+ 		}
+ 
++		if (async_flip) {
++			ret = drm_atomic_crtc_get_property(crtc, crtc_state,
++							   prop, &old_val);
++			ret = drm_atomic_check_prop_changes(ret, old_val, prop_value, prop);
++			break;
++		}
++
+ 		ret = drm_atomic_crtc_set_property(crtc,
+ 				crtc_state, prop, prop_value);
+ 		break;
+@@ -1051,6 +1081,7 @@ int drm_atomic_set_property(struct drm_atomic_state *state,
+ 	case DRM_MODE_OBJECT_PLANE: {
+ 		struct drm_plane *plane = obj_to_plane(obj);
+ 		struct drm_plane_state *plane_state;
++		struct drm_mode_config *config = &plane->dev->mode_config;
+ 
+ 		plane_state = drm_atomic_get_plane_state(state, plane);
+ 		if (IS_ERR(plane_state)) {
+@@ -1058,6 +1089,13 @@ int drm_atomic_set_property(struct drm_atomic_state *state,
+ 			break;
+ 		}
+ 
++		if (async_flip && prop != config->prop_fb_id) {
++			ret = drm_atomic_plane_get_property(plane, plane_state,
++							    prop, &old_val);
++			ret = drm_atomic_check_prop_changes(ret, old_val, prop_value, prop);
++			break;
++		}
++
+ 		ret = drm_atomic_plane_set_property(plane,
+ 				plane_state, file_priv,
+ 				prop, prop_value);
+@@ -1349,6 +1387,7 @@ int drm_mode_atomic_ioctl(struct drm_device *dev,
+ 	struct drm_out_fence_state *fence_state;
+ 	int ret = 0;
+ 	unsigned int i, j, num_fences;
++	bool async_flip = false;
+ 
+ 	/* disallow for drivers not supporting atomic: */
+ 	if (!drm_core_check_feature(dev, DRIVER_ATOMIC))
+@@ -1385,6 +1424,8 @@ int drm_mode_atomic_ioctl(struct drm_device *dev,
+ 				       "commit failed: DRM_MODE_PAGE_FLIP_ASYNC not supported with atomic\n");
+ 			return -EINVAL;
+ 		}
++
++		async_flip = true;
+ 	}
+ 
+ 	/* can't test and expect an event at the same time. */
+@@ -1469,8 +1510,8 @@ int drm_mode_atomic_ioctl(struct drm_device *dev,
+ 				goto out;
+ 			}
+ 
+-			ret = drm_atomic_set_property(state, file_priv,
+-						      obj, prop, prop_value);
++			ret = drm_atomic_set_property(state, file_priv, obj,
++						      prop, prop_value, async_flip);
+ 			if (ret) {
+ 				drm_mode_object_put(obj);
+ 				goto out;
+--- a/drivers/gpu/drm/drm_crtc_internal.h
++++ b/drivers/gpu/drm/drm_crtc_internal.h
+@@ -251,7 +251,7 @@ int drm_atomic_set_property(struct drm_atomic_state *state,
+ 			    struct drm_file *file_priv,
+ 			    struct drm_mode_object *obj,
+ 			    struct drm_property *prop,
+-			    uint64_t prop_value);
++			    uint64_t prop_value, bool async_flip);
+ int drm_atomic_get_property(struct drm_mode_object *obj,
+ 			    struct drm_property *property, uint64_t *val);
+ 
+--- a/drivers/gpu/drm/drm_mode_object.c
++++ b/drivers/gpu/drm/drm_mode_object.c
+@@ -538,7 +538,7 @@ static int set_property_atomic(struct drm_mode_object *obj,
+ 						       obj_to_connector(obj),
+ 						       prop_value);
+ 	} else {
+-		ret = drm_atomic_set_property(state, file_priv, obj, prop, prop_value);
++		ret = drm_atomic_set_property(state, file_priv, obj, prop, prop_value, false);
+ 		if (ret)
+ 			goto out;
+ 		ret = drm_atomic_commit(state);
+-- 
+2.42.0
+
+From: Pekka Paalanen <pekka.paalanen@collabora.com>
+
+Specify how the atomic state is maintained between userspace and
+kernel, plus the special case for async flips.
+
+Signed-off-by: Pekka Paalanen <pekka.paalanen@collabora.com>
+Signed-off-by: André Almeida <andrealmeid@igalia.com>
+--- a/Documentation/gpu/drm-uapi.rst
++++ b/Documentation/gpu/drm-uapi.rst
+@@ -570,3 +570,50 @@ dma-buf interoperability
+ 
+ Please see Documentation/userspace-api/dma-buf-alloc-exchange.rst for
+ information on how dma-buf is integrated and exposed within DRM.
++
++KMS atomic state
++================
++
++An atomic commit can change multiple KMS properties in an atomic fashion,
++without ever applying intermediate or partial state changes.  Either the whole
++commit succeeds or fails, and it will never be applied partially. This is the
++fundamental improvement of the atomic API over the older non-atomic API which is
++referred to as the "legacy API".  Applying intermediate state could unexpectedly
++fail, cause visible glitches, or delay reaching the final state.
++
++An atomic commit can be flagged with DRM_MODE_ATOMIC_TEST_ONLY, which means the
++complete state change is validated but not applied.  Userspace should use this
++flag to validate any state change before asking to apply it. If validation fails
++for any reason, userspace should attempt to fall back to another, perhaps
++simpler, final state.  This allows userspace to probe for various configurations
++without causing visible glitches on screen and without the need to undo a
++probing change.
++
++The changes recorded in an atomic commit apply on top the current KMS state in
++the kernel. Hence, the complete new KMS state is the complete old KMS state with
++the committed property settings done on top. The kernel will try to avoid
++no-operation changes, so it is safe for userspace to send redundant property
++settings.  However, not every situation allows for no-op changes, due to the
++need to acquire locks for some attributes. Userspace needs to be aware that some
++redundant information might result in oversynchronization issues.  No-operation
++changes do not count towards actually needed changes, e.g.  setting MODE_ID to a
++different blob with identical contents as the current KMS state shall not be a
++modeset on its own. As a special exception for VRR needs, explicitly setting
++FB_ID to its current value is not a no-op.
++
++A "modeset" is a change in KMS state that might enable, disable, or temporarily
++disrupt the emitted video signal, possibly causing visible glitches on screen. A
++modeset may also take considerably more time to complete than other kinds of
++changes, and the video sink might also need time to adapt to the new signal
++properties. Therefore a modeset must be explicitly allowed with the flag
++DRM_MODE_ATOMIC_ALLOW_MODESET.  This in combination with
++DRM_MODE_ATOMIC_TEST_ONLY allows userspace to determine if a state change is
++likely to cause visible disruption on screen and avoid such changes when end
++users do not expect them.
++
++An atomic commit with the flag DRM_MODE_PAGE_FLIP_ASYNC is allowed to
++effectively change only the FB_ID property on any planes. No-operation changes
++are ignored as always. Changing any other property will cause the commit to be
++rejected. Each driver may relax this restriction if they have guarantees that
++such property change doesn't cause modesets. Userspace can use TEST_ONLY commits
++to query the driver about this.
+-- 
+2.42.0
+
+From: Simon Ser <contact@emersion.fr>
+
+amdgpu_dm_commit_planes() already sets the flip_immediate flag for
+async page-flips. This flag is used to set the UNP_FLIP_CONTROL
+register. Thus, no additional change is required to handle async
+page-flips with the atomic uAPI.
+
+Signed-off-by: Simon Ser <contact@emersion.fr>
+Reviewed-by: André Almeida <andrealmeid@igalia.com>
+Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: André Almeida <andrealmeid@igalia.com>
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+@@ -3997,7 +3997,6 @@ static int amdgpu_dm_mode_config_init(struct amdgpu_device *adev)
+ 		adev_to_drm(adev)->mode_config.prefer_shadow = 1;
+ 	/* indicates support for immediate flip */
+ 	adev_to_drm(adev)->mode_config.async_page_flip = true;
+-	adev_to_drm(adev)->mode_config.atomic_async_page_flip_not_supported = true;
+ 
+ 	state = kzalloc(sizeof(*state), GFP_KERNEL);
+ 	if (!state)
+-- 
+2.42.0

@@ -9860,682 +9860,509 @@ diff -uprN a/src/malloc/scudo/vector.h b/src/malloc/scudo/vector.h
 +} // namespace scudo
 +
 +#endif // SCUDO_VECTOR_H_
-diff -uprN a/src/malloc/scudo/wrappers_c.cpp b/src/malloc/scudo/wrappers_c.cpp
---- a/src/malloc/scudo/wrappers_c.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/wrappers_c.cpp	2023-10-17 09:46:41.735768899 -0400
-@@ -0,0 +1,37 @@
-+//===-- wrappers_c.cpp ------------------------------------------*- C++ -*-===//
-+//
-+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
-+// See https://llvm.org/LICENSE.txt for license information.
-+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
-+//
-+//===----------------------------------------------------------------------===//
-+
-+#include "platform.h"
-+
-+// Skip this compilation unit if compiled as part of Bionic.
-+#if !SCUDO_ANDROID || !_BIONIC
-+
-+#include "allocator_config.h"
-+#include "wrappers_c.h"
-+#include "wrappers_c_checks.h"
-+
+diff -uprN a/src/malloc/scudo/wrappers.cpp b/src/malloc/scudo/wrappers.cpp
+--- a/src/malloc/scudo/wrappers.cpp	1969-12-31 19:00:00.000000000 -0500
++++ b/src/malloc/scudo/wrappers.cpp	2023-10-17 09:49:10.627423533 -0400
+@@ -0,0 +1,502 @@
 +#include <stdint.h>
 +#include <stdio.h>
++#include <errno.h>
 +
-+#define SCUDO_PREFIX(name) name
-+#define SCUDO_ALLOCATOR Allocator
-+
-+// Export the static allocator so that the C++ wrappers can access it.
-+// Technically we could have a completely separated heap for C & C++ but in
-+// reality the amount of cross pollination between the two is staggering.
-+SCUDO_REQUIRE_CONSTANT_INITIALIZATION
-+scudo::Allocator<scudo::Config, SCUDO_PREFIX(malloc_postinit)> SCUDO_ALLOCATOR;
-+
-+#include "wrappers_c.inc"
-+
-+#undef SCUDO_ALLOCATOR
-+#undef SCUDO_PREFIX
-+
-+extern "C" INTERFACE void __scudo_print_stats(void) { Allocator.printStats(); }
-+
-+#endif // !SCUDO_ANDROID || !_BIONIC
-diff -uprN a/src/malloc/scudo/wrappers_c.h b/src/malloc/scudo/wrappers_c.h
---- a/src/malloc/scudo/wrappers_c.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/wrappers_c.h	2023-10-17 09:46:45.319143527 -0400
-@@ -0,0 +1,62 @@
-+//===-- wrappers_c.h --------------------------------------------*- C++ -*-===//
-+//
-+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
-+// See https://llvm.org/LICENSE.txt for license information.
-+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
-+//
-+//===----------------------------------------------------------------------===//
-+
-+#ifndef SCUDO_WRAPPERS_C_H_
-+#define SCUDO_WRAPPERS_C_H_
++extern "C" {
++#include "pthread_impl.h"
++}
 +
 +#include "platform.h"
++#include "allocator_config.h"
 +#include "stats.h"
 +
-+// Bionic's struct mallinfo consists of size_t (mallinfo(3) uses int).
-+#if SCUDO_ANDROID
-+typedef size_t __scudo_mallinfo_data_t;
-+#else
-+typedef int __scudo_mallinfo_data_t;
++/* we don't use standard lib so define a placement-new */
++inline void *operator new (size_t, void *p) { return p; }
++inline void  operator delete (void *, void *) {}
++
++/* we will request 64k memory at a time
++ *
++ * this may be as little as 1 page on some systems,
++ * and it will hold around 8 TSDs
++ */
++#ifndef MUSL_SCUDO_TSD_CHUNK
++#define MUSL_SCUDO_TSD_CHUNK 65536
 +#endif
 +
-+struct __scudo_mallinfo {
-+  __scudo_mallinfo_data_t arena;
-+  __scudo_mallinfo_data_t ordblks;
-+  __scudo_mallinfo_data_t smblks;
-+  __scudo_mallinfo_data_t hblks;
-+  __scudo_mallinfo_data_t hblkhd;
-+  __scudo_mallinfo_data_t usmblks;
-+  __scudo_mallinfo_data_t fsmblks;
-+  __scudo_mallinfo_data_t uordblks;
-+  __scudo_mallinfo_data_t fordblks;
-+  __scudo_mallinfo_data_t keepcost;
++/* the secondary cache was not found to be not much of a benefit
++ * (typically higher rss and often worse performance) while also
++ * causing some strange jank on qemu-user/riscv builders, so drop
++ * it at least for now
++ */
++#ifndef MUSL_SCUDO_USE_SECONDARY_CACHE
++#define MUSL_SCUDO_USE_SECONDARY_CACHE 0
++#endif
++
++inline constexpr size_t size_round(size_t sz, size_t align) {
++    return ((sz + align - 1) / align) * align;
++}
++
++template<typename T, typename TM>
++inline constexpr size_t tsds_in_chunk() {
++    return (MUSL_SCUDO_TSD_CHUNK - sizeof(TM)) / size_round(sizeof(T), alignof(T));
++}
++
++/* tsd registry implementation specific to musl pthreads
++ *
++ * we need to use a custom one, because the existing exclusive registry
++ * relies on thread_local for its state initialization and the tsd object
++ * itself, which will mess things up for main thread for dynamic executables
++ * loaded through ldso, and also uses pthread keys and stuff, which we do
++ * not like for libc
++ *
++ * so map the tsd object memory manually, and keep track of it using a custom
++ * algorithm, storing only one pointer to the tsd object within the thread
++ * object internally
++ *
++ * we map chunks of MUSL_SCUDO_TSD_CHUNK size, each containing storage for
++ * as many TSD objects as possible (the first chunk is allocated almost
++ * immediately, for the fallback TSD); these are managed like a linked list,
++ * so that when threads exit, their TSDs are given back to the list to be
++ * reused; in case we run out, a new chunk is mapped as needed
++ *
++ * to make sure that we don't just map memory and never release any, the
++ * chunks are freed as necessary; the strategy is that there can only ever
++ * be one chunk that is fully empty - that effectively means an empty chunk
++ * is unmapped when another chunk becomes empty
++ *
++ * the 64k value was chosen for the chunk size as it's the maximum size of
++ * a single page one is generally to encounter, which means on these systems
++ * only a single page will be mapped at a time (on other systems, it will be
++ * multiple pages); regardless of page size, the chunk will be able to fit
++ * several TSDs
++ */
++
++template<typename TSD>
++class TSDAllocator {
++    struct chunk;
++
++    struct tsdata {
++        TSD tsd;
++        tsdata *next;
++        chunk *parent;
++        uint32_t dirty: 1;
++        uint32_t unused: 1;
++    };
++
++    struct chunk_meta {
++        chunk *below;
++        chunk *above;
++        unsigned short nused;
++    };
++
++    struct chunk {
++        tsdata tsds[tsds_in_chunk<tsdata, chunk_meta>()];
++        chunk_meta m;
++    };
++
++    static_assert(sizeof(chunk) < MUSL_SCUDO_TSD_CHUNK, "chunk too large");
++
++    void init_chunk(chunk *ch) {
++        ch->m.below = p_chunks;
++        ch->m.above = nullptr;
++        ch->m.nused = 0;
++        if (p_chunks) {
++            p_chunks->m.above = ch;
++        }
++        p_chunks = ch;
++        /* init links */
++        auto tsdn = (sizeof(ch->tsds) / sizeof(tsdata));
++        for (size_t i = 0; i < (tsdn - 1); ++i) {
++            ch->tsds[i].parent = ch;
++            ch->tsds[i].next = &ch->tsds[i + 1];
++            ch->tsds[i].dirty = 0;
++            ch->tsds[i].unused = 1;
++        }
++        ch->tsds[tsdn - 1].parent = ch;
++        ch->tsds[tsdn - 1].next = nullptr;
++        ch->tsds[tsdn - 1].dirty = 0;
++        ch->tsds[tsdn - 1].unused = 1;
++        /* init unused */
++        p_unused = ch->tsds;
++    }
++
++    void release_freechunk() {
++        if (!p_freechunk) {
++            return;
++        }
++        /* unmap and unset whatever previous freechunk we may have
++         *
++         * doing this ensures that whenever there may be a newly
++         * gained empty chunk, the previous empty chunk will be
++         * unmapped, so there is always at most one and never more
++         */
++        auto *ch = p_freechunk;
++        p_freechunk = nullptr;
++        /* update chunks pointer if needed */
++        if (ch == p_chunks) {
++            p_chunks = ch->m.below;
++        }
++        /* first unchain */
++        if (ch->m.below) {
++            ch->m.below->m.above = ch->m.above;
++        }
++        if (ch->m.above) {
++            ch->m.above->m.below = ch->m.below;
++        }
++        /* decide based on where our first pointer was positioned */
++        auto *sp = p_unused;
++        if (sp->parent == ch) {
++            /* we were at the beginning */
++            while (sp->parent == ch) {
++                sp = sp->next;
++            }
++            p_unused = sp;
++        } else {
++            /* we were in the middle or at the end */
++            while (sp->next->parent != ch) {
++                sp = sp->next;
++            }
++            auto *ep = sp->next;
++            while (ep && (ep->parent == ch)) {
++                ep = ep->next;
++            }
++            sp->next = ep;
++        }
++        /* then unmap */
++        scudo::unmap(ch, sizeof(chunk));
++    }
++
++    tsdata *p_unused = nullptr;
++    chunk *p_chunks = nullptr;
++    chunk *p_freechunk = nullptr;
++
++public:
++    TSD *request() {
++        if (!p_unused) {
++            auto *ch = static_cast<chunk *>(scudo::map(
++                nullptr, sizeof(chunk), "scudo:tsdchunk"
++            ));
++            new (ch) chunk{};
++            init_chunk(ch);
++        } else if (p_unused->parent == p_freechunk) {
++            /* chunk will be occupied again */
++            p_freechunk = nullptr;
++        }
++        /* yoink */
++        tsdata *tsd = p_unused;
++        p_unused = p_unused->next;
++        tsd->next = nullptr;
++        tsd->unused = 0;
++        ++tsd->parent->m.nused;
++        /* wipe dirty (recycled) tsds first */
++        if (tsd->dirty) {
++            memset(&tsd->tsd, 0, sizeof(tsd->tsd));
++            new (&tsd->tsd) TSD{};
++        }
++        return &tsd->tsd;
++    }
++
++    /* return it to the allocator; the TSD is destroyed but tsdata is not */
++    void release(TSD *tsd) {
++        tsdata *p;
++        /* get original structure */
++        memcpy(&p, &tsd, sizeof(void *));
++        /* get parent chunk */
++        auto *ch = p->parent;
++        /* empty chunk? */
++        if (!--ch->m.nused) {
++            /* drop the previous freechunk if needed */
++            release_freechunk();
++            /* assign new freechunk once empty */
++            p_freechunk = ch;
++        }
++        /* delay memset until it's actually needed */
++        p->dirty = 1;
++        /* try to locate a unused node */
++        for (size_t i = 0; i < (sizeof(ch->tsds) / sizeof(tsdata)); ++i) {
++            if (ch->tsds[i].unused) {
++                auto *pp = &ch->tsds[i];
++                auto *pn = pp->next;
++                pp->next = p;
++                p->next = pn;
++                p->unused = 1;
++                /* we are done here */
++                return;
++            }
++        }
++        /* couldn't locate a unused node, put it in the front */
++        p->unused = 1;
++        p->next = p_unused;
++        p_unused = p;
++    }
 +};
 +
-+struct __scudo_mallinfo2 {
-+  size_t arena;
-+  size_t ordblks;
-+  size_t smblks;
-+  size_t hblks;
-+  size_t hblkhd;
-+  size_t usmblks;
-+  size_t fsmblks;
-+  size_t uordblks;
-+  size_t fordblks;
-+  size_t keepcost;
++template<typename A>
++struct TSDRegistry {
++    using tsd_t = scudo::TSD<A>;
++
++    void enable() {
++        atomic_store(&p_disabled, 0U, scudo::memory_order_release);
++        p_fallback->unlock();
++        p_mtx.unlock();
++    }
++
++    void disable() {
++        p_mtx.lock();
++        p_fallback->lock();
++        atomic_store(&p_disabled, 1U, scudo::memory_order_release);
++    }
++
++    /* this is normally adjustable through setOption, but we do not have
++     * mallopt, which means setOption is never actually called by anything
++     * (and does not exist for this registry) so return the sane default
++     */
++    bool getDisableMemInit() { return false; }
++
++    void initOnceMaybe(A *inst) {
++        scudo::ScopedLock L{p_mtx};
++        init_once_maybe(inst);
++    }
++
++    ALWAYS_INLINE void initThreadMaybe(A *inst, bool minimal) {
++        auto *self = get_self();
++        if (LIKELY(self->scudo_tsd)) {
++            return;
++        }
++        init_thread(inst, self);
++    }
++
++    ALWAYS_INLINE tsd_t *getTSDAndLock(bool *unlock) {
++        auto *self = get_self();
++        if (LIKELY(
++            self->scudo_tsd &&
++            !scudo::atomic_load(&p_disabled, scudo::memory_order_acquire)
++        )) {
++            *unlock = false;
++            return static_cast<tsd_t *>(self->scudo_tsd);
++        }
++        p_fallback->lock();
++        *unlock = true;
++        return p_fallback;
++    }
++
++private:
++    friend void ::__malloc_tsd_teardown(void *p);
++
++    /* return it to the allocator */
++    void dispose(A *inst, tsd_t *tsd) {
++        /* commit back and destroy, no need to lock yet */
++        tsd->commitBack(inst);
++        tsd->~tsd_t();
++        {
++            scudo::ScopedLock L{p_mtx};
++            p_talloc.release(tsd);
++        }
++    }
++
++    /* assumes locked p_mtx */
++    void init_once_maybe(A *inst) {
++        if (LIKELY(p_init)) {
++            return;
++        }
++        inst->init();
++        p_fallback = p_talloc.request();
++        p_fallback->init(inst);
++        p_init = true;
++    }
++
++    void init_thread(A *inst, struct pthread *self) {
++        tsd_t *tsd;
++        {
++            scudo::ScopedLock L{p_mtx};
++            init_once_maybe(inst);
++            tsd = p_talloc.request();
++        }
++        tsd->init(inst);
++        self->scudo_tsd = tsd;
++        inst->callPostInitCallback();
++    }
++
++    static struct pthread *get_self() {
++        struct pthread *p;
++        pthread_t s = __pthread_self();
++        memcpy(&p, &s, sizeof(struct pthread *));
++        return p;
++    }
++
++    bool p_init = false;
++    scudo::atomic_u8 p_disabled = {};
++    tsd_t *p_fallback = nullptr;
++    TSDAllocator<tsd_t> p_talloc;
++    scudo::HybridMutex p_mtx;
 +};
 +
-+// Android sometimes includes malloc.h no matter what, which yields to
-+// conflicting return types for mallinfo() if we use our own structure. So if
-+// struct mallinfo is declared (#define courtesy of malloc.h), use it directly.
-+#if STRUCT_MALLINFO_DECLARED
-+#define SCUDO_MALLINFO mallinfo
++using Origin = scudo::Chunk::Origin;
++
++struct MuslConfig {
++    /* use table-driven size classes, found to perform better */
++    using SizeClassMap = scudo::AndroidSizeClassMap;
++
++    static const bool MaySupportMemoryTagging = true;
++
++    /* we are not actually using primary64 at the moment, as primary32
++     * appears to have similar performance and memory usage even on
++     * 64-bit systems, while mapping far less virtual memory, which
++     * entirely eliminates our qemu performance issues besides other
++     * things; maybe reevaluate another time
++     */
++#if 0 /*SCUDO_WORDSIZE == 64U*/
++    using Primary = scudo::SizeClassAllocator64<MuslConfig>;
++    /* use pointer compacting like android, improves memory use */
++    using PrimaryCompactPtrT = uint32_t;
++
++    /* too large values result in large mmaps (which will result in terrible
++     * performance in qemu-user, for example), too small values may result
++     * in size class exhaustion; for now use the same value as android
++     */
++    static const uintptr_t PrimaryRegionSizeLog = 28U;
++    static const uintptr_t PrimaryGroupSizeLog = 20U;
++    static const uintptr_t PrimaryCompactPtrScale = SCUDO_MIN_ALIGNMENT_LOG;
++    static const uintptr_t PrimaryMapSizeIncrement = 1UL << 18;
++    static const bool PrimaryEnableRandomOffset = true;
 +#else
-+#define SCUDO_MALLINFO __scudo_mallinfo
++    using Primary = scudo::SizeClassAllocator32<MuslConfig>;
++    using PrimaryCompactPtrT = uintptr_t;
++
++    static const uintptr_t PrimaryRegionSizeLog = FIRST_32_SECOND_64(18U, 20U);
++    static const uintptr_t PrimaryGroupSizeLog = FIRST_32_SECOND_64(18U, 20U);
 +#endif
 +
-+#if !SCUDO_ANDROID || !_BIONIC
-+extern "C" void malloc_postinit();
-+extern HIDDEN scudo::Allocator<scudo::Config, malloc_postinit> Allocator;
++    static const int32_t PrimaryMinReleaseToOsIntervalMs = INT32_MIN;
++    static const int32_t PrimaryMaxReleaseToOsIntervalMs = INT32_MAX;
++
++#if MUSL_SCUDO_USE_SECONDARY_CACHE
++    using SecondaryCache = scudo::MapAllocatorCache<MuslConfig>;
++
++    static const uint32_t SecondaryCacheEntriesArraySize = 32U;
++    static const uint32_t SecondaryCacheQuarantineSize = 0U;
++    static const uint32_t SecondaryCacheDefaultMaxEntriesCount = 32U;
++    static const uintptr_t SecondaryCacheDefaultMaxEntrySize = 1UL << 19;
++    static const int32_t SecondaryCacheMinReleaseToOsIntervalMs = INT32_MIN;
++    static const int32_t SecondaryCacheMaxReleaseToOsIntervalMs = INT32_MAX;
++#else
++    using SecondaryCache = scudo::MapAllocatorNoCache;
 +#endif
 +
-+#endif // SCUDO_WRAPPERS_C_H_
-diff -uprN a/src/malloc/scudo/wrappers_c.inc b/src/malloc/scudo/wrappers_c.inc
---- a/src/malloc/scudo/wrappers_c.inc	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/wrappers_c.inc	2023-10-17 09:46:48.225843690 -0400
-@@ -0,0 +1,288 @@
-+//===-- wrappers_c.inc ------------------------------------------*- C++ -*-===//
-+//
-+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
-+// See https://llvm.org/LICENSE.txt for license information.
-+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
-+//
-+//===----------------------------------------------------------------------===//
-+
-+#ifndef SCUDO_PREFIX
-+#error "Define SCUDO_PREFIX prior to including this file!"
-+#endif
-+
-+// malloc-type functions have to be aligned to std::max_align_t. This is
-+// distinct from (1U << SCUDO_MIN_ALIGNMENT_LOG), since C++ new-type functions
-+// do not have to abide by the same requirement.
-+#ifndef SCUDO_MALLOC_ALIGNMENT
-+#define SCUDO_MALLOC_ALIGNMENT FIRST_32_SECOND_64(8U, 16U)
-+#endif
++    template<typename A>
++    using TSDRegistryT = TSDRegistry<A>;
++};
 +
 +extern "C" {
 +
-+INTERFACE WEAK void *SCUDO_PREFIX(calloc)(size_t nmemb, size_t size) {
-+  scudo::uptr Product;
-+  if (UNLIKELY(scudo::checkForCallocOverflow(size, nmemb, &Product))) {
-+    if (SCUDO_ALLOCATOR.canReturnNull()) {
-+      errno = ENOMEM;
-+      return nullptr;
-+    }
-+    scudo::reportCallocOverflow(nmemb, size);
-+  }
-+  return scudo::setErrnoOnNull(SCUDO_ALLOCATOR.allocate(
-+      Product, scudo::Chunk::Origin::Malloc, SCUDO_MALLOC_ALIGNMENT, true));
++extern int __malloc_replaced;
++extern int __aligned_alloc_replaced;
++
++static void malloc_postinit();
++
++static SCUDO_REQUIRE_CONSTANT_INITIALIZATION
++scudo::Allocator<MuslConfig, malloc_postinit> o_alloc;
++
++#define MALLOC_ALIGN FIRST_32_SECOND_64(8U, 16U)
++
++static void malloc_postinit() {
++    o_alloc.initGwpAsan();
 +}
 +
-+INTERFACE WEAK void SCUDO_PREFIX(free)(void *ptr) {
-+  SCUDO_ALLOCATOR.deallocate(ptr, scudo::Chunk::Origin::Malloc);
-+}
-+
-+INTERFACE WEAK struct SCUDO_MALLINFO SCUDO_PREFIX(mallinfo)(void) {
-+  struct SCUDO_MALLINFO Info = {};
-+  scudo::StatCounters Stats;
-+  SCUDO_ALLOCATOR.getStats(Stats);
-+  // Space allocated in mmapped regions (bytes)
-+  Info.hblkhd = static_cast<__scudo_mallinfo_data_t>(Stats[scudo::StatMapped]);
-+  // Maximum total allocated space (bytes)
-+  Info.usmblks = Info.hblkhd;
-+  // Space in freed fastbin blocks (bytes)
-+  Info.fsmblks = static_cast<__scudo_mallinfo_data_t>(Stats[scudo::StatFree]);
-+  // Total allocated space (bytes)
-+  Info.uordblks =
-+      static_cast<__scudo_mallinfo_data_t>(Stats[scudo::StatAllocated]);
-+  // Total free space (bytes)
-+  Info.fordblks = Info.fsmblks;
-+  return Info;
-+}
-+
-+INTERFACE WEAK struct __scudo_mallinfo2 SCUDO_PREFIX(mallinfo2)(void) {
-+  struct __scudo_mallinfo2 Info = {};
-+  scudo::StatCounters Stats;
-+  SCUDO_ALLOCATOR.getStats(Stats);
-+  // Space allocated in mmapped regions (bytes)
-+  Info.hblkhd = Stats[scudo::StatMapped];
-+  // Maximum total allocated space (bytes)
-+  Info.usmblks = Info.hblkhd;
-+  // Space in freed fastbin blocks (bytes)
-+  Info.fsmblks = Stats[scudo::StatFree];
-+  // Total allocated space (bytes)
-+  Info.uordblks = Stats[scudo::StatAllocated];
-+  // Total free space (bytes)
-+  Info.fordblks = Info.fsmblks;
-+  return Info;
-+}
-+
-+INTERFACE WEAK void *SCUDO_PREFIX(malloc)(size_t size) {
-+  return scudo::setErrnoOnNull(SCUDO_ALLOCATOR.allocate(
-+      size, scudo::Chunk::Origin::Malloc, SCUDO_MALLOC_ALIGNMENT));
-+}
-+
-+#if SCUDO_ANDROID
-+INTERFACE WEAK size_t SCUDO_PREFIX(malloc_usable_size)(const void *ptr) {
-+#else
-+INTERFACE WEAK size_t SCUDO_PREFIX(malloc_usable_size)(void *ptr) {
-+#endif
-+  return SCUDO_ALLOCATOR.getUsableSize(ptr);
-+}
-+
-+INTERFACE WEAK void *SCUDO_PREFIX(memalign)(size_t alignment, size_t size) {
-+  // Android rounds up the alignment to a power of two if it isn't one.
-+  if (SCUDO_ANDROID) {
-+    if (UNLIKELY(!alignment)) {
-+      alignment = 1U;
++void __malloc_atfork(int who) {
++    if (who < 0) {
++        o_alloc.disable();
 +    } else {
-+      if (UNLIKELY(!scudo::isPowerOfTwo(alignment)))
-+        alignment = scudo::roundUpToPowerOfTwo(alignment);
++        o_alloc.enable();
 +    }
-+  } else {
-+    if (UNLIKELY(!scudo::isPowerOfTwo(alignment))) {
-+      if (SCUDO_ALLOCATOR.canReturnNull()) {
-+        errno = EINVAL;
++}
++
++void __malloc_tsd_teardown(void *p) {
++    using T = scudo::TSD<decltype(o_alloc)>;
++    auto *tsdp = static_cast<T **>(p);
++    auto *tsd = *tsdp;
++    if (!tsd) {
++        return;
++    }
++    *tsdp = nullptr;
++    o_alloc.getTSDRegistry()->dispose(&o_alloc, tsd);
++}
++
++void *__libc_calloc(size_t m, size_t n) {
++    if (n && m > (((size_t)-1) / n)) {
++        if (o_alloc.canReturnNull()) {
++            errno = ENOMEM;
++            return nullptr;
++        }
++        scudo::reportCallocOverflow(m, n);
++    }
++    auto *ptr = o_alloc.allocate(n * m, Origin::Malloc, MALLOC_ALIGN, true);
++    if (UNLIKELY(!ptr)) {
++        errno = ENOMEM;
++    }
++    return ptr;
++}
++
++void __libc_free(void *ptr) {
++    o_alloc.deallocate(ptr, Origin::Malloc);
++}
++
++void *__libc_malloc_impl(size_t len) {
++    auto *ptr = o_alloc.allocate(len, Origin::Malloc, MALLOC_ALIGN);
++    if (UNLIKELY(!ptr)) {
++        errno = ENOMEM;
++    }
++    return ptr;
++}
++
++void *__libc_realloc(void *ptr, size_t len) {
++    if (!ptr) {
++        auto *ptr = o_alloc.allocate(len, Origin::Malloc, MALLOC_ALIGN);
++        if (UNLIKELY(!ptr)) {
++            errno = ENOMEM;
++        }
++        return ptr;
++    }
++    if (len == 0) {
++        o_alloc.deallocate(ptr, Origin::Malloc);
 +        return nullptr;
-+      }
-+      scudo::reportAlignmentNotPowerOfTwo(alignment);
 +    }
-+  }
-+  return SCUDO_ALLOCATOR.allocate(size, scudo::Chunk::Origin::Memalign,
-+                                  alignment);
-+}
-+
-+INTERFACE WEAK int SCUDO_PREFIX(posix_memalign)(void **memptr, size_t alignment,
-+                                                size_t size) {
-+  if (UNLIKELY(scudo::checkPosixMemalignAlignment(alignment))) {
-+    if (!SCUDO_ALLOCATOR.canReturnNull())
-+      scudo::reportInvalidPosixMemalignAlignment(alignment);
-+    return EINVAL;
-+  }
-+  void *Ptr =
-+      SCUDO_ALLOCATOR.allocate(size, scudo::Chunk::Origin::Memalign, alignment);
-+  if (UNLIKELY(!Ptr))
-+    return ENOMEM;
-+  *memptr = Ptr;
-+  return 0;
-+}
-+
-+INTERFACE WEAK void *SCUDO_PREFIX(pvalloc)(size_t size) {
-+  const scudo::uptr PageSize = scudo::getPageSizeCached();
-+  if (UNLIKELY(scudo::checkForPvallocOverflow(size, PageSize))) {
-+    if (SCUDO_ALLOCATOR.canReturnNull()) {
-+      errno = ENOMEM;
-+      return nullptr;
++    ptr = o_alloc.reallocate(ptr, len, MALLOC_ALIGN);
++    if (UNLIKELY(!ptr)) {
++        errno = ENOMEM;
 +    }
-+    scudo::reportPvallocOverflow(size);
-+  }
-+  // pvalloc(0) should allocate one page.
-+  return scudo::setErrnoOnNull(SCUDO_ALLOCATOR.allocate(
-+      size ? scudo::roundUpTo(size, PageSize) : PageSize,
-+      scudo::Chunk::Origin::Memalign, PageSize));
++    return ptr;
 +}
 +
-+INTERFACE WEAK void *SCUDO_PREFIX(realloc)(void *ptr, size_t size) {
-+  if (!ptr)
-+    return scudo::setErrnoOnNull(SCUDO_ALLOCATOR.allocate(
-+        size, scudo::Chunk::Origin::Malloc, SCUDO_MALLOC_ALIGNMENT));
-+  if (size == 0) {
-+    SCUDO_ALLOCATOR.deallocate(ptr, scudo::Chunk::Origin::Malloc);
-+    return nullptr;
-+  }
-+  return scudo::setErrnoOnNull(
-+      SCUDO_ALLOCATOR.reallocate(ptr, size, SCUDO_MALLOC_ALIGNMENT));
-+}
-+
-+INTERFACE WEAK void *SCUDO_PREFIX(valloc)(size_t size) {
-+  return scudo::setErrnoOnNull(SCUDO_ALLOCATOR.allocate(
-+      size, scudo::Chunk::Origin::Memalign, scudo::getPageSizeCached()));
-+}
-+
-+INTERFACE WEAK int SCUDO_PREFIX(malloc_iterate)(
-+    uintptr_t base, size_t size,
-+    void (*callback)(uintptr_t base, size_t size, void *arg), void *arg) {
-+  SCUDO_ALLOCATOR.iterateOverChunks(base, size, callback, arg);
-+  return 0;
-+}
-+
-+INTERFACE WEAK void SCUDO_PREFIX(malloc_enable)() { SCUDO_ALLOCATOR.enable(); }
-+
-+INTERFACE WEAK void SCUDO_PREFIX(malloc_disable)() {
-+  SCUDO_ALLOCATOR.disable();
-+}
-+
-+void SCUDO_PREFIX(malloc_postinit)() {
-+  SCUDO_ALLOCATOR.initGwpAsan();
-+  pthread_atfork(SCUDO_PREFIX(malloc_disable), SCUDO_PREFIX(malloc_enable),
-+                 SCUDO_PREFIX(malloc_enable));
-+}
-+
-+INTERFACE WEAK int SCUDO_PREFIX(mallopt)(int param, int value) {
-+  if (param == M_DECAY_TIME) {
-+    if (SCUDO_ANDROID) {
-+      if (value == 0) {
-+        // Will set the release values to their minimum values.
-+        value = INT32_MIN;
-+      } else {
-+        // Will set the release values to their maximum values.
-+        value = INT32_MAX;
-+      }
++/* this has loose checking of align like memalign, but this matches musl's
++ * aligned_alloc, which is also used to implement memalign as well as
++ * posix_memalign and it allows for replacement of just aligned_alloc,
++ * so that is our baseline
++ */
++INTERFACE void *aligned_alloc(size_t align, size_t len) {
++    if (UNLIKELY(!scudo::isPowerOfTwo(align))) {
++        if (o_alloc.canReturnNull()) {
++            errno = EINVAL;
++            return nullptr;
++        }
++        scudo::reportAlignmentNotPowerOfTwo(align);
 +    }
-+
-+    SCUDO_ALLOCATOR.setOption(scudo::Option::ReleaseInterval,
-+                              static_cast<scudo::sptr>(value));
-+    return 1;
-+  } else if (param == M_PURGE) {
-+    SCUDO_ALLOCATOR.releaseToOS();
-+    return 1;
-+  } else {
-+    scudo::Option option;
-+    switch (param) {
-+    case M_MEMTAG_TUNING:
-+      option = scudo::Option::MemtagTuning;
-+      break;
-+    case M_THREAD_DISABLE_MEM_INIT:
-+      option = scudo::Option::ThreadDisableMemInit;
-+      break;
-+    case M_CACHE_COUNT_MAX:
-+      option = scudo::Option::MaxCacheEntriesCount;
-+      break;
-+    case M_CACHE_SIZE_MAX:
-+      option = scudo::Option::MaxCacheEntrySize;
-+      break;
-+    case M_TSDS_COUNT_MAX:
-+      option = scudo::Option::MaxTSDsCount;
-+      break;
-+    default:
-+      return 0;
++    if (UNLIKELY(__malloc_replaced && !__aligned_alloc_replaced)) {
++        errno = ENOMEM;
++        return nullptr;
 +    }
-+    return SCUDO_ALLOCATOR.setOption(option, static_cast<scudo::sptr>(value));
-+  }
-+}
-+
-+INTERFACE WEAK void *SCUDO_PREFIX(aligned_alloc)(size_t alignment,
-+                                                 size_t size) {
-+  if (UNLIKELY(scudo::checkAlignedAllocAlignmentAndSize(alignment, size))) {
-+    if (SCUDO_ALLOCATOR.canReturnNull()) {
-+      errno = EINVAL;
-+      return nullptr;
++    auto *ptr = o_alloc.allocate(len, Origin::Malloc, align);
++    if (UNLIKELY(!ptr)) {
++        errno = ENOMEM;
 +    }
-+    scudo::reportInvalidAlignedAllocAlignment(alignment, size);
-+  }
-+  return scudo::setErrnoOnNull(
-+      SCUDO_ALLOCATOR.allocate(size, scudo::Chunk::Origin::Malloc, alignment));
++    return ptr;
 +}
 +
-+INTERFACE WEAK int SCUDO_PREFIX(malloc_info)(UNUSED int options, FILE *stream) {
-+  const scudo::uptr max_size =
-+      decltype(SCUDO_ALLOCATOR)::PrimaryT::SizeClassMap::MaxSize;
-+  auto *sizes = static_cast<scudo::uptr *>(
-+      SCUDO_PREFIX(calloc)(max_size, sizeof(scudo::uptr)));
-+  auto callback = [](uintptr_t, size_t size, void *arg) {
-+    auto *sizes = reinterpret_cast<scudo::uptr *>(arg);
-+    if (size < max_size)
-+      sizes[size]++;
-+  };
-+  SCUDO_ALLOCATOR.iterateOverChunks(0, -1ul, callback, sizes);
-+
-+  fputs("<malloc version=\"scudo-1\">\n", stream);
-+  for (scudo::uptr i = 0; i != max_size; ++i)
-+    if (sizes[i])
-+      fprintf(stream, "<alloc size=\"%zu\" count=\"%zu\"/>\n", i, sizes[i]);
-+  fputs("</malloc>\n", stream);
-+  SCUDO_PREFIX(free)(sizes);
-+  return 0;
++INTERFACE size_t malloc_usable_size(void *p) {
++    return o_alloc.getUsableSize(p);
 +}
 +
-+// Disable memory tagging for the heap. The caller must disable memory tag
-+// checks globally (e.g. by clearing TCF0 on aarch64) before calling this
-+// function, and may not re-enable them after calling the function.
-+INTERFACE WEAK void SCUDO_PREFIX(malloc_disable_memory_tagging)() {
-+  SCUDO_ALLOCATOR.disableMemoryTagging();
-+}
-+
-+// Sets whether scudo records stack traces and other metadata for allocations
-+// and deallocations. This function only has an effect if the allocator and
-+// hardware support memory tagging.
-+INTERFACE WEAK void
-+SCUDO_PREFIX(malloc_set_track_allocation_stacks)(int track) {
-+  SCUDO_ALLOCATOR.setTrackAllocationStacks(track);
-+}
-+
-+// Sets whether scudo zero-initializes all allocated memory.
-+INTERFACE WEAK void SCUDO_PREFIX(malloc_set_zero_contents)(int zero_contents) {
-+  SCUDO_ALLOCATOR.setFillContents(zero_contents ? scudo::ZeroFill
-+                                                : scudo::NoFill);
-+}
-+
-+// Sets whether scudo pattern-initializes all allocated memory.
-+INTERFACE WEAK void
-+SCUDO_PREFIX(malloc_set_pattern_fill_contents)(int pattern_fill_contents) {
-+  SCUDO_ALLOCATOR.setFillContents(
-+      pattern_fill_contents ? scudo::PatternOrZeroFill : scudo::NoFill);
-+}
-+
-+// Sets whether scudo adds a small amount of slack at the end of large
-+// allocations, before the guard page. This can be enabled to work around buggy
-+// applications that read a few bytes past the end of their allocation.
-+INTERFACE WEAK void
-+SCUDO_PREFIX(malloc_set_add_large_allocation_slack)(int add_slack) {
-+  SCUDO_ALLOCATOR.setAddLargeAllocationSlack(add_slack);
-+}
++/* we have no way to implement this AFAICT */
++void __malloc_donate(char *, char *) {}
 +
 +} // extern "C"
-diff -uprN a/src/malloc/scudo/wrappers_c_bionic.cpp b/src/malloc/scudo/wrappers_c_bionic.cpp
---- a/src/malloc/scudo/wrappers_c_bionic.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/wrappers_c_bionic.cpp	2023-10-17 09:46:41.735768899 -0400
-@@ -0,0 +1,88 @@
-+//===-- wrappers_c_bionic.cpp -----------------------------------*- C++ -*-===//
-+//
-+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
-+// See https://llvm.org/LICENSE.txt for license information.
-+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
-+//
-+//===----------------------------------------------------------------------===//
-+
-+#include "platform.h"
-+
-+// This is only used when compiled as part of Bionic.
-+#if SCUDO_ANDROID && _BIONIC
-+
-+#include "allocator_config.h"
-+#include "wrappers_c.h"
-+#include "wrappers_c_checks.h"
-+
-+#include <stdint.h>
-+#include <stdio.h>
-+
-+// Regular MallocDispatch definitions.
-+#define SCUDO_PREFIX(name) CONCATENATE(scudo_, name)
-+#define SCUDO_ALLOCATOR Allocator
-+
-+extern "C" void SCUDO_PREFIX(malloc_postinit)();
-+SCUDO_REQUIRE_CONSTANT_INITIALIZATION
-+static scudo::Allocator<scudo::AndroidConfig, SCUDO_PREFIX(malloc_postinit)>
-+    SCUDO_ALLOCATOR;
-+
-+#include "wrappers_c.inc"
-+
-+#undef SCUDO_ALLOCATOR
-+#undef SCUDO_PREFIX
-+
-+// Svelte MallocDispatch definitions.
-+#define SCUDO_PREFIX(name) CONCATENATE(scudo_svelte_, name)
-+#define SCUDO_ALLOCATOR SvelteAllocator
-+
-+extern "C" void SCUDO_PREFIX(malloc_postinit)();
-+SCUDO_REQUIRE_CONSTANT_INITIALIZATION
-+static scudo::Allocator<scudo::AndroidSvelteConfig,
-+                        SCUDO_PREFIX(malloc_postinit)>
-+    SCUDO_ALLOCATOR;
-+
-+#include "wrappers_c.inc"
-+
-+#undef SCUDO_ALLOCATOR
-+#undef SCUDO_PREFIX
-+
-+// TODO(kostyak): support both allocators.
-+INTERFACE void __scudo_print_stats(void) { Allocator.printStats(); }
-+
-+INTERFACE void
-+__scudo_get_error_info(struct scudo_error_info *error_info,
-+                       uintptr_t fault_addr, const char *stack_depot,
-+                       const char *region_info, const char *ring_buffer,
-+                       const char *memory, const char *memory_tags,
-+                       uintptr_t memory_addr, size_t memory_size) {
-+  Allocator.getErrorInfo(error_info, fault_addr, stack_depot, region_info,
-+                         ring_buffer, memory, memory_tags, memory_addr,
-+                         memory_size);
-+}
-+
-+INTERFACE const char *__scudo_get_stack_depot_addr() {
-+  return Allocator.getStackDepotAddress();
-+}
-+
-+INTERFACE size_t __scudo_get_stack_depot_size() {
-+  return sizeof(scudo::StackDepot);
-+}
-+
-+INTERFACE const char *__scudo_get_region_info_addr() {
-+  return Allocator.getRegionInfoArrayAddress();
-+}
-+
-+INTERFACE size_t __scudo_get_region_info_size() {
-+  return Allocator.getRegionInfoArraySize();
-+}
-+
-+INTERFACE const char *__scudo_get_ring_buffer_addr() {
-+  return Allocator.getRingBufferAddress();
-+}
-+
-+INTERFACE size_t __scudo_get_ring_buffer_size() {
-+  return Allocator.getRingBufferSize();
-+}
-+
-+#endif // SCUDO_ANDROID && _BIONIC
-diff -uprN a/src/malloc/scudo/wrappers_c_checks.h b/src/malloc/scudo/wrappers_c_checks.h
---- a/src/malloc/scudo/wrappers_c_checks.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/wrappers_c_checks.h	2023-10-17 09:46:45.319143527 -0400
-@@ -0,0 +1,72 @@
-+//===-- wrappers_c_checks.h -------------------------------------*- C++ -*-===//
-+//
-+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
-+// See https://llvm.org/LICENSE.txt for license information.
-+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
-+//
-+//===----------------------------------------------------------------------===//
-+
-+#ifndef SCUDO_CHECKS_H_
-+#define SCUDO_CHECKS_H_
-+
-+#include "common.h"
-+
-+#include <errno.h>
-+
-+#ifndef __has_builtin
-+#define __has_builtin(X) 0
-+#endif
-+
-+namespace scudo {
-+
-+// A common errno setting logic shared by almost all Scudo C wrappers.
-+inline void *setErrnoOnNull(void *Ptr) {
-+  if (UNLIKELY(!Ptr))
-+    errno = ENOMEM;
-+  return Ptr;
-+}
-+
-+// Checks return true on failure.
-+
-+// Checks aligned_alloc() parameters, verifies that the alignment is a power of
-+// two and that the size is a multiple of alignment.
-+inline bool checkAlignedAllocAlignmentAndSize(uptr Alignment, uptr Size) {
-+  return Alignment == 0 || !isPowerOfTwo(Alignment) ||
-+         !isAligned(Size, Alignment);
-+}
-+
-+// Checks posix_memalign() parameters, verifies that alignment is a power of two
-+// and a multiple of sizeof(void *).
-+inline bool checkPosixMemalignAlignment(uptr Alignment) {
-+  return Alignment == 0 || !isPowerOfTwo(Alignment) ||
-+         !isAligned(Alignment, sizeof(void *));
-+}
-+
-+// Returns true if calloc(Size, N) overflows on Size*N calculation. Use a
-+// builtin supported by recent clang & GCC if it exists, otherwise fallback to a
-+// costly division.
-+inline bool checkForCallocOverflow(uptr Size, uptr N, uptr *Product) {
-+#if __has_builtin(__builtin_umull_overflow) && (SCUDO_WORDSIZE == 64U)
-+  return __builtin_umull_overflow(Size, N,
-+                                  reinterpret_cast<unsigned long *>(Product));
-+#elif __has_builtin(__builtin_umul_overflow) && (SCUDO_WORDSIZE == 32U)
-+  // On, e.g. armv7, uptr/uintptr_t may be defined as unsigned long
-+  return __builtin_umul_overflow(Size, N,
-+                                 reinterpret_cast<unsigned int *>(Product));
-+#else
-+  *Product = Size * N;
-+  if (!Size)
-+    return false;
-+  return (*Product / Size) != N;
-+#endif
-+}
-+
-+// Returns true if the size passed to pvalloc overflows when rounded to the next
-+// multiple of PageSize.
-+inline bool checkForPvallocOverflow(uptr Size, uptr PageSize) {
-+  return roundUpTo(Size, PageSize) < Size;
-+}
-+
-+} // namespace scudo
-+
-+#endif // SCUDO_CHECKS_H_
-diff -uprN a/src/malloc/scudo/wrappers_cpp.cpp b/src/malloc/scudo/wrappers_cpp.cpp
---- a/src/malloc/scudo/wrappers_cpp.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ b/src/malloc/scudo/wrappers_cpp.cpp	2023-10-17 09:46:41.735768899 -0400
-@@ -0,0 +1,108 @@
-+//===-- wrappers_cpp.cpp ----------------------------------------*- C++ -*-===//
-+//
-+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
-+// See https://llvm.org/LICENSE.txt for license information.
-+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
-+//
-+//===----------------------------------------------------------------------===//
-+
-+#include "platform.h"
-+
-+// Skip this compilation unit if compiled as part of Bionic.
-+#if !SCUDO_ANDROID || !_BIONIC
-+
-+#include "allocator_config.h"
-+#include "wrappers_c.h"
-+
-+#include <stdint.h>
-+
-+namespace std {
-+struct nothrow_t {};
-+enum class align_val_t : size_t {};
-+} // namespace std
-+
-+INTERFACE WEAK void *operator new(size_t size) {
-+  return Allocator.allocate(size, scudo::Chunk::Origin::New);
-+}
-+INTERFACE WEAK void *operator new[](size_t size) {
-+  return Allocator.allocate(size, scudo::Chunk::Origin::NewArray);
-+}
-+INTERFACE WEAK void *operator new(size_t size,
-+                                  std::nothrow_t const &) NOEXCEPT {
-+  return Allocator.allocate(size, scudo::Chunk::Origin::New);
-+}
-+INTERFACE WEAK void *operator new[](size_t size,
-+                                    std::nothrow_t const &) NOEXCEPT {
-+  return Allocator.allocate(size, scudo::Chunk::Origin::NewArray);
-+}
-+INTERFACE WEAK void *operator new(size_t size, std::align_val_t align) {
-+  return Allocator.allocate(size, scudo::Chunk::Origin::New,
-+                            static_cast<scudo::uptr>(align));
-+}
-+INTERFACE WEAK void *operator new[](size_t size, std::align_val_t align) {
-+  return Allocator.allocate(size, scudo::Chunk::Origin::NewArray,
-+                            static_cast<scudo::uptr>(align));
-+}
-+INTERFACE WEAK void *operator new(size_t size, std::align_val_t align,
-+                                  std::nothrow_t const &) NOEXCEPT {
-+  return Allocator.allocate(size, scudo::Chunk::Origin::New,
-+                            static_cast<scudo::uptr>(align));
-+}
-+INTERFACE WEAK void *operator new[](size_t size, std::align_val_t align,
-+                                    std::nothrow_t const &) NOEXCEPT {
-+  return Allocator.allocate(size, scudo::Chunk::Origin::NewArray,
-+                            static_cast<scudo::uptr>(align));
-+}
-+
-+INTERFACE WEAK void operator delete(void *ptr) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::New);
-+}
-+INTERFACE WEAK void operator delete[](void *ptr) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::NewArray);
-+}
-+INTERFACE WEAK void operator delete(void *ptr,
-+                                    std::nothrow_t const &) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::New);
-+}
-+INTERFACE WEAK void operator delete[](void *ptr,
-+                                      std::nothrow_t const &) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::NewArray);
-+}
-+INTERFACE WEAK void operator delete(void *ptr, size_t size) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::New, size);
-+}
-+INTERFACE WEAK void operator delete[](void *ptr, size_t size) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::NewArray, size);
-+}
-+INTERFACE WEAK void operator delete(void *ptr,
-+                                    std::align_val_t align) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::New, 0,
-+                       static_cast<scudo::uptr>(align));
-+}
-+INTERFACE WEAK void operator delete[](void *ptr,
-+                                      std::align_val_t align) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::NewArray, 0,
-+                       static_cast<scudo::uptr>(align));
-+}
-+INTERFACE WEAK void operator delete(void *ptr, std::align_val_t align,
-+                                    std::nothrow_t const &) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::New, 0,
-+                       static_cast<scudo::uptr>(align));
-+}
-+INTERFACE WEAK void operator delete[](void *ptr, std::align_val_t align,
-+                                      std::nothrow_t const &) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::NewArray, 0,
-+                       static_cast<scudo::uptr>(align));
-+}
-+INTERFACE WEAK void operator delete(void *ptr, size_t size,
-+                                    std::align_val_t align) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::New, size,
-+                       static_cast<scudo::uptr>(align));
-+}
-+INTERFACE WEAK void operator delete[](void *ptr, size_t size,
-+                                      std::align_val_t align) NOEXCEPT {
-+  Allocator.deallocate(ptr, scudo::Chunk::Origin::NewArray, size,
-+                       static_cast<scudo::uptr>(align));
-+}
-+
-+#endif // !SCUDO_ANDROID || !_BIONIC
