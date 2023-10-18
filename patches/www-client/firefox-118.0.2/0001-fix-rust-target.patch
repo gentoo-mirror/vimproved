@@ -29,3 +29,15 @@ weird custom build system...
  
  
  @imports('os')
+--- a/build/moz.configure/rust.configure
++++ b/build/moz.configure/rust.configure
+@@ -491,7 +491,7 @@ def rust_host_triple(
+     rustc_target = detect_rustc_target(
+         host, compiler_info, arm_target, rust_supported_targets
+     )
+-    if rustc_target != rustc_host:
++    if False:
+         if host.alias == rustc_target:
+             configure_host = host.alias
+         else:
+
