@@ -1,4 +1,0 @@
-# Copyright 2003-2023 Gentoo Authors
-# Distributed under the terms of the GNU General Public License v2
-
-amd64	default/linux/amd64/23.0/musl/llvm/hardened	exp
