@@ -92,7 +92,7 @@ fi
 if [[ -n "${ZIG_MAX}" ]]; then
 	BDEPEND+=" || (
 		<dev-lang/zig-${ZIG_MAX}
-		<dev-lang/zig-${ZIG_MAX}
+		<dev-lang/zig-bin-${ZIG_MAX}
 	)"
 fi
 
