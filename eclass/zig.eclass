@@ -36,7 +36,7 @@ fi
 # @DESCRIPTION:
 # The Zig binary to use for build. Useful if you have multiple Zig versions
 # installed and want to use a specific version.
-ZIG="${ZIG:-}"
+: "${ZIG:-}"
 
 # @ECLASS_VARIABLE: ezigargs
 # @DEFAULT_UNSET
@@ -50,27 +50,51 @@ ZIG="${ZIG:-}"
 # User-controlled variable containing extra arguments to be passed to
 # `zig build`.
 
+# @ECLASS_VARIABLE: ZIG_BUILD_TYPE
+# @DESCRIPTION:
+# Controls Zig's build type. Can be one of Debug, ReleaseSafe, ReleaseSmall, or
+# ReleaseFast. Defaults to ReleaseSafe.
+: "${ZIG_BUILD_TYPE:=ReleaseSafe}"
+
 # @ECLASS_VARIABLE: ZIG_BUILD_VERBOSE
 # @DESCRIPTION:
 # If non-empty, build with verbose output.
-ZIG_BUILD_VERBOSE="${ZIG_BUILD_VERBOSE:=1}"
+: "${ZIG_BUILD_VERBOSE:=1}"
 
 # @ECLASS_VARIABLE: ZIG_MIN
+# @PRE_INHERIT
 # @DEFAULT_UNSET
 # @DESCRIPTION:
-# Specifies the minimum version of Zig. Must be a minor version (x.y).
-ZIG_MIN="${ZIG_MIN:-}"
+# Specifies the minimum version of Zig (inclusive). Must be a minor version
+# (x.y).
+: "${ZIG_MIN:-}"
 
 # @ECLASS_VARIABLE: ZIG_MAX
+# @PRE_INHERIT
 # @DEFAULT_UNSET
 # @DESCRIPTION:
-# Specifies the maximum version of Zig. Must be a minor version (x.y).
-ZIG_MAX="${ZIG_MAX:-}"
+# Specifies the maximum version of Zig (exclusive). Must be a minor version
+# (x.y).
+: "${ZIG_MAX:-}"
 
 BDEPEND="|| (
 	dev-lang/zig
 	dev-lang/zig-bin
 )"
+
+if [[ -n "${ZIG_MIN}" ]]; then
+	BDEPEND+=" || (
+		>=dev-lang/zig-${ZIG_MIN}
+		>=dev-lang/zig-bin-${ZIG_MIN}
+	)"
+fi
+
+if [[ -n "${ZIG_MAX}" ]]; then
+	BDEPEND+=" || (
+		<dev-lang/zig-${ZIG_MAX}
+		<dev-lang/zig-${ZIG_MAX}
+	)"
+fi
 
 # @FUNCTION: zig-set_ZIG
 # @DESCRIPTION:
@@ -98,7 +122,7 @@ zig-set_ZIG() {
 		fi
 
 		if [[ -n ${ZIG_MAX} ]] \
-			&& ver_test "${ver_minor}" -gt "${ZIG_MAX}"; then
+			&& ver_test "${ver_minor}" -ge "${ZIG_MAX}"; then
 			continue
 		fi
 
@@ -141,6 +165,9 @@ zig_src_compile() {
 	fi
 
 	zigargs+=(
+		# ZIG_BUILD_TYPE
+		-Doptimize="${ZIG_BUILD_TYPE}"
+
 		# Arguments from ebuild
 		"${ezigargs[@]}"
 
