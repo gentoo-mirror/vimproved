@@ -53,7 +53,7 @@ fi
 # @ECLASS_VARIABLE: ZIG_BUILD_TYPE
 # @DESCRIPTION:
 # Controls Zig's build type. Can be one of Debug, ReleaseSafe, ReleaseSmall, or
-# ReleaseFast. Defaults to ReleaseSafe.
+# ReleaseFast. Defaults to ReleaseSafe. Only works with Zig 0.11 and later.
 : "${ZIG_BUILD_TYPE:=ReleaseSafe}"
 
 # @ECLASS_VARIABLE: ZIG_BUILD_VERBOSE
@@ -140,6 +140,7 @@ zig-set_ZIG() {
 	fi
 
 	export ZIG="${selected}"
+	export ZIG_VER="${selected_ver}"
 }
 
 # @FUNCTION: zig_pkg_setup
@@ -164,9 +165,14 @@ zig_src_compile() {
 		zigargs+=( -Dpie=$(usex pie true false) )
 	fi
 
+	if ver_test "${ZIG_VER}" -ge "0.11"; then
+		zigargs+=(
+			# ZIG_BUILD_TYPE
+			-Doptimize="${ZIG_BUILD_TYPE}"
+		)
+	fi
+
 	zigargs+=(
-		# ZIG_BUILD_TYPE
-		-Doptimize="${ZIG_BUILD_TYPE}"
 
 		# Arguments from ebuild
 		"${ezigargs[@]}"
