@@ -170,6 +170,12 @@ zig_src_compile() {
 			# ZIG_BUILD_TYPE
 			-Doptimize="${ZIG_BUILD_TYPE}"
 		)
+	elif [[ "${ZIG_BUILD_TYPE}" = ReleaseSafe ]]; then
+			zigargs+=( -Drelease-safe )
+	elif [[ "${ZIG_BUILD_TYPE}" = ReleaseFast ]]; then
+			zigargs+=( -Drelease-fast )
+	elif [[ "${ZIG_BUILD_TYPE}" = ReleaseSmall ]]; then
+			zigargs+=( -Drelease-small )
 	fi
 
 	zigargs+=(
