@@ -3,6 +3,7 @@
 
 EAPI=8
 
+ZIG_MAX="0.11"
 inherit zig
 
 DESCRIPTION="A dynamic tiling Wayland compositor"
@@ -27,17 +28,8 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND="
 	dev-libs/wayland-protocols
-	|| (
-		<=dev-lang/zig-0.11
-		<=dev-lang/zig-bin-0.11
-	)
 	man? ( app-text/scdoc )
 "
-
-pkg_setup() {
-	local ZIG_MAX="0.10"
-	zig_pkg_setup
-}
 
 src_compile() {
 	local ezigargs=(
