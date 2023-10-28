@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+# Copyright 2023 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="Independent session/login tracker"
+pidfile="/run/turnstiled.pid"
+command=/usr/bin/turnstiled
+command_args="${turnstiled_args}"
+command_background=true
+
+depend() {
+	before xdm
+}
