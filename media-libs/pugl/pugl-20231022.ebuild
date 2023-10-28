@@ -13,17 +13,15 @@ SRC_URI="https://gitlab.com/lv2/pugl/-/archive/${MY_PV}/pugl-${MY_PV}.tar.bz2 ->
 LICENSE="0BSD"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+X +cairo doc +opengl test vulkan"
+IUSE="+cairo doc +opengl test vulkan"
 RESTRICT="!test? ( test )"
 S="${WORKDIR}/pugl-${MY_PV}"
 
 DEPEND="
 	x11-libs/libX11
-	X? (
-		x11-libs/libXcursor
-		x11-libs/libXext
-		x11-libs/libXrandr
-	)
+	x11-libs/libXcursor
+	x11-libs/libXext
+	x11-libs/libXrandr
 	cairo? ( x11-libs/cairo )
 	opengl? ( virtual/opengl )
 	vulkan? ( media-libs/vulkan-loader )
@@ -44,9 +42,9 @@ src_configure() {
 		$(meson_feature opengl)
 		$(meson_feature test tests)
 		$(meson_feature vulkan)
-		$(meson_feature X xcursor)
-		$(meson_feature X xrandr)
-		$(meson_feature X xsync)
+		-Dxcursor=enabled
+		-Dxrandr=enabled
+		-Dxsync=enabled
 	)
 
 	meson_src_configure
