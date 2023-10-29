@@ -1,0 +1,4 @@
+gui-apps/foot
+gui-apps/fuzzel
+gui-libs/xdg-desktop-portal-wlr
+gui-wm/sway
