@@ -3,6 +3,9 @@
 
 EAPI=8
 
+PYTHON_COMPAT=( python3_{11..12} )
+inherit python-single-r1
+
 FALKTX_CARLA_COMMIT="41f07e119252b8b14627bec8345cb7304485a815"
 
 DESCRIPTION="Audio plugin host"
@@ -13,10 +16,10 @@ LICENSE="GPL-2 LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="debug"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 S="${WORKDIR}/Carla-${FALKTX_CARLA_COMMIT}"
 
 RDEPEND="
-	dev-python/PyQt5[gui,svg,widgets]
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5[egl]
 	dev-qt/qtwidgets:5
@@ -29,6 +32,11 @@ RDEPEND="
 	x11-libs/libXext
 	x11-libs/libXrandr
 	elibc_musl? ( sys-libs/fts-standalone )
+	$(python_gen_cond_dep '
+		dev-python/pyliblo3[${PYTHON_USEDEP}]
+		dev-python/PyQt5[gui,svg,widgets,${PYTHON_USEDEP}]
+	')
+	${PYTHON_DEPS}
 "
 DEPEND="${RDEPEND}"
 BDEPEND="dev-python/PyQt5"
