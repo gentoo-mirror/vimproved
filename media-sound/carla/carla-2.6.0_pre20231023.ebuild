@@ -28,6 +28,7 @@ RDEPEND="
 	x11-libs/libXcursor
 	x11-libs/libXext
 	x11-libs/libXrandr
+	elibc_musl? ( sys-libs/fts-standalone )
 "
 DEPEND="${RDEPEND}"
 BDEPEND="dev-python/PyQt5"
