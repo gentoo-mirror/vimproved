@@ -24,6 +24,7 @@ DEPEND="${RDEPEND}"
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_CUTTER_PLUGIN=$(usex cutter)
+		-DCUTTER_INSTALL_PLUGDIR=/usr/share/rizin/cutter/plugins/native
 	)
 
 	filter-flags "-march=*"
