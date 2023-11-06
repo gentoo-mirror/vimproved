@@ -1,0 +1,28 @@
+From fd5bfae9615a154a433ce919885621b002ff2b64 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Sun, 5 Nov 2023 19:03:02 -0500
+Subject: [PATCH] boot/efi: un-force bfd and libgcc
+
+---
+ src/boot/efi/meson.build | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/src/boot/efi/meson.build b/src/boot/efi/meson.build
+index 2773eaf286..e0788b51a4 100644
+--- a/src/boot/efi/meson.build
++++ b/src/boot/efi/meson.build
+@@ -151,11 +151,6 @@ if get_option('mode') == 'developer' and get_option('debug')
+ endif
+ 
+ efi_c_ld_args = [
+-        # We only support bfd. gold is going away, lld has issues with LTO on x86
+-        # and mold does not support linker scripts.
+-        '-fuse-ld=bfd',
+-
+-        '-lgcc',
+         '-nostdlib',
+         '-static-pie',
+         '-Wl,--entry=efi_main',
+-- 
+2.42.1
+
