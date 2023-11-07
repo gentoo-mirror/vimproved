@@ -39,7 +39,7 @@ RDEPEND="
 	)
 	fluidsynth? ( media-sound/fluidsynth:= )
 	opengl? (
-		media-libs/libglvnd
+		media-libs/libglvnd[X]
 		x11-libs/libX11
 	)
 	osc? (
