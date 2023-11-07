@@ -25,6 +25,7 @@ RDEPEND="
 	dev-qt/qtwidgets:5
 	media-libs/alsa-lib
 	media-libs/libglvnd
+	media-libs/libsdl2
 	media-sound/fluidsynth
 	virtual/jack
 	x11-libs/libX11
