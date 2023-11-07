@@ -4,7 +4,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{11..12} )
-inherit python-single-r1
+inherit python-single-r1 xdg
 
 FALKTX_CARLA_COMMIT="41f07e119252b8b14627bec8345cb7304485a815"
 
