@@ -74,6 +74,7 @@ pkg_setup() {
 		HAVE_PYQT=$(usex gui true false)
 		HAVE_QT4=false
 		HAVE_QT5=$(usex gui true false)
+		HAVE_QT5PKG=$(usex opengl true false)
 		HAVE_SDL1=false
 		HAVE_SDL2=$(usex sdl true false)
 		HAVE_SNDFILE=$(usex sndfile true false)
