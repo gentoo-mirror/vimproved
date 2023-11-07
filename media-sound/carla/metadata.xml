@@ -8,4 +8,7 @@
 	<upstream>
 		<remote-id type="github">falkTX/Carla</remote-id>
 	</upstream>
+	<use>
+		<flag name="fluidsynth">Enable FluidSynth support for sf2 soundfonts</flag>
+	</use>
 </pkgmetadata>
