@@ -38,7 +38,10 @@ RDEPEND="
 		$(python_gen_cond_dep 'dev-python/PyQt5[gui,svg,widgets,${PYTHON_USEDEP}]')
 	)
 	fluidsynth? ( media-sound/fluidsynth:= )
-	opengl? ( media-libs/libglvnd )
+	opengl? (
+		media-libs/libglvnd
+		x11-libs/libX11
+	)
 	osc? (
 		media-libs/liblo
 		$(python_gen_cond_dep 'dev-python/pyliblo3[${PYTHON_USEDEP}]')
@@ -72,7 +75,7 @@ pkg_setup() {
 		HAVE_QT4=false
 		HAVE_QT5=$(usex gui true false)
 		HAVE_SDL1=false
-		HAVE_SDL2=true
+		HAVE_SDL2=$(usex sdl true false)
 		HAVE_SNDFILE=$(usex sndfile true false)
 		HAVE_X11=$(usex X true false)
 		HAVE_XCURSOR=$(usex X true false)
