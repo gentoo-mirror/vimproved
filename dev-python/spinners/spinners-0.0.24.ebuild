@@ -13,5 +13,5 @@ HOMEPAGE="https://pypi.org/project/spinners/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-
+# Depends on deprecated dev-python/nose
 RESTRICT="test"
