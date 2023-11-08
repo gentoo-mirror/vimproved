@@ -8,12 +8,15 @@ inherit flag-o-matic
 DESCRIPTION="Common library for basic language definitions used by LSP Project"
 HOMEPAGE="https://lsp-plug.in/"
 SRC_URI="https://github.com/lsp-plugins/lsp-common-lib/releases/download/${PV}/lsp-common-lib-src-${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/lsp-common-lib"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="static-libs"
-S="${WORKDIR}/lsp-common-lib"
+IUSE="static-libs test"
+RESTRICT="!test? ( test )"
+
+BDEPEND="test? ( media-libs/lsp-test-fw )"
 
 pkg_setup() {
 	append-ldflags "-Wl,-soname,lib${P}.so"
@@ -25,7 +28,10 @@ pkg_setup() {
 		INCDIR="/usr/include"
 		LDFLAGS_EXT="$(raw-ldflags)"
 		LIBDIR="/usr/$(get_libdir)"
+		LSP_TEST_FW_LDFLAGS="-llsp-test-fw"
+		LSP_TEST_FW_TYPE="opt"
 		SO_FLAGS_EXT="${LDFLAGS}"
+		TEST=$(usex test 1 0)
 		VERBOSE=1
 	)
 }
@@ -41,8 +47,11 @@ src_configure() {
 }
 
 src_compile() {
-
 	emake "${emakeargs[@]}"
+}
+
+src_test() {
+	"${S}/.build/target/lsp-common-lib/lsp-common-lib-test" utest -v || die
 }
 
 src_install() {
