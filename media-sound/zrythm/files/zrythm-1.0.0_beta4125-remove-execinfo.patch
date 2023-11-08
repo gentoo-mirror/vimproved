@@ -1,0 +1,43 @@
+From 0e7e2ccd700a805d5fa5f9619eb4136f6722c3a7 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Tue, 7 Nov 2023 21:56:22 -0500
+Subject: [PATCH] remove execinfo
+
+---
+ src/utils/backtrace.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/utils/backtrace.c b/src/utils/backtrace.c
+index a9671c8f1..72dbad976 100644
+--- a/src/utils/backtrace.c
++++ b/src/utils/backtrace.c
+@@ -33,7 +33,7 @@
+ #  include <windows.h>
+ /*#define DBGHELP_TRANSLATE_TCHAR*/
+ #  include <dbghelp.h>
+-#else
++#elif defined(__GLIBC__)
+ #  include <execinfo.h>
+ #endif
+ 
+@@ -395,7 +395,7 @@ read_traditional_bt:
+     }
+   free (symbol);
+   free (line);
+-#else /* else if not _WOE32 */
++#elif defined(__GLIBC__) /* else if not _WOE32 */
+   void *  array[max_lines];
+   char ** strings;
+ 
+@@ -416,6 +416,8 @@ read_traditional_bt:
+       strcat (message, current_line);
+     }
+   free (strings);
++#else
++#warning "Implement me!"
+ #endif
+ 
+   return g_strdup (message);
+-- 
+2.42.1
+
