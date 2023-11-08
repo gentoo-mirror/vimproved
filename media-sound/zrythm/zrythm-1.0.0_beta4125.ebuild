@@ -49,12 +49,13 @@ RDEPEND="
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf:2
 	x11-libs/pango
+	X? ( x11-libs/libX11 )
 	graphviz? ( media-gfx/graphviz )
 	guile? ( dev-scheme/guile:12= )
 	jack? ( virtual/jack )
 	lsp-dsp? ( media-libs/lsp-dsp-lib )
 	pulseaudio? ( media-libs/libpulse )
-	rtaudio? ( media-libs/rtaudio )
+	rtaudio? ( media-libs/rtaudio:= )
 	rtmidi? ( media-libs/rtmidi )
 	sdl? ( media-libs/libsdl2 )
 "
