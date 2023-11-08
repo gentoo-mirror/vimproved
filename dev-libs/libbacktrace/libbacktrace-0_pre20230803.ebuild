@@ -17,12 +17,17 @@ KEYWORDS="~amd64"
 S="${WORKDIR}/${PN}-${MY_PV}"
 
 src_configure() {
+	local econfargs=(
+		--disable-werror
+		--enable-shared
+	)
+
 	# Compiles with LTO, but upstream made the mind-bogglingly stupid decision
 	# of having a BACKTRACE_SUPPORTED macro that gets defined to 0 when
 	# compiled with LTO
 	filter-lto
 
-	econf --enable-shared
+	econf
 }
 
 src_install() {
