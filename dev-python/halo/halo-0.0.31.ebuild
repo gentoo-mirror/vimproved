@@ -13,6 +13,8 @@ HOMEPAGE="https://pypi.org/project/halo/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+# Uses deprecated dev-python/nose
+RESTRICT="test"
 
 RDEPEND="
 	dev-python/colorama[${PYTHON_USEDEP}]
@@ -21,5 +23,3 @@ RDEPEND="
 	dev-python/spinners[${PYTHON_USEDEP}]
 	dev-python/termcolor[${PYTHON_USEDEP}]
 "
-
-RESTRICT="test"
