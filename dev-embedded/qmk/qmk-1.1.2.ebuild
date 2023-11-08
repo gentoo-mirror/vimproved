@@ -13,6 +13,7 @@ HOMEPAGE="https://qmk.fm/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+# All tests require network
 RESTRICT="test"
 
 RDEPEND="
