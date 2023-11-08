@@ -15,7 +15,7 @@ SRC_URI="https://www.zrythm.org/releases/zrythm-${MY_PV}.tar.xz -> ${P}.tar.xz"
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="X alsa graphviz +guile +jack +lsp-dsp +plugins profile pulseaudio rtaudio rtmidi sdl"
+IUSE="X alsa graphviz +guile +jack +lsp-dsp +plugins pulseaudio rtaudio rtmidi sdl"
 S="${WORKDIR}/zrythm-${MY_PV}"
 
 RDEPEND="
@@ -85,7 +85,6 @@ src_configure() {
 		$(meson_feature guile)
 		$(meson_feature lsp-dsp lsp_dsp)
 		$(meson_use plugins bundled_plugins)
-		$(meson_use profile profiling)
 		$(meson_feature pulseaudio pulse)
 		$(meson_feature rtaudio)
 		$(meson_feature rtmidi)
