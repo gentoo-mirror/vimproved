@@ -30,7 +30,7 @@ RDEPEND="
 	dev-libs/serd
 	dev-libs/xxhash
 	dev-libs/zix
-	>=gui-libs/gtk-4.10:4
+	>=gui-libs/gtk-4.10:4[X?]
 	gui-libs/gtksourceview:5
 	gui-libs/libadwaita:1
 	gui-libs/libpanel:1
