@@ -14,7 +14,7 @@ HOMEPAGE="https://pypi.org/project/m3u8/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+# Tests are broken (?)
+RESTRICT="test"
 
 RDEPEND="dev-python/iso8601[${PYTHON_USEDEP}]"
-
-RESTRICT="test"
