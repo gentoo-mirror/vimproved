@@ -8,12 +8,12 @@ inherit cmake flag-o-matic
 DESCRIPTION="Deep ghidra decompiler and sleigh disassembler integration for rizin"
 HOMEPAGE="https://github.com/rizinorg/rz-ghidra"
 SRC_URI="https://github.com/rizinorg/rz-ghidra/releases/download/v${PV}/rz-ghidra-src-v${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/rz-ghidra"
 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+cutter"
-S="${WORKDIR}/rz-ghidra"
 
 RDEPEND="
 	dev-util/rizin
@@ -27,6 +27,7 @@ src_configure() {
 		-DCUTTER_INSTALL_PLUGDIR=/usr/share/rizin/cutter/plugins/native
 	)
 
+	# Causes build failure in ghidra. Will be fixed upstream in next release.
 	filter-flags "-march=*"
 
 	cmake_src_configure
