@@ -13,5 +13,5 @@ HOMEPAGE="https://pypi.org/project/hjson/"
 LICENSE="AFL-2.1 MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-
+# No tag for 3.1.0; test assets not in pypi tarball
 RESTRICT="test"
