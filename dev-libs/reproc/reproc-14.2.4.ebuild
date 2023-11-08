@@ -12,12 +12,14 @@ SRC_URI="https://github.com/DaanDeMeyer/reproc/archive/refs/tags/v${PV}.tar.gz -
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="cxx examples"
+IUSE="cxx examples test"
+RESTRICT="!test? ( test )"
 
 src_configure() {
 	local mycmakeargs=(
 		-DREPROC++=$(usex cxx)
 		-DREPROC_EXAMPLES=$(usex examples)
+		-DREPROC_TEST=$(usex test)
 	)
 
 	cmake_src_configure
