@@ -13,8 +13,8 @@ HOMEPAGE="https://pypi.org/project/hid/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+# No tests?
+RESTRICT="test"
 
 DEPEND="dev-libs/hidapi"
 RDEPEND="${DEPEND}"
-
-RESTRICT="test"
