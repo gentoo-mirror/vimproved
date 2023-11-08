@@ -14,6 +14,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="X +man"
+# No tests (?)
 RESTRICT="test"
 
 DEPEND="
