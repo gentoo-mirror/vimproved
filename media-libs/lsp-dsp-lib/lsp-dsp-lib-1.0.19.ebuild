@@ -8,15 +8,17 @@ inherit flag-o-matic
 DESCRIPTION="DSP library for signal processing"
 HOMEPAGE="https://lsp-plug.in/"
 SRC_URI="https://github.com/lsp-plugins/lsp-dsp-lib/releases/download/${PV}/lsp-dsp-lib-src-${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/lsp-dsp-lib"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="static-libs"
-S="${WORKDIR}/lsp-dsp-lib"
+IUSE="static-libs test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="media-libs/lsp-common-lib"
 DEPEND="${RDEPEND}"
+BDEPEND="test? ( media-libs/lsp-test-fw )"
 
 pkg_setup() {
 	append-ldflags "-Wl,-soname,lib${P}.so"
@@ -30,7 +32,10 @@ pkg_setup() {
 		LIBDIR="/usr/$(get_libdir)"
 		LSP_COMMON_LIB_LDFLAGS="-llsp-common-lib"
 		LSP_COMMON_LIB_TYPE="opt"
+		LSP_TEST_FW_LDFLAGS="-llsp-test-fw"
+		LSP_TEST_FW_TYPE="opt"
 		SO_FLAGS_EXT="${LDFLAGS}"
+		TEST=$(usex test 1 0)
 		VERBOSE=1
 	)
 }
@@ -47,6 +52,10 @@ src_configure() {
 
 src_compile() {
 	emake "${emakeargs[@]}"
+}
+
+src_test() {
+	"${S}/.build/target/lsp-dsp-lib/lsp-dsp-lib-test" utest -v || die
 }
 
 src_install() {
