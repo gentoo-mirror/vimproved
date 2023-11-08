@@ -14,6 +14,8 @@ LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+cutter"
+# rz-test binary is not installed by dev-util/rizin
+RESTRICT="test"
 
 RDEPEND="
 	dev-util/rizin
