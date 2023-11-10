@@ -94,24 +94,38 @@ Signed-off-by: Violet Purcell <vimproved@inventati.org>
  endif
  
  libomx_gallium = shared_library(
-similarity index 70%
-rename from src/gallium/targets/omx/omx.sym
-rename to src/gallium/targets/omx/omx.sym.in
 --- a/src/gallium/targets/omx/omx.sym
-+++ b/src/gallium/targets/omx/omx.sym.in
-@@ -5,9 +5,9 @@
- 
- 		# Workaround for an LLVM warning with -simplifycfg-sink-common
- 		# due to LLVM being initialized multiple times.
++++ /dev/null
+@@ -1,13 +0,0 @@
+-{
+-	global:
+-		OMX_ComponentInit;
+-		omx_component_library_Setup;
+-
+-		# Workaround for an LLVM warning with -simplifycfg-sink-common
+-		# due to LLVM being initialized multiple times.
 -		radeon_drm_winsys_create;
 -		amdgpu_winsys_create;
 -		ac_init_shared_llvm_once;
+-	local:
+-		*;
+-};
+--- /dev/null
++++ b/src/gallium/targets/omx/omx.sym.in
+@@ -0,0 +1,13 @@
++{
++	global:
++		OMX_ComponentInit;
++		omx_component_library_Setup;
++
++		# Workaround for an LLVM warning with -simplifycfg-sink-common
++		# due to LLVM being initialized multiple times.
 +		@radeon_drm_winsys_create@
 +		@amdgpu_winsys_create@
 +		@ac_init_shared_llvm_once@
- 	local:
- 		*;
- };
++	local:
++		*;
++};
 --- a/src/gallium/targets/pipe-loader/meson.build
 +++ b/src/gallium/targets/pipe-loader/meson.build
 @@ -37,13 +37,6 @@ if (with_gallium_va or with_gallium_vdpau or with_gallium_omx != 'disabled')
@@ -159,30 +173,38 @@ rename to src/gallium/targets/omx/omx.sym.in
    if x[0]
      shared_library(
        'pipe_@0@'.format(x[1]),
-similarity index 51%
-rename from src/gallium/targets/pipe-loader/pipe.sym
-rename to src/gallium/targets/pipe-loader/pipe.sym.in
 --- a/src/gallium/targets/pipe-loader/pipe.sym
-+++ b/src/gallium/targets/pipe-loader/pipe.sym.in
-@@ -1,13 +1,13 @@
- {
- 	global:
++++ /dev/null
+@@ -1,13 +0,0 @@
+-{
+-	global:
 -		driver_descriptor;
 -		swrast_driver_descriptor;
-+		@driver_descriptor@
-+		@swrast_driver_descriptor@
- 
- 		# Workaround for an LLVM warning with -simplifycfg-sink-common
- 		# due to LLVM being initialized multiple times.
+-
+-		# Workaround for an LLVM warning with -simplifycfg-sink-common
+-		# due to LLVM being initialized multiple times.
 -		radeon_drm_winsys_create;
 -		amdgpu_winsys_create;
 -		ac_init_shared_llvm_once;
+-	local:
+-		*;
+-};
+--- /dev/null
++++ b/src/gallium/targets/pipe-loader/pipe.sym.in
+@@ -0,0 +1,13 @@
++{
++	global:
++		@driver_descriptor@
++		@swrast_driver_descriptor@
++
++		# Workaround for an LLVM warning with -simplifycfg-sink-common
++		# due to LLVM being initialized multiple times.
 +		@radeon_drm_winsys_create@
 +		@amdgpu_winsys_create@
 +		@ac_init_shared_llvm_once@
- 	local:
- 		*;
- };
++	local:
++		*;
++};
 --- a/src/gallium/targets/va/meson.build
 +++ b/src/gallium/targets/va/meson.build
 @@ -26,9 +26,11 @@ va_link_args = []
@@ -199,24 +221,36 @@ rename to src/gallium/targets/pipe-loader/pipe.sym.in
  endif
  if with_ld_dynamic_list
    va_link_args += ['-Wl,--dynamic-list', join_paths(meson.current_source_dir(), '../dri.dyn')]
-similarity index 66%
-rename from src/gallium/targets/va/va.sym
-rename to src/gallium/targets/va/va.sym.in
 --- a/src/gallium/targets/va/va.sym
-+++ b/src/gallium/targets/va/va.sym.in
-@@ -4,9 +4,9 @@
- 
- 		# Workaround for an LLVM warning with -simplifycfg-sink-common
- 		# due to LLVM being initialized multiple times.
++++ /dev/null
+@@ -1,12 +0,0 @@
+-{
+-	global:
+-		__vaDriverInit_*_*;
+-
+-		# Workaround for an LLVM warning with -simplifycfg-sink-common
+-		# due to LLVM being initialized multiple times.
 -		radeon_drm_winsys_create;
 -		amdgpu_winsys_create;
 -		ac_init_shared_llvm_once;
+-	local:
+-		*;
+-};
+--- /dev/null
++++ b/src/gallium/targets/va/va.sym.in
+@@ -0,0 +1,12 @@
++{
++	global:
++		__vaDriverInit_*_*;
++
++		# Workaround for an LLVM warning with -simplifycfg-sink-common
++		# due to LLVM being initialized multiple times.
 +		@radeon_drm_winsys_create@
 +		@amdgpu_winsys_create@
 +		@ac_init_shared_llvm_once@
- 	local:
- 		*;
- };
++	local:
++		*;
++};
 --- a/src/gallium/targets/vdpau/meson.build
 +++ b/src/gallium/targets/vdpau/meson.build
 @@ -26,9 +26,11 @@ vdpau_link_args = []
