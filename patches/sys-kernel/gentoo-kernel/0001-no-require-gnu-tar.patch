@@ -1,11 +1,12 @@
 --- a/kernel/gen_kheaders.sh
 +++ b/kernel/gen_kheaders.sh
-@@ -84,7 +84,7 @@ find $cpio_dir -type f -print0 |
+@@ -84,8 +84,7 @@ find $cpio_dir -type f -print0 |
  
  # Create archive and try to normalize metadata for reproducibility.
  tar "${KBUILD_BUILD_TIMESTAMP:+--mtime=$KBUILD_BUILD_TIMESTAMP}" \
 -    --owner=0 --group=0 --sort=name --numeric-owner \
-+    --numeric-owner \
-     -I $XZ -cf $tarfile -C $cpio_dir/ . > /dev/null
+-    -I $XZ -cf $tarfile -C $cpio_dir/ . > /dev/null
++    -cf $tarfile -C $cpio_dir/ . > /dev/null
  
  echo $headers_md5 > kernel/kheaders.md5
+ echo "$this_file_md5" >> kernel/kheaders.md5
