@@ -15,7 +15,7 @@ SRC_URI="https://github.com/falkTX/Carla/archive/${FALKTX_CARLA_COMMIT}.tar.gz -
 LICENSE="GPL-2 LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+X alsa debug +fluidsynth +gui +opengl +osc pulseaudio sdl +sndfile"
+IUSE="+X alsa debug +fluidsynth +gui opengl +osc pulseaudio sdl +sndfile"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 S="${WORKDIR}/Carla-${FALKTX_CARLA_COMMIT}"
 
