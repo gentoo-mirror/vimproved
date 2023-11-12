@@ -1,3 +1,4 @@
+gnome-base/gsettings-desktop-schemas
 gui-apps/foot
 gui-apps/fuzzel
 gui-libs/xdg-desktop-portal-wlr
