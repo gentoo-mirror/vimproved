@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>vimproved@inventati.org</email>
+		<name>Violet Purcell</name>
+	</maintainer>
+	<use>
+		<flag name="pinentry-efl">Symlink to pinentry-efl</flag>
+		<flag name="pinentry-gtk">Symlink to pinentry-gtk</flag>
+		<flag name="pinentry-ncurses">Symlink to pinentry-ncurses</flag>
+		<flag name="pinentry-qt5">Symlink to pinentry-qt5</flag>
+		<flag name="pinentry-tty">Symlink to pinentry-tty</flag>
+	</use>
+</pkgmetadata>
