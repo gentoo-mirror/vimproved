@@ -5,7 +5,7 @@ EAPI=8
 
 ALTERNATIVES=(
 	"pinentry-curses:app-crypt/pinentry[ncurses]"
-	"pinentry-gtk:app-crypt/pinentry[gtk]"
+	"pinentry-gnome3:app-crypt/pinentry[gtk]"
 	"pinentry-qt5:app-crypt/pinentry[qt5]"
 	"pinentry-efl:app-crypt/pinentry[efl]"
 	"pinentry-tty:app-crypt/pinentry"

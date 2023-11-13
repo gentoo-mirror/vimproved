@@ -7,7 +7,7 @@
 	</maintainer>
 	<use>
 		<flag name="pinentry-efl">Symlink to pinentry-efl</flag>
-		<flag name="pinentry-gtk">Symlink to pinentry-gtk</flag>
+		<flag name="pinentry-gnome3">Symlink to pinentry-gnome3</flag>
 		<flag name="pinentry-curses">Symlink to pinentry-curses</flag>
 		<flag name="pinentry-qt5">Symlink to pinentry-qt5</flag>
 		<flag name="pinentry-tty">Symlink to pinentry-tty</flag>
