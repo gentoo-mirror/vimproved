@@ -8,7 +8,7 @@
 	<use>
 		<flag name="pinentry-efl">Symlink to pinentry-efl</flag>
 		<flag name="pinentry-gtk">Symlink to pinentry-gtk</flag>
-		<flag name="pinentry-ncurses">Symlink to pinentry-ncurses</flag>
+		<flag name="pinentry-curses">Symlink to pinentry-curses</flag>
 		<flag name="pinentry-qt5">Symlink to pinentry-qt5</flag>
 		<flag name="pinentry-tty">Symlink to pinentry-tty</flag>
 	</use>
