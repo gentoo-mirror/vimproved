@@ -6,10 +6,10 @@
 		<name>Violet Purcell</name>
 	</maintainer>
 	<use>
-		<flag name="pinentry-efl">Symlink to pinentry-efl</flag>
-		<flag name="pinentry-gnome3">Symlink to pinentry-gnome3</flag>
-		<flag name="pinentry-curses">Symlink to pinentry-curses</flag>
-		<flag name="pinentry-qt5">Symlink to pinentry-qt5</flag>
-		<flag name="pinentry-tty">Symlink to pinentry-tty</flag>
+		<flag name="efl">Symlink to pinentry-efl</flag>
+		<flag name="gnome3">Symlink to pinentry-gnome3</flag>
+		<flag name="curses">Symlink to pinentry-curses</flag>
+		<flag name="qt5">Symlink to pinentry-qt5</flag>
+		<flag name="tty">Symlink to pinentry-tty</flag>
 	</use>
 </pkgmetadata>

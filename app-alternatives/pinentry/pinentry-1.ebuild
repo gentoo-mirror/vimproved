@@ -4,11 +4,11 @@
 EAPI=8
 
 ALTERNATIVES=(
-	"pinentry-curses:app-crypt/pinentry[ncurses]"
-	"pinentry-gnome3:app-crypt/pinentry[gtk]"
-	"pinentry-qt5:app-crypt/pinentry[qt5]"
-	"pinentry-efl:app-crypt/pinentry[efl]"
-	"pinentry-tty:app-crypt/pinentry"
+	"curses:app-crypt/pinentry[ncurses]"
+	"gnome3:app-crypt/pinentry[gtk]"
+	"qt5:app-crypt/pinentry[qt5]"
+	"efl:app-crypt/pinentry[efl]"
+	"tty:app-crypt/pinentry"
 )
 
 inherit app-alternatives
@@ -17,5 +17,5 @@ DESCRIPTION="pinentry symlinks"
 KEYWORDS="~amd64"
 
 src_install() {
-	dosym $(get_alternative) /usr/bin/pinentry
+	dosym pinentry-$(get_alternative) /usr/bin/pinentry
 }
