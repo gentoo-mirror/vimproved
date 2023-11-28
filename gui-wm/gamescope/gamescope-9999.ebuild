@@ -70,11 +70,6 @@ src_prepare() {
 	mkdir subprojects/stb || die
 	ln -sn "${ESYSROOT}"/usr/include/stb/* "${S}"/subprojects/packagefiles/stb/* subprojects/stb/ || die
 
-	# ReShade is bundled as a git submodule, but it references an unofficial
-	# fork, so we cannot unbundle it. Symlink to its extracted sources.
-	rmdir src/reshade || die
-	ln -snfT ../../reshade-${RESHADE_COMMIT} src/reshade || die
-
 	# SPIRV-Headers is required by ReShade. It is bundled as a git submodule but
 	# not wrapped with Meson, so we can symlink to our system-wide headers.
 	mkdir thirdparty/SPIRV-Headers/include || die
