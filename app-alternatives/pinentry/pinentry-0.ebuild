@@ -18,7 +18,7 @@ KEYWORDS="~amd64"
 
 src_install() {
 	local alternative
-	case "$(get_alternative)" in
+	case $(get_alternative) in
 		ncurses)
 			alternative=curses
 			;;
@@ -26,8 +26,8 @@ src_install() {
 			alternative=gnome3
 			;;
 		*)
-			alternative="$(get_alternative)"
+			alternative=$(get_alternative)
 			;;
 	esac
-	dosym pinentry-$(get_alternative) /usr/bin/pinentry
+	dosym pinentry-${alternative} /usr/bin/pinentry
 }
