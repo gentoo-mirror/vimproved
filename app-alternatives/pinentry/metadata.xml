@@ -7,8 +7,8 @@
 	</maintainer>
 	<use>
 		<flag name="efl">Symlink to pinentry-efl</flag>
-		<flag name="gnome3">Symlink to pinentry-gnome3</flag>
-		<flag name="curses">Symlink to pinentry-curses</flag>
+		<flag name="gtk">Symlink to pinentry-gnome3</flag>
+		<flag name="ncurses">Symlink to pinentry-curses</flag>
 		<flag name="qt5">Symlink to pinentry-qt5</flag>
 		<flag name="tty">Symlink to pinentry-tty</flag>
 	</use>
