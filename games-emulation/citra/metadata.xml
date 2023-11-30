@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>vimproved@inventati.org</email>
+		<name>Violet Purcell</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">citra-emu/citra-nightly</remote-id>
+	</upstream>
+	<use>
+		<flag name="cubeb">Enable cubeb audio backend.</flag>
+		<flag name="libusb">Enable libusb for GameCube Adapter support.</flag>
+	</use>
+</pkgmetadata>
