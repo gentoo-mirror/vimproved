@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake
+inherit cmake xdg
 
 MY_PV="20231129-0ed909e"
 
@@ -19,26 +19,24 @@ IUSE="cubeb libusb openal +qt6 +sdl +telemetry"
 RESTRICT="test"
 
 RDEPEND="
-	>=dev-cpp/catch-3
-	dev-cpp/cpp-httplib
+	dev-cpp/cpp-httplib:=
 	dev-cpp/nlohmann_json
 	dev-cpp/robin-map
-	dev-libs/boost[nls]
-	dev-libs/crypto++
+	dev-libs/boost:=[nls]
+	dev-libs/crypto++:=
 	dev-libs/dynarmic
 	dev-libs/inih
-	dev-libs/libfmt
-	dev-libs/openssl
-	dev-util/glslang
+	dev-libs/libfmt:=
+	dev-libs/openssl:=
+	dev-util/glslang:=
 	dev-util/vulkan-headers
 	dev-util/vulkan-memory-allocator
-	media-libs/libsoundtouch
+	media-libs/libsoundtouch:=
 	media-libs/lodepng
-	media-video/ffmpeg
-	net-libs/enet
+	net-libs/enet:=
 	amd64? ( dev-libs/xbyak )
 	cubeb? ( media-libs/cubeb )
-	libusb? ( virtual/libusb )
+	libusb? ( virtual/libusb:1 )
 	openal? ( media-libs/openal )
 	qt6? (
 		dev-qt/qtbase:6[concurrent,widgets]
@@ -46,6 +44,11 @@ RDEPEND="
 	)
 	sdl? ( media-libs/libsdl2 )
 	telemetry? ( dev-cpp/cpp-jwt )
+"
+DEPEND="
+	${RDEPEND}
+	>=dev-cpp/catch-3
+	media-video/ffmpeg
 "
 
 src_prepare() {
