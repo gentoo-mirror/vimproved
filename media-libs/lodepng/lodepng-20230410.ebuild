@@ -3,20 +3,20 @@
 
 EAPI=8
 
-COMMIT="8c6a9e30576f07bf470ad6f09458a2dcd7a6a84a"
-
 DESCRIPTION="PNG encoder and decoder"
 HOMEPAGE="
 	http://lodev.org/lodepng
 	https://github.com/lvandeve/lodepng
 "
-SRC_URI="https://github.com/lvandeve/lodepng/archive/${COMMIT}.tar.gz -> ${P}-${COMMIT}.gh.tar.gz"
-S="${WORKDIR}/${PN}-${COMMIT}"
+EGIT_COMMIT="c18b949b71f45e78b1f9a28c5d458bce0da505d6"
+SRC_URI="https://github.com/lvandeve/lodepng/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/lodepng-${EGIT_COMMIT}"
 
 LICENSE="ZLIB"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="benchmark pngdetail showpng test"
+RESTRICT="!test? ( test )"
 
 DEPEND="
 	benchmark? ( media-libs/libsdl )
@@ -24,8 +24,9 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-RESTRICT="!test? ( test )"
-PATCHES=( "${FILESDIR}/${PN}-makefile.patch" )
+PATCHES=(
+	"${FILESDIR}/${PN}-makefile.patch"
+)
 
 src_compile() {
 	emake liblodepng.so

@@ -1,3 +1,4 @@
+Add makefile target for shared library.
 --- a/Makefile
 +++ b/Makefile
 @@ -9,26 +9,29 @@
