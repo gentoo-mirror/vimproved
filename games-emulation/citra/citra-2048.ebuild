@@ -5,10 +5,9 @@ EAPI=8
 
 inherit cmake xdg
 
-MY_PV="20231129-0ed909e"
-
 DESCRIPTION="A Nintendo 3DS Emulator"
 HOMEPAGE="https://citra-emu.org/"
+MY_PV="20231130-59beeac"
 SRC_URI="https://github.com/citra-emu/citra-nightly/releases/download/nightly-${PV}/citra-unified-source-${MY_PV}.tar.xz -> ${P}.tar.xz"
 S="${WORKDIR}/citra-unified-source-${MY_PV}"
 
