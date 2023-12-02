@@ -18,10 +18,19 @@ REQUIRED_USE="${LUA_REQUIRED_USE}"
 RDEPEND="${LUA_DEPS}"
 DEPEND="${RDEPEND}"
 
+pkg_setup() {
+	lua-single_pkg_setup
+
+	emakeargs=(
+		LUA="${ELUA}"
+		PREFIX="/usr"
+	)
+}
+
 src_compile() {
-	emake LUA="${ELUA}"
+	emake "${emakeargs[@]}"
 }
 
 src_install() {
-	emake DESTDIR="${ED}" PREFIX="/usr" install
+	emake "${emakeargs[@]}" DESTDIR="${ED}" install
 }
