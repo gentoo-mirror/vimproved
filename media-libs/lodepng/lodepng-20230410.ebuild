@@ -25,7 +25,7 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-makefile.patch"
+	"${FILESDIR}/lodepng-20230410-make-shared-library.patch"
 )
 
 src_compile() {

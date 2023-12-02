@@ -1,4 +1,8 @@
-Add makefile target for shared library.
+From 1c82f3de02d8b3a5fbb0fd0cf8f22fd228f656c6 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Sat, 2 Dec 2023 10:02:52 -0500
+Subject: [PATCH] Add make target for shared library
+
 --- a/Makefile
 +++ b/Makefile
 @@ -9,26 +9,29 @@
@@ -24,7 +28,7 @@ Add makefile target for shared library.
 +	$(CXX) $(CXXFLAGS) $(LDFLAGS) -fPIC -shared -Wl,-soname,liblodepng.so $^ -o $@
  
 -benchmark: lodepng.o lodepng_benchmark.o
--	$(CXX) $^ $(CXXFLAGS) -lSDL -o $@
+-	$(CXX) $^ $(CXXFLAGS) -lSDL2 -o $@
 +unittest: liblodepng.so lodepng_util.o lodepng_unittest.o
 +	$(CXX) $^ $(CXXFLAGS) $(LDFLAGS) -fPIE -o $@ -L. -llodepng
  
@@ -34,7 +38,7 @@ Add makefile target for shared library.
 +	$(CXX) $^ $(CXXFLAGS) $(LDFLAGS) -fPIE -lSDL -o $@ -L. -llodepng
  
 -showpng: lodepng.o examples/example_sdl.o
--	$(CXX) -I ./ $^ $(CXXFLAGS) -lSDL -o $@
+-	$(CXX) -I ./ $^ $(CXXFLAGS) -lSDL2 -o $@
 +pngdetail: liblodepng.so lodepng_util.o pngdetail.o
 +	$(CXX) $^ $(CXXFLAGS) $(LDFLAGS) -fPIE -o $@ -L. -llodepng
 +
@@ -43,3 +47,6 @@ Add makefile target for shared library.
  
  clean:
  	rm -f unittest benchmark pngdetail showpng lodepng_unittest.o lodepng_benchmark.o lodepng.o lodepng_util.o pngdetail.o examples/example_sdl.o
+-- 
+2.43.0
+
