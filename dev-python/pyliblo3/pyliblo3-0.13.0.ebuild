@@ -14,7 +14,6 @@ HOMEPAGE="https://pypi.org/project/pyliblo3/"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64"
-# No tests in pypi tarball and no git tag for 0.13.0
 RESTRICT="test"
 
 RDEPEND="
