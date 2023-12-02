@@ -6,18 +6,17 @@ EAPI=8
 PYTHON_COMPAT=( python3_{11..12} )
 inherit python-single-r1 xdg
 
-FALKTX_CARLA_COMMIT="41f07e119252b8b14627bec8345cb7304485a815"
-
 DESCRIPTION="Audio plugin host"
 HOMEPAGE="https://kx.studio/Applications:Carla"
-SRC_URI="https://github.com/falkTX/Carla/archive/${FALKTX_CARLA_COMMIT}.tar.gz -> ${P}.tar.gz"
+EGIT_COMMIT="f3d8dce5861fcd6024c524c7966d5226aa07e328"
+SRC_URI="https://github.com/falkTX/Carla/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/Carla-${EGIT_COMMIT}"
 
 LICENSE="GPL-2 LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+X alsa debug +fluidsynth +gui opengl +osc pulseaudio sdl +sndfile"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-S="${WORKDIR}/Carla-${FALKTX_CARLA_COMMIT}"
 
 RDEPEND="
 	sys-apps/file
@@ -60,7 +59,7 @@ PATCHES=(
 )
 
 pkg_setup() {
-	export emakeargs=(
+	emakeargs=(
 		DEBUG=$(usex debug true false)
 		HAVE_ALSA=$(usex alsa true false)
 		HAVE_DBUS=false
