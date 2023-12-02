@@ -5,12 +5,11 @@ EAPI=8
 
 inherit cmake
 
-MY_PV="5e43c795daf43dd09398d8307212e85025215052"
-
 DESCRIPTION="Easy to integrate Vulkan memory allocation library"
 HOMEPAGE="https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator"
-SRC_URI="https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/VulkanMemoryAllocator-${MY_PV}"
+EGIT_COMMIT="5e43c795daf43dd09398d8307212e85025215052"
+SRC_URI="https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/VulkanMemoryAllocator-${EGIT_COMMIT}"
 
 LICENSE="MIT"
 SLOT="0"
