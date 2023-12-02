@@ -7,8 +7,8 @@ inherit cmake xdg
 
 DESCRIPTION="A free software percussion synthesizer for GNU/Linux"
 HOMEPAGE="https://geonkick.org"
-SRC_URI="https://gitlab.com/${PN}-synthesizer/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.bz2 -> ${P}.tar.bz2"
-S="${WORKDIR}/${PN}-v${PV}"
+SRC_URI="https://gitlab.com/geonkick-synthesizer/geonkick/-/archive/v${PV}/geonkick-v${PV}.tar.bz2 -> ${P}.tar.bz2"
+S="${WORKDIR}/geonkick-v${PV}"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -20,18 +20,19 @@ RDEPEND="
 	dev-libs/rapidjson
 	media-libs/libsndfile
 	media-libs/lv2
+	x11-libs/cairo[X]
 	standalone? ( virtual/jack )
 "
 DEPEND="${RDEPEND}"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-2.10.1-remove-stdc++fs.patch"
+	"${FILESDIR}/geonkick-3.0.0-remove-link-to-libstdc++fs.patch"
 )
 
 src_configure() {
 	local mycmakeargs=(
-		-DGKICK_STANDALONE=$(usex standalone)
 		-DGKICK_PLUGIN_LV2=$(usex lv2)
+		-DGKICK_STANDALONE=$(usex standalone)
 	)
 
 	cmake_src_configure

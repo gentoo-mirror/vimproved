@@ -1,0 +1,43 @@
+From 21cda92a89ee0a5223c724198f2d1dc7d47c386a Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Sat, 2 Dec 2023 09:17:53 -0500
+Subject: [PATCH] Remove link to libstdc++fs
+
+For C++17 and above, std::filesystem is contained in the main libstdc++
+shared library, and thus linking to libstdc++fs is unnecessary.
+Additionaly, explicitly linking to libstdc++fs breaks building on Linux
+systems using LLVM's libc++.
+--- a/src/plugin/lv2/CMakeLists.txt
++++ b/src/plugin/lv2/CMakeLists.txt
+@@ -7,7 +7,6 @@ add_library(geonkick_lv2 SHARED
+ 
+ set_target_properties(geonkick_lv2 PROPERTIES PREFIX "")
+ target_link_libraries(geonkick_lv2 PRIVATE  geonkick_common api_plugin redkite)
+-target_link_libraries(geonkick_lv2 PRIVATE "-lstdc++fs")
+ 
+ if (CMAKE_SYSTEM_NAME MATCHES Windows)
+     target_link_libraries(geonkick_lv2 PRIVATE
+@@ -58,7 +57,6 @@ add_library(geonkick_single_lv2 SHARED
+     ${GKICK_LV2_SOURCES})
+ set_target_properties(geonkick_single_lv2 PROPERTIES PREFIX "")
+ target_link_libraries(geonkick_single_lv2 PRIVATE  geonkick_common_single api_plugin_single redkite)
+-target_link_libraries(geonkick_single_lv2 PRIVATE "-lstdc++fs")
+ 
+ if (CMAKE_SYSTEM_NAME MATCHES Windows)
+     target_link_libraries(geonkick_single_lv2 PRIVATE
+--- a/src/standalone/CMakeLists.txt
++++ b/src/standalone/CMakeLists.txt
+@@ -9,9 +9,8 @@ add_dependencies(geonkick api_standalone)
+ add_dependencies(geonkick redkite)
+ target_link_libraries(geonkick  geonkick_common api_standalone redkite)
+ if (CMAKE_SYSTEM_NAME MATCHES Windows)
+-    target_link_libraries(geonkick "-mwindows -lstdc++ -lstdc++fs -lsndfile -lcrypto -lm -lpthread")
++    target_link_libraries(geonkick "-mwindows -lstdc++ -lsndfile -lcrypto -lm -lpthread")
+ else()
+-    target_link_libraries(geonkick "-lstdc++fs")
+     target_link_libraries(geonkick "-lX11 -ljack -lsndfile -lcrypto -lrt -lm -ldl -lpthread -lcairo")
+ endif()
+ 
+-- 
+2.43.0
+
