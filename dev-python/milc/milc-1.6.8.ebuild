@@ -11,10 +11,11 @@ DESCRIPTION="Opinionated Batteries-Included Python 3 CLI Framework"
 HOMEPAGE="https://milc.clueboard.co/"
 SRC_URI="https://github.com/clueboard/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz"
 
-IUSE="test"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+IUSE="test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	dev-python/appdirs[${PYTHON_USEDEP}]
@@ -24,7 +25,5 @@ RDEPEND="
 	dev-python/spinners[${PYTHON_USEDEP}]
 	test? ( dev-python/semver[${PYTHON_USEDEP}] )
 "
-
-RESTRICT="!test? ( test )"
 
 distutils_enable_tests pytest
