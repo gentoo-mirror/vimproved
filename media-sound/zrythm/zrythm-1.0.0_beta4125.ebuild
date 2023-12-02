@@ -5,11 +5,10 @@ EAPI=8
 
 inherit gnome2-utils meson xdg
 
-BETA_PV="$(ver_cut 5)"
-MY_PV="$(ver_cut 1-3)-beta.${BETA_PV:0:1}.${BETA_PV:1:2}.${BETA_PV:3:4}"
-
 DESCRIPTION="A highly automated and intuitive digital audio workstation"
 HOMEPAGE="https://www.zrythm.org/"
+BETA_PV="$(ver_cut 5)"
+MY_PV="$(ver_cut 1-3)-beta.${BETA_PV:0:1}.${BETA_PV:1:2}.${BETA_PV:3:4}"
 SRC_URI="https://www.zrythm.org/releases/zrythm-${MY_PV}.tar.xz -> ${P}.tar.xz"
 
 LICENSE="AGPL-3"
