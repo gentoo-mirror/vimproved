@@ -3,27 +3,32 @@
 
 EAPI=8
 
-inherit cmake vcs-snapshot
+inherit cmake
 
 DESCRIPTION="JSON Web Token library for C++"
 HOMEPAGE="https://github.com/arun11299"
-SRC_URI="https://github.com/arun11299/cpp-jwt/archive/e12ef06218596b52d9b5d6e1639484866a8e7067.tar.gz -> ${P}.tar.gz"
+EGIT_COMMIT="10ef5735d842b31025f1257ae78899f50a40fb14"
+SRC_URI="https://github.com/arun11299/cpp-jwt/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/cpp-jwt-${EGIT_COMMIT}"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-
-DEPEND="test? ( dev-cpp/gtest )
-	dev-libs/openssl
-	dev-cpp/nlohmann_json"
-RDEPEND="${DEPEND}"
-
 IUSE="examples test"
 RESTRICT="!test? ( test )"
+
+RDEPEND="
+	dev-libs/openssl
+	dev-cpp/nlohmann_json
+	test? ( dev-cpp/gtest )
+"
+DEPEND="${RDEPEND}"
+
 src_configure() {
 	local mycmakeargs=(
 		-DCPP_JWT_BUILD_EXAMPLES=$(usex examples)
 		-DCPP_JWT_BUILD_TESTS=$(usex test)
+		-DCPP_JWT_USE_VENDORED_NLOHMANN_JSON=OFF
 	)
 	cmake_src_configure
 }
