@@ -14,7 +14,7 @@ S="${WORKDIR}/citra-unified-source-${MY_PV}"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="cubeb libusb openal +qt6 +sdl +telemetry"
+IUSE="cubeb libusb +openal +qt6 +sdl +telemetry"
 RESTRICT="test"
 
 RDEPEND="
