@@ -26,7 +26,7 @@ src_configure() {
 	# compiled with LTO
 	filter-lto
 
-	econf
+	econf "${econfargs[@]}"
 }
 
 src_install() {
