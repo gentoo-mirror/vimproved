@@ -13,7 +13,6 @@ HOMEPAGE="https://pypi.org/project/halo/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-# Uses deprecated dev-python/nose
 RESTRICT="test"
 
 RDEPEND="
