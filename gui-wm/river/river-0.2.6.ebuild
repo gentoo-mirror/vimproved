@@ -3,7 +3,6 @@
 
 EAPI=8
 
-ZIG_MAX="0.11"
 inherit zig
 
 DESCRIPTION="A dynamic tiling Wayland compositor"
@@ -14,7 +13,6 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="X +man"
-# No tests (?)
 RESTRICT="test"
 
 DEPEND="
