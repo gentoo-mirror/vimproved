@@ -12,16 +12,18 @@ SRC_URI="https://github.com/zyantific/zycore-c/archive/refs/tags/v${PV}.tar.gz -
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="examples test"
+IUSE="doc examples test"
 RESTRICT="!test? ( test )"
 
 DEPEND="test? ( dev-cpp/gtest )"
+BDEPEND="doc? ( app-doc/doxygen )"
 
 src_configure() {
 	local mycmakeargs=(
 		-DZYCORE_BUILD_EXAMPLES=$(usex examples)
 		-DZYCORE_BUILD_SHARED_LIB=ON
 		-DZYCORE_BUILD_TESTS=$(usex test)
+		$(cmake_use_find_package doc Doxygen)
 	)
 
 	cmake_src_configure
