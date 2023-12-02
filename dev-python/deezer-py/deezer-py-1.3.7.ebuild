@@ -14,7 +14,6 @@ HOMEPAGE="https://pypi.org/project/deezer-py/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-# No tests
 RESTRICT="test"
 
 RDEPEND="dev-python/requests[${PYTHON_USEDEP}]"
