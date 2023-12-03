@@ -15,32 +15,26 @@ S="${WORKDIR}/Carla-${EGIT_COMMIT}"
 LICENSE="GPL-2 LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+X alsa debug +fluidsynth +gui opengl +osc pulseaudio sdl +sndfile"
+IUSE="alsa debug +fluidsynth +gui +osc pulseaudio sdl +sndfile"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="
 	sys-apps/file
 	virtual/jack
-	X? (
-		x11-libs/libX11
-		x11-libs/libXcursor
-		x11-libs/libXext
-		x11-libs/libXrandr
-	)
 	alsa? ( media-libs/alsa-lib )
 	elibc_musl? ( sys-libs/fts-standalone )
 	gui? (
 		dev-qt/qtcore:5
-		dev-qt/qtgui:5
+		dev-qt/qtgui:5[egl]
 		dev-qt/qtwidgets:5
-		opengl? ( dev-qt/qtgui:5[egl] )
+		media-libs/libglvnd[X]
+		x11-libs/libX11
+		x11-libs/libXcursor
+		x11-libs/libXext
+		x11-libs/libXrandr
 		$(python_gen_cond_dep 'dev-python/PyQt5[gui,svg,widgets,${PYTHON_USEDEP}]')
 	)
 	fluidsynth? ( media-sound/fluidsynth:= )
-	opengl? (
-		media-libs/libglvnd[X]
-		x11-libs/libX11
-	)
 	osc? (
 		media-libs/liblo
 		$(python_gen_cond_dep 'dev-python/pyliblo3[${PYTHON_USEDEP}]')
@@ -63,7 +57,7 @@ pkg_setup() {
 		DEBUG=$(usex debug true false)
 		HAVE_ALSA=$(usex alsa true false)
 		HAVE_DBUS=false
-		HAVE_DGL=$(usex opengl true false)
+		HAVE_DGL=$(usex gui true false)
 		HAVE_FFMPEG=false
 		HAVE_FLUIDSYNTH=$(usex fluidsynth true false)
 		HAVE_FRONTEND=$(usex gui true false)
@@ -73,14 +67,14 @@ pkg_setup() {
 		HAVE_PYQT=$(usex gui true false)
 		HAVE_QT4=false
 		HAVE_QT5=$(usex gui true false)
-		HAVE_QT5PKG=$(usex opengl true false)
+		HAVE_QT5PKG=$(usex gui true false)
 		HAVE_SDL1=false
 		HAVE_SDL2=$(usex sdl true false)
 		HAVE_SNDFILE=$(usex sndfile true false)
-		HAVE_X11=$(usex X true false)
-		HAVE_XCURSOR=$(usex X true false)
-		HAVE_XEXT=$(usex X true false)
-		HAVE_XRANDR=$(usex X true false)
+		HAVE_X11=$(usex gui true false)
+		HAVE_XCURSOR=$(usex gui true false)
+		HAVE_XEXT=$(usex gui true false)
+		HAVE_XRANDR=$(usex gui true false)
 		HAVE_YSFX=true
 		JACKBRIDGE_DIRECT=true
 		LIBDIR="/usr/$(get_libdir)"
