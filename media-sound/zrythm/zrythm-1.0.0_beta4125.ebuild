@@ -44,7 +44,7 @@ RDEPEND="
 	media-libs/vamp-plugin-sdk
 	>=media-sound/carla-2.6
 	net-misc/curl
-	sci-libs/fftw:3.0=
+	sci-libs/fftw:3.0=[threads]
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf:2
 	x11-libs/pango
