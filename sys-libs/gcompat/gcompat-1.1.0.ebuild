@@ -18,7 +18,9 @@ DEPEND="${RDEPEND}"
 
 pkg_setup() {
 	emakeargs=(
-		LINKER_PATH="/lib/ld-musl-${CHOST%%-*}.so.1"
+		LINKER_PATH="/lib/ld-musl-x86_64.so.1"
+		LOADER_NAME="ld-linux-x86-64.so.2"
+		LOADER_PATH="/lib/ld-linux-x86-64.so.2"
 		WITH_LIBUCONTEXT=1
 	)
 }
@@ -28,9 +30,5 @@ src_compile() {
 }
 
 src_install() {
-	# Only install libgcompat, not the elf interpreter stub. The correct path
-	# too difficult to figure out, and for some reason having it installed
-	# breaks Syncthing.
-	dolib.so "${S}/libgcompat.so.0"
-	dosym libgcompat.so.0 "/usr/$(get_libdir)/libgcompat.so"
+	emake "${emakeargs[@]}" DESTDIR="${ED}" install
 }
