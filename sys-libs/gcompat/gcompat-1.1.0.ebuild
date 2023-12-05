@@ -3,8 +3,6 @@
 
 EAPI=8
 
-inherit toolchain-funcs
-
 DESCRIPTION="The GNU C Library Compatibility Layer for Adélie Linux"
 HOMEPAGE="https://git.adelielinux.org/adelie/gcompat"
 SRC_URI="https://git.adelielinux.org/adelie/gcompat/-/archive/${PV}/${P}.tar.bz2"
@@ -18,68 +16,9 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
-get_glibc_ldso_name() {
-	local i ldso_abi ldso_name
-	local ldso_abi_list=(
-		# x86
-		amd64   /lib64/ld-linux-x86-64.so.2
-		x32     /libx32/ld-linux-x32.so.2
-		x86     /lib/ld-linux.so.2
-		# mips
-		o32     /lib/ld.so.1
-		n32     /lib32/ld.so.1
-		n64     /lib64/ld.so.1
-		# powerpc
-		ppc     /lib/ld.so.1
-		# riscv
-		ilp32d  /lib/ld-linux-riscv32-ilp32d.so.1
-		ilp32   /lib/ld-linux-riscv32-ilp32.so.1
-		lp64d   /lib/ld-linux-riscv64-lp64d.so.1
-		lp64    /lib/ld-linux-riscv64-lp64.so.1
-		# s390
-		s390    /lib/ld.so.1
-		s390x   /lib/ld64.so.1
-		# sparc
-		sparc32 /lib/ld-linux.so.2
-		sparc64 /lib64/ld-linux.so.2
-	)
-
-	case "$(tc-endian)" in
-		little)
-			ldso_abi_list+=(
-				# arm
-				arm64   /lib/ld-linux-aarch64.so.1
-				# ELFv2 (glibc does not support ELFv1 on LE)
-				ppc64   /lib64/ld64.so.2
-			)
-			;;
-		big)
-			ldso_abi_list+=(
-				# arm
-				arm64   /lib/ld-linux-aarch64_be.so.1
-				# ELFv1 (glibc does not support ELFv2 on BE)
-				ppc64   /lib64/ld64.so.1
-			)
-			;;
-	esac
-
-	for (( i = 0; i < ${#ldso_abi_list[@]}; i += 2 )) ; do
-		ldso_abi=${ldso_abi_list[i]}
-		has ${ldso_abi} ${ABI} || continue
-
-		ldso_name="${ldso_abi_list[i+1]}"
-		echo "${ldso_name}"
-		return 0
-	done
-	die "Invalid ABI???"
-}
-
 pkg_setup() {
-	glibc_ldso_name="$(get_glibc_ldso_name)"
 	emakeargs=(
 		LINKER_PATH="/lib/ld-musl-${CHOST%%-*}.so.1"
-		LOADER_NAME="${glibc_ldso_name##*/}"
-		LOADER_PATH="${glibc_ldso_name}"
 		WITH_LIBUCONTEXT=1
 	)
 }
@@ -89,5 +28,9 @@ src_compile() {
 }
 
 src_install() {
-	emake "${emakeargs[@]}" DESTDIR="${ED}" install
+	# Only install libgcompat, not the elf interpreter stub. The correct path
+	# too difficult to figure out, and for some reason having it installed
+	# breaks Syncthing.
+	dolib.so "${S}/libgcompat.so.0"
+	dosym libgcompat.so.0 "/usr/$(get_libdir)/libgcompat.so"
 }
