@@ -21,6 +21,6 @@ src_compile() {
 }
 
 src_install() {
-	default
 	dobin efm-langserver
+	einstalldocs
 }
