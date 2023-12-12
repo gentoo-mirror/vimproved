@@ -1,0 +1,24 @@
+From 7f210f2cf5c4bc28503f992e63ec1d7c38d97265 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Tue, 12 Dec 2023 14:32:43 -0500
+Subject: [PATCH] Don't force -Werror in developer mode
+
+---
+ CMakeLists.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fc0896f7..e6ab63fd 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -291,7 +291,6 @@ endif()
+ # Always build the test harness in developer-mode
+ if(KDDockWidgets_DEVELOPER_MODE)
+     set(KDDockWidgets_TESTS ON)
+-    set(KDDockWidgets_WERROR ON)
+     include(ECMEnableSanitizers)
+ 
+     # Enable assert() in developer mode, regardless of debug vs release
+-- 
+2.43.0
+
