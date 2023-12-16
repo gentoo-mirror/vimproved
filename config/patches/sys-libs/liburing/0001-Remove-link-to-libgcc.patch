@@ -1,0 +1,19 @@
+From e49b73f705de352c37f72f4f8ab47be77164aedb Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Wed, 13 Dec 2023 22:12:55 -0500
+Subject: [PATCH] Remove link to libgcc
+
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -47,7 +47,7 @@ ifeq ($(CONFIG_NOLIBC),y)
+ 	liburing_srcs += nolibc.c
+ 	override CFLAGS += -nostdlib -nodefaultlibs -ffreestanding -fno-builtin -fno-stack-protector
+ 	override CPPFLAGS += -nostdlib -nodefaultlibs -ffreestanding -fno-builtin -fno-stack-protector
+-	override LINK_FLAGS += -nostdlib -nodefaultlibs -lgcc
++	override LINK_FLAGS += -nostdlib -nodefaultlibs
+ endif
+ 
+ override CPPFLAGS += -MT "$@" -MMD -MP -MF "$@.d"
+-- 
+2.43.0
+
