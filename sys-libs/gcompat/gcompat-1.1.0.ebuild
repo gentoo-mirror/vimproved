@@ -10,6 +10,7 @@ HOMEPAGE="https://git.adelielinux.org/adelie/gcompat"
 SRC_URI="https://git.adelielinux.org/adelie/gcompat/-/archive/${PV}/${P}.tar.bz2"
 
 LICENSE="UoI-NCSA"
+KEYWORDS="~amd64"
 SLOT="0"
 
 RDEPEND="
