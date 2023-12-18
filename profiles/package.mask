@@ -1,0 +1,2 @@
+# Unmask in custom musl profiles.
+sys-libs/gcompat
