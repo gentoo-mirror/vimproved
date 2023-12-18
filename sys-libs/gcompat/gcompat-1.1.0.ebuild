@@ -75,7 +75,7 @@ get_glibc_loader_name() {
 }
 
 pkg_setup() {
-	GLIBC_LDSO="$(get_glibc_loader_name)"
+	local GLIBC_LDSO="$(get_glibc_loader_name)"
 	emakeargs=(
 		LINKER_PATH="/usr/lib/libc.so"
 		LOADER_NAME="${GLIBC_LDSO##*/}"
@@ -89,5 +89,8 @@ src_compile() {
 }
 
 src_install() {
+	local GLIBC_LDSO="$(get_glibc_loader_name)"
 	emake "${emakeargs[@]}" DESTDIR="${ED}" install
+	[[ ! -e "${ED}/$(get_libdir)/${GLIBC_LDSO##*/}" ]] &&
+		dosym ..${GLIBC_LDSO} /$(get_libdir)/${GLIBC_LDSO##*/}
 }
