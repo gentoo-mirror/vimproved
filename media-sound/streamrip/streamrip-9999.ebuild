@@ -29,6 +29,7 @@ RDEPEND="
 	dev-python/pillow[${PYTHON_USEDEP}]
 	dev-python/pycryptodome[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/rich[${PYTHON_USEDEP}]
 	dev-python/simple-term-menu[${PYTHON_USEDEP}]
 	dev-python/tomlkit[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
