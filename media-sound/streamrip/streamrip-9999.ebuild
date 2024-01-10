@@ -24,6 +24,7 @@ RDEPEND="
 	dev-python/appdirs[${PYTHON_USEDEP}]
 	dev-python/cleo[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
+	dev-python/click-help-colors[${PYTHON_USEDEP}]
 	dev-python/deezer-py[${PYTHON_USEDEP}]
 	dev-python/m3u8[${PYTHON_USEDEP}]
 	dev-python/pathvalidate[${PYTHON_USEDEP}]
@@ -39,8 +40,8 @@ RDEPEND="
 
 src_prepare() {
 	sed -i 's/Cryptodome/Crypto/' \
-		"${S}/${PN}/downloadtools.py" \
-		"${S}/${PN}/clients.py"
+		"${S}/${PN}/client/deezer.py" \
+		"${S}/${PN}/client/downloadable.py"
 
 	default
 }
