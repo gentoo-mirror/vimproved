@@ -20,6 +20,7 @@ RDEPEND="
 	dev-python/aiodns[${PYTHON_USEDEP}]
 	dev-python/aiofiles[${PYTHON_USEDEP}]
 	dev-python/aiohttp[${PYTHON_USEDEP}]
+	dev-python/aiolimiter[${PYTHON_USEDEP}]
 	dev-python/appdirs[${PYTHON_USEDEP}]
 	dev-python/cleo[${PYTHON_USEDEP}]
 	dev-python/click[${PYTHON_USEDEP}]
@@ -35,11 +36,3 @@ RDEPEND="
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	media-libs/mutagen[${PYTHON_USEDEP}]
 "
-
-src_prepare() {
-	sed -i 's/Cryptodome/Crypto/' \
-		"${S}/${PN}/downloadtools.py" \
-		"${S}/${PN}/clients.py"
-
-	default
-}
