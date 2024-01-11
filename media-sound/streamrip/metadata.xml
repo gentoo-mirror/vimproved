@@ -6,6 +6,6 @@
 		<name>Violet Purcell</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">nathom/streamrip</remote-id>
+		<remote-id type="pypi">streamrip</remote-id>
 	</upstream>
 </pkgmetadata>

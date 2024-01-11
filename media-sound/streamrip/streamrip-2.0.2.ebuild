@@ -1,20 +1,18 @@
-# Copyright 2023 Gentoo Authors
+# Copyright 2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DISTUTILS_USE_PEP517=poetry
-PYTHON_COMPAT=( python3_{10..11} )
-inherit distutils-r1 git-r3
+PYTHON_COMPAT=( python3_11 )
+inherit distutils-r1 pypi
 
 DESCRIPTION="A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer"
-HOMEPAGE="https://github.com/nathom/streamrip"
-EGIT_REPO_URI="https://github.com/nathom/${PN}.git"
-EGIT_BRANCH="dev"
+HOMEPAGE="https://pypi.org/project/streamrip/"
 
 LICENSE="GPL-3"
 SLOT="0"
-RESTRICT="test"
+KEYWORDS="~amd64"
 
 RDEPEND="
 	dev-python/aiodns[${PYTHON_USEDEP}]
@@ -36,6 +34,7 @@ RDEPEND="
 	dev-python/tomlkit[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	media-libs/mutagen[${PYTHON_USEDEP}]
+	${PYTHON_DEPS}
 "
 
 src_prepare() {
