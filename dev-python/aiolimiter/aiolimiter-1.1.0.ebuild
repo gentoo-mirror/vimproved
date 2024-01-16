@@ -14,6 +14,8 @@ HOMEPAGE="https://pypi.org/project/aiolimiter/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+# Tests broken (?)
+# TODO: look into this more
 RESTRICT="test"
 
 python_install() {
