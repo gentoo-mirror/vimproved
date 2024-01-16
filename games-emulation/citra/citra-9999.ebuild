@@ -8,7 +8,7 @@ inherit cmake git-r3 xdg
 DESCRIPTION="A Nintendo 3DS Emulator"
 HOMEPAGE="https://citra-emu.org/"
 EGIT_REPO_URI="https://github.com/citra-emu/citra-nightly.git"
-EGIT_SUBMODULES=( faad2 nihstro sirit teakra zstd )
+EGIT_SUBMODULES=( faad2 nihstro sirit teakra )
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -49,6 +49,10 @@ DEPEND="
 	media-video/ffmpeg
 "
 
+PATCHES=(
+	"${FILESDIR}/citra-9999-fix-system-zstd.patch"
+)
+
 src_prepare() {
 	# Fool git detection
 	rm -rf .git || die
@@ -67,7 +71,6 @@ src_configure() {
 		-DENABLE_WEB_SERVICE=$(usex telemetry)
 		-DSIRIT_USE_SYSTEM_SPIRV_HEADERS=ON
 		-DUSE_SYSTEM_LIBS=ON
-		-DDISABLE_SYSTEM_ZSTD=ON
 	)
 
 	cmake_src_configure
