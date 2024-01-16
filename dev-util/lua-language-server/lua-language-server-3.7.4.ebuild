@@ -21,8 +21,8 @@ REQUIRE_USE="${LUA_REQUIRED_USE}"
 DEPEND="${LUA_DEPS}"
 RDEPEND="${DEPEND}"
 BDEPEND="
+	app-alternatives/ninja
 	app-arch/unzip
-	dev-util/ninja
 "
 RESTRICT="!test? ( test )"
 PATCHES=( "${FILESDIR}/linux.ninja.patch" "${FILESDIR}/build.ninja.patch" )
