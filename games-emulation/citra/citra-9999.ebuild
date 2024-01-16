@@ -3,17 +3,15 @@
 
 EAPI=8
 
-inherit cmake xdg
+inherit cmake git-r3 xdg
 
 DESCRIPTION="A Nintendo 3DS Emulator"
 HOMEPAGE="https://citra-emu.org/"
-MY_PV="20231130-59beeac"
-SRC_URI="https://github.com/citra-emu/citra-nightly/releases/download/nightly-${PV}/citra-unified-source-${MY_PV}.tar.xz -> ${P}.tar.xz"
-S="${WORKDIR}/citra-unified-source-${MY_PV}"
+EGIT_REPO_URI="https://github.com/citra-emu/citra-nightly.git"
+EGIT_SUBMODULES=( faad2 nihstro sirit teakra zstd )
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
 IUSE="cubeb libusb +openal +qt6 +sdl +telemetry"
 RESTRICT="test"
 
@@ -28,6 +26,7 @@ RDEPEND="
 	dev-libs/libfmt:=
 	dev-libs/openssl:=
 	dev-util/glslang:=
+	dev-util/spirv-headers
 	dev-util/vulkan-headers
 	dev-util/vulkan-memory-allocator
 	media-libs/libsoundtouch:=
@@ -51,37 +50,9 @@ DEPEND="
 "
 
 src_prepare() {
+	# Fool git detection
+	rm -rf .git || die
 	cmake_src_prepare
-
-	# Remove unused bundled dependencies
-	rm -r externals/android-ifaddrs \
-		externals/boost \
-		externals/catch2 \
-		externals/cpp-jwt \
-		externals/cryptopp \
-		externals/cryptopp-cmake \
-		externals/cubeb \
-		externals/discord-rpc \
-		externals/dynarmic \
-		externals/enet \
-		externals/fmt \
-		externals/getopt \
-		externals/glslang \
-		externals/httplib \
-		externals/inih \
-		externals/json \
-		externals/libadrenotools \
-		externals/library-headers \
-		externals/libressl \
-		externals/libusb \
-		externals/libyuv \
-		externals/lodepng \
-		externals/openal-soft \
-		externals/sdl2 \
-		externals/soundtouch \
-		externals/vma \
-		externals/vulkan-headers \
-		externals/xbyak || die
 }
 
 src_configure() {
@@ -94,6 +65,7 @@ src_configure() {
 		-DENABLE_QT=$(usex qt6)
 		-DENABLE_SDL2=$(usex sdl)
 		-DENABLE_WEB_SERVICE=$(usex telemetry)
+		-DSIRIT_USE_SYSTEM_SPIRV_HEADERS=ON
 		-DUSE_SYSTEM_LIBS=ON
 		-DDISABLE_SYSTEM_ZSTD=ON
 	)
