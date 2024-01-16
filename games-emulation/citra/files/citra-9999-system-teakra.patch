@@ -1,0 +1,76 @@
+From 73129b280326ec49312085be63d0d4fbb5234b5a Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Tue, 16 Jan 2024 12:59:11 -0500
+Subject: [PATCH] externals: allow use of system teakra
+
+---
+ externals/CMakeLists.txt                          |  9 ++++++++-
+ .../cmake-modules/CitraHandleSystemLibs.cmake     |  2 ++
+ externals/cmake-modules/Findteakra.cmake          | 15 +++++++++++++++
+ 3 files changed, 25 insertions(+), 1 deletion(-)
+ create mode 100644 externals/cmake-modules/Findteakra.cmake
+
+diff --git a/externals/CMakeLists.txt b/externals/CMakeLists.txt
+index 29e0a73b5..527462c27 100644
+--- a/externals/CMakeLists.txt
++++ b/externals/CMakeLists.txt
+@@ -201,7 +201,14 @@ endif()
+ add_subdirectory(sirit EXCLUDE_FROM_ALL)
+ 
+ # Teakra
+-add_subdirectory(teakra EXCLUDE_FROM_ALL)
++if (USE_SYSTEM_TEAKRA)
++    find_package(teakra REQUIRED)
++    add_library(teakra INTERFACE)
++    target_link_libraries(teakra INTERFACE "${TEAKRA_LIBRARY}")
++    target_include_directories(teakra SYSTEM INTERFACE "${TEAKRA_INCLUDE_DIR}")
++else()
++    add_subdirectory(teakra EXCLUDE_FROM_ALL)
++endif()
+ 
+ # SDL2
+ if (ENABLE_SDL2 AND NOT USE_SYSTEM_SDL2)
+diff --git a/externals/cmake-modules/CitraHandleSystemLibs.cmake b/externals/cmake-modules/CitraHandleSystemLibs.cmake
+index b1bb7ccd9..032db152b 100644
+--- a/externals/cmake-modules/CitraHandleSystemLibs.cmake
++++ b/externals/cmake-modules/CitraHandleSystemLibs.cmake
+@@ -26,6 +26,7 @@ option(USE_SYSTEM_OPENAL "Use the system OpenAL (instead of the bundled one)" OF
+ option(USE_SYSTEM_VMA "Use the system VulkanMemoryAllocator (instead of the bundled one)" OFF)
+ option(USE_SYSTEM_VULKAN_HEADERS "Use the system Vulkan headers (instead of the bundled ones)" OFF)
+ option(USE_SYSTEM_CATCH2 "Use the system Catch2 (instead of the bundled one)" OFF)
++option(USE_SYSTEM_TEAKRA "Use the system teakra (instead of the bundled one)" OFF)
+ 
+ # Qt and MoltenVK are handled separately
+ CMAKE_DEPENDENT_OPTION(DISABLE_SYSTEM_SDL2 "Disable system SDL2" OFF "USE_SYSTEM_LIBS" OFF)
+@@ -76,6 +77,7 @@ set(LIB_VAR_LIST
+     VMA
+     VULKAN_HEADERS
+     CATCH2
++    TEAKRA
+     )
+ 
+ # First, check that USE_SYSTEM_XXX is not used with USE_SYSTEM_LIBS
+diff --git a/externals/cmake-modules/Findteakra.cmake b/externals/cmake-modules/Findteakra.cmake
+new file mode 100644
+index 000000000..f357a9707
+--- /dev/null
++++ b/externals/cmake-modules/Findteakra.cmake
+@@ -0,0 +1,15 @@
++find_path(TEAKRA_INCLUDE_DIR NAMES teakra/teakra.h
++    PATHS
++    /usr/include
++    /usr/local/include
++)
++
++find_library(TEAKRA_LIBRARY NAMES teakra
++    PATHS
++    /usr/lib64
++    /usr/lib
++    /usr/local/lib64
++    /usr/local/lib
++)
++
++find_package_handle_standard_args(teakra REQUIRED_VARS TEAKRA_INCLUDE_DIR TEAKRA_LIBRARY)
+-- 
+2.43.0
+

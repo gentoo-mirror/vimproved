@@ -16,6 +16,7 @@ IUSE="cubeb libusb +openal +qt6 +sdl +telemetry"
 RESTRICT="test"
 
 RDEPEND="
+	app-arch/zstd
 	dev-cpp/cpp-httplib:=
 	dev-cpp/nlohmann_json
 	dev-cpp/robin-map
@@ -25,6 +26,7 @@ RDEPEND="
 	dev-libs/inih
 	dev-libs/libfmt:=
 	dev-libs/openssl:=
+	dev-libs/teakra
 	dev-util/glslang:=
 	dev-util/spirv-headers
 	dev-util/vulkan-headers
@@ -51,6 +53,7 @@ DEPEND="
 
 PATCHES=(
 	"${FILESDIR}/citra-9999-fix-system-zstd.patch"
+	"${FILESDIR}/citra-9999-system-teakra.patch"
 )
 
 src_prepare() {
