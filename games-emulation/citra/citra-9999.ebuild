@@ -8,7 +8,7 @@ inherit cmake git-r3 xdg
 DESCRIPTION="A Nintendo 3DS Emulator"
 HOMEPAGE="https://citra-emu.org/"
 EGIT_REPO_URI="https://github.com/citra-emu/citra-nightly.git"
-EGIT_SUBMODULES=( faad2 nihstro sirit teakra )
+EGIT_SUBMODULES=( dds-ktx faad2 nihstro sirit teakra )
 
 LICENSE="GPL-2"
 SLOT="0"
