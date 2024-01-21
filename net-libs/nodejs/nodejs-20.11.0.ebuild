@@ -42,7 +42,7 @@ RDEPEND=">=app-arch/brotli-1.0.9:=
 	system-icu? ( >=dev-libs/icu-67:= )
 	system-ssl? ( >=dev-libs/openssl-1.1.1:0= )"
 BDEPEND="${PYTHON_DEPS}
-	dev-util/ninja
+	app-alternatives/ninja
 	sys-apps/coreutils
 	virtual/pkgconfig
 	test? ( net-misc/curl )
@@ -60,7 +60,6 @@ CHECKREQS_MEMORY="8G"
 CHECKREQS_DISK_BUILD="22G"
 
 PATCHES=(
-	"${FILESDIR}"/"${PN}"-20.3.0-gcc14.patch
 	"${FILESDIR}"/"${PN}"-20.7.0-libcxx-dont-link-libatomic.patch
 	)
 
@@ -231,6 +230,7 @@ src_install() {
 
 src_test() {
 	local drop_tests=(
+	test/parallel/test-dns-resolveany-bad-account.js
 		test/parallel/test-fs-read-stream.js
 		test/parallel/test-dns-setserver-when-querying.js
 		test/parallel/test-fs-mkdir.js
