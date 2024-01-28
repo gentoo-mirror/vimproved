@@ -25,7 +25,6 @@ BDEPEND="
 	app-arch/unzip
 "
 RESTRICT="!test? ( test )"
-PATCHES=( "${FILESDIR}/linux.ninja.patch" "${FILESDIR}/build.ninja.patch" )
 
 src_prepare() {
 	# Remove hardcoded gcc references
@@ -35,6 +34,7 @@ src_prepare() {
 		3rd/lpeglabel/makefile || die
 	# Shipped file doesn't respect CFLAGS/CXXFLAGS/LDFLAGS
 	eapply "${FILESDIR}/linux.ninja.patch"
+	eapply "${FILESDIR}/lua-language-server-3.7.4-bee-userdata-align-16.patch"
 	eapply_user
 	sed -i -e "s/^cc = REPLACE_ME/cc = $(tc-getCC)/" \
 		-e "s/^ar = REPLACE_AR/ar = $(tc-getAR)/" \

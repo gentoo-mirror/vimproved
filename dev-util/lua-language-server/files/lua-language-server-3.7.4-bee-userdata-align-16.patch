@@ -1,0 +1,34 @@
+From 99fc9ebe561901ebd71db5b176a3553df3633523 Mon Sep 17 00:00:00 2001
+From: Mark Johnston <markj@FreeBSD.org>
+Date: Sat, 27 Jan 2024 11:30:04 -0500
+Subject: [PATCH] Ensure that memory returned by lua_newuserdatauv() is 16-byte
+ aligned
+
+For some reason clang requests 16-byte alignment for some C++ objects.
+This alignment is exploited by constructors which zero the structure
+with SIMD instructions.  lua_newuserdatauv() always returns unaligned
+memory due to the layout of struct Udata.  lua_newuserdata() does not
+have this problem, i.e., it always returns 16-byte-aligned memory.
+
+Force alignment to work around this.
+--- a/3rd/bee.lua/3rd/lua/lobject.h
++++ b/3rd/bee.lua/3rd/lua/lobject.h
+@@ -462,7 +462,7 @@ typedef struct Udata {
+   size_t len;  /* number of bytes */
+   struct Table *metatable;
+   GCObject *gclist;
+-  UValue uv[1];  /* user values */
++  UValue uv[1] __attribute__((__aligned__(16)));  /* user values */
+ } Udata;
+ 
+ 
+--- a/3rd/bee.lua/binding/binding.h
++++ b/3rd/bee.lua/binding/binding.h
+@@ -214,6 +214,7 @@ namespace bee::lua {
+     template <typename T, typename... Args>
+     T& newudata(lua_State* L, Args&&... args) {
+         static_assert(udata_has_name<T>::value);
++        static_assert(_Alignof(T) <= 16);
+         int nupvalue = 0;
+         if constexpr (udata_has_nupvalue<T>::value) {
+             nupvalue = udata<T>::nupvalue;
