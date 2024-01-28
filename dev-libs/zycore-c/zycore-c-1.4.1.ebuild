@@ -6,7 +6,7 @@ EAPI=8
 inherit cmake
 
 DESCRIPTION="Platform independent types, macros and a fallback for environments without LibC."
-HOMEPAGE="https://github.com/zyantific/zycore-c"
+HOMEPAGE="https://github.com/zyantific/zycore-c/"
 SRC_URI="https://github.com/zyantific/zycore-c/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
@@ -16,7 +16,7 @@ IUSE="doc examples test"
 RESTRICT="!test? ( test )"
 
 DEPEND="test? ( dev-cpp/gtest )"
-BDEPEND="doc? ( app-doc/doxygen )"
+BDEPEND="doc? ( app-text/doxygen )"
 
 src_configure() {
 	local mycmakeargs=(
