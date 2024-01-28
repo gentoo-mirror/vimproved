@@ -9,7 +9,7 @@ STATEPATH="${XDG_STATE_HOME:-${HOME}/.local/state}/lua-language-server"
 
 mkdir --parents ${DATAPATH} ${STATEPATH}
 
-exec @GENTOO_PORTAGE_EPREFIX@/opt/lua-language-server/bin/lua-language-server \
+exec @GENTOO_PORTAGE_EPREFIX@/usr/lib/lua-language-server/bin/lua-language-server \
 	--logpath="${STATEPATH}/log" \
 	--metapath="${DATAPATH}/meta" \
 	"${@}"

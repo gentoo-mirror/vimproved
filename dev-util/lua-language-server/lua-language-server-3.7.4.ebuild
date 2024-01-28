@@ -70,15 +70,19 @@ src_compile() {
 }
 
 src_install() {
+	if [[ $(get_libdir) != lib ]]; then
+		sed -i "s/lib/$(get_libdir)/" "${T}/wrapper.sh" || die
+	fi
+
 	newbin "${T}/wrapper.sh" ${PN}
 
-	into /opt/${PN}
+	into /usr/$(get_libdir)/${PN}
 	dobin bin/${PN}
 
-	insinto /opt/${PN}/bin
+	insinto /usr/$(get_libdir)/${PN}/bin
 	doins bin/main.lua
 
-	insinto /opt/${PN}
+	insinto /usr/$(get_libdir)/${PN}
 	doins -r debugger.lua main.lua locale meta script
 
 	einstalldocs
