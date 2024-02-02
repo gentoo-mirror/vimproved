@@ -24,6 +24,7 @@ KEYWORDS="~amd64"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="
+	dev-libs/libportal
 	gui-libs/gtk:4
 	>=gui-libs/libadwaita-1.2
 	>=net-libs/libsoup-3.2
