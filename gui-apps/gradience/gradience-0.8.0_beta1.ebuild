@@ -4,7 +4,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12} )
-inherit meson python-single-r1
+inherit gnome2-utils meson python-single-r1 xdg
 
 MY_PV="$(ver_cut 1-3)-$(ver_cut 4-5)"
 SUBMODULES_COMMIT="cc95cdf36c7c52ffa5d34dcf337e1523db89de26"
@@ -24,7 +24,7 @@ KEYWORDS="~amd64"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="
-	dev-libs/libportal
+	dev-libs/libportal[gtk]
 	gui-libs/gtk:4
 	>=gui-libs/libadwaita-1.2
 	>=net-libs/libsoup-3.2
@@ -34,6 +34,7 @@ RDEPEND="
 		dev-python/libsass[${PYTHON_USEDEP}]
 		dev-python/material-color-utilities-python[${PYTHON_USEDEP}]
 		dev-python/pygobject[${PYTHON_USEDEP}]
+		dev-python/regex[${PYTHON_USEDEP}]
 		dev-python/svglib[${PYTHON_USEDEP}]
 		dev-python/yapsy[${PYTHON_USEDEP}]
 	')
@@ -58,4 +59,14 @@ src_install() {
 	python_fix_shebang "${ED}/usr/bin/gradience-cli"
 
 	mv "${ED}/usr/share/appdata" "${ED}/usr/share/metainfo" || die
+}
+
+pkg_postinst() {
+	xdg_pkg_postinst
+	gnome2_schemas_update
+}
+
+pkg_postrm() {
+	xdg_pkg_postrm
+	gnome2_schemas_update
 }
