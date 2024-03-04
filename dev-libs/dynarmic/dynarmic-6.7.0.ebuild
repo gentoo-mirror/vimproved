@@ -20,7 +20,7 @@ RDEPEND="
 	>=dev-libs/boost-1.57
 	>=dev-libs/libfmt-9
 	~dev-libs/mcl-0.1.12
-	>=dev-libs/xbyak-6
+	>=dev-libs/xbyak-7
 	dev-libs/zydis
 "
 DEPEND="
