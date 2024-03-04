@@ -8,7 +8,7 @@ inherit python-single-r1 xdg
 
 DESCRIPTION="Audio plugin host"
 HOMEPAGE="https://kx.studio/Applications:Carla"
-EGIT_COMMIT="f3d8dce5861fcd6024c524c7966d5226aa07e328"
+EGIT_COMMIT="fe8631bc13a507507ccc6b5c408d5a4a880b1936"
 SRC_URI="https://github.com/falkTX/Carla/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/Carla-${EGIT_COMMIT}"
 
@@ -50,6 +50,7 @@ BDEPEND="dev-python/PyQt5"
 PATCHES=(
 	"${FILESDIR}/carla-2.6.0_pre20231023-Add-logic-to-autodetect-compiler-and-fix-build-with-clang-on-linux.patch"
 	"${FILESDIR}/carla-2.6.0_pre20231023-Add-logic-to-automatically-link-against-fts-standalone.patch"
+	"${FILESDIR}/carla-2.6.0_pre20240301-liblo-0.32.patch"
 )
 
 pkg_setup() {
