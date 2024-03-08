@@ -1,8 +1,0 @@
-app-admin/chezmoi
-app-admin/pass
-app-shells/bash-completion
-dev-util/github-cli
-sys-apps/bat
-sys-apps/eza
-sys-apps/ripgrep
-sys-process/btop
