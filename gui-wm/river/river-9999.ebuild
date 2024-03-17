@@ -25,7 +25,7 @@ DEPEND="
 	dev-libs/libevdev
 	dev-libs/libinput:=
 	dev-libs/wayland
-	gui-libs/wlroots:=[X?]
+	>=gui-libs/wlroots-0.17.2:=[X?] <gui-libs/wlroots-0.18
 	X? ( x11-base/xwayland )
 	x11-libs/libxkbcommon
 	x11-libs/pixman
