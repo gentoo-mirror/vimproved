@@ -32,7 +32,7 @@ src_prepare() {
 	mv "${WORKDIR}/diffz-${DIFFZ_COMMIT}" \
 		"${T}/zig-cache/p/122089a8247a693cad53beb161bde6c30f71376cd4298798d45b32740c3581405864" || die
 	mv "${WORKDIR}/known-folders-${KNOWN_FOLDERS_COMMIT}" \
-		"${T}/zig-cache/p/122048992ca58a78318b6eba4f65c692564be5af3b30fbef50cd4abeda981b2e7fa5"|| die
+		"${T}/zig-cache/p/122048992ca58a78318b6eba4f65c692564be5af3b30fbef50cd4abeda981b2e7fa5" || die
 	mv "${WORKDIR}/8372900fcc09e38d7b0b6bbaddad3904-${BINNED_ALLOCATOR_COMMIT}" \
 		"${T}/zig-cache/p/1220363c7e27b2d3f39de6ff6e90f9537a0634199860fea237a55ddb1e1717f5d6a5" || die
 	rm -r src/tracy || die
