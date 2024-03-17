@@ -148,6 +148,8 @@ zig-set_ZIG() {
 # Determines suitable Zig installation and exports ZIG.
 zig_pkg_setup() {
 	zig-set_ZIG
+	mkdir -p "${T}/zig-cache" || die
+	export ZIG_GLOBAL_CACHE_DIR="${T}/zig-cache"
 }
 
 # @FUNCTION: zig_src_compile
