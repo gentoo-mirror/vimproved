@@ -7,11 +7,17 @@ inherit zig
 
 DESCRIPTION="A dynamic tiling Wayland compositor"
 HOMEPAGE="https://github.com/riverwm/river/"
-SRC_URI="https://github.com/riverwm/river/releases/download/v${PV}/${P}.tar.gz"
+
+if [[ ${PV} == 9999 ]]; then
+	EGIT_REPO_URI="https://github.com/riverwm/river.git"
+	inherit git-r3
+else
+	SRC_URI="https://github.com/riverwm/river/releases/download/v${PV}/${P}.tar.gz"
+	KEYWORDS="~amd64"
+fi
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
 IUSE="X +man"
 RESTRICT="test"
 
