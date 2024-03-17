@@ -1,0 +1,19 @@
+From 12ef0a9e0b842a5f8f164b7bb20ba63b95072fe5 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Sun, 17 Mar 2024 14:00:26 -0400
+Subject: [PATCH] tinywl: update for versioned pkg-config file
+
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ WAYLAND_PROTOCOLS=$(shell pkg-config --variable=pkgdatadir wayland-protocols)
+ WAYLAND_SCANNER=$(shell pkg-config --variable=wayland_scanner wayland-scanner)
+ LIBS=\
+-	 $(shell pkg-config --cflags --libs "wlroots >= 0.18.0-dev") \
++	 $(shell pkg-config --cflags --libs "wlroots-0.18") \
+ 	 $(shell pkg-config --cflags --libs wayland-server) \
+ 	 $(shell pkg-config --cflags --libs xkbcommon)
+ 
+-- 
+2.44.0
+
