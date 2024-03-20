@@ -35,12 +35,12 @@ RDEPEND="
 
 src_install() {
 	distutils-r1_src_install
-	udev_dorules "${FILESDIR}/50-qmk.rules"
+	udev_dorules "${FILESDIR}/50-${PN}.rules"
 }
 
 pkg_postinst() {
 	udev_reload
-	einfo "To use qmk, use sys-devel/crossdev to setup the avr and arm-none-eabi toolchains."
+	einfo "To use ${PN}, use sys-devel/crossdev to setup the avr and arm-none-eabi toolchains."
 }
 
 pkg_postrm() {
