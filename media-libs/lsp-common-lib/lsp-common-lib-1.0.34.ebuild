@@ -7,8 +7,8 @@ inherit flag-o-matic
 
 DESCRIPTION="Common library for basic language definitions used by LSP Project"
 HOMEPAGE="https://lsp-plug.in/"
-SRC_URI="https://github.com/lsp-plugins/lsp-common-lib/releases/download/${PV}/lsp-common-lib-src-${PV}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/lsp-common-lib"
+SRC_URI="https://github.com/lsp-plugins/${PN}/releases/download/${PV}/${PN}-src-${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/${PN}"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
@@ -51,7 +51,7 @@ src_compile() {
 }
 
 src_test() {
-	"${S}/.build/target/lsp-common-lib/lsp-common-lib-test" utest -v || die
+	"${S}/.build/target/${PN}/${PN}-test" utest -v || die
 }
 
 src_install() {
