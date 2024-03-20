@@ -10,8 +10,8 @@ inherit python-single-r1 xdg
 DESCRIPTION="Audio plugin host"
 HOMEPAGE="https://kx.studio/Applications:Carla"
 CARLA_COMMIT="66afe24a08790732cc17d81d4b846a1e0cfa0118"
-SRC_URI="https://github.com/falkTX/Carla/archive/${CARLA_COMMIT}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/Carla-${CARLA_COMMIT}"
+SRC_URI="https://github.com/falkTX/${PN^}/archive/${CARLA_COMMIT}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/${PN^}-${CARLA_COMMIT}"
 
 LICENSE="GPL-2 LGPL-3"
 SLOT="0"
@@ -49,9 +49,9 @@ DEPEND="${RDEPEND}"
 BDEPEND="dev-python/PyQt5"
 
 PATCHES=(
-	"${FILESDIR}/carla-2.6.0_pre20231023-Add-logic-to-autodetect-compiler-and-fix-build-with-clang-on-linux.patch"
-	"${FILESDIR}/carla-2.6.0_pre20231023-Add-logic-to-automatically-link-against-fts-standalone.patch"
-	"${FILESDIR}/carla-2.6.0_pre20240301-liblo-0.32.patch"
+	"${FILESDIR}/${PN}-2.6.0_pre20231023-Add-logic-to-autodetect-compiler-and-fix-build-with-clang-on-linux.patch"
+	"${FILESDIR}/${PN}-2.6.0_pre20231023-Add-logic-to-automatically-link-against-fts-standalone.patch"
+	"${FILESDIR}/${PN}-2.6.0_pre20240301-liblo-0.32.patch"
 )
 
 pkg_setup() {
