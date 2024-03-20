@@ -5,6 +5,7 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{9..12} pypy3 )
+
 inherit distutils-r1 pypi
 
 DESCRIPTION="Colored symbols for various log levels for Python"
