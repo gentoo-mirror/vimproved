@@ -9,7 +9,7 @@ inherit lua-single
 
 DESCRIPTION="A formatter for Fennel code"
 HOMEPAGE="https://git.sr.ht/~technomancy/fnlfmt"
-SRC_URI="https://git.sr.ht/~technomancy/fnlfmt/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://git.sr.ht/~technomancy/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
