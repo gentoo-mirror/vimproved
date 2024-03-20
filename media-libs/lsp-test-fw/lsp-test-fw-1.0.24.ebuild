@@ -7,8 +7,8 @@ inherit flag-o-matic
 
 DESCRIPTION="Simple test framework for writing and executing tests used by LSP Project"
 HOMEPAGE="https://lsp-plug.in/"
-SRC_URI="https://github.com/lsp-plugins/lsp-test-fw/releases/download/${PV}/lsp-test-fw-src-${PV}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/lsp-test-fw"
+SRC_URI="https://github.com/lsp-plugins/${PN}/releases/download/${PV}/${PN}-src-${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/${PN}"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
@@ -41,7 +41,7 @@ src_compile() {
 }
 
 src_test() {
-	"${S}/.build/target/lsp-test-fw/lsp-test-fw-test" utest -v || die
+	"${S}/.build/target/${PN}/${PN}-test" utest -v || die
 }
 
 src_install() {
