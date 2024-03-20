@@ -4,13 +4,13 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12} )
-inherit gnome2-utils meson python-single-r1 xdg
 
-MY_PV="$(ver_cut 1-3)-$(ver_cut 4-5)"
-SUBMODULES_COMMIT="cc95cdf36c7c52ffa5d34dcf337e1523db89de26"
+inherit gnome2-utils meson python-single-r1 xdg
 
 DESCRIPTION="Change the look of Adwaita, with ease"
 HOMEPAGE="https://gradienceteam.github.io/"
+MY_PV="$(ver_cut 1-3)-$(ver_cut 4-5)"
+SUBMODULES_COMMIT="cc95cdf36c7c52ffa5d34dcf337e1523db89de26"
 SRC_URI="
 	https://github.com/GradienceTeam/Gradience/archive/refs/tags/${MY_PV}.tar.gz -> ${P}.tar.gz
 	https://github.com/GradienceTeam/Submodules/archive/${SUBMODULES_COMMIT}.tar.gz
@@ -23,7 +23,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RDEPEND="
+DEPEND="
 	dev-libs/libportal[gtk]
 	gui-libs/gtk:4
 	>=gui-libs/libadwaita-1.2
@@ -40,7 +40,7 @@ RDEPEND="
 	')
 	${PYTHON_DEPS}
 "
-DEPEND="${RDEPEND}"
+RDEPEND="${DEPEND}"
 BDEPEND="dev-util/blueprint-compiler"
 
 src_prepare() {
