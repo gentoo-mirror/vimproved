@@ -7,8 +7,8 @@ inherit cmake xdg
 
 DESCRIPTION="A free software percussion synthesizer for GNU/Linux"
 HOMEPAGE="https://geonkick.org"
-SRC_URI="https://gitlab.com/geonkick-synthesizer/geonkick/-/archive/v${PV}/geonkick-v${PV}.tar.bz2 -> ${P}.tar.bz2"
-S="${WORKDIR}/geonkick-v${PV}"
+SRC_URI="https://gitlab.com/${PN}-synthesizer/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.bz2 -> ${P}.tar.bz2"
+S="${WORKDIR}/${PN}-v${PV}"
 
 LICENSE="GPL-3"
 SLOT="0"
