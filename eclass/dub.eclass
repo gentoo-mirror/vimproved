@@ -23,7 +23,6 @@ inherit dlang
 
 BDEPEND="
 	${BDEPEND}
-	dev-d/dub-config
 	dev-util/dub
 "
 
@@ -45,9 +44,9 @@ dub_src_compile() {
 # @DESCRIPTION:
 # Copy package into dub system cache.
 dub_src_install() {
-	insinto /usr/${LIBDIR}/dub/${P}
+	insinto /usr/${LIBDIR}/dub/${PN}/${PV}
 	doins -r "${S}"
-	mv "${ED}/usr/${LIBDIR}/dub/${P}/${S##*/}" "${ED}/usr/${LIBDIR}/dub/${P}/${PN}" || die
+	mv "${ED}/usr/${LIBDIR}/dub/${PN}/${PV}/${S##*/}" "${ED}/usr/${LIBDIR}/dub/${PN}/${PV}/${PN}" || die
 }
 
 EXPORT_FUNCTIONS pkg_setup src_compile src_install
