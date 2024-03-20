@@ -12,9 +12,9 @@ HOMEPAGE="https://gradienceteam.github.io/"
 MY_PV="$(ver_cut 1-3)-$(ver_cut 4-5)"
 SUBMODULES_COMMIT="cc95cdf36c7c52ffa5d34dcf337e1523db89de26"
 SRC_URI="
-	https://github.com/GradienceTeam/Gradience/archive/refs/tags/${MY_PV}.tar.gz -> ${P}.tar.gz
-	https://github.com/GradienceTeam/Submodules/archive/${SUBMODULES_COMMIT}.tar.gz
-		-> gradience-submodules-${SUBMODULES_COMMIT}.tar.gz
+	https://github.com/${PN^}Team/${PN^}/archive/refs/tags/${MY_PV}.tar.gz -> ${P}.tar.gz
+	https://github.com/${PN^}Team/Submodules/archive/${SUBMODULES_COMMIT}.tar.gz
+		-> ${PN}-submodules-${SUBMODULES_COMMIT}.tar.gz
 "
 S="${WORKDIR}/Gradience-${MY_PV}"
 
@@ -55,8 +55,8 @@ src_install() {
 
 	python_optimize
 
-	python_fix_shebang "${ED}/usr/bin/gradience"
-	python_fix_shebang "${ED}/usr/bin/gradience-cli"
+	python_fix_shebang "${ED}/usr/bin/${PN}"
+	python_fix_shebang "${ED}/usr/bin/${PN}-cli"
 
 	mv "${ED}/usr/share/appdata" "${ED}/usr/share/metainfo" || die
 }
