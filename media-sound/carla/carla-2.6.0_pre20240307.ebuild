@@ -4,13 +4,14 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{11..12} )
+
 inherit python-single-r1 xdg
 
 DESCRIPTION="Audio plugin host"
 HOMEPAGE="https://kx.studio/Applications:Carla"
-EGIT_COMMIT="fe8631bc13a507507ccc6b5c408d5a4a880b1936"
-SRC_URI="https://github.com/falkTX/Carla/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/Carla-${EGIT_COMMIT}"
+CARLA_COMMIT="66afe24a08790732cc17d81d4b846a1e0cfa0118"
+SRC_URI="https://github.com/falkTX/Carla/archive/${CARLA_COMMIT}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/Carla-${CARLA_COMMIT}"
 
 LICENSE="GPL-2 LGPL-3"
 SLOT="0"
