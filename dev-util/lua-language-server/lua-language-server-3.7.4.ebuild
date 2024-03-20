@@ -9,7 +9,7 @@ inherit lua-single ninja-utils prefix toolchain-funcs
 
 DESCRIPTION="Lua language server"
 HOMEPAGE="https://github.com/LuaLS/lua-language-server"
-SRC_URI="https://github.com/LuaLS/lua-language-server/releases/download/${PV}/${P}-submodules.zip -> ${P}.zip"
+SRC_URI="https://github.com/LuaLS/${PN}/releases/download/${PV}/${P}-submodules.zip -> ${P}.zip"
 S="${WORKDIR}"
 
 LICENSE="MIT"
@@ -34,7 +34,7 @@ src_prepare() {
 		3rd/lpeglabel/makefile || die
 	# Shipped file doesn't respect CFLAGS/CXXFLAGS/LDFLAGS
 	eapply "${FILESDIR}/linux.ninja.patch"
-	eapply "${FILESDIR}/lua-language-server-3.7.4-bee-userdata-align-16.patch"
+	eapply "${FILESDIR}/${PN}-3.7.4-bee-userdata-align-16.patch"
 	eapply_user
 	sed -i -e "s/^cc = REPLACE_ME/cc = $(tc-getCC)/" \
 		-e "s/^ar = REPLACE_AR/ar = $(tc-getAR)/" \
