@@ -6,6 +6,7 @@ EAPI=8
 DISTUTILS_USE_PEP517=poetry
 PYPI_NO_NORMALIZE=1
 PYTHON_COMPAT=( python3_{11..12} )
+
 inherit distutils-r1 pypi
 
 DESCRIPTION="Python port of material-color-utilities used for Material You colors"
