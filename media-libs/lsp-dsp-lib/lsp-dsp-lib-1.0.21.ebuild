@@ -16,8 +16,8 @@ KEYWORDS="~amd64"
 IUSE="static-libs test"
 RESTRICT="!test? ( test )"
 
-RDEPEND="media-libs/lsp-common-lib"
-DEPEND="${RDEPEND}"
+DEPEND="media-libs/lsp-common-lib"
+RDEPEND="${DEPEND}"
 BDEPEND="test? ( media-libs/lsp-test-fw )"
 
 pkg_setup() {
