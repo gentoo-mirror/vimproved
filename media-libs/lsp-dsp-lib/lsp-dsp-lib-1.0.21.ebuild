@@ -7,8 +7,8 @@ inherit flag-o-matic
 
 DESCRIPTION="DSP library for signal processing"
 HOMEPAGE="https://lsp-plug.in/"
-SRC_URI="https://github.com/lsp-plugins/lsp-dsp-lib/releases/download/${PV}/lsp-dsp-lib-src-${PV}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/lsp-dsp-lib"
+SRC_URI="https://github.com/lsp-plugins/${PN}/releases/download/${PV}/${PN}-src-${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/${PN}"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
@@ -55,7 +55,7 @@ src_compile() {
 }
 
 src_test() {
-	"${S}/.build/target/lsp-dsp-lib/lsp-dsp-lib-test" utest -v || die
+	"${S}/.build/target/${PN}/${PN}-test" utest -v || die
 }
 
 src_install() {
