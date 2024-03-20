@@ -12,8 +12,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="debug static-libs"
 
-RDEPEND="dev-libs/libyaml"
-DEPEND="${RDEPEND}"
+DEPEND="dev-libs/libyaml"
+RDEPEND="${DEPEND}"
 BDEPEND="virtual/pkgconfig"
 
 pkg_setup() {
