@@ -16,17 +16,17 @@ KEYWORDS="~amd64"
 IUSE="+lv2 +standalone"
 RESTRICT="test"
 
-RDEPEND="
+DEPEND="
 	dev-libs/rapidjson
 	media-libs/libsndfile
 	media-libs/lv2
 	x11-libs/cairo[X]
 	standalone? ( virtual/jack )
 "
-DEPEND="${RDEPEND}"
+RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}/geonkick-3.0.0-remove-link-to-libstdc++fs.patch"
+	"${FILESDIR}/${PN}-3.4.0-remove-link-to-libstdc++fs.patch"
 )
 
 src_configure() {

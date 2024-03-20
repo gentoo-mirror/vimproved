@@ -1,0 +1,47 @@
+From e684377fc786eccd57044aaab780d1f91af01205 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Wed, 20 Mar 2024 10:05:08 -0400
+Subject: [PATCH] remove link to libstdc++fs
+
+--- a/src/plugin/lv2/CMakeLists.txt
++++ b/src/plugin/lv2/CMakeLists.txt
+@@ -38,7 +38,6 @@ if (CMAKE_SYSTEM_NAME MATCHES Windows)
+       "-static-libstdc++"
+       "-static-libgcc")
+ else()
+-    target_link_libraries(geonkick_lv2 PRIVATE "-lstdc++fs")
+     target_link_libraries(geonkick_lv2 PRIVATE "-lX11 -lsndfile -lrt -lm -ldl -lpthread -lcairo")
+ endif()
+ 
+@@ -82,7 +81,6 @@ if (CMAKE_SYSTEM_NAME MATCHES Windows)
+       "-static-libstdc++"
+       "-static-libgcc")
+ else()
+-  target_link_libraries(geonkick_single_lv2 PRIVATE "-lstdc++fs")
+   target_link_libraries(geonkick_single_lv2 PRIVATE "-lX11 -lsndfile -lrt -lm -ldl -lpthread -lcairo")
+ endif()
+ 
+--- a/src/plugin/vst/CMakeLists.txt
++++ b/src/plugin/vst/CMakeLists.txt
+@@ -80,7 +80,7 @@ target_link_libraries(${target} PRIVATE
+       "-static-libgcc"
+       )
+ else()
+-      target_link_libraries(${target} PRIVATE "-lstdc++ -lstdc++fs -lsndfile -lcairo -lm -lpthread")
++      target_link_libraries(${target} PRIVATE "-lstdc++ -lsndfile -lcairo -lm -lpthread")
+ endif()
+ 
+ add_dependencies(${target} geonkick_common)
+--- a/src/standalone/CMakeLists.txt
++++ b/src/standalone/CMakeLists.txt
+@@ -11,7 +11,6 @@ target_link_libraries(geonkick  geonkick_common api_standalone redkite)
+ if (CMAKE_SYSTEM_NAME MATCHES Windows)
+     target_link_libraries(geonkick "-mwindows -lstdc++ -lstdc++fs -lsndfile -lm -lpthread")
+ else()
+-    target_link_libraries(geonkick "-lstdc++fs")
+     target_link_libraries(geonkick "-lX11 -ljack -lsndfile -lrt -lm -ldl -lpthread -lcairo")
+ endif()
+ 
+-- 
+2.44.0
+
