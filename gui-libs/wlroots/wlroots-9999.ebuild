@@ -67,10 +67,6 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-PDEPEND="
-	tinywl? ( ~gui-wm/tinywl-${PV} )
-"
-
 PATCHES=(
 	"${FILESDIR}/wlroots-9999-Allow-parallel-install-of-wlroots-versions.patch"
 )
@@ -84,6 +80,7 @@ src_configure() {
 	local meson_backends=$(IFS=','; echo "${backends[*]}")
 	local emesonargs=(
 		$(meson_feature xcb-errors)
+		$(meson_use tinywl examples)
 		-Drenderers=$(usex vulkan 'gles2,vulkan' gles2)
 		$(meson_feature X xwayland)
 		-Dbackends=${meson_backends}
@@ -96,6 +93,10 @@ src_configure() {
 src_install() {
 	meson_src_install
 	dodoc docs/*
+
+	if use tinywl; then
+		dobin "${BUILD_DIR}"/tinywl/tinywl
+	fi
 }
 
 pkg_postinst() {
