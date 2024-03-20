@@ -5,6 +5,7 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{9..11} )
+
 inherit distutils-r1 pypi udev
 
 DESCRIPTION="A program to help users work with QMK Firmware."
