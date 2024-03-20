@@ -4,6 +4,7 @@
 EAPI=8
 
 LUA_COMPAT=( lua5-1 luajit lua5-{3..4} )
+
 inherit lua-single
 
 DESCRIPTION="A formatter for Fennel code"
@@ -15,8 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 REQUIRED_USE="${LUA_REQUIRED_USE}"
 
-RDEPEND="${LUA_DEPS}"
-DEPEND="${RDEPEND}"
+DEPEND="${LUA_DEPS}"
+RDEPEND="${DEPEND}"
 
 pkg_setup() {
 	lua-single_pkg_setup
