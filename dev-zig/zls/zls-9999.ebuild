@@ -14,7 +14,7 @@ EGIT_REPO_URI="https://github.com/zigtools/zls.git"
 LICENSE="MIT"
 SLOT="0"
 
-BDEPEND="
+DEPEND="
 	dev-zig/diffz:20240105
 	dev-zig/known-folders:20240321
 "
