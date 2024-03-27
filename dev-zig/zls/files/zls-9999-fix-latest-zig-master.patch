@@ -1,0 +1,39 @@
+From 05a3dc9b093360c81ac9196e860b10fb0afe3932 Mon Sep 17 00:00:00 2001
+From: Ian Johnson <ian@ianjohnson.dev>
+Date: Mon, 25 Mar 2024 21:55:12 -0400
+Subject: [PATCH] Fix build for latest Zig master
+
+As of https://github.com/ziglang/zig/pull/19414, a small workaround is
+necessary to avoid global variables containing references to comptime
+vars.
+---
+ src/lsp.zig | 2 +-
+ src/uri.zig | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/lsp.zig b/src/lsp.zig
+index 8af8c6ed5..0ecf84dfb 100644
+--- a/src/lsp.zig
++++ b/src/lsp.zig
+@@ -107,7 +107,7 @@ pub fn EnumCustomStringValues(comptime T: type, comptime contains_empty_enum: bo
+             for (fields[0 .. fields.len - 1], 0..) |field, i| {
+                 kvs_array[i] = .{ field.name, @field(T, field.name) };
+             }
+-            break :build_kvs kvs_array[0..];
++            break :build_kvs kvs_array;
+         };
+         /// NOTE: this maps 'empty' to .empty when T contains an empty enum
+         /// this shouldn't happen but this doesn't do any harm
+diff --git a/src/uri.zig b/src/uri.zig
+index 51ecaf50d..8d5565551 100644
+--- a/src/uri.zig
++++ b/src/uri.zig
+@@ -15,7 +15,7 @@ const reserved_escapes = blk: {
+         escapes[i][0] = '%';
+         _ = std.fmt.bufPrint(escapes[i][1..], "{X}", .{c}) catch unreachable;
+     }
+-    break :blk &escapes;
++    break :blk escapes;
+ };
+ 
+ /// Returns a URI from a path, caller owns the memory allocated with `allocator`
