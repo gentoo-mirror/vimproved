@@ -7,7 +7,7 @@ inherit zig-package
 
 DESCRIPTION="Zig bindings for xkbcommon"
 HOMEPAGE="https://codeberg.org/ifreund/zig-xkbcommon"
-SRC_URI="https://codeberg.org/ifreund/zig-xkbcommon/archive/7b188de0ba794b52eb70340abf2469b858630816.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://codeberg.org/ifreund/zig-xkbcommon/archive/3a2eefdad6b4d48757274061dd2b5df3b89a2bfd.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}"
 
 LICENSE="MIT"
