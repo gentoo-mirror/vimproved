@@ -7,7 +7,7 @@ inherit zig-package
 
 DESCRIPTION="Zig wayland scanner and libwayland bindings"
 HOMEPAGE="https://codeberg.org/ifreund/zig-wayland"
-SRC_URI="https://codeberg.org/ifreund/${PN}/archive/343c2e30d838b7765c9a5c5bfc31baf18b564a9a.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://codeberg.org/ifreund/${PN}/archive/e47e885f5361f7b4d25cc4a7ae856f276b314b34.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}"
 
 LICENSE="MIT"
