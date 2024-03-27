@@ -9,7 +9,7 @@ inherit python-single-r1 xdg
 
 DESCRIPTION="Audio plugin host"
 HOMEPAGE="https://kx.studio/Applications:Carla"
-CARLA_COMMIT="66afe24a08790732cc17d81d4b846a1e0cfa0118"
+CARLA_COMMIT="3c7d0e7b914d38a32b733cc5ced0b5696d2f9a03"
 SRC_URI="https://github.com/falkTX/${PN^}/archive/${CARLA_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN^}-${CARLA_COMMIT}"
 
