@@ -21,6 +21,7 @@ esac
 if [[ ! ${_ZIG_PACKAGE_ECLASS} ]]; then
 _ZIG_PACKAGE_ECLASS=1
 
+ZIG_MIN="0.12"
 inherit zig
 
 SLOT="${PV}"
