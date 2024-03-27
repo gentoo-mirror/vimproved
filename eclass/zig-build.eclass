@@ -7,6 +7,7 @@
 # @AUTHOR:
 # Violet Purcell <vimproved@inventati.org>
 # @SUPPORTED_EAPIS: 8
+# @PROVIDES: zig
 # @BLURB: Basic eclass for packages using the Zig build system.
 # @DESCRIPTION:
 # This eclass provides logic for packages using the Zig build system
@@ -82,6 +83,12 @@ zig-build_src_compile() {
 			zigargs+=( -Drelease-fast )
 	elif [[ "${ZIG_BUILD_TYPE}" = ReleaseSmall ]]; then
 			zigargs+=( -Drelease-small )
+	fi
+
+	if ver_test "${ZIG_VER}" -ge "0.12"; then
+		zigbuildargs+=(
+			--system "${EPREFIX}/usr/src/zig/packages"
+		)
 	fi
 
 	zigbuildargs+=(

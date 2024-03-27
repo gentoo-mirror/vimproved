@@ -7,6 +7,7 @@
 # @AUTHOR:
 # Violet Purcell <vimproved@inventati.org>
 # @SUPPORTED_EAPIS: 8
+# @PROVIDES: zig
 # @BLURB: eclass for Zig source packages
 # @DESCRIPTION:
 # This eclass provieds functionality to automatically install Zig source
