@@ -7,7 +7,7 @@ inherit zig-package
 
 DESCRIPTION="Implementation of go-diff's diffmatchpatch in Zig"
 HOMEPAGE="https://github.com/ziglibs/diffz"
-DIFFZ_COMMIT="90353d401c59e2ca5ed0abe5444c29ad3d7489aa"
+DIFFZ_COMMIT="e10bf15962e45affb3fcd7d9a950977a69c901b3"
 SRC_URI="https://github.com/ziglibs/${PN}/archive/${DIFFZ_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}-${DIFFZ_COMMIT}"
 
