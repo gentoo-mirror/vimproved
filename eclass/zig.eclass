@@ -7,9 +7,9 @@
 # @AUTHOR:
 # Violet Purcell <vimproved@inventati.org>
 # @SUPPORTED_EAPIS: 8
-# @BLURB: Utility functions for packages using Zig's build system.
+# @BLURB: Common eclass for programs written in the Zig programming language.
 # @DESCRIPTION:
-# Utility eclass for packages that use Zig's build system (eg. with build.zig).
+# This eclass contains helper code for any package with code written in Zig.
 
 case ${EAPI} in
 	8) ;;
@@ -21,45 +21,11 @@ _ZIG_ECLASS=1
 
 inherit edo
 
-# @ECLASS_VARIABLE: ZIG_USE_PIE
-# @PRE_INHERIT
-# @DESCRIPTION:
-# If true, add the pie USE flag to the package. Toggle off only if the
-# program is broken with PIE.
-ZIG_USE_PIE="${ZIG_USE_PIE:=true}"
-
-if [[ "${ZIG_USE_PIE}" = true ]]; then
-	IUSE="pie"
-fi
-
 # @ECLASS_VARIABLE: ZIG
 # @DESCRIPTION:
 # The Zig binary to use for build. Useful if you have multiple Zig versions
 # installed and want to use a specific version.
 : "${ZIG:-}"
-
-# @ECLASS_VARIABLE: ezigargs
-# @DEFAULT_UNSET
-# @DESCRIPTION:
-# Optional Zig arguments as Bash array; this should be defined before calling
-# zig_src_compile
-
-# @ECLASS_VARIABLE: MYZIGARGS
-# @USER_VARIABLE
-# @DESCRIPTION:
-# User-controlled variable containing extra arguments to be passed to
-# `zig build`.
-
-# @ECLASS_VARIABLE: ZIG_BUILD_TYPE
-# @DESCRIPTION:
-# Controls Zig's build type. Can be one of Debug, ReleaseSafe, ReleaseSmall, or
-# ReleaseFast. Defaults to ReleaseSafe. Only works with Zig 0.11 and later.
-: "${ZIG_BUILD_TYPE:=ReleaseSafe}"
-
-# @ECLASS_VARIABLE: ZIG_BUILD_VERBOSE
-# @DESCRIPTION:
-# If non-empty, build with verbose output.
-: "${ZIG_BUILD_VERBOSE:=1}"
 
 # @ECLASS_VARIABLE: ZIG_MIN
 # @PRE_INHERIT
@@ -152,58 +118,6 @@ zig_pkg_setup() {
 	export ZIG_GLOBAL_CACHE_DIR="${T}/zig-cache"
 }
 
-# @FUNCTION: zig_src_compile
-# @DESCRIPTION:
-# Runs `zig build` with specified arguments..
-zig_src_compile() {
-	local zigargs=( "${ZIG}" build )
-
-	if [[ -n "${ZIG_BUILD_VERBOSE}" ]]; then
-		zigargs+=( --verbose )
-	fi
-
-	# Enable PIE if ZIG_USE_PIE is set and use flag is enabled.
-	if [[ "${ZIG_USE_PIE}" = true ]]; then
-		zigargs+=( -Dpie=$(usex pie true false) )
-	fi
-
-	if ver_test "${ZIG_VER}" -ge "0.11"; then
-		zigargs+=(
-			# ZIG_BUILD_TYPE
-			-Doptimize="${ZIG_BUILD_TYPE}"
-		)
-	elif [[ "${ZIG_BUILD_TYPE}" = ReleaseSafe ]]; then
-			zigargs+=( -Drelease-safe )
-	elif [[ "${ZIG_BUILD_TYPE}" = ReleaseFast ]]; then
-			zigargs+=( -Drelease-fast )
-	elif [[ "${ZIG_BUILD_TYPE}" = ReleaseSmall ]]; then
-			zigargs+=( -Drelease-small )
-	fi
-
-	zigargs+=(
-
-		# Arguments from ebuild
-		"${ezigargs[@]}"
-
-		# Arguments passed to this function
-		"$@"
-
-		# Arguments from user
-		"${MYZIGARGS[@]}"
-	)
-
-	edo "${zigargs[@]}"
-}
-
-# @FUNCTION: zig_src_install
-# @DESCRIPTION:
-# Copies Zig's default install tree to DESTDIR.
-zig_src_install() {
-	# Zig has no separate install/compile steps and installs to ${S}/zig-out by
-	# default. We just copy this tree to ${ED} here.
-	cp -a "${S}/zig-out" "${ED}/usr" || die
-}
-
-EXPORT_FUNCTIONS pkg_setup src_compile src_install
+EXPORT_FUNCTIONS pkg_setup
 
 fi
