@@ -21,7 +21,7 @@ esac
 if [[ ! ${_ZIG_BUILD_ECLASS} ]]; then
 _ZIG_BUILD_ECLASS=1
 
-inherit edo
+inherit edo zig
 
 # @ECLASS_VARIABLE: ZIG_USE_PIE
 # @PRE_INHERIT
