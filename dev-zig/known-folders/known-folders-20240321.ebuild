@@ -7,7 +7,7 @@ inherit zig-package
 
 DESCRIPTION="Provides access to well-known folders across several operating systems"
 HOMEPAGE="https://github.com/ziglibs/known-folders"
-KNOWN_FOLDERS_COMMIT="fa75e1bc672952efa0cf06160bbd942b47f6d59b"
+KNOWN_FOLDERS_COMMIT="bf79988adcfce166f848e4b11e718c1966365329"
 SRC_URI="https://github.com/ziglibs/${PN}/archive/${KNOWN_FOLDERS_COMMIT}.tar.gz -> ${PN}-${KNOWN_FOLDERS_COMMIT}.tar.gz"
 S="${WORKDIR}/${PN}-${KNOWN_FOLDERS_COMMIT}"
 
