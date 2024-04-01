@@ -3,6 +3,8 @@
 
 EAPI=8
 
+inherit autotools
+
 DESCRIPTION="Generate text, XML, JSON, and HTML output using a common set of function calls."
 HOMEPAGE="https://juniper.github.io/libxo/libxo-manual.html"
 SRC_URI="https://github.com/Juniper/libxo/releases/download/${PV}/${P}.tar.gz"
@@ -14,6 +16,13 @@ KEYWORDS="~amd64"
 PATCHES=(
 	"${FILESDIR}/${P}-musl.patch"
 )
+
+src_configure() {
+	# work around slibtool build failure
+	eautoreconf
+
+	default
+}
 
 src_install() {
 	default
