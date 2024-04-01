@@ -42,7 +42,7 @@ src_configure() {
 src_install() {
 	meson_src_install
 
-	for bin in "${ED}"/usr/bin/*; do
+	for bin in "${ED}"/usr/bin/* "${ED}"/usr/sbin/*; do
 		mv "${bin}" "${bin}-chimera" || die
 	done
 
