@@ -43,12 +43,24 @@ src_install() {
 	meson_src_install
 
 	for bin in "${ED}"/usr/bin/* "${ED}"/usr/sbin/*; do
-		mv "${bin}" "${bin}-chimera" || die
+		if [[ -h "${bin}" ]]; then
+			local dest="$(readlink "${bin}")"
+			rm "${bin}" || die
+			dosym "${dest}-chimera" "${bin#"${ED}"}-chimera"
+		else
+			mv "${bin}" "${bin}-chimera" || die
+		fi
 	done
 
 	for man in "${ED}"/usr/share/man/man*/*; do
 		local basename_man="${man##*/}"
-		local man_folder="${man%/*}"
-		mv "${man}" "${man_folder}/${basename_man%%.*}-chimera.${basename_man#*.}" || die
+		local new_man="${man%/*}/${basename_man%%.*}-chimera.${basename_man#*.}"
+		if [[ -h "${man}" ]]; then
+			local dest="$(readlink "${man}")"
+			rm "${man}" || die
+			dosym "${dest%%.*}-chimera.${dest#*.}" "${new_man#"${ED}"}"
+		else
+			mv "${man}" "${new_man}" || die
+		fi
 	done
 }
