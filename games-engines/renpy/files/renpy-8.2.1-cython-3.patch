@@ -1,0 +1,71 @@
+From 90f0b18f9416811dd1e0996bee85e20dfc879db8 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Mon, 15 Apr 2024 15:43:33 -0400
+Subject: [PATCH 2/2] fix build with cython>=3
+
+---
+ renpy/audio/renpysound.pyx | 4 ++--
+ renpy/text/ftfont.pyx      | 4 ++--
+ renpy/text/hbfont.pyx      | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/renpy/audio/renpysound.pyx b/renpy/audio/renpysound.pyx
+index e2485957a..8417d84ac 100644
+--- a/renpy/audio/renpysound.pyx
++++ b/renpy/audio/renpysound.pyx
+@@ -518,7 +518,7 @@ def set_generate_audio_c_function(fn):
+         import ctypes
+         fn = ctypes.cast(fn, ctypes.c_void_p).value
+ 
+-    RPS_generate_audio_c_function = <void (*)(float *, int)> <uintptr_t> fn
++    RPS_generate_audio_c_function = <void (*)(float *, int) noexcept> <uintptr_t> fn
+ 
+ 
+ # Store the sample surfaces so they stay alive.
+diff --git a/renpy/text/ftfont.pyx b/renpy/text/ftfont.pyx
+index 2de165b55..585303a28 100644
+--- a/renpy/text/ftfont.pyx
++++ b/renpy/text/ftfont.pyx
+@@ -120,7 +120,7 @@ cdef bint is_zerowidth(unsigned int char):
+ 
+     return False
+ 
+-cdef unsigned long io_func(FT_Stream stream, unsigned long offset, unsigned char *buffer, unsigned long count):
++cdef unsigned long io_func(FT_Stream stream, unsigned long offset, unsigned char *buffer, unsigned long count) noexcept:
+     """
+     Seeks to offset, and then reads count bytes from the stream into buffer.
+     """
+@@ -157,7 +157,7 @@ cdef unsigned long io_func(FT_Stream stream, unsigned long offset, unsigned char
+ 
+     return count
+ 
+-cdef void close_func(FT_Stream stream):
++cdef void close_func(FT_Stream stream) noexcept:
+     """
+     Close the stream.
+ 
+diff --git a/renpy/text/hbfont.pyx b/renpy/text/hbfont.pyx
+index 8f84ca9a6..ab1f54b8e 100644
+--- a/renpy/text/hbfont.pyx
++++ b/renpy/text/hbfont.pyx
+@@ -246,7 +246,7 @@ cdef bint is_zerowidth(unsigned int char):
+ 
+     return False
+ 
+-cdef unsigned long io_func(FT_Stream stream, unsigned long offset, unsigned char *buffer, unsigned long count):
++cdef unsigned long io_func(FT_Stream stream, unsigned long offset, unsigned char *buffer, unsigned long count) noexcept:
+     """
+     Seeks to offset, and then reads count bytes from the stream into buffer.
+     """
+@@ -283,7 +283,7 @@ cdef unsigned long io_func(FT_Stream stream, unsigned long offset, unsigned char
+ 
+     return count
+ 
+-cdef void close_func(FT_Stream stream):
++cdef void close_func(FT_Stream stream) noexcept:
+     """
+     Close the stream.
+ 
+-- 
+2.44.0
+
