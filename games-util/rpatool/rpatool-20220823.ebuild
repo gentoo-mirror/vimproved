@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/Shizmob/rpatool"
 SRC_URI="https://github.com/shizmob/rpatool/raw/74f26d5dfdd645483e02552aa766ca447ad6b191/rpatool -> ${P}"
 S="${WORKDIR}"
 
-LICENSE="WTFPL"
+LICENSE="WTFPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
