@@ -1,7 +1,14 @@
 media-libs/lsp-plugins
 media-plugins/calf
 media-plugins/distrho-ports
+media-plugins/dragonfly-reverb-plugins
+media-plugins/noise-repellent
+media-plugins/swh-lv2
 media-plugins/x42-avldrums
 media-plugins/x42-plugins
+media-plugins/zam-plugins
+media-sound/amsynth
+media-sound/geonkick
 media-sound/helm
+media-sound/yoshimi
 media-sound/zynaddsubfx
