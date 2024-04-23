@@ -61,6 +61,7 @@ src_configure() {
 		$(meson_use vst3 build-vst3)
 		-Dlto-optimizations=false
 		-Dneon-optimizations=false
+		-Doptimizations=false
 		-Dsse-optimizations=false
 	)
 
