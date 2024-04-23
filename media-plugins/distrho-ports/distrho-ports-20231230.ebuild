@@ -24,7 +24,7 @@ S="${WORKDIR}/DISTRHO-Ports-${COMMIT}"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+lv2 vst2 vst3"
+IUSE="+lv2 +vst2 +vst3"
 RESTRICT="test"
 
 DEPEND="
