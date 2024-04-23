@@ -55,6 +55,7 @@ BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-4.2.0-dynamic_cast-crash.patch"
+	"${FILESDIR}/${PN}-9999-appshell-qkeycombination.patch"
 )
 
 src_prepare() {
