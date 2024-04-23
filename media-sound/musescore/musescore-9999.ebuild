@@ -28,7 +28,7 @@ RESTRICT="!test? ( test )"
 
 RDEPEND="
 	dev-libs/tinyxml2:=
-	dev-qt/qt5compat:6
+	dev-qt/qt5compat:6[qml]
 	dev-qt/qtbase:6[concurrent,dbus,gui,network,opengl,widgets,xml]
 	dev-qt/qtdeclarative:6[widgets]
 	dev-qt/qtnetworkauth:6
