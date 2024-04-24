@@ -51,7 +51,6 @@ BDEPEND="dev-python/PyQt5"
 PATCHES=(
 	"${FILESDIR}/${PN}-2.6.0_pre20231023-Add-logic-to-autodetect-compiler-and-fix-build-with-clang-on-linux.patch"
 	"${FILESDIR}/${PN}-2.6.0_pre20231023-Add-logic-to-automatically-link-against-fts-standalone.patch"
-	"${FILESDIR}/${PN}-2.6.0_pre20240301-liblo-0.32.patch"
 )
 
 pkg_setup() {
