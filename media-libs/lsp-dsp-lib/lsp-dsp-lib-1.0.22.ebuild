@@ -11,7 +11,7 @@ SRC_URI="https://github.com/lsp-plugins/${PN}/releases/download/${PV}/${PN}-src-
 S="${WORKDIR}/${PN}"
 
 LICENSE="GPL-3 LGPL-3"
-SLOT="0"
+SLOT="0/${PV}"
 KEYWORDS="~amd64"
 IUSE="static-libs test"
 RESTRICT="!test? ( test )"
