@@ -7,7 +7,7 @@ inherit meson
 
 DESCRIPTION="Linux audio plugins and LV2 ports"
 HOMEPAGE="http://distrho.sourceforge.net/ports"
-COMMIT="5c55f9445ee6ff75d53c7f8601fc341d200aa4a0"
+COMMIT="7fedbb937b7c48ac8f0d28e546ddeccaca295f04"
 JUCE5_COMMIT="176f819c681405a12e7f6ecc1e2e1af472c3ed7b"
 JUCE60_COMMIT="6648f3fee63fce603a21d467715e4314f3766a27"
 JUCE61_COMMIT="7c23c02e47739ee77f29a9bec4d5440b59dc54d3"
