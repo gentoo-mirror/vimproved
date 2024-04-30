@@ -6,9 +6,6 @@
 		<name>Violet Purcell</name>
 	</maintainer>
 	<use>
-		<flag name="lsp-dsp">Use <pkg>media-libs/lsp-dsp-lib</pkg> for optimized signal processing</flag>
 		<flag name="plugins">Build extra plugins for Zrythm</flag>
-		<flag name="rtaudio">Enable support for <pkg>media-libs/rtaudio</pkg></flag>
-		<flag name="rtmidi">Enable support for <pkg>media-libs/rtmidi</pkg></flag>
 	</use>
 </pkgmetadata>

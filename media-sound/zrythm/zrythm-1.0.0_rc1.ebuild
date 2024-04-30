@@ -7,15 +7,16 @@ inherit gnome2-utils meson xdg
 
 DESCRIPTION="A highly automated and intuitive digital audio workstation"
 HOMEPAGE="https://www.zrythm.org/"
-BETA_PV="$(ver_cut 5)"
-MY_PV="$(ver_cut 1-3)-beta.${BETA_PV:0:1}.${BETA_PV:1:2}.${BETA_PV:3:4}"
+if [[ ${PV} = *_rc* ]]; then
+	MY_PV="$(ver_cut 1-3)-rc.$(ver_cut 5)"
+fi
 SRC_URI="https://www.${PN}.org/releases/${PN}-${MY_PV}.tar.xz -> ${P}.tar.xz"
 S="${WORKDIR}/${PN}-${MY_PV}"
 
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="X alsa graphviz +guile +jack +lsp-dsp +plugins pulseaudio rtaudio rtmidi sdl"
+IUSE="X alsa +jack +plugins pulseaudio sdl"
 
 RDEPEND="
 	app-arch/zstd:=
@@ -29,7 +30,8 @@ RDEPEND="
 	dev-libs/serd
 	dev-libs/xxhash
 	dev-libs/zix
-	>=gui-libs/gtk-4.10:4[X?]
+	dev-scheme/guile:12=
+	>=gui-libs/gtk-4.14:4[X?]
 	gui-libs/gtksourceview:5
 	gui-libs/libadwaita:1
 	gui-libs/libpanel:1
@@ -38,6 +40,7 @@ RDEPEND="
 	media-libs/fontconfig
 	media-libs/graphene
 	media-libs/lilv
+	media-libs/lsp-dsp-lib
 	media-libs/rubberband
 	media-libs/soxr
 	media-libs/sratom
@@ -49,13 +52,8 @@ RDEPEND="
 	x11-libs/gdk-pixbuf:2
 	x11-libs/pango
 	X? ( x11-libs/libX11 )
-	graphviz? ( media-gfx/graphviz )
-	guile? ( dev-scheme/guile:12= )
 	jack? ( virtual/jack )
-	lsp-dsp? ( media-libs/lsp-dsp-lib )
 	pulseaudio? ( media-libs/libpulse )
-	rtaudio? ( media-libs/rtaudio:= )
-	rtmidi? ( media-libs/rtmidi )
 	sdl? ( media-libs/libsdl2 )
 "
 DEPEND="
@@ -70,6 +68,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.0.0_beta4125-remove-execinfo.patch"
+	"${FILESDIR}/${PN}-1.0.0_rc1-dlfcn.h-include.patch"
 )
 
 src_configure() {
@@ -78,16 +77,12 @@ src_configure() {
 		-Dcarla_use_cv32_patchbay_variant=true
 		-Dcheck_updates=false
 		-Dcompletions=false
+		-Dlsp_dsp=enabled
 		-Dopus=true
 		$(meson_feature X x11)
 		$(meson_feature alsa)
-		$(meson_feature graphviz)
-		$(meson_feature guile)
-		$(meson_feature lsp-dsp lsp_dsp)
 		$(meson_use plugins bundled_plugins)
 		$(meson_feature pulseaudio pulse)
-		$(meson_feature rtaudio)
-		$(meson_feature rtmidi)
 		$(meson_feature sdl)
 	)
 

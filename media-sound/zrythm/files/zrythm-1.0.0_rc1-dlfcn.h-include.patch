@@ -1,0 +1,25 @@
+From 599e5edfdfe994ccc1909216b2d5bf73e8e58019 Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Tue, 30 Apr 2024 14:22:02 -0400
+Subject: [PATCH] fix incorrect dlfcn.h conditional
+
+---
+ src/dsp/engine_jack.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/dsp/engine_jack.c b/src/dsp/engine_jack.c
+index 9a43ad1d0..bcf2d34e2 100644
+--- a/src/dsp/engine_jack.c
++++ b/src/dsp/engine_jack.c
+@@ -31,7 +31,7 @@
+ #  include <glib/gi18n.h>
+ #  include <gtk/gtk.h>
+ 
+-#  if !defined _WOE32 && defined __GLIBC__
++#  if !defined _WOE32 && !defined __APPLE__
+ #    include <dlfcn.h>
+ #  endif
+ 
+-- 
+2.45.0
+
