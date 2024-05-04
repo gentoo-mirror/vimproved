@@ -42,6 +42,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-20231230-juce6.1-musl.patch"
 	"${FILESDIR}/${PN}-20231230-juce7-musl.patch"
 	"${FILESDIR}/${PN}-20231230-nullptr-cast.patch"
+	"${FILESDIR}/${PN}-20240427-no-strip.patch"
 )
 
 src_prepare() {
