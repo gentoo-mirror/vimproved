@@ -24,7 +24,7 @@ fi
 
 GETENT_COMMIT="93a08815f8598db442d8b766b463d0150ed8e2ab"
 GETENT_FILE="musl-getent-${GETENT_COMMIT}.c"
-SCUDO_VER="17.0.6"
+SCUDO_VER="18.1.6"
 SRC_URI+="
 	https://dev.gentoo.org/~blueness/musl-misc/getconf.c
 	https://gitlab.alpinelinux.org/alpine/aports/-/raw/${GETENT_COMMIT}/main/musl/getent.c -> ${GETENT_FILE}
@@ -56,6 +56,7 @@ PATCHES=(
 	"${FILESDIR}"/musl-1.2.5-scudo-add-necessary-plumbing.patch
 	"${FILESDIR}"/musl-1.2.4-scudo-clean-up-lingering-weak-symbols-we-don-t-want.patch
 	"${FILESDIR}"/musl-1.2.4-do-not-rely-on-system-headers-for-cpu-info.patch
+	"${FILESDIR}"/musl-1.2.5-scudo-common-no-unistd.patch
 )
 
 just_headers() {
