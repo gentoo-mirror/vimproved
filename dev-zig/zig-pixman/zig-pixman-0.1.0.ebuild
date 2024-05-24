@@ -8,6 +8,7 @@ inherit zig-package
 DESCRIPTION="Zig bindings for pixman"
 HOMEPAGE="https://codeberg.org/ifreund/zig-pixman"
 SRC_URI="https://codeberg.org/ifreund/zig-pixman/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}/${PN}"
 
 LICENSE="MIT"
 SLOT="${PV}"
