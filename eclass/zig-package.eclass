@@ -34,14 +34,14 @@ zig-package_src_prepare() {
 }
 
 zig-package_src_install() {
-	local temp_zig_pkg_hash="$("${ZIG}" fetch "${S}")" || die
+	local new_zig_pkg_hash="$("${ZIG}" fetch "${S}")" || die
 	insinto /usr/src/zig
-	doins -r "${T}/zig-cache/p/${temp_zig_pkg_hash}"
-	if [[ "${temp_zig_pkg_hash}" != "${zig_pkg_hash}" ]]; then
-		mv "${ED}/usr/src/zig/${temp_zig_pkg_hash}" "${ED}/usr/src/zig/${zig_pkg_hash}" || die
+	doins -r "${T}/zig-cache/p/${new_zig_pkg_hash}"
+	if [[ "${new_zig_pkg_hash}" != "${zig_pkg_hash}" ]]; then
+		mv "${ED}/usr/src/zig/${new_zig_pkg_hash}" "${ED}/usr/src/zig/${zig_pkg_hash}" || die
 	fi
 }
 
-EXPORT_FUNCTIONS src_install
+EXPORT_FUNCTIONS src_prepare src_install
 
 fi
