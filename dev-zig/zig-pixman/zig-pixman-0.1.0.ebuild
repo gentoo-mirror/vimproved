@@ -11,5 +11,4 @@ SRC_URI="https://codeberg.org/ifreund/zig-pixman/archive/v${PV}.tar.gz -> ${P}.t
 S="${WORKDIR}/${PN}"
 
 LICENSE="MIT"
-SLOT="${PV}"
 KEYWORDS="~amd64"
