@@ -27,10 +27,17 @@ inherit zig
 
 SLOT="${PV}"
 
+zig-package_src_prepare() {
+	# Calculate package hash BEFORE applying any patches
+	zig_pkg_hash="$("${ZIG}" fetch "${S}")" || die
+	default
+}
+
 zig-package_src_install() {
-	local zig_pkg_hash="$("${ZIG}" fetch "${S}")" || die
-	insinto /usr/src/zig/packages
-	doins -r "${T}/zig-cache/p/${zig_pkg_hash}"
+	local temp_zig_pkg_hash="$("${ZIG}" fetch "${S}")" || die
+	insinto /usr/src/zig
+	doins -r "${T}/zig-cache/p/${temp_zig_pkg_hash}"
+	mv "${ED}/usr/src/zig/${temp_zig_pkg_hash}" "${ED}/usr/src/zig/${zig_pkg_hash}" || die
 }
 
 EXPORT_FUNCTIONS src_install
