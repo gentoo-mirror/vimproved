@@ -37,7 +37,9 @@ zig-package_src_install() {
 	local temp_zig_pkg_hash="$("${ZIG}" fetch "${S}")" || die
 	insinto /usr/src/zig
 	doins -r "${T}/zig-cache/p/${temp_zig_pkg_hash}"
-	mv "${ED}/usr/src/zig/${temp_zig_pkg_hash}" "${ED}/usr/src/zig/${zig_pkg_hash}" || die
+	if [[ "${temp_zig_pkg_hash}" != "${zig_pkg_hash}" ]]; then
+		mv "${ED}/usr/src/zig/${temp_zig_pkg_hash}" "${ED}/usr/src/zig/${zig_pkg_hash}" || die
+	fi
 }
 
 EXPORT_FUNCTIONS src_install
