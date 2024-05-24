@@ -87,7 +87,7 @@ zig-build_src_compile() {
 
 	if ver_test "${ZIG_VER}" -ge "0.12"; then
 		zigbuildargs+=(
-			--system "${EPREFIX}/usr/src/zig/packages"
+			--system "${EPREFIX}/usr/src/zig"
 		)
 	fi
 
