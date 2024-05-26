@@ -36,8 +36,8 @@ src_prepare() {
 	eapply_user
 	sed -i -e "s/^cc = gcc/cc = $(tc-getCC)/" \
 		-e "s/^ar = ar/ar = $(tc-getAR)/" \
-		-e "s/-std=c11/-std=c11 ${CFLAGS}/" \
-		-e "s/-fno-rtti/-fno-rtti ${CXXFLAGS}/" \
+		-e "s/-std=c11 -O2 -Wall/-std=c11 ${CFLAGS}/" \
+		-e "s/-fno-rtti -O2 -Wall/-fno-rtti ${CXXFLAGS}/" \
 		-e "s/-lstdc++fs/${LDFLAGS}/" \
 		-e "s/-static-libgcc//" \
 		-e "s/-Wl,-Bstatic//" \
@@ -53,8 +53,8 @@ src_compile() {
 
 	sed -i -e "s/^cc =.*./cc = $(tc-getCC)/" \
 		-e "s/^ar =.*./ar = $(tc-getAR)/" \
-		-e "s/-std=c11/-std=c11 ${CFLAGS}/" \
-		-e "s/-fno-rtti/-fno-rtti ${CXXFLAGS}/" \
+		-e "s/-std=c11 -O2 -Wall/-std=c11 ${CFLAGS}/" \
+		-e "s/-std=c++17 -O2 -Wall/-std=c++17 ${CXXFLAGS}/" \
 		-e "s/-lstdc++fs/${LDFLAGS}/" \
 		-e "s/-static-libgcc//" \
 		-e "s/-Wl,-Bstatic//" \
