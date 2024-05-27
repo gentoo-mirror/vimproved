@@ -36,7 +36,9 @@ RESTRICT="!test? ( test )"
 RDEPEND=">=app-arch/brotli-1.0.9:=
 	>=dev-libs/libuv-1.44.0:=
 	>=net-dns/c-ares-1.18.1:=
-	>=net-libs/nghttp2-1.41.0:=
+	>=net-libs/nghttp2-1.61.0:=
+	>=net-libs/ngtcp2-1.3.0:=
+	>=dev-libs/simdjson-3.9.1:=
 	sys-libs/zlib
 	corepack? ( !sys-apps/yarn )
 	system-icu? ( >=dev-libs/icu-67:= )
@@ -116,10 +118,18 @@ src_configure() {
 
 	local myconf=(
 		--ninja
+		# ada is not packaged yet
+		# https://github.com/ada-url/ada
+		# --shared-ada
 		--shared-brotli
 		--shared-cares
 		--shared-libuv
 		--shared-nghttp2
+		--shared-ngtcp2
+		--shared-simdjson
+		# simdutf is not packaged yet
+		# https://github.com/simdutf/simdutf
+		# --shared-simdutf
 		--shared-zlib
 	)
 	use debug && myconf+=( --debug )
