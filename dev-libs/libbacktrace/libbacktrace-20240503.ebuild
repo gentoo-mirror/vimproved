@@ -7,7 +7,7 @@ inherit flag-o-matic
 
 DESCRIPTION="Library to produce symbolic backtraces"
 HOMEPAGE="https://github.com/ianlancetaylor/libbacktrace"
-LIBBACKTRACE_COMMIT="9ae4f4ae4481b1e69d38ed810980d33103544613"
+LIBBACKTRACE_COMMIT="11427f31a64b11583fec94b4c2a265c7dafb1ab3"
 SRC_URI="https://github.com/ianlancetaylor/${PN}/archive/${LIBBACKTRACE_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}-${LIBBACKTRACE_COMMIT}"
 
