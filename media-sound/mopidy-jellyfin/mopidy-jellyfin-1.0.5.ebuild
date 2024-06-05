@@ -23,5 +23,6 @@ RDEPEND="
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/unidecode[${PYTHON_USEDEP}]
 	dev-python/websocket-client[${PYTHON_USEDEP}]
+	media-plugins/gst-plugins-meta[http]
 	media-sound/mopidy[${PYTHON_USEDEP}]
 "
