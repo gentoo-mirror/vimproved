@@ -22,7 +22,12 @@ esac
 if [[ ! ${_ZIG_PACKAGE_ECLASS} ]]; then
 _ZIG_PACKAGE_ECLASS=1
 
+# @ECLASS_VARIABLE: ZIG_MIN
+# @INTERNAL
+# @DESCRIPTION:
+# ZIG_MIN variable to be passed to zig.eclass
 ZIG_MIN="0.12"
+
 inherit zig
 
 SLOT="${PV}"
