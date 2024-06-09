@@ -20,46 +20,29 @@ IUSE="X alsa +jack +plugins pulseaudio sdl"
 
 RDEPEND="
 	app-arch/zstd:=
-	dev-libs/glib:2
-	dev-libs/json-glib
 	dev-libs/libbacktrace
 	dev-libs/libcyaml
-	dev-libs/libpcre
 	dev-libs/libpcre2:=
-	dev-libs/reproc
-	dev-libs/serd
 	dev-libs/xxhash
 	dev-libs/zix
-	dev-scheme/guile:12=
 	>=gui-libs/gtk-4.14:4[X?]
 	gui-libs/gtksourceview:5
 	gui-libs/libadwaita:1
 	gui-libs/libpanel:1
-	kde-frameworks/breeze-icons
 	>=media-libs/libsndfile-1.0.29
-	media-libs/fontconfig
-	media-libs/graphene
-	media-libs/lilv
 	media-libs/lsp-dsp-lib
 	media-libs/rubberband
 	media-libs/soxr
-	media-libs/sratom
 	media-libs/vamp-plugin-sdk
 	>=media-sound/carla-2.6
 	net-misc/curl
 	sci-libs/fftw:3.0=[threads]
-	x11-libs/cairo
-	x11-libs/gdk-pixbuf:2
-	x11-libs/pango
-	X? ( x11-libs/libX11 )
 	jack? ( virtual/jack )
+	plugins? ( dev-libs/boost )
 	pulseaudio? ( media-libs/libpulse )
 	sdl? ( media-libs/libsdl2 )
 "
-DEPEND="
-	${RDEPEND}
-	plugins? ( dev-libs/boost )
-"
+DEPEND="${RDEPEND}"
 BDEPEND="
 	dev-lang/sassc
 	dev-scheme/guile
