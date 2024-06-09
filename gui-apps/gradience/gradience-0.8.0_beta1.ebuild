@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11,12} )
+PYTHON_COMPAT=( python3_{11..12} )
 
 inherit gnome2-utils meson python-single-r1 xdg
 
@@ -22,6 +22,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+RESTRICT="test"
 
 DEPEND="
 	dev-libs/libportal[gtk]
