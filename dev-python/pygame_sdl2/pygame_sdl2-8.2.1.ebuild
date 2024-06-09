@@ -3,15 +3,15 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
 DISTUTILS_EXT=1
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..12} )
-inherit distutils-r1
 
-MY_P="${PN}-2.1.0+renpy${PV}"
+inherit distutils-r1
 
 DESCRIPTION="Reimplementation of portions of the pygame API using SDL2"
 HOMEPAGE="https://github.com/renpy/pygame_sdl2"
+MY_P="${PN}-2.1.0+renpy${PV}"
 SRC_URI="https://www.renpy.org/dl/${PV}/${MY_P}.tar.gz"
 S="${WORKDIR}/${MY_P}"
 
