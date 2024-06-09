@@ -8,7 +8,7 @@ DISTUTILS_SINGLE_IMPL=1
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..12} )
 
-inherit desktop gnome2-utils distutils-r1
+inherit desktop distutils-r1
 
 DESCRIPTION="Visual novel engine written in python"
 HOMEPAGE="https://www.renpy.org"
@@ -36,9 +36,7 @@ DEPEND="
 	sys-libs/zlib
 	media-video/ffmpeg:=
 "
-RDEPEND="${DEPEND}
-	!app-eselect/eselect-renpy
-"
+RDEPEND="${DEPEND}"
 BDEPEND="
 	$(python_gen_cond_dep 'dev-python/cython[${PYTHON_USEDEP}]')
 	virtual/pkgconfig
