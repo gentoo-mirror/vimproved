@@ -5,7 +5,6 @@
 		<email>vimproved@inventati.org</email>
 		<name>Violet Purcell</name>
 	</maintainer>
-	<stabilize-allarches/>
 	<upstream>
 		<remote-id type="pypi">aiolimiter</remote-id>
 	</upstream>
