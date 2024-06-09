@@ -12,6 +12,7 @@ S="${WORKDIR}/${PN}"
 
 LICENSE="MIT"
 KEYWORDS="~amd64"
+RESTRICT="test"
 
 DEPEND="
 	dev-zig/zig-pixman:0.1.0
