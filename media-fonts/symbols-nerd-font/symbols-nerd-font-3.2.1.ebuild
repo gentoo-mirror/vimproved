@@ -10,8 +10,9 @@ HOMEPAGE="https://www.nerdfonts.com/"
 SRC_URI="https://github.com/ryanoasis/nerd-fonts/releases/download/v${PV}/NerdFontsSymbolsOnly.tar.xz -> ${P}.tar.xz"
 S="${WORKDIR}"
 
-LICENSE="MIT OFL"
+LICENSE="MIT OFL-1.1"
 SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="test"
 
 FONT_SUFFIX="ttf"
