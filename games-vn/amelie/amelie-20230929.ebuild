@@ -4,6 +4,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{11..12} )
+
 inherit desktop python-single-r1 xdg
 
 DESCRIPTION="In the middle of a field, far out in the countryside, sits a lone manor."
@@ -15,7 +16,7 @@ LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-RESTRICT="bindist fetch splitdebug"
+RESTRICT="bindist fetch splitdebug test"
 
 QA_PREBUILT="/opt/${PN}/*"
 
