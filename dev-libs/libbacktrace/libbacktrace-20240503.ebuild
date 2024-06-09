@@ -14,6 +14,8 @@ S="${WORKDIR}/${PN}-${LIBBACKTRACE_COMMIT}"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
+# Tests fail with llvm-objcopy
+RESTRICT="test"
 
 src_configure() {
 	# Breaks due to grepping an object file
