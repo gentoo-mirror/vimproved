@@ -30,7 +30,7 @@ RDEPEND="
 	gui-libs/libadwaita:1
 	gui-libs/libpanel:1
 	>=media-libs/libsndfile-1.0.29
-	media-libs/lsp-dsp-lib
+	media-libs/lsp-dsp-lib:=
 	media-libs/rubberband
 	media-libs/soxr
 	media-libs/vamp-plugin-sdk
