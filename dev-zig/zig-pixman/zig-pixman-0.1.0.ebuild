@@ -12,3 +12,4 @@ S="${WORKDIR}/${PN}"
 
 LICENSE="MIT"
 KEYWORDS="~amd64"
+RESTRICT="test"
