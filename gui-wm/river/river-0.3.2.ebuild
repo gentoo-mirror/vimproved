@@ -8,16 +8,11 @@ inherit zig-build
 
 DESCRIPTION="A dynamic tiling Wayland compositor"
 HOMEPAGE="https://isaacfreund.com/software/river/"
-if [[ "${PV}" = 9999 ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://codeberg.org/river/river.git"
-else
-	KEYWORDS="~amd64"
-	SRC_URI="https://codeberg.org/river/river/releases/download/v${PV}/${P}.tar.gz"
-fi
+SRC_URI="https://codeberg.org/river/river/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
+KEYWORDS="~amd64"
 IUSE="+X"
 RESTRICT="test"
 
