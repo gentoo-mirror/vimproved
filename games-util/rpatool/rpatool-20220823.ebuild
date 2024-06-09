@@ -4,6 +4,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{11..12} )
+
 inherit python-single-r1
 
 DESCRIPTION="A tool to work with Ren'Py archives."
@@ -15,6 +16,7 @@ LICENSE="WTFPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+RESTRICT="test"
 
 RDEPEND="${PYTHON_DEPS}"
 
