@@ -2,10 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{11..12} )
-DISTUTILS_SINGLE_IMPL=1
+
 DISTUTILS_EXT=1
+DISTUTILS_SINGLE_IMPL=1
 DISTUTILS_USE_PEP517=setuptools
+PYTHON_COMPAT=( python3_{11..12} )
+
 inherit desktop gnome2-utils distutils-r1
 
 DESCRIPTION="Visual novel engine written in python"
@@ -19,9 +21,6 @@ KEYWORDS="~amd64 ~x86"
 IUSE="development doc examples"
 REQUIRED_USE="examples? ( development )"
 
-BDEPEND="
-	$(python_gen_cond_dep 'dev-python/cython[${PYTHON_USEDEP}]')
-	virtual/pkgconfig"
 DEPEND="
 	dev-libs/fribidi
 	$(python_gen_cond_dep '
@@ -38,7 +37,12 @@ DEPEND="
 	media-video/ffmpeg:=
 "
 RDEPEND="${DEPEND}
-	!app-eselect/eselect-renpy"
+	!app-eselect/eselect-renpy
+"
+BDEPEND="
+	$(python_gen_cond_dep 'dev-python/cython[${PYTHON_USEDEP}]')
+	virtual/pkgconfig
+"
 
 PATCHES=(
 	"${FILESDIR}/renpy-6.99.12.4-compat-style.patch"
