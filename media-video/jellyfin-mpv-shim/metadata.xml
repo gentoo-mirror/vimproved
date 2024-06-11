@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>vimproved@inventati.org</email>
+		<name>Violet Purcell</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="pypi">jellyfin-mpv-shim</remote-id>
+		<remote-id type="github">jellyfin/jellyfin-mpv-shim</remote-id>
+	</upstream>
+</pkgmetadata>
