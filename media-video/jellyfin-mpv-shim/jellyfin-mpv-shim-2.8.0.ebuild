@@ -8,7 +8,7 @@ PYPI_NO_NORMALIZE=1
 PYTHON_COMPAT=( python3_12 )
 PYTHON_REQ_USE="tk(-)"
 
-inherit desktop distutils-r1 pypi
+inherit desktop distutils-r1 pypi xdg
 
 DESCRIPTION="MPV Cast Client for Jellyfin"
 HOMEPAGE="https://github.com/jellyfin/jellyfin-mpv-shim"
