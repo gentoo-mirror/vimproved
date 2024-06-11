@@ -8,7 +8,7 @@ PYPI_NO_NORMALIZE=1
 PYTHON_COMPAT=( python3_12 )
 PYTHON_REQ_USE="tk(-)"
 
-inherit desktop distutils-r1 pypi xdg
+inherit distutils-r1 pypi xdg
 
 DESCRIPTION="MPV Cast Client for Jellyfin"
 HOMEPAGE="https://github.com/jellyfin/jellyfin-mpv-shim"
@@ -24,15 +24,3 @@ RDEPEND="
 	dev-python/python-mpv[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 "
-
-src_install() {
-	distutils-r1_src_install
-
-	domenu "${S}/jellyfin_mpv_shim/integration/com.github.iwalton3.jellyfin-mpv-shim.desktop"
-	doicon -s 16 "${S}/jellyfin_mpv_shim/integration/jellyfin-16.png"
-	doicon -s 32 "${S}/jellyfin_mpv_shim/integration/jellyfin-32.png"
-	doicon -s 48 "${S}/jellyfin_mpv_shim/integration/jellyfin-48.png"
-	doicon -s 64 "${S}/jellyfin_mpv_shim/integration/jellyfin-64.png"
-	doicon -s 128 "${S}/jellyfin_mpv_shim/integration/jellyfin-128.png"
-	doicon -s 256 "${S}/jellyfin_mpv_shim/integration/jellyfin-256.png"
-}
