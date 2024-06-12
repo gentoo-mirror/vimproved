@@ -1,0 +1,21 @@
+From 2341b6797178fc9c0f2b64e6fbd16d693d473a3c Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Wed, 12 Jun 2024 11:55:43 -0400
+Subject: [PATCH] Support LLVM_VERSION_SUFFIX in clang version parsing regex
+
+If LLVM is compiled with the LLVM_VERSION_SUFFIX cmake option, then the
+version may have an additional suffix, for example "18.1.7+libcxx".
+Gentoo for example uses this to fend off ABI issues between libstdc++
+and libc++.
+
+Signed-off-by: Violet Purcell <vimproved@inventati.org>
+--- a/meson-scripts/get_clang_ver
++++ b/meson-scripts/get_clang_ver
+@@ -1,3 +1,3 @@
+ #!/bin/bash
+ 
+-"$1" --version | sed -nr 's/^.*clang version ([\.0-9]*)(git)?( .*)?$/\1/p'
++"$1" --version | sed -nr 's/^.*clang version ([\.0-9]*)(git)?(\+.*)?( .*)?$/\1/p'
+-- 
+2.45.2
+
