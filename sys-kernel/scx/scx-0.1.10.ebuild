@@ -182,6 +182,7 @@ IUSE="systemd"
 DEPEND=">=dev-libs/libbpf-1.3"
 RDEPEND="${DEPEND}"
 BDEPEND="
+	app-misc/jq
 	dev-util/bpftool
 	$(llvm_gen_dep '
 		sys-devel/clang:${LLVM_SLOT}[llvm_targets_BPF(-)]
