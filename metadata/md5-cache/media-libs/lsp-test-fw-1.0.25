@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install setup test
+DESCRIPTION=Simple test framework for writing and executing tests used by LSP Project
+EAPI=8
+HOMEPAGE=https://lsp-plug.in/
+INHERIT=flag-o-matic
+IUSE=static-libs test
+KEYWORDS=~amd64
+LICENSE=GPL-3 LGPL-3
+RESTRICT=!test? ( test )
+SLOT=0/1.0.25
+SRC_URI=https://github.com/lsp-plugins/lsp-test-fw/releases/download/1.0.25/lsp-test-fw-src-1.0.25.tar.gz -> lsp-test-fw-1.0.25.tar.gz
+_eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	d309b9713dfc18e754cba88d3ba69653
+_md5_=ae6ea91bc027cdc387220c921879ffb8

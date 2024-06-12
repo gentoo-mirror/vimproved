@@ -1,0 +1,47 @@
+dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
+dev-libs/libbacktrace 20240503: Library to produce symbolic backtraces
+dev-libs/libcyaml 1.4.1: C library for reading and writing YAML.
+dev-python/aiolimiter 1.1.0: An efficient implementation of a rate limiter for asyncio.
+dev-python/deezer-py 1.3.7: A wrapper for all Deezer's APIs
+dev-python/dotty-dict 1.3.1: Dictionary wrapper for quick access to deeply nested keys.
+dev-python/halo 0.0.31: Beautiful terminal spinners in Python
+dev-python/hid 1.0.6: ctypes bindings for hidapi
+dev-python/hjson 3.1.0: A user interface for JSON.
+dev-python/jellyfin-apiclient-python 1.9.2: Python API Client for Jellyfin
+dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
+dev-python/m3u8 5.0.0: Python m3u8 parser
+dev-python/material-color-utilities-python 0.1.5: Python port of material-color-utilities used for Material You colors
+dev-python/milc 1.8.0: Opinionated Batteries-Included Python 3 CLI Framework
+dev-python/pygame_sdl2 8.2.1: Reimplementation of portions of the pygame API using SDL2
+dev-python/pyliblo3 0.13.0: Python bindings for the liblo OSC library
+dev-python/pystray 0.19.5: Provides systray integration
+dev-python/simple-term-menu 1.6.4: A Python package which creates simple interactive menus on the command line.
+dev-python/spinners 0.0.24: Spinners for terminals
+dev-util/fnlfmt 0.3.1: A formatter for Fennel code
+dev-util/lua-language-server 3.9.3: Lua language server
+dev-zig/zig-pixman 0.1.0: Zig bindings for pixman
+dev-zig/zig-wayland 0.1.0: Zig wayland scanner and libwayland bindings
+dev-zig/zig-wlroots 0.17.0: Zig bindings for wlroots
+dev-zig/zig-xkbcommon 0.1.0: Zig bindings for xkbcommon
+games-engines/renpy 8.2.1: Visual novel engine written in python
+games-util/rpatool 20220823: A tool to work with Ren'Py archives.
+games-vn/amelie 20230929: In the middle of a field, far out in the countryside, sits a lone manor.
+games-vn/highway-blossoms 1.2.4: A short yuri Visual Novel set in the American Southwest.
+games-vn/it-gets-so-lonely-here 1.0: A yandere yuri visual novel with a fairytale theme.
+gui-apps/gradience 0.8.0_beta1: Change the look of Adwaita, with ease
+gui-wm/river 0.3.2: A dynamic tiling Wayland compositor
+media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
+media-libs/lsp-common-lib 1.0.36: Common library for basic language definitions used by LSP Project
+media-libs/lsp-dsp-lib 1.0.24: DSP library for signal processing
+media-libs/lsp-test-fw 1.0.25: Simple test framework for writing and executing tests used by LSP Project
+media-plugins/distrho-ports 20240427: Linux audio plugins and LV2 ports
+media-sound/carla 2.6.0_pre20240524: Audio plugin host
+media-sound/geonkick 3.4.0: A free software percussion synthesizer for GNU/Linux
+media-sound/mopidy-jellyfin 1.0.5: Mopidy extension for playing music from jellyfin
+media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling Mopidy from MPD clients
+media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
+media-sound/zrythm 1.0.0_rc1: A highly automated and intuitive digital audio workstation
+media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
+sys-kernel/scx 0.1.10: sched_ext schedulers and tools
+sys-libs/libatomic-chimera 0.90.0: An implementation of libatomic
+sys-libs/musl 1.2.5-r1: Light, fast and, simple C library focused on standards-conformance and safety

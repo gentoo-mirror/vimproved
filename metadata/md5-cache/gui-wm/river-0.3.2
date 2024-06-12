@@ -1,0 +1,16 @@
+BDEPEND=app-text/scdoc virtual/pkgconfig || ( dev-lang/zig dev-lang/zig-bin ) || ( >=dev-lang/zig-0.12 >=dev-lang/zig-bin-0.12 )
+DEFINED_PHASES=compile install setup
+DEPEND=dev-libs/libevdev >=gui-libs/wlroots-0.17.2[X?] <gui-libs/wlroots-0.18[X?] x11-libs/libxkbcommon x11-libs/pixman dev-zig/zig-pixman:0.1.0 dev-zig/zig-wayland:0.1.0 dev-zig/zig-wlroots:0.17.0 dev-zig/zig-xkbcommon:0.1.0
+DESCRIPTION=A dynamic tiling Wayland compositor
+EAPI=8
+HOMEPAGE=https://isaacfreund.com/software/river/
+INHERIT=zig-build
+IUSE=+X pie
+KEYWORDS=~amd64
+LICENSE=MIT
+RDEPEND=dev-libs/libevdev >=gui-libs/wlroots-0.17.2[X?] <gui-libs/wlroots-0.18[X?] x11-libs/libxkbcommon x11-libs/pixman
+RESTRICT=test
+SLOT=0
+SRC_URI=https://codeberg.org/river/river/releases/download/v0.3.2/river-0.3.2.tar.gz
+_eclasses_=edo	367e103a74bf77e6a8da7894d999fa3c	zig	a4527358e6f977064d90a09b67888a8f	zig-build	fb785da6adc612f64e2813a7c54de4e0
+_md5_=e8eac8d4c92cea450e90a53c4728d966

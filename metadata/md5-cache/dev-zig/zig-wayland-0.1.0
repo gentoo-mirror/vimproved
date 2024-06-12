@@ -1,0 +1,13 @@
+BDEPEND=|| ( dev-lang/zig dev-lang/zig-bin ) || ( >=dev-lang/zig-0.12 >=dev-lang/zig-bin-0.12 )
+DEFINED_PHASES=install prepare setup
+DESCRIPTION=Zig wayland scanner and libwayland bindings
+EAPI=8
+HOMEPAGE=https://codeberg.org/ifreund/zig-wayland
+INHERIT=zig-package
+KEYWORDS=~amd64
+LICENSE=MIT
+RESTRICT=test
+SLOT=0.1.0
+SRC_URI=https://codeberg.org/ifreund/zig-wayland/archive/v0.1.0.tar.gz -> zig-wayland-0.1.0.tar.gz
+_eclasses_=edo	367e103a74bf77e6a8da7894d999fa3c	zig	a4527358e6f977064d90a09b67888a8f	zig-package	90ec9a278682524101ac13b383b24a30
+_md5_=e4528b94698333f60a4590684fc29c9b
