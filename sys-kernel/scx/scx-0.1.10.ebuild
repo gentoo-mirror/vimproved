@@ -183,7 +183,7 @@ DEPEND=">=dev-libs/libbpf-1.3"
 RDEPEND="${DEPEND}"
 BDEPEND="
 	|| (
-		>=dev-lang/rust-1.72[llvm_targets_BPF(-)]
+		>=dev-lang/rust-1.72[LLVM_TARGETS_BPF(-)]
 		>=dev-lang/rust-bin-1.72
 	)
 	dev-util/bpftool
