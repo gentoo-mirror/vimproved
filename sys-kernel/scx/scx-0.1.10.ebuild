@@ -182,10 +182,6 @@ IUSE="systemd"
 DEPEND=">=dev-libs/libbpf-1.3"
 RDEPEND="${DEPEND}"
 BDEPEND="
-	|| (
-		>=dev-lang/rust-1.72[LLVM_TARGETS_BPF(-)]
-		>=dev-lang/rust-bin-1.72
-	)
 	dev-util/bpftool
 	$(llvm_gen_dep '
 		sys-devel/clang:${LLVM_SLOT}[llvm_targets_BPF(-)]
