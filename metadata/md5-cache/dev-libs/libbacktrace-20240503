@@ -8,5 +8,5 @@ LICENSE=BSD
 RESTRICT=test
 SLOT=0
 SRC_URI=https://github.com/ianlancetaylor/libbacktrace/archive/11427f31a64b11583fec94b4c2a265c7dafb1ab3.tar.gz -> libbacktrace-20240503.tar.gz
-_eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	d309b9713dfc18e754cba88d3ba69653
+_eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	e503ea5acc20410237ba33ec3f7c857d
 _md5_=53359bb7af248cf9a519f2277f83314c
