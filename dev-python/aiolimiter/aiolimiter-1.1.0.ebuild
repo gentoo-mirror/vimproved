@@ -17,3 +17,8 @@ KEYWORDS="~amd64"
 # Tests broken (?)
 # TODO: look into this more
 RESTRICT="test"
+
+python_install() {
+	distutils-r1_python_install
+	rm "${ED}/usr/lib/${EPYTHON}/site-packages/CHANGELOG.md" || die
+}
