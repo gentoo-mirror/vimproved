@@ -1,3 +1,5 @@
+acct-group/kavita 0: System group: kavita
+acct-user/kavita 0: System user: kavita
 dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
 dev-libs/libbacktrace 20240715: Library to produce symbolic backtraces
 dev-libs/libcyaml 1.4.1: C library for reading and writing YAML.
@@ -46,3 +48,4 @@ media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
 sys-kernel/scx 1.0.1: sched_ext schedulers and tools
 sys-libs/libatomic-chimera 0.90.0: An implementation of libatomic
 sys-libs/musl 1.2.5-r1: Light, fast and, simple C library focused on standards-conformance and safety
+www-apps/kavita-bin 0.8.2: Kavita is a fast, feature rich, cross platform reading server.
