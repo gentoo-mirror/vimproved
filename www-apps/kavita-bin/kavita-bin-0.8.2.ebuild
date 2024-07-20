@@ -31,5 +31,5 @@ src_install() {
 	doins -r "${S}"/*
 	chmod 755 "${D}${INST_DIR}/Kavita"
 	systemd_dounit "${FILESDIR}/kavita.service"
-	newbin kavita-wrapper kavita
+	newbin "${FILESDIR}/kavita-wrapper" kavita
 }
