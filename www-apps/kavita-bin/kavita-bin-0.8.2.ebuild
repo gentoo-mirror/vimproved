@@ -31,25 +31,5 @@ src_install() {
 	doins -r "${S}"/*
 	chmod 755 "${D}${INST_DIR}/Kavita"
 	systemd_dounit "${FILESDIR}/kavita.service"
-
-	newbin - kavita <<-EOF
-		#!/bin/sh
-		if ! [ -d config ]; then
-			rm -rf config
-			cp -r "${EPREFIX}${INST_DIR}/config" config
-		done
-		if ! [ -d config ]; then
-			rm -rf config
-			cp -r "${EPREFIX}${INST_DIR}/config" config
-		done
-		if ! [ -h wwwroot ]; then
-			rm -rf wwwroot
-			ln -s "${EPREFIX}${INST_DIR}/wwwroot" wwwroot
-		done
-		if ! [ -h EmailTemplates ]; then
-			rm -rf EmailTemplates
-			ln -s "${EPREFIX}${INST_DIR}/EmailTemplates" EmailTemplates
-		done
-		exec ${EPREFIX}/opt/kavita/Kavita
-	EOF
+	newbin "${FILESDIR}/kavita-wrapper" kavita
 }
