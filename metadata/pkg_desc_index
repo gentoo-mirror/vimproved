@@ -19,6 +19,7 @@ dev-python/simple-term-menu 1.6.4: A Python package which creates simple interac
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-util/fnlfmt 0.3.1: A formatter for Fennel code
 dev-util/lua-language-server 3.9.3: Lua language server
+dev-util/teapot-tools 0.4.3: Replacement for depot_tools (gclient) and luci-go (cipd)
 dev-zig/zig-pixman 0.1.0: Zig bindings for pixman
 dev-zig/zig-wayland 0.1.0: Zig wayland scanner and libwayland bindings
 dev-zig/zig-wlroots 0.17.0: Zig bindings for wlroots
