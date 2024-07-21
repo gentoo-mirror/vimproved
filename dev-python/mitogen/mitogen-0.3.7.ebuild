@@ -16,4 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 RESTRICT="test"
 
-PATCHES=( "${FILESDIR}/${P}-ansible-2.17.patch" )
+PATCHES=(
+	"${FILESDIR}/${P}-ansible-2.17.patch"
+	"${FILESDIR}/${P}-ask-become-pass.patch"
+)
