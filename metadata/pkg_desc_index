@@ -16,7 +16,7 @@ dev-python/material-color-utilities-python 0.1.5: Python port of material-color-
 dev-python/milc 1.8.0: Opinionated Batteries-Included Python 3 CLI Framework
 dev-python/mitogen 0.3.7: Distributed self-replicating programs in Python
 dev-python/pygame_sdl2 8.2.3: Reimplementation of portions of the pygame API using SDL2
-dev-python/pyliblo3 0.13.0: Python bindings for the liblo OSC library
+dev-python/pyliblo3 0.16.1: Python bindings for the liblo OSC library
 dev-python/pystray 0.19.5: Provides systray integration
 dev-python/simple-term-menu 1.6.4: A Python package which creates simple interactive menus on the command line.
 dev-python/spinners 0.0.24: Spinners for terminals
