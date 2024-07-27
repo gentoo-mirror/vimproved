@@ -22,7 +22,3 @@ RDEPEND="
 	!media-libs/pyliblo
 "
 BDEPEND="dev-python/cython[${PYTHON_USEDEP}]"
-
-PATCHES=(
-	"${FILESDIR}/${PN}-0.12.0-cython-3.patch"
-)
