@@ -25,7 +25,4 @@ RESTRICT="test"
 
 PATCHES=(
 	"${FILESDIR}/mitogen-0.3.7-ansible-2.17.patch"
-
-	# Backports
-	"${FILESDIR}/${P}-ask-become-pass.patch"
 )
