@@ -21,8 +21,27 @@ fi
 
 LICENSE="BSD"
 SLOT="0"
+IUSE="+ansible"
 RESTRICT="test"
+
+RDEPEND="ansible? ( app-admin/ansible[${PYTHON_USEDEP}] )"
 
 PATCHES=(
 	"${FILESDIR}/mitogen-0.3.7-ansible-2.17.patch"
 )
+
+python_install() {
+	distutils-r1_python_install
+
+	if use ansible; then
+		# Symlink strategy plugins into Ansible strategy plugins directory
+		for plugin in mitogen mitogen_free mitogen_host_pinned mitogen_linear; do
+			dosym \
+				../../../ansible_mitogen/plugins/strategy/${plugin}.py \
+				"$(python_get_sitedir)/ansible/plugins/strategy/${plugin}.py"
+
+		done
+
+		python_optimize "${D}/$(python_get_sitedir)/ansible/plugins/strategy/"
+	fi
+}

@@ -9,4 +9,7 @@
 	<upstream>
 		<remote-id type="pypi">mitogen</remote-id>
 	</upstream>
+	<use>
+		<flag name="ansible">Install symlinks for Ansible strategy plugins</flag>
+	</use>
 </pkgmetadata>
