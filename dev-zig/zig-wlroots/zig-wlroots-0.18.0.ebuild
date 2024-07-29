@@ -15,7 +15,7 @@ KEYWORDS="~amd64"
 RESTRICT="test"
 
 DEPEND="
-	dev-zig/zig-pixman:0.1.0
-	dev-zig/zig-wayland:0.1.0
-	dev-zig/zig-xkbcommon:0.1.0
+	dev-zig/zig-pixman:0.2.0
+	dev-zig/zig-wayland:0.2.0
+	dev-zig/zig-xkbcommon:0.2.0
 "
