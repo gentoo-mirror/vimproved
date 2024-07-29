@@ -3,7 +3,7 @@
 
 EAPI=8
 
-ZIG_MIN="0.12"
+ZIG_MIN="0.13"
 inherit zig-build
 
 DESCRIPTION="A dynamic tiling Wayland compositor"
@@ -18,17 +18,16 @@ RESTRICT="test"
 
 RDEPEND="
 	dev-libs/libevdev
-	>=gui-libs/wlroots-0.17.2[X?]
-	<gui-libs/wlroots-0.18[X?]
+	gui-libs/wlroots:0.18[X?]
 	x11-libs/libxkbcommon
 	x11-libs/pixman
 "
 DEPEND="
 	${RDEPEND}
-	dev-zig/zig-pixman:0.1.0
-	dev-zig/zig-wayland:0.1.0
-	dev-zig/zig-wlroots:0.17.0
-	dev-zig/zig-xkbcommon:0.1.0
+	dev-zig/zig-pixman:0.2.0
+	dev-zig/zig-wayland:0.2.0
+	dev-zig/zig-wlroots:0.18.0
+	dev-zig/zig-xkbcommon:0.2.0
 "
 BDEPEND="
 	app-text/scdoc
