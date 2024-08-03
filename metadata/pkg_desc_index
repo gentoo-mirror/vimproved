@@ -1,5 +1,6 @@
 acct-group/kavita 0: System group: kavita
 acct-user/kavita 0: System user: kavita
+app-emulation/wine-tkg 9.14: Free implementation of Windows(tm) on Unix, with Wine-Staging patchset
 dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
 dev-lang/zig 0.13.0: A robust, optimal, and maintainable programming language
 dev-libs/libbacktrace 20240715: Library to produce symbolic backtraces
