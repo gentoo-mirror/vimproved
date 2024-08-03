@@ -223,8 +223,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/${P}-tkg-reverts.patch"
-
 	local patchinstallargs=(
 		--all
 		--no-autoconf
@@ -248,13 +246,8 @@ src_prepare() {
 	local WINE_TKG_PATCHDIR="${WORKDIR}/wine-tkg-git-${WINE_TKG_COMMIT}/wine-tkg-git/wine-tkg-patches"
 	local TKG_PATCHES=(
 		"${WINE_TKG_PATCHDIR}/proton/fsync/fsync-unix-staging.patch"
-		"${WINE_TKG_PATCHDIR}/proton/fsync/server_Abort_waiting_on_a_completion_port_when_closing_it.patch"
 		"${WINE_TKG_PATCHDIR}/proton/fsync/fsync_futex_waitv.patch"
-		"${WINE_TKG_PATCHDIR}/misc/childwindow/childwindow-proton.patch"
 		"${WINE_TKG_PATCHDIR}/proton/LAA/LAA-unix-staging.patch"
-		"${WINE_TKG_PATCHDIR}/proton-tkg-specific/proton-tkg/staging/proton-tkg-staging.patch"
-		"${WINE_TKG_PATCHDIR}/proton-tkg-specific/proton-tkg/proton-tkg-additions.patch"
-		"${WINE_TKG_PATCHDIR}/proton-tkg-specific/proton-cpu-topology-overrides/proton-cpu-topology-overrides.patch"
 		"${WINE_TKG_PATCHDIR}/misc/josh-flat-theme/josh-flat-theme.patch"
 		"${WINE_TKG_PATCHDIR}/proton-tkg-specific/proton_battleye/proton_battleye.patch"
 		"${WINE_TKG_PATCHDIR}/proton-tkg-specific/proton_eac/proton-eac_bridge.patch"
