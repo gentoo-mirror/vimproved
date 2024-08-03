@@ -80,7 +80,10 @@ WINE_DLOPEN_DEPEND="
 	truetype? ( media-libs/freetype[${MULTILIB_USEDEP}] )
 	udisks? ( sys-apps/dbus[${MULTILIB_USEDEP}] )
 	v4l? ( media-libs/libv4l[${MULTILIB_USEDEP}] )
-	vulkan? ( media-libs/vulkan-loader[X?,wayland?,${MULTILIB_USEDEP}] )
+	vulkan? (
+		dev-util/vulkan-headers
+		media-libs/vulkan-loader[X?,wayland?,${MULTILIB_USEDEP}]
+	)
 "
 WINE_COMMON_DEPEND="
 	${WINE_DLOPEN_DEPEND}
@@ -289,6 +292,7 @@ src_prepare() {
 
 	# always update for patches (including user's wrt #432348)
 	eautoreconf
+	dlls/winevulkan/make_vulkan --xml "${EPREFIX}/usr/share/vulkan/registry/vk.xml" || die
 	tools/make_requests || die # perl
 	# tip: if need more for user patches, with portage can e.g. do
 	# echo "post_src_prepare() { tools/make_specfiles || die; }" \
