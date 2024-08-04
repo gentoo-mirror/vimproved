@@ -12,12 +12,11 @@ dev-python/hid 1.0.6: ctypes bindings for hidapi
 dev-python/hjson 3.1.0: A user interface for JSON.
 dev-python/jellyfin-apiclient-python 1.9.2: Python API Client for Jellyfin
 dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
-dev-python/m3u8 5.1.0: Python m3u8 parser
+dev-python/m3u8 5.3.0: Python m3u8 parser
 dev-python/material-color-utilities-python 0.1.5: Python port of material-color-utilities used for Material You colors
 dev-python/milc 1.8.0: Opinionated Batteries-Included Python 3 CLI Framework
 dev-python/mitogen 0.3.7 9999: Distributed self-replicating programs in Python
 dev-python/pygame_sdl2 8.2.3: Reimplementation of portions of the pygame API using SDL2
-dev-python/pyliblo3 0.16.1: Python bindings for the liblo OSC library
 dev-python/pystray 0.19.5: Provides systray integration
 dev-python/simple-term-menu 1.6.4: A Python package which creates simple interactive menus on the command line.
 dev-python/spinners 0.0.24: Spinners for terminals
@@ -36,9 +35,9 @@ games-vn/it-gets-so-lonely-here 1.0: A yandere yuri visual novel with a fairytal
 gui-apps/gradience 0.8.0_beta1: Change the look of Adwaita, with ease
 gui-wm/river 0.3.5: A dynamic tiling Wayland compositor
 media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
-media-libs/lsp-common-lib 1.0.36: Common library for basic language definitions used by LSP Project
-media-libs/lsp-dsp-lib 1.0.24: DSP library for signal processing
-media-libs/lsp-test-fw 1.0.25: Simple test framework for writing and executing tests used by LSP Project
+media-libs/lsp-common-lib 1.0.37: Common library for basic language definitions used by LSP Project
+media-libs/lsp-dsp-lib 1.0.25: DSP library for signal processing
+media-libs/lsp-test-fw 1.0.26: Simple test framework for writing and executing tests used by LSP Project
 media-plugins/distrho-ports 20240427: Linux audio plugins and LV2 ports
 media-sound/carla 2.6.0_pre20240524: Audio plugin host
 media-sound/geonkick 3.4.0: A free software percussion synthesizer for GNU/Linux
