@@ -6,6 +6,6 @@
 		<name>Violet Purcell</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="pypi">m3u8</remote-id>
+		<remote-id type="github">globocom/m3u8</remote-id>
 	</upstream>
 </pkgmetadata>

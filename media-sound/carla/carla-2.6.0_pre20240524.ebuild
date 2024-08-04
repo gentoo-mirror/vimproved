@@ -36,10 +36,6 @@ RDEPEND="
 		$(python_gen_cond_dep 'dev-python/PyQt5[gui,svg,widgets,${PYTHON_USEDEP}]')
 	)
 	fluidsynth? ( media-sound/fluidsynth:= )
-	osc? (
-		media-libs/liblo
-		$(python_gen_cond_dep 'dev-python/pyliblo3[${PYTHON_USEDEP}]')
-	)
 	pulseaudio? ( media-libs/libpulse )
 	sdl? ( media-libs/libsdl2 )
 	sndfile? ( media-libs/libsndfile )
@@ -63,7 +59,7 @@ pkg_setup() {
 		HAVE_FLUIDSYNTH=$(usex fluidsynth true false)
 		HAVE_FRONTEND=$(usex gui true false)
 		HAVE_FTS_STANDALONE=$(usex elibc_musl true false)
-		HAVE_LIBLO=$(usex osc true false)
+		HAVE_LIBLO=false
 		HAVE_PULSEAUDIO=$(usex pulseaudio true false)
 		HAVE_PYQT=$(usex gui true false)
 		HAVE_QT4=false
