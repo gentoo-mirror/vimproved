@@ -23,13 +23,6 @@ _ZIG_BUILD_ECLASS=1
 
 inherit edo zig
 
-# @ECLASS_VARIABLE: ZIG_USE_PIE
-# @PRE_INHERIT
-# @DESCRIPTION:
-# If true, add the pie USE flag to the package. Toggle off only if the
-# program is broken with PIE.
-ZIG_USE_PIE="${ZIG_USE_PIE:=true}"
-
 # @ECLASS_VARIABLE: ezigbuildargs
 # @DEFAULT_UNSET
 # @DESCRIPTION:
@@ -53,10 +46,6 @@ ZIG_USE_PIE="${ZIG_USE_PIE:=true}"
 # If non-empty, build with verbose output.
 : "${ZIG_BUILD_VERBOSE:=1}"
 
-if [[ "${ZIG_USE_PIE}" = true ]]; then
-	IUSE="${IUSE} pie"
-fi
-
 # @FUNCTION: zig-build_src_compile
 # @DESCRIPTION:
 # Runs `zig build` with specified arguments..
@@ -65,11 +54,6 @@ zig-build_src_compile() {
 
 	if [[ -n "${ZIG_BUILD_VERBOSE}" ]]; then
 		zigbuildargs+=( --verbose )
-	fi
-
-	# Enable PIE if ZIG_USE_PIE is set and use flag is enabled.
-	if [[ "${ZIG_USE_PIE}" = true ]]; then
-		zigbuildargs+=( -Dpie=$(usex pie true false) )
 	fi
 
 	if ver_test "${ZIG_VER}" -ge "0.11"; then
