@@ -1,7 +1,6 @@
 acct-group/kavita 0: System group: kavita
 acct-user/kavita 0: System user: kavita
 dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
-dev-lang/zig 0.13.0: A robust, optimal, and maintainable programming language
 dev-libs/libbacktrace 20240715: Library to produce symbolic backtraces
 dev-libs/libcyaml 1.4.1: C library for reading and writing YAML.
 dev-python/aiolimiter 1.1.0: An efficient implementation of a rate limiter for asyncio.
@@ -18,8 +17,10 @@ dev-python/milc 1.8.0: Opinionated Batteries-Included Python 3 CLI Framework
 dev-python/mitogen 0.3.7 9999: Distributed self-replicating programs in Python
 dev-python/pygame_sdl2 8.2.3: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
+dev-python/ruyaml 0.91.0: An openly maintained fork of elusive ruamel-yaml package.
 dev-python/simple-term-menu 1.6.4: A Python package which creates simple interactive menus on the command line.
 dev-python/spinners 0.0.24: Spinners for terminals
+dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.1: A formatter for Fennel code
 dev-util/lua-language-server 3.9.3: Lua language server
 dev-util/teapot-tools 0.4.3: Replacement for depot_tools (gclient) and luci-go (cipd)
