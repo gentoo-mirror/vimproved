@@ -1,9 +1,0 @@
-DEFINED_PHASES=install
-DESCRIPTION=Soho vibes for GTK
-EAPI=8
-HOMEPAGE=https://github.com/rose-pine/gtk/
-KEYWORDS=~amd64
-LICENSE=MIT
-SLOT=0
-SRC_URI=https://github.com/rose-pine/gtk/releases/download/v2.1.0/rose-pine-icons.tar.gz -> rose-pine-icons-2.1.0.tar.gz https://github.com/rose-pine/gtk/releases/download/v2.1.0/rose-pine-dawn-icons.tar.gz -> rose-pine-dawn-icons-2.1.0.tar.gz https://github.com/rose-pine/gtk/releases/download/v2.1.0/rose-pine-moon-icons.tar.gz -> rose-pine-moon-icons-2.1.0.tar.gz
-_md5_=5423d3cf68d35bd60824a3f745dc2bea
