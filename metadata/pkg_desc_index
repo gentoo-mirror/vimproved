@@ -51,4 +51,6 @@ sys-kernel/scx 1.0.1: sched_ext schedulers and tools
 sys-libs/libatomic-chimera 0.90.0: An implementation of libatomic
 sys-libs/musl 1.2.5-r1: Light, fast and, simple C library focused on standards-conformance and safety
 www-apps/kavita-bin 0.8.2: Kavita is a fast, feature rich, cross platform reading server.
+x11-themes/rose-pine-gtk-theme 2.1.0: Soho vibes for GTK
+x11-themes/rose-pine-icon-theme 2.1.0: Soho vibes for GTK
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
