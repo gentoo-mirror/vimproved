@@ -10,5 +10,5 @@ LICENSE=GPL-3 LGPL-3
 RESTRICT=!test? ( test )
 SLOT=0/1.0.37
 SRC_URI=https://github.com/lsp-plugins/lsp-common-lib/releases/download/1.0.37/lsp-common-lib-src-1.0.37.tar.gz -> lsp-common-lib-1.0.37.tar.gz
-_eclasses_=toolchain-funcs	e7e7331166166e7a516d19e264b098c2	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	e503ea5acc20410237ba33ec3f7c857d
+_eclasses_=toolchain-funcs	0c713337f7872f1a002cecaaea9bef73	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	e503ea5acc20410237ba33ec3f7c857d
 _md5_=578c3d417450aa87ab3c531dc3714564
