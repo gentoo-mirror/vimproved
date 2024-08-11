@@ -1,0 +1,187 @@
+From 9e45a80b0125ab6084b133d045dad89fc5337f69 Mon Sep 17 00:00:00 2001
+From: phantamanta44 <phanta@phanta.pl>
+Date: Fri, 29 Sep 2023 21:45:07 +0200
+Subject: [PATCH 1/2] Set virtual fs mounts based on env vars if present
+
+---
+ src/Etterna/Globals/StepMania.cpp | 45 ++++++++++++++++++++++---------
+ 1 file changed, 32 insertions(+), 13 deletions(-)
+
+diff --git a/src/Etterna/Globals/StepMania.cpp b/src/Etterna/Globals/StepMania.cpp
+index 9e16be2bab..8d93c8bd34 100644
+--- a/src/Etterna/Globals/StepMania.cpp
++++ b/src/Etterna/Globals/StepMania.cpp
+@@ -63,6 +63,9 @@
+ #ifdef _WIN32
+ #include <windows.h>
+ int(WINAPIV* __vsnprintf)(char*, size_t, const char*, va_list) = _vsnprintf;
++#define PATH_SEPARATOR ";"
++#else
++#define PATH_SEPARATOR ":"
+ #endif
+ 
+ bool noWindow;
+@@ -950,6 +953,17 @@ static LocalizedString COULDNT_OPEN_LOADING_WINDOW(
+   "LoadingWindow",
+   "Couldn't open any loading windows.");
+ 
++static void
++MountAdditionalDirs(const std::string& sDirList,
++		const std::string& sDelimiter,
++		const std::string& sMountPoint)
++{
++	std::vector<std::string> dirs;
++	split(sDirList, sDelimiter, dirs, true);
++	for (unsigned i = 0; i < dirs.size(); i++)
++		FILEMAN->Mount("dir", dirs[i], sMountPoint);
++}
++
+ int
+ sm_main(int argc, char* argv[])
+ {
+@@ -992,7 +1006,13 @@ sm_main(int argc, char* argv[])
+ 
+ 	// Almost everything uses this to read and write files.  Load this early.
+ 	FILEMAN = new RageFileManager(argv[0]);
+-	FILEMAN->Mount("dir", Core::Platform::getAppDirectory(), "/");
++	const char* envRootDir = std::getenv("ETTERNA_ROOT_DIR");
++	std::string rootDir = (envRootDir && std::strlen(envRootDir) > 0)
++			? envRootDir : Core::Platform::getAppDirectory();
++	if (!FILEMAN->Mount("dir", rootDir, "/")) {
++		Locator::getLogger()->error("Failed to mount root directory: {}", rootDir);
++		return 1;
++	}
+ 
+ 	// load preferences and mount any alternative trees.
+ 	PREFSMAN = new PrefsManager;
+@@ -1012,18 +1032,17 @@ sm_main(int argc, char* argv[])
+ 	WriteLogHeader();
+ 
+ 	// Set up alternative filesystem trees.
+-	if (!PREFSMAN->m_sAdditionalFolders.Get().empty()) {
+-		std::vector<std::string> dirs;
+-		split(PREFSMAN->m_sAdditionalFolders, ",", dirs, true);
+-		for (unsigned i = 0; i < dirs.size(); i++)
+-			FILEMAN->Mount("dir", dirs[i], "/");
+-	}
+-	if (!PREFSMAN->m_sAdditionalSongFolders.Get().empty()) {
+-		std::vector<std::string> dirs;
+-		split(PREFSMAN->m_sAdditionalSongFolders, ",", dirs, true);
+-		for (unsigned i = 0; i < dirs.size(); i++)
+-			FILEMAN->Mount("dir", dirs[i], "/AdditionalSongs");
+-	}
++	if (!PREFSMAN->m_sAdditionalFolders.Get().empty())
++		MountAdditionalDirs(PREFSMAN->m_sAdditionalFolders, ",", "/");
++	const char* envAdditionalFolders = std::getenv("ETTERNA_ADDITIONAL_ROOT_DIRS");
++	if (envAdditionalFolders && std::strlen(envAdditionalFolders) > 0)
++		MountAdditionalDirs(envAdditionalFolders, PATH_SEPARATOR, "/");
++
++	if (!PREFSMAN->m_sAdditionalSongFolders.Get().empty())
++		MountAdditionalDirs(PREFSMAN->m_sAdditionalSongFolders, ",", "/AdditionalSongs");
++	const char* envAdditionalSongFolders = std::getenv("ETTERNA_ADDITIONAL_SONG_DIRS");
++	if (envAdditionalSongFolders && std::strlen(envAdditionalSongFolders) > 0)
++		MountAdditionalDirs(envAdditionalSongFolders, PATH_SEPARATOR, "/AdditionalSongs");
+ 
+ 	/* One of the above filesystems might contain files that affect preferences
+ 	 * (e.g. Data/Static.ini). Re-read preferences. */
+
+From 7cdc8a2c7f0c392520b209be26f7d3c94e30fa83 Mon Sep 17 00:00:00 2001
+From: phantamanta44 <phanta@phanta.pl>
+Date: Fri, 29 Sep 2023 21:46:05 +0200
+Subject: [PATCH 2/2] Don't install crashpad binary if not built, make
+ install/asset dirs configurable by cmake vars
+
+---
+ CMake/Helpers/CPackSetup.cmake | 55 +++++++++++++++++++---------------
+ 1 file changed, 31 insertions(+), 24 deletions(-)
+
+diff --git a/CMake/Helpers/CPackSetup.cmake b/CMake/Helpers/CPackSetup.cmake
+index ea0f4d8dce..b78fed052c 100644
+--- a/CMake/Helpers/CPackSetup.cmake
++++ b/CMake/Helpers/CPackSetup.cmake
+@@ -6,7 +6,8 @@ set(CPACK_RESOURCE_FILE_LICENSE ${PROJECT_SOURCE_DIR}/CMake/CPack/license_instal
+ set(CPACK_COMPONENT_ETTERNA_REQUIRED TRUE)  # Require Etterna component to be installed
+ 
+ # Custom Variables
+-set(INSTALL_DIR "Etterna")
++set(INSTALL_DIR "Etterna" CACHE STRING "Output directory for built game")
++set(ASSET_DIR "${INSTALL_DIR}" CACHE STRING "Output directory for game assets")
+ 
+ if(UNIX)
+     set(CPACK_GENERATOR TGZ)
+@@ -14,12 +15,14 @@ if(UNIX)
+     set(CPACK_PACKAGE_CONTACT https://github.com/etternagame/etterna)
+ 
+     install(TARGETS Etterna COMPONENT Etterna DESTINATION ${INSTALL_DIR})
+-    install(FILES ${PROJECT_BINARY_DIR}/gn_crashpad/crashpad_handler
+-            COMPONENT Etterna
+-            DESTINATION ${INSTALL_DIR}
+-            PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+-                        GROUP_READ GROUP_EXECUTE
+-                        WORLD_READ WORLD_EXECUTE)
++    if(WITH_CRASHPAD AND TARGET crashpad)
++        install(FILES ${PROJECT_BINARY_DIR}/gn_crashpad/crashpad_handler
++                COMPONENT Etterna
++                DESTINATION ${INSTALL_DIR}
++                PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
++                            GROUP_READ GROUP_EXECUTE
++                            WORLD_READ WORLD_EXECUTE)
++    endif()
+ endif()
+ 
+ # Windows Specific CPack
+@@ -47,8 +50,10 @@ if(WIN32)
+ 
+     # List every DLL etterna needs.
+     list(APPEND WIN_DLLS "${PROJECT_SOURCE_DIR}/Program/avcodec-55.dll" "${PROJECT_SOURCE_DIR}/Program/avformat-55.dll"
+-                         "${PROJECT_SOURCE_DIR}/Program/avutil-52.dll" "${PROJECT_SOURCE_DIR}/Program/swscale-2.dll"
+-                         ${PROJECT_BINARY_DIR}/gn_crashpad/crashpad_handler.exe)
++                         "${PROJECT_SOURCE_DIR}/Program/avutil-52.dll" "${PROJECT_SOURCE_DIR}/Program/swscale-2.dll")
++    if(WITH_CRASHPAD AND TARGET crashpad)
++        list(APPEND WIN_DLLS ${PROJECT_BINARY_DIR}/gn_crashpad/crashpad_handler.exe)
++    endif()
+     install(FILES ${WIN_DLLS}   COMPONENT Etterna DESTINATION Program)
+     install(TARGETS Etterna     COMPONENT Etterna DESTINATION Program)
+     install(FILES CMake/CPack/license_install.txt COMPONENT Etterna DESTINATION Docs)
+@@ -60,24 +65,26 @@ elseif(APPLE)
+     set(CPACK_DMG_VOLUME_NAME Etterna)
+ 
+     install(TARGETS Etterna COMPONENT Etterna DESTINATION Etterna)
+-    install(FILES ${PROJECT_BINARY_DIR}/gn_crashpad/crashpad_handler
+-            COMPONENT Etterna DESTINATION ${INSTALL_DIR}
+-            PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+-                        GROUP_READ GROUP_EXECUTE
+-                        WORLD_READ WORLD_EXECUTE)
++    if(WITH_CRASHPAD AND TARGET crashpad)
++        install(FILES ${PROJECT_BINARY_DIR}/gn_crashpad/crashpad_handler
++                COMPONENT Etterna DESTINATION ${INSTALL_DIR}
++                PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
++                            GROUP_READ GROUP_EXECUTE
++                            WORLD_READ WORLD_EXECUTE)
++    endif()
+ endif()
+ 
+ # Universal Install Directories
+ ## Files Only
+-install(FILES Songs/instructions.txt        COMPONENT Etterna DESTINATION "${INSTALL_DIR}/Songs")
+-install(FILES Announcers/instructions.txt   COMPONENT Etterna DESTINATION "${INSTALL_DIR}/Announcers")
++install(FILES Songs/instructions.txt        COMPONENT Etterna DESTINATION "${ASSET_DIR}/Songs")
++install(FILES Announcers/instructions.txt   COMPONENT Etterna DESTINATION "${ASSET_DIR}/Announcers")
+ 
+ ## Essential Game Files
+-install(DIRECTORY Assets                    COMPONENT Etterna DESTINATION "${INSTALL_DIR}")
+-install(DIRECTORY BackgroundEffects         COMPONENT Etterna DESTINATION "${INSTALL_DIR}")
+-install(DIRECTORY BackgroundTransitions     COMPONENT Etterna DESTINATION "${INSTALL_DIR}")
+-install(DIRECTORY BGAnimations              COMPONENT Etterna DESTINATION "${INSTALL_DIR}")
+-install(DIRECTORY Data                      COMPONENT Etterna DESTINATION "${INSTALL_DIR}")
+-install(DIRECTORY NoteSkins                 COMPONENT Etterna DESTINATION "${INSTALL_DIR}")
+-install(DIRECTORY Scripts                   COMPONENT Etterna DESTINATION "${INSTALL_DIR}")
+-install(DIRECTORY Themes                    COMPONENT Etterna DESTINATION "${INSTALL_DIR}")
++install(DIRECTORY Assets                    COMPONENT Etterna DESTINATION "${ASSET_DIR}")
++install(DIRECTORY BackgroundEffects         COMPONENT Etterna DESTINATION "${ASSET_DIR}")
++install(DIRECTORY BackgroundTransitions     COMPONENT Etterna DESTINATION "${ASSET_DIR}")
++install(DIRECTORY BGAnimations              COMPONENT Etterna DESTINATION "${ASSET_DIR}")
++install(DIRECTORY Data                      COMPONENT Etterna DESTINATION "${ASSET_DIR}")
++install(DIRECTORY NoteSkins                 COMPONENT Etterna DESTINATION "${ASSET_DIR}")
++install(DIRECTORY Scripts                   COMPONENT Etterna DESTINATION "${ASSET_DIR}")
++install(DIRECTORY Themes                    COMPONENT Etterna DESTINATION "${ASSET_DIR}")
