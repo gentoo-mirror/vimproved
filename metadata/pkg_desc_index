@@ -29,6 +29,7 @@ dev-zig/zig-wayland 0.2.0: Zig wayland scanner and libwayland bindings
 dev-zig/zig-wlroots 0.18.0: Zig bindings for wlroots
 dev-zig/zig-xkbcommon 0.2.0: Zig bindings for xkbcommon
 games-engines/renpy 8.2.3: Visual novel engine written in python
+games-rhythm/etterna 0.72.3: Advanced cross-platform rhythm game focused on keyboard play
 games-util/rpatool 20220823: A tool to work with Ren'Py archives.
 games-vn/amelie 20230929: In the middle of a field, far out in the countryside, sits a lone manor.
 games-vn/highway-blossoms 1.2.4: A short yuri Visual Novel set in the American Southwest.
