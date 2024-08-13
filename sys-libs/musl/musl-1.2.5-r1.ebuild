@@ -17,19 +17,19 @@ else
 
 	SRC_URI="https://musl.libc.org/releases/${P}.tar.gz"
 	SRC_URI+=" verify-sig? ( https://musl.libc.org/releases/${P}.tar.gz.asc )"
-	#KEYWORDS="-* ~amd64 ~arm ~arm64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~x86"
+	# KEYWORDS="-* ~amd64 ~arm ~arm64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~x86"
 
 	BDEPEND="verify-sig? ( sec-keys/openpgp-keys-musl )"
 fi
 
 GETENT_COMMIT="93a08815f8598db442d8b766b463d0150ed8e2ab"
 GETENT_FILE="musl-getent-${GETENT_COMMIT}.c"
-SCUDO_VER="18.1.6"
+MIMALLOC_VER="2.1.7"
 SRC_URI+="
 	https://dev.gentoo.org/~blueness/musl-misc/getconf.c
 	https://gitlab.alpinelinux.org/alpine/aports/-/raw/${GETENT_COMMIT}/main/musl/getent.c -> ${GETENT_FILE}
 	https://dev.gentoo.org/~blueness/musl-misc/iconv.c
-	https://github.com/llvm/llvm-project/releases/download/llvmorg-${SCUDO_VER}/compiler-rt-${SCUDO_VER}.src.tar.xz
+	https://github.com/microsoft/mimalloc/archive/refs/tags/v${MIMALLOC_VER}.tar.gz -> mimalloc-${MIMALLOC_VER}.tar.gz
 "
 
 LICENSE="MIT LGPL-2 GPL-2"
@@ -53,10 +53,10 @@ else
 fi
 
 PATCHES=(
-	"${FILESDIR}"/musl-1.2.5-scudo-add-necessary-plumbing.patch
-	"${FILESDIR}"/musl-1.2.4-scudo-clean-up-lingering-weak-symbols-we-don-t-want.patch
-	"${FILESDIR}"/musl-1.2.4-do-not-rely-on-system-headers-for-cpu-info.patch
-	"${FILESDIR}"/musl-1.2.5-scudo-common-no-unistd.patch
+	"${FILESDIR}"/${PN}-1.2.4-arm64-crti-alignment.patch
+	"${FILESDIR}"/${PN}-1.2.5-support-for-external-allocator.patch
+	"${FILESDIR}"/${PN}-1.2.5-mimalloc-musl-integration.patch
+	"${FILESDIR}"/${PN}-1.2.5-mimalloc-tweak-options.patch
 )
 
 just_headers() {
@@ -64,7 +64,7 @@ just_headers() {
 }
 
 pkg_setup() {
-	if [ ${CTARGET} == ${CHOST} ] ; then
+	if [[ ${CTARGET} == ${CHOST} ]] ; then
 		case ${CHOST} in
 			*-musl*) ;;
 			*) die "Use sys-devel/crossdev to build a musl toolchain" ;;
@@ -92,21 +92,18 @@ src_unpack() {
 }
 
 src_prepare() {
-	local scudo_path="${WORKDIR}/compiler-rt-${SCUDO_VER}.src/lib/scudo/standalone"
-	mkdir -p src/malloc/scudo/scudo || die
-	cp "${scudo_path}/"*.cpp src/malloc/scudo || die
-	cp "${scudo_path}/"*.h src/malloc/scudo || die
-	cp "${scudo_path}/"*.inc src/malloc/scudo || die
-	cp "${scudo_path}/include/scudo/interface.h" src/malloc/scudo/scudo || die
-	rm src/malloc/scudo/wrappers_* || die
-	cp "${FILESDIR}/wrappers.cpp" src/malloc/scudo || die
-
+	mv "${WORKDIR}/mimalloc-${MIMALLOC_VER}" "${S}/mimalloc" || die
 	default
+
+	cp "${FILESDIR}/mimalloc-verify-syms.sh" . || die
+	cp "${FILESDIR}/mimalloc.c" mimalloc/src
 
 	mkdir "${WORKDIR}"/misc || die
 	cp "${DISTDIR}"/getconf.c "${WORKDIR}"/misc/getconf.c || die
 	cp "${DISTDIR}/${GETENT_FILE}" "${WORKDIR}"/misc/getent.c || die
 	cp "${DISTDIR}"/iconv.c "${WORKDIR}"/misc/iconv.c || die
+
+	mkdir -p "${S}/src/malloc/external-${ARCH}"
 }
 
 src_configure() {
@@ -121,14 +118,15 @@ src_configure() {
 		--target=${CTARGET} \
 		--prefix="${EPREFIX}${sysroot}/usr" \
 		--syslibdir="${EPREFIX}${sysroot}/lib" \
-		--disable-gcc-wrapper || die
+		--disable-gcc-wrapper \
+		--with-malloc=external || die
 }
 
 src_compile() {
 	emake obj/include/bits/alltypes.h
 	just_headers && return 0
 
-	emake
+	emake EXTRA_OBJ="${S}/src/malloc/external/mimalloc.o"
 	if ! is_crosspkg ; then
 		emake -C "${T}" getconf getent iconv \
 			CC="$(tc-getCC)" \
