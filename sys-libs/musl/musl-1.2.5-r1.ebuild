@@ -52,11 +52,16 @@ else
 	PDEPEND="!crypt? ( sys-libs/libxcrypt[system] )"
 fi
 
+PDEPEND+=" sys-apps/musl-locales"
+
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.2.4-arm64-crti-alignment.patch
 	"${FILESDIR}"/${PN}-1.2.5-support-for-external-allocator.patch
 	"${FILESDIR}"/${PN}-1.2.5-mimalloc-musl-integration.patch
 	"${FILESDIR}"/${PN}-1.2.5-mimalloc-tweak-options.patch
+	"${FILESDIR}"/${PN}-1.2.5-memcpy.patch
+	"${FILESDIR}"/${PN}-1.2.5-musl-locales.patch
+	"${FILESDIR}"/${PN}-1.2.5-lto.patch
 )
 
 just_headers() {
@@ -98,6 +103,10 @@ src_prepare() {
 	cp "${FILESDIR}/mimalloc-verify-syms.sh" . || die
 	cp "${FILESDIR}/mimalloc.c" mimalloc/src
 
+	# remove musl's x86_64 asm memcpy as it's actually
+	# noticeably slower than the c implementation
+	rm src/string/x86_64/memcpy.s || die
+
 	mkdir "${WORKDIR}"/misc || die
 	cp "${DISTDIR}"/getconf.c "${WORKDIR}"/misc/getconf.c || die
 	cp "${DISTDIR}/${GETENT_FILE}" "${WORKDIR}"/misc/getent.c || die
@@ -107,7 +116,7 @@ src_prepare() {
 }
 
 src_configure() {
-	strip-flags && filter-lto # Prevent issues caused by aggressive optimizations & bug #877343
+	strip-flags # Prevent issues caused by aggressive optimizations
 	tc-getCC ${CTARGET}
 
 	just_headers && export CC=true
