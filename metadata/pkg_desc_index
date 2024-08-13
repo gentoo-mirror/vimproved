@@ -11,7 +11,6 @@ dev-python/hid 1.0.6: ctypes bindings for hidapi
 dev-python/hjson 3.1.0: A user interface for JSON.
 dev-python/jellyfin-apiclient-python 1.9.2: Python API Client for Jellyfin
 dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
-dev-python/lsprotocol 2023.0.1: Python implementation of the Language Server Protocol.
 dev-python/m3u8 5.3.0: Python m3u8 parser
 dev-python/material-color-utilities-python 0.1.5: Python port of material-color-utilities used for Material You colors
 dev-python/milc 1.8.0: Opinionated Batteries-Included Python 3 CLI Framework
