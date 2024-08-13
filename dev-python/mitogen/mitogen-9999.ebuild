@@ -26,10 +26,6 @@ RESTRICT="test"
 
 RDEPEND="ansible? ( app-admin/ansible[${PYTHON_USEDEP}] )"
 
-PATCHES=(
-	"${FILESDIR}/mitogen-0.3.7-ansible-2.17.patch"
-)
-
 python_install() {
 	distutils-r1_python_install
 
