@@ -50,6 +50,6 @@ media-sound/zrythm 1.0.0_rc1: A highly automated and intuitive digital audio wor
 media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
 sys-kernel/scx 1.0.1: sched_ext schedulers and tools
 sys-libs/libatomic-chimera 0.90.0: An implementation of libatomic
-sys-libs/musl 1.2.5-r1: Light, fast and, simple C library focused on standards-conformance and safety
+sys-libs/musl 1.2.5-r1 1.2.5-r2: Light, fast and, simple C library focused on standards-conformance and safety
 www-apps/kavita-bin 0.8.2: Kavita is a fast, feature rich, cross platform reading server.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
