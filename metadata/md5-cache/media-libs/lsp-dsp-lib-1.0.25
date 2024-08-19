@@ -12,5 +12,5 @@ RDEPEND=media-libs/lsp-common-lib
 RESTRICT=!test? ( test )
 SLOT=0/1.0.25
 SRC_URI=https://github.com/lsp-plugins/lsp-dsp-lib/releases/download/1.0.25/lsp-dsp-lib-src-1.0.25.tar.gz -> lsp-dsp-lib-1.0.25.tar.gz
-_eclasses_=toolchain-funcs	5f8f1dc0c94e007fa08af4e98a19d0e5	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	e503ea5acc20410237ba33ec3f7c857d
+_eclasses_=toolchain-funcs	333970c740aa7b1a92e4fcdc52f612bd	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	e503ea5acc20410237ba33ec3f7c857d
 _md5_=d6590667836d59e7b1f6c1039ce50d71
