@@ -1,0 +1,4 @@
+# Violet Purcell <vimproved@inventati.org> (2024-08-20)
+# slibtool is experimental and replacing libtool entirely is not recommended.
+# This package is here for adventurous (insane) people like me.
+=dev-build/libtool-99999999
