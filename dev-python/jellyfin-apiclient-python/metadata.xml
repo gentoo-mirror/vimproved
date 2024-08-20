@@ -6,6 +6,6 @@
 		<name>Violet Purcell</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="pypi">jellyfin-apiclient-python</remote-id>
+		<remote-id type="github">jellyfin/jellyfin-apiclient-python</remote-id>
 	</upstream>
 </pkgmetadata>

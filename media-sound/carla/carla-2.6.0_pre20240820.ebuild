@@ -9,7 +9,7 @@ inherit python-single-r1 xdg
 
 DESCRIPTION="Audio plugin host"
 HOMEPAGE="https://kx.studio/Applications:Carla"
-CARLA_COMMIT="c37d53a4216654118e711fa41e88e7e801d5bd9b"
+CARLA_COMMIT="74262a5dace5338444a6599e65d97c3b98968c96"
 SRC_URI="https://github.com/falkTX/${PN^}/archive/${CARLA_COMMIT}.tar.gz -> ${PN}-${CARLA_COMMIT}.tar.gz"
 S="${WORKDIR}/${PN^}-${CARLA_COMMIT}"
 
@@ -25,15 +25,13 @@ RDEPEND="
 	alsa? ( media-libs/alsa-lib )
 	elibc_musl? ( sys-libs/fts-standalone )
 	gui? (
-		dev-qt/qtcore:5
-		dev-qt/qtgui:5[egl]
-		dev-qt/qtwidgets:5
+		dev-qt/qtbase:6[gui,widgets]
 		media-libs/libglvnd[X]
 		x11-libs/libX11
 		x11-libs/libXcursor
 		x11-libs/libXext
 		x11-libs/libXrandr
-		$(python_gen_cond_dep 'dev-python/PyQt5[gui,svg,widgets,${PYTHON_USEDEP}]')
+		$(python_gen_cond_dep 'dev-python/PyQt6[gui,svg,widgets,${PYTHON_USEDEP}]')
 	)
 	fluidsynth? ( media-sound/fluidsynth:= )
 	pulseaudio? ( media-libs/libpulse )
@@ -42,7 +40,6 @@ RDEPEND="
 	${PYTHON_DEPS}
 "
 DEPEND="${RDEPEND}"
-BDEPEND="dev-python/PyQt5"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2.6.0_pre20231023-Add-logic-to-autodetect-compiler-and-fix-build-with-clang-on-linux.patch"
@@ -63,8 +60,9 @@ pkg_setup() {
 		HAVE_PULSEAUDIO=$(usex pulseaudio true false)
 		HAVE_PYQT=$(usex gui true false)
 		HAVE_QT4=false
-		HAVE_QT5=$(usex gui true false)
-		HAVE_QT5PKG=$(usex gui true false)
+		HAVE_QT5=false
+		HAVE_QT5PKG=false
+		HAVE_QT6=$(usex gui true false)
 		HAVE_SDL1=false
 		HAVE_SDL2=$(usex sdl true false)
 		HAVE_SNDFILE=$(usex sndfile true false)
