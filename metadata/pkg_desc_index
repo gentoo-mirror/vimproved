@@ -37,7 +37,7 @@ games-vn/amelie 20230929: In the middle of a field, far out in the countryside, 
 games-vn/highway-blossoms 1.2.4: A short yuri Visual Novel set in the American Southwest.
 games-vn/it-gets-so-lonely-here 1.0: A yandere yuri visual novel with a fairytale theme.
 gui-apps/gradience 0.8.0_beta1: Change the look of Adwaita, with ease
-gui-wm/river 0.3.5: A dynamic tiling Wayland compositor
+gui-wm/river 0.3.5-r1: A dynamic tiling Wayland compositor
 media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
 media-libs/lsp-common-lib 1.0.37: Common library for basic language definitions used by LSP Project
 media-libs/lsp-dsp-lib 1.0.25: DSP library for signal processing
