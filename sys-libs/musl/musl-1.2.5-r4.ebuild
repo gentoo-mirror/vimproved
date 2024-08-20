@@ -62,6 +62,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.2.5-memcpy.patch
 	"${FILESDIR}"/${PN}-1.2.5-musl-locales.patch
 	"${FILESDIR}"/${PN}-1.2.5-lto.patch
+	"${FILESDIR}"/${PN}-1.2.5-mimalloc-errno.patch
 )
 
 just_headers() {
