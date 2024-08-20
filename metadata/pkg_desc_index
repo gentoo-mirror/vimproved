@@ -4,6 +4,7 @@ dev-build/libtool 99999999: Dummy libtool package providing symlinks to dev-buil
 dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
 dev-libs/libbacktrace 20240715: Library to produce symbolic backtraces
 dev-libs/libcyaml 1.4.1: C library for reading and writing YAML.
+dev-libs/libxo 1.7.5: Generate text, XML, JSON, and HTML output using a common set of function calls.
 dev-python/aiolimiter 1.1.0: An efficient implementation of a rate limiter for asyncio.
 dev-python/deezer-py 1.3.7: A wrapper for all Deezer's APIs
 dev-python/dotty-dict 1.3.1: Dictionary wrapper for quick access to deeply nested keys.
