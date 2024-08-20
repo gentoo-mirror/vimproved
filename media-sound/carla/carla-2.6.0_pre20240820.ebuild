@@ -74,6 +74,7 @@ pkg_setup() {
 		JACKBRIDGE_DIRECT=true
 		LIBDIR="/usr/$(get_libdir)"
 		PREFIX="/usr"
+		PYUIC="pyuic6"
 		SKIP_STRIPPING=true
 		USING_RTAUDIO=true
 	)
