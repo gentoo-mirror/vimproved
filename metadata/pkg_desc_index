@@ -11,14 +11,14 @@ dev-python/dotty-dict 1.3.1: Dictionary wrapper for quick access to deeply neste
 dev-python/halo 0.0.31: Beautiful terminal spinners in Python
 dev-python/hid 1.0.6: ctypes bindings for hidapi
 dev-python/hjson 3.1.0: A user interface for JSON.
-dev-python/jellyfin-apiclient-python 1.9.2: Python API Client for Jellyfin
+dev-python/jellyfin-apiclient-python 1.10.0: Python API Client for Jellyfin
 dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
 dev-python/lsprotocol 2023.0.1: Python implementation of the Language Server Protocol.
-dev-python/m3u8 5.3.0: Python m3u8 parser
+dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/material-color-utilities-python 0.1.5: Python port of material-color-utilities used for Material You colors
 dev-python/milc 1.8.0: Opinionated Batteries-Included Python 3 CLI Framework
-dev-python/mitogen 0.3.7 9999: Distributed self-replicating programs in Python
-dev-python/pygame_sdl2 8.2.3: Reimplementation of portions of the pygame API using SDL2
+dev-python/mitogen 0.3.9 9999: Distributed self-replicating programs in Python
+dev-python/pygame_sdl2 8.3.0: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
 dev-python/python-lsp-ruff 2.2.2: Ruff linting plugin for pylsp
 dev-python/ruyaml 0.91.0: An openly maintained fork of elusive ruamel-yaml package.
@@ -26,13 +26,13 @@ dev-python/simple-term-menu 1.6.4: A Python package which creates simple interac
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.1: A formatter for Fennel code
-dev-util/lua-language-server 3.9.3: Lua language server
+dev-util/lua-language-server 3.10.5: Lua language server
 dev-util/teapot-tools 0.4.3: Replacement for depot_tools (gclient) and luci-go (cipd)
 dev-zig/zig-pixman 0.2.0: Zig bindings for pixman
 dev-zig/zig-wayland 0.2.0: Zig wayland scanner and libwayland bindings
 dev-zig/zig-wlroots 0.18.0: Zig bindings for wlroots
 dev-zig/zig-xkbcommon 0.2.0: Zig bindings for xkbcommon
-games-engines/renpy 8.2.3: Visual novel engine written in python
+games-engines/renpy 8.3.0: Visual novel engine written in python
 games-rhythm/etterna 0.72.3: Advanced cross-platform rhythm game focused on keyboard play
 games-util/rpatool 20220823: A tool to work with Ren'Py archives.
 games-vn/amelie 20230929: In the middle of a field, far out in the countryside, sits a lone manor.
@@ -45,15 +45,15 @@ media-libs/lsp-common-lib 1.0.37: Common library for basic language definitions 
 media-libs/lsp-dsp-lib 1.0.25: DSP library for signal processing
 media-libs/lsp-test-fw 1.0.26: Simple test framework for writing and executing tests used by LSP Project
 media-plugins/distrho-ports 20240427: Linux audio plugins and LV2 ports
-media-sound/carla 2.6.0_pre20240524: Audio plugin host
+media-sound/carla 2.6.0_pre20240820: Audio plugin host
 media-sound/geonkick 3.4.0: A free software percussion synthesizer for GNU/Linux
 media-sound/mopidy-jellyfin 1.0.5: Mopidy extension for playing music from jellyfin
 media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling Mopidy from MPD clients
 media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-sound/zrythm 1.0.0_rc1: A highly automated and intuitive digital audio workstation
 media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
-sys-kernel/scx 1.0.1: sched_ext schedulers and tools
+sys-kernel/scx 1.0.2: sched_ext schedulers and tools
 sys-libs/libatomic-chimera 0.90.0: An implementation of libatomic
-sys-libs/musl 1.2.5-r3: Light, fast and, simple C library focused on standards-conformance and safety
+sys-libs/musl 1.2.5-r4: Light, fast and, simple C library focused on standards-conformance and safety
 www-apps/kavita-bin 0.8.2: Kavita is a fast, feature rich, cross platform reading server.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
