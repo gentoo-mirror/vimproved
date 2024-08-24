@@ -108,6 +108,7 @@ CRATES="
 	gimli@0.29.0
 	glob@0.3.1
 	h2@0.4.5
+	h2@0.4.6
 	hashbrown@0.14.5
 	heck@0.4.1
 	heck@0.5.0
@@ -213,6 +214,7 @@ CRATES="
 	rustc-hash@1.1.0
 	rustix@0.38.34
 	rustls-native-certs@0.7.1
+	rustls-native-certs@0.7.2
 	rustls-pemfile@2.1.3
 	rustls-pki-types@1.8.0
 	rustls-webpki@0.102.6
@@ -269,6 +271,7 @@ CRATES="
 	tokio-rustls@0.26.0
 	tokio-util@0.7.11
 	tokio@1.39.2
+	tokio@1.39.3
 	tower-layer@0.3.3
 	tower-service@0.3.3
 	tower@0.4.13
