@@ -52,7 +52,7 @@ media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling Mopidy from MPD c
 media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-sound/zrythm 1.0.0_rc1: A highly automated and intuitive digital audio workstation
 media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
-sys-kernel/scx 1.0.2: sched_ext schedulers and tools
+sys-kernel/scx 1.0.3: sched_ext schedulers and tools
 sys-libs/libatomic-chimera 0.90.0: An implementation of libatomic
 sys-libs/musl 1.2.5-r4: Light, fast and, simple C library focused on standards-conformance and safety
 www-apps/kavita-bin 0.8.2: Kavita is a fast, feature rich, cross platform reading server.
