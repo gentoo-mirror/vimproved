@@ -3,7 +3,7 @@
 
 EAPI=8
 
-CHECKREQS_DISK_BUILD="8G"
+CHECKREQS_DISK_BUILD="5G"
 # List of crates for pycargoebuild:
 # rust/scx_{rustland_core,stats,utils}
 # scheds/rust/scx_{bpfland,lavd,layered,rlfifo,rustland,rusty}
