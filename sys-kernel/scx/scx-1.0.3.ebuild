@@ -3,17 +3,10 @@
 
 EAPI=8
 
-# Update with:
-# pycargoebuild -i ${P}.ebuild \
-#		rust/scx_rustland_core \
-#		rust/scx_utils \
-#		scheds/rust/scx_bpfland \
-#		scheds/rust/scx_lavd \
-#		scheds/rust/scx_layered \
-#		scheds/rust/scx_mitosis \
-#		scheds/rust/scx_rlfifo \
-#		scheds/rust/scx_rustland \
-#		scheds/rust/scx_rusty
+CHECKREQS_DISK_BUILD="8G"
+# List of crates for pycargoebuild:
+# rust/scx_{rustland_core,stats,utils}
+# scheds/rust/scx_{bpfland,lavd,layered,rlfifo,rustland,rusty}
 CRATES="
 	addr2line@0.22.0
 	adler@1.0.2
@@ -57,7 +50,6 @@ CRATES="
 	cfg-if@1.0.0
 	cfg_aliases@0.1.1
 	cfg_aliases@0.2.1
-	cgroupfs@0.7.1
 	chrono@0.4.38
 	clang-sys@1.8.1
 	clap@4.5.16
@@ -71,6 +63,7 @@ CRATES="
 	cmake@0.1.51
 	colorchoice@1.0.1
 	colorchoice@1.0.2
+	colored@2.1.0
 	const_format@0.2.31
 	const_format@0.2.32
 	const_format_proc_macros@0.2.31
@@ -86,7 +79,6 @@ CRATES="
 	crossbeam@0.8.4
 	ctrlc@3.4.5
 	deranged@0.3.11
-	dtoa@1.0.9
 	dunce@1.0.5
 	either@1.13.0
 	endian-type@0.1.2
@@ -150,9 +142,7 @@ CRATES="
 	libloading@0.8.5
 	libredox@0.1.3
 	linux-raw-sys@0.4.14
-	lock_api@0.4.12
 	log@0.4.22
-	maplit@1.0.2
 	memchr@2.7.4
 	memmap2@0.5.10
 	memoffset@0.6.5
@@ -179,8 +169,6 @@ CRATES="
 	ordered-float@3.9.2
 	ordered-float@4.2.1
 	ordered-float@4.2.2
-	parking_lot@0.12.3
-	parking_lot_core@0.9.10
 	paste@1.0.15
 	pin-project-internal@1.1.5
 	pin-project-lite@0.2.14
@@ -193,10 +181,9 @@ CRATES="
 	powerfmt@0.2.0
 	prettyplease@0.2.20
 	proc-macro2@1.0.86
-	prometheus-client-derive-encode@0.4.2
-	prometheus-client@0.19.0
 	quanta@0.12.3
 	quote@1.0.36
+	quote@1.0.37
 	radium@0.7.0
 	radix_trie@0.2.1
 	raw-cpuid@11.0.2
@@ -223,17 +210,20 @@ CRATES="
 	ryu@1.0.18
 	same-file@1.0.6
 	schannel@0.1.23
-	scopeguard@1.2.0
 	security-framework-sys@2.11.1
 	security-framework@2.11.1
 	semver@1.0.23
 	serde@1.0.204
 	serde@1.0.208
+	serde@1.0.209
 	serde_derive@1.0.204
 	serde_derive@1.0.208
+	serde_derive@1.0.209
 	serde_json@1.0.120
 	serde_json@1.0.125
+	serde_json@1.0.127
 	shlex@1.3.0
+	simple_logger@5.0.0
 	simplelog@0.12.2
 	sketches-ddsketch@0.2.2
 	slab@0.4.9
@@ -254,6 +244,7 @@ CRATES="
 	syn@2.0.71
 	syn@2.0.74
 	syn@2.0.75
+	syn@2.0.76
 	tap@1.0.1
 	tar@0.4.41
 	tempfile@3.10.1
@@ -344,7 +335,7 @@ CRATES="
 "
 LLVM_COMPAT=( {16..18} )
 
-inherit cargo llvm-r1 meson
+inherit cargo check-reqs linux-info llvm-r1 meson
 
 DESCRIPTION="sched_ext schedulers and tools"
 HOMEPAGE="https://github.com/sched-ext/scx"
@@ -355,12 +346,19 @@ SRC_URI="
 
 LICENSE="GPL-2"
 # Dependent crate licenses
-LICENSE+=" Apache-2.0 BSD-2 BSD ISC MIT openssl Unicode-DFS-2016 ZLIB"
+LICENSE+="
+	Apache-2.0 BSD-2 BSD ISC MIT MPL-2.0 openssl Unicode-DFS-2016 ZLIB
+"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="systemd"
+RESTRICT="test"
 
-DEPEND=">=dev-libs/libbpf-1.3"
+DEPEND="
+	dev-libs/elfutils
+	>=dev-libs/libbpf-1.3:=
+	sys-libs/zlib
+"
 RDEPEND="${DEPEND}"
 BDEPEND="
 	app-misc/jq
@@ -370,10 +368,35 @@ BDEPEND="
 	')
 "
 
+CONFIG_CHECK="
+	~BPF
+	~BPF_EVENTS
+	~BPF_JIT
+	~BPF_SYSCALL
+	~DEBUG_INFO_BTF
+	~FTRACE
+	~SCHED_CLASS_EXT
+"
+
+RUST_SCHEDS=(
+	scx_bpfland
+	scx_lavd
+	scx_layered
+	scx_rlfifo
+	scx_rustland
+	scx_rusty
+)
+
+pkg_setup() {
+	check-reqs_pkg_setup
+	linux-info_pkg_setup
+}
+
 src_configure() {
 	local emesonargs=(
 		-Dbpftool="disabled"
 		-Dbpf_clang="clang-${LLVM_SLOT}"
+		-Denable_rust=false
 		-Dlibbpf_a="disabled"
 		-Doffline=true
 		-Dopenrc=enabled
@@ -381,4 +404,27 @@ src_configure() {
 	)
 
 	meson_src_configure
+	cargo_src_configure
+}
+
+src_compile() {
+	meson_src_compile
+
+	for sched in "${RUST_SCHEDS[@]}"; do
+		pushd "scheds/rust/${sched}" > /dev/null || die "pushd failed"
+		einfo "Building ${sched}"
+		cargo_src_compile
+		popd > /dev/null || die "popd failed"
+	done
+}
+
+src_install() {
+	meson_src_install
+
+	for sched in "${RUST_SCHEDS[@]}"; do
+		pushd "scheds/rust/${sched}" > /dev/null || die "pushd failed"
+		einfo "Installing ${sched}"
+		cargo_src_install
+		popd > /dev/null || die "popd failed"
+	done
 }
