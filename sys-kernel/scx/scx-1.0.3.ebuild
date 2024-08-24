@@ -422,9 +422,9 @@ src_install() {
 	meson_src_install
 
 	for sched in "${RUST_SCHEDS[@]}"; do
-		pushd "scheds/rust/${sched}" > /dev/null || die "pushd failed"
 		einfo "Installing ${sched}"
-		cargo_src_install
-		popd > /dev/null || die "popd failed"
+		# Use dobin, since cargo really likes trying to recompile during install,
+		# and this ends up tacking on a ton of build time.
+		dobin "scheds/rust/${sched}/$(cargo_target_dir)/${sched}"
 	done
 }
