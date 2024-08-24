@@ -367,10 +367,6 @@ BDEPEND="
 	')
 "
 
-PATCHES=(
-	"${FILESDIR}/${P}-lavd-nix-signal.patch"
-)
-
 src_configure() {
 	local emesonargs=(
 		-Dbpftool="disabled"
