@@ -46,10 +46,12 @@ CRATES="
 	bytes@1.7.1
 	camino@1.1.7
 	camino@1.1.8
+	camino@1.1.9
 	cargo-platform@0.1.8
 	cargo_metadata@0.15.4
 	cargo_metadata@0.18.1
 	cc@1.1.12
+	cc@1.1.13
 	cc@1.1.5
 	cexpr@0.6.0
 	cfg-if@1.0.0
@@ -76,8 +78,12 @@ CRATES="
 	convert_case@0.6.0
 	core-foundation-sys@0.8.7
 	core-foundation@0.9.4
+	crossbeam-channel@0.5.13
+	crossbeam-deque@0.8.5
 	crossbeam-epoch@0.9.18
+	crossbeam-queue@0.3.11
 	crossbeam-utils@0.8.20
+	crossbeam@0.8.4
 	ctrlc@3.4.5
 	deranged@0.3.11
 	dtoa@1.0.9
@@ -138,6 +144,7 @@ CRATES="
 	libbpf-sys@1.4.3+v1.4.5
 	libc@0.2.155
 	libc@0.2.156
+	libc@0.2.158
 	libloading@0.8.4
 	libloading@0.8.5
 	libredox@0.1.3
@@ -244,6 +251,7 @@ CRATES="
 	syn@1.0.109
 	syn@2.0.71
 	syn@2.0.74
+	syn@2.0.75
 	tap@1.0.1
 	tar@0.4.41
 	tempfile@3.10.1
@@ -274,6 +282,7 @@ CRATES="
 	unicode-width@0.1.12
 	unicode-width@0.1.13
 	unicode-xid@0.2.4
+	unicode-xid@0.2.5
 	untrusted@0.9.0
 	utf8parse@0.2.2
 	vergen@8.3.2
