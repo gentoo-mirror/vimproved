@@ -75,10 +75,13 @@ index e1907477c..4012f8e69 100644
  
      def urlopen(url):
          import requests
-@@ -1050,7 +1050,7 @@ init -1500 python in updater:
-             self.updates = json.loads(updates_json)
- 
-             if verified and "monkeypatch" in self.updates:
+@@ -1054,9 +1054,9 @@ init -1500 python in updater:
+             if "RENPY_TEST_MONKEYPATCH" in os.environ:
+                 with open(os.environ["RENPY_TEST_MONKEYPATCH"], "r") as f:
+                     monkeypatch = f.read()
+-                    future.utils.exec_(monkeypatch, globals(), globals())
++                    six.exec_(monkeypatch, globals(), globals())
+             elif verified and "monkeypatch" in self.updates:
 -                future.utils.exec_(self.updates["monkeypatch"], globals(), globals())
 +                six.exec_(self.updates["monkeypatch"], globals(), globals())
  

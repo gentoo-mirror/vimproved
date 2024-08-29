@@ -47,7 +47,7 @@ PATCHES=(
 	"${FILESDIR}/renpy-6.99.12.4-compat-infinite-loop.patch"
 	"${FILESDIR}/renpy-8.1.0-ignore_rpyc_errors.patch"
 	"${FILESDIR}/renpy-8.2.1-cython-3.patch"
-	"${FILESDIR}/renpy-8.2.1-six.patch"
+	"${FILESDIR}/renpy-8.3.0-six.patch"
 )
 
 python_prepare_all() {
