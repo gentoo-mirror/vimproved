@@ -19,7 +19,7 @@ dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/material-color-utilities-python 0.1.5: Python port of material-color-utilities used for Material You colors
 dev-python/milc 1.8.0: Opinionated Batteries-Included Python 3 CLI Framework
 dev-python/mitogen 0.3.9 9999: Distributed self-replicating programs in Python
-dev-python/pygame_sdl2 8.3.0: Reimplementation of portions of the pygame API using SDL2
+dev-python/pygame_sdl2 8.2.3: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
 dev-python/python-lsp-ruff 2.2.2: Ruff linting plugin for pylsp
 dev-python/ruyaml 0.91.0: An openly maintained fork of elusive ruamel-yaml package.
@@ -33,7 +33,7 @@ dev-zig/zig-pixman 0.2.0: Zig bindings for pixman
 dev-zig/zig-wayland 0.2.0: Zig wayland scanner and libwayland bindings
 dev-zig/zig-wlroots 0.18.0: Zig bindings for wlroots
 dev-zig/zig-xkbcommon 0.2.0: Zig bindings for xkbcommon
-games-engines/renpy 8.3.0: Visual novel engine written in python
+games-engines/renpy 8.2.3: Visual novel engine written in python
 games-rhythm/etterna 0.72.3: Advanced cross-platform rhythm game focused on keyboard play
 games-util/rpatool 20220823: A tool to work with Ren'Py archives.
 games-vn/amelie 20230929: In the middle of a field, far out in the countryside, sits a lone manor.
