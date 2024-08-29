@@ -21,7 +21,6 @@ CRATES="
 	clap_derive@4.5.13
 	clap_lex@0.7.2
 	colorchoice@1.0.2
-	convert_case@0.6.0
 	cpufeatures@0.2.13
 	crypto-common@0.1.6
 	digest@0.10.7
@@ -56,7 +55,6 @@ CRATES="
 	regex-automata@0.4.7
 	regex-syntax@0.8.4
 	regex@1.10.6
-	rustversion@1.0.17
 	ryu@1.0.18
 	serde@1.0.208
 	serde_derive@1.0.208
@@ -65,7 +63,6 @@ CRATES="
 	sha2@0.10.8
 	shellexpand@3.1.0
 	strsim@0.11.1
-	strum_macros@0.26.4
 	syn@2.0.75
 	thiserror-impl@1.0.63
 	thiserror@1.0.63
@@ -75,7 +72,6 @@ CRATES="
 	typenum@1.17.0
 	ucd-trie@0.1.6
 	unicode-ident@1.0.12
-	unicode-segmentation@1.11.0
 	utf8parse@0.2.2
 	version_check@0.9.5
 	wasi@0.11.0+wasi-snapshot-preview1
