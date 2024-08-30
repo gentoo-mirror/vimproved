@@ -37,9 +37,11 @@ games-engines/renpy 8.2.3: Visual novel engine written in python
 games-rhythm/etterna 0.72.3: Advanced cross-platform rhythm game focused on keyboard play
 games-util/rpatool 20220823: A tool to work with Ren'Py archives.
 games-vn/amelie 20230929: In the middle of a field, far out in the countryside, sits a lone manor.
+games-vn/butterfly-soup 2.20: A visual novel about gay asian girls playing baseball and falling in love.
 games-vn/highway-blossoms 1.2.4: A short yuri Visual Novel set in the American Southwest.
 games-vn/it-gets-so-lonely-here 1.0: A yandere yuri visual novel with a fairytale theme.
 games-vn/scheme 20220701: SCHEME (Yuki's 4P 2)
+games-vn/the-final-prize-is-soup 1.05: A survival-horror yuri visual novel.
 games-vn/yukis4p 20210811: Yuki's 4P
 gui-apps/gradience 0.8.0_beta1: Change the look of Adwaita, with ease
 gui-wm/river 0.3.5-r1: A dynamic tiling Wayland compositor
