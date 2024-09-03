@@ -51,6 +51,7 @@ media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
 media-libs/lsp-common-lib 1.0.37: Common library for basic language definitions used by LSP Project
 media-libs/lsp-dsp-lib 1.0.25: DSP library for signal processing
 media-libs/lsp-test-fw 1.0.26: Simple test framework for writing and executing tests used by LSP Project
+media-plugins/aida-x 1.1.0: AIDA-X, an Amp Model Player leveraging AI
 media-plugins/distrho-ports 20240427: Linux audio plugins and LV2 ports
 media-sound/carla 2.6.0_pre20240820: Audio plugin host
 media-sound/geonkick 3.4.0: A free software percussion synthesizer for GNU/Linux
