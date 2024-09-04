@@ -13,6 +13,7 @@ media-plugins/mcp-plugins
 media-plugins/mda-lv2
 media-plugins/noise-repellent
 media-plugins/rev-plugins
+media-plugins/sfizz
 media-plugins/swh-lv2
 media-plugins/swh-plugins
 media-plugins/tap-plugins
