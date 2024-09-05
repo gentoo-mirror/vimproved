@@ -58,6 +58,7 @@ media-sound/carla 2.6.0_pre20240820: Audio plugin host
 media-sound/geonkick 3.4.0: A free software percussion synthesizer for GNU/Linux
 media-sound/mopidy-jellyfin 1.0.5: Mopidy extension for playing music from jellyfin
 media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling Mopidy from MPD clients
+media-sound/musescore 4.4.0: WYSIWYG Music Score Typesetter
 media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-sound/zrythm 1.0.0_rc1: A highly automated and intuitive digital audio workstation
 media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
