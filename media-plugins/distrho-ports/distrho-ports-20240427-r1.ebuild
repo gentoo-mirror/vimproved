@@ -42,8 +42,9 @@ PATCHES=(
 	"${FILESDIR}/${PN}-20231230-juce6.1-musl.patch"
 	"${FILESDIR}/${PN}-20231230-juce7-musl.patch"
 	"${FILESDIR}/${PN}-20231230-nullptr-cast.patch"
-	"${FILESDIR}/${PN}-20240427-no-strip.patch"
 )
+
+MESON_BUILDTYPE="debug"
 
 src_prepare() {
 	rm -r libs/{juce5,juce6.0,juce6.1,juce7}/source || die
