@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake flag-o-matic
+inherit cmake desktop flag-o-matic
 
 DESCRIPTION="AIDA-X, an Amp Model Player leveraging AI"
 HOMEPAGE="https://aida-x.cc/"
@@ -43,4 +43,7 @@ src_install() {
 	doins -r "${BUILD_DIR}/bin/AIDA-X.lv2"
 	insinto "/usr/$(get_libdir)/vst3/"
 	doins -r "${BUILD_DIR}/bin/AIDA-X.vst3"
+
+	newicon -s 192 "${FILESDIR}/icon.png" AIDA-X.png
+	make_desktop_entry AIDA-X AIDA-X AIDA-X
 }
