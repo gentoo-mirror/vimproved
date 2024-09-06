@@ -7,5 +7,6 @@
 	</maintainer>
 	<upstream>
 		<remote-id type="pypi">hjson</remote-id>
+		<remote-id type="github">hjson/hjson-py</remote-id>
 	</upstream>
 </pkgmetadata>
