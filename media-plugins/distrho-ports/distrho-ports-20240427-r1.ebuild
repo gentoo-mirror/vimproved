@@ -45,8 +45,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-20240427-juce5-unsigned.patch"
 )
 
-EMESON_BUILDTYPE="debug"
-
 src_prepare() {
 	rm -r libs/{juce5,juce6.0,juce6.1,juce7}/source || die
 	mv "${WORKDIR}/JUCE-${JUCE5_COMMIT}" libs/juce5/source || die
@@ -67,6 +65,8 @@ src_configure() {
 		-Doptimizations=false
 		-Dsse-optimizations=false
 	)
+
+	local -x EMESON_BUILDTYPE=debug
 
 	meson_src_configure
 }
