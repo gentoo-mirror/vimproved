@@ -6,19 +6,29 @@ EAPI=8
 DISTUTILS_USE_PEP517=poetry
 PYTHON_COMPAT=( python3_{11..12} )
 
-inherit distutils-r1 pypi
+inherit distutils-r1
 
 DESCRIPTION="An efficient implementation of a rate limiter for asyncio."
 HOMEPAGE="https://pypi.org/project/aiolimiter/"
+SRC_URI="https://github.com/mjpieters/aiolimiter/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-# Tests broken (?)
-# TODO: look into this more
-RESTRICT="test"
+IUSE="test"
+RESTRICT="!test? ( test )"
+
+BDEPEND="test? (
+	dev-python/pytest[${PYTHON_USEDEP}]
+	dev-python/pytest-asyncio[${PYTHON_USEDEP}]
+	dev-python/toml[${PYTHON_USEDEP}]
+)"
 
 python_install() {
 	distutils-r1_python_install
 	rm "${ED}/usr/lib/${EPYTHON}/site-packages/CHANGELOG.md" || die
+}
+
+python_test() {
+	epytest -o addopts=
 }
