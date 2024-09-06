@@ -1,5 +1,4 @@
 media-libs/lsp-plugins
-media-plugins/aida-x
 media-plugins/amb-plugins
 media-plugins/calf
 media-plugins/cmt-plugins
@@ -21,6 +20,7 @@ media-plugins/vco-plugins
 media-plugins/x42-avldrums
 media-plugins/x42-plugins
 media-plugins/zam-plugins
+media-sound/aida-x
 media-sound/amsynth
 media-sound/geonkick
 media-sound/helm
