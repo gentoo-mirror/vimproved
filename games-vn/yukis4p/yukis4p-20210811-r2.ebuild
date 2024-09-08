@@ -11,7 +11,7 @@ HOMEPAGE="https://milkkylemon.itch.io/yukis-4p"
 SRC_URI="Yuki's-4P-linux.tar.bz2"
 S="${WORKDIR}/Yuki's-4P-linux"
 
-SLOT="0"
+KEYWORDS="~amd64"
 
 BDEPEND+="app-arch/unzip"
 
