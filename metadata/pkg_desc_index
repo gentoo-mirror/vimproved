@@ -49,7 +49,7 @@ media-libs/lsp-test-fw 1.0.26: Simple test framework for writing and executing t
 media-plugins/distrho-ports 20240427-r1: Linux audio plugins and LV2 ports
 media-plugins/sfizz 1.2.3: SFZ parser and synth c++ library, providing a JACK standalone client
 media-sound/aida-x 1.1.0-r1: AIDA-X, an Amp Model Player leveraging AI
-media-sound/carla 2.6.0_pre20240820-r1: Audio plugin host
+media-sound/carla 2.6.0_pre20240820-r2: Audio plugin host
 media-sound/geonkick 3.4.0: A free software percussion synthesizer for GNU/Linux
 media-sound/mopidy-jellyfin 1.0.5: Mopidy extension for playing music from jellyfin
 media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling Mopidy from MPD clients
