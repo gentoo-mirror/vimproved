@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python3_{11..12} )
 
 inherit desktop python-single-r1 xdg
 
-DESCRIPTION="A downloadable game for Windows, macOS, and Linux"
+DESCRIPTION="Yuki gets kidnapped??"
 HOMEPAGE="https://milkkylemon.itch.io/yukis-4p-2"
 SRC_URI="yukis4p2-linux.tar.bz2"
 S="${WORKDIR}/yukis4p2-linux"
