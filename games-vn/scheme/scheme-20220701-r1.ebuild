@@ -54,5 +54,5 @@ src_install() {
 
 	newicon -s 256 "${T}/unpacked/gui/window_icon.png" ${PN}.png
 	make_desktop_entry ${PN} \
-		"Spica, Chinatsu and Haruka's Enchanting, Marvelous, and quite frankly Elaborate quest to save their (cute) girlfriend!!!"
+		"SCHEME!!!"
 }
