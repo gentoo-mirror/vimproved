@@ -16,7 +16,6 @@ SRC_URI="https://github.com/jellyfin/jellyfin-apiclient-python/archive/refs/tags
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 PATCHES=(
 	"${FILESDIR}/jellyfin-apiclient-python-1.10.0-setuptools-pyproject.patch"
@@ -28,3 +27,5 @@ RDEPEND="
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	dev-python/websocket-client[${PYTHON_USEDEP}]
 "
+
+distutils_enable_tests pytest
