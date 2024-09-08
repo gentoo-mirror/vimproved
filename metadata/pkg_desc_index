@@ -1,6 +1,6 @@
 acct-group/kavita 0: System group: kavita
 acct-user/kavita 0: System user: kavita
-app-admin/blahajdots 0.1.1: Bespoke dotfile management for sharkgirls.
+app-admin/blahajdots 0.2.0: Bespoke dotfile management for sharkgirls.
 dev-build/libtool 99999999: Dummy libtool package providing symlinks to dev-build/slibtool.
 dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
 dev-libs/libbacktrace 20240715: Library to produce symbolic backtraces
