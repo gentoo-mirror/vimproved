@@ -9,17 +9,32 @@ inherit python-single-r1
 
 DESCRIPTION="A tool to work with Ren'Py archives."
 HOMEPAGE="https://github.com/Shizmob/rpatool"
-SRC_URI="https://github.com/shizmob/rpatool/raw/74f26d5dfdd645483e02552aa766ca447ad6b191/rpatool -> ${P}"
-S="${WORKDIR}"
+RPATOOL_COMMIT="74f26d5dfdd645483e02552aa766ca447ad6b191"
+SRC_URI="https://github.com/shizmob/rpatool/archive/${RPATOOL_COMMIT}.tar.gz -> rpatool-${RPATOOL_COMMIT}.tar.gz"
+S="${WORKDIR}/rpatool-${RPATOOL_COMMIT}"
 
 LICENSE="WTFPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
+IUSE="test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-RESTRICT="test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="${PYTHON_DEPS}"
+BDEPEND="
+	test? ( $(python_gen_cond_dep '
+		dev-python/pytest-import-check[${PYTHON_USEDEP}]
+	') )
+"
+
+src_test() {
+	ln -s rpatool rpatool.py || die
+
+	epytest --import-check rpatool.py
+}
 
 src_install() {
-	python_newscript "${DISTDIR}/${P}" ${PN}
+	default
+
+	python_doscript rpatool
 }
