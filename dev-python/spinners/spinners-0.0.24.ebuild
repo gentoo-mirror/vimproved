@@ -14,4 +14,5 @@ HOMEPAGE="https://pypi.org/project/spinners/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
+
+distutils_enable_tests import-check
