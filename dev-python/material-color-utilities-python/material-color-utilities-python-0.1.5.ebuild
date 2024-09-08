@@ -15,5 +15,5 @@ HOMEPAGE="https://pypi.org/project/material-color-utilities-python/"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-# No tests
-RESTRICT="test"
+
+distutils_enable_tests import-check
