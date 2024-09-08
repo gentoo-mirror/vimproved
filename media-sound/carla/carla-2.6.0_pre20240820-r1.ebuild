@@ -91,4 +91,6 @@ src_compile() {
 src_install() {
 	emake "${emakeargs[@]}" DESTDIR="${ED}" install
 	mv "${ED}/usr/share/appdata" "${ED}/usr/share/metainfo" || die
+
+	python_fix_shebang "${ED}"
 }
