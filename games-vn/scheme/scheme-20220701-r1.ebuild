@@ -7,10 +7,10 @@ PYTHON_COMPAT=( python3_{11..12} )
 
 inherit desktop python-single-r1 xdg
 
-DESCRIPTION="Yuki's 4P"
-HOMEPAGE="https://milkkylemon.itch.io/yukis-4p"
-SRC_URI="Yuki's-4P-linux.tar.bz2"
-S="${WORKDIR}/Yuki's-4P-linux"
+DESCRIPTION="Yuki gets kidnapped??"
+HOMEPAGE="https://milkkylemon.itch.io/yukis-4p-2"
+SRC_URI="yukis4p2-linux.tar.bz2"
+S="${WORKDIR}/yukis4p2-linux"
 
 LICENSE="all-rights-reserved"
 SLOT="0"
@@ -36,6 +36,11 @@ pkg_nofetch() {
 }
 
 src_install() {
+	mkdir "${T}/unpacked" || die
+	pushd "${T}/unpacked" || die
+	rpatool -x "${S}/game/images.rpa" || die
+	popd || die
+
 	insinto /opt/${PN}
 	doins -r game
 
@@ -47,7 +52,7 @@ src_install() {
 		exec /opt/${PN}/${PN}
 	EOF
 
-	newicon -s 256 "${S}/game/gui/window_icon.png" ${PN}.png
+	newicon -s 256 "${T}/unpacked/gui/window_icon.png" ${PN}.png
 	make_desktop_entry ${PN} \
-		"Yuki's Palpitating, Passionate, Phenomenal, and quite frankly Proficient quest for a (hot) girlfriend!!!"
+		"SCHEME!!!"
 }

@@ -5,7 +5,7 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
 PYPI_NO_NORMALIZE=1
-PYTHON_COMPAT=( python3_12 )
+PYTHON_COMPAT=( python3_{12..13} )
 
 inherit distutils-r1
 
@@ -16,7 +16,6 @@ SRC_URI="https://github.com/jellyfin/jellyfin-apiclient-python/archive/refs/tags
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 PATCHES=(
 	"${FILESDIR}/jellyfin-apiclient-python-1.10.0-setuptools-pyproject.patch"
@@ -28,3 +27,5 @@ RDEPEND="
 	dev-python/urllib3[${PYTHON_USEDEP}]
 	dev-python/websocket-client[${PYTHON_USEDEP}]
 "
+
+distutils_enable_tests pytest

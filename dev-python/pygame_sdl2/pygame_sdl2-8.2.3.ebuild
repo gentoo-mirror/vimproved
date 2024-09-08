@@ -5,7 +5,7 @@ EAPI=8
 
 DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1
 
@@ -18,12 +18,9 @@ S="${WORKDIR}/${MY_P}"
 LICENSE="LGPL-2.1 ZLIB"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+IUSE="test"
+RESTRICT="!test? ( test )"
 
-# <wheel-0.41.0 wasn't installing headers correctly
-# https://github.com/pypa/setuptools/issues/3997
-BDEPEND="
-	>=dev-python/wheel-0.41.0
-"
 DEPEND="
 	dev-python/numpy[${PYTHON_USEDEP}]
 	media-libs/libjpeg-turbo:=
@@ -34,6 +31,12 @@ DEPEND="
 	media-libs/sdl2-ttf:=
 "
 RDEPEND="${DEPEND}"
+# <wheel-0.41.0 wasn't installing headers correctly
+# https://github.com/pypa/setuptools/issues/3997
+BDEPEND="
+	>=dev-python/wheel-0.41.0
+	test? ( dev-python/pytest-import-check[${PYTHON_USEDEP}] )
+"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-8.2.1-cython-3.patch"
@@ -45,4 +48,8 @@ python_prepare_all() {
 	rm -r gen{,3,-static} || die
 
 	distutils-r1_python_prepare_all
+}
+
+python_test() {
+	epytest --import-check "${BUILD_DIR}/install$(python_get_sitedir)/pygame_sdl2/__init__.py"
 }
