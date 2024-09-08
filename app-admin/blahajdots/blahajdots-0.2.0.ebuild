@@ -14,6 +14,7 @@ CRATES="
 	anstyle@1.0.8
 	bitflags@2.6.0
 	block-buffer@0.10.4
+	byteorder@1.5.0
 	cfg-if@1.0.0
 	clap-verbosity-flag@2.2.1
 	clap@4.5.16
@@ -35,6 +36,7 @@ CRATES="
 	handlebars@6.0.0
 	hashbrown@0.14.5
 	heck@0.5.0
+	home@0.5.9
 	humantime@2.1.0
 	indexmap@2.4.0
 	is_terminal_polyfill@1.70.1
@@ -49,8 +51,12 @@ CRATES="
 	pest_derive@2.7.11
 	pest_generator@2.7.11
 	pest_meta@2.7.11
+	ppv-lite86@0.2.20
 	proc-macro2@1.0.86
 	quote@1.0.36
+	rand@0.8.5
+	rand_chacha@0.3.1
+	rand_core@0.6.4
 	redox_users@0.4.6
 	regex-automata@0.4.7
 	regex-syntax@0.8.4
@@ -95,6 +101,8 @@ CRATES="
 	windows_x86_64_msvc@0.48.5
 	windows_x86_64_msvc@0.52.6
 	winnow@0.6.18
+	zerocopy-derive@0.7.35
+	zerocopy@0.7.35
 "
 
 inherit cargo
