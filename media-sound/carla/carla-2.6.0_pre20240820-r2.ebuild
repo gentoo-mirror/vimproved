@@ -95,4 +95,14 @@ src_install() {
 	mv "${ED}/usr/share/appdata" "${ED}/usr/share/metainfo" || die
 
 	python_fix_shebang "${ED}"
+
+	newbin - carla <<-EOF
+		#!/bin/sh
+		INSTALL_PREFIX="${EPREFIX}/usr"
+		export PATH="\${INSTALL_PREFIX}/lib/carla:\${PATH}"
+		exec ${EPYTHON} "\${INSTALL_PREFIX}/share/carla/carla" \\
+			--with-appname="\${0}" \\
+			--with-libprefix="\${INSTALL_PREFIX}" \\
+			"\${@}"
+	EOF
 }
