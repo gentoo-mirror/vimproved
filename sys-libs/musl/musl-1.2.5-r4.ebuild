@@ -25,11 +25,13 @@ fi
 GETENT_COMMIT="93a08815f8598db442d8b766b463d0150ed8e2ab"
 GETENT_FILE="musl-getent-${GETENT_COMMIT}.c"
 MIMALLOC_VER="2.1.7"
+CPORTS_COMMIT="98f74e399b2923930f31b4b8b30b70e16e395041"
 SRC_URI+="
 	https://dev.gentoo.org/~blueness/musl-misc/getconf.c
 	https://gitlab.alpinelinux.org/alpine/aports/-/raw/${GETENT_COMMIT}/main/musl/getent.c -> ${GETENT_FILE}
 	https://dev.gentoo.org/~blueness/musl-misc/iconv.c
 	https://github.com/microsoft/mimalloc/archive/refs/tags/v${MIMALLOC_VER}.tar.gz -> mimalloc-${MIMALLOC_VER}.tar.gz
+	https://github.com/chimera-linux/cports/archive/${CPORTS_COMMIT}.tar.gz -> cports-${CPORTS_COMMIT}.tar.gz
 "
 
 LICENSE="MIT LGPL-2 GPL-2"
@@ -54,15 +56,17 @@ fi
 
 PDEPEND+=" sys-apps/musl-locales"
 
+CPORTS_MUSL_PATCHES="${WORKDIR}/cports-${CPORTS_COMMIT}/main/musl/patches/"
+
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.2.4-arm64-crti-alignment.patch
-	"${FILESDIR}"/${PN}-1.2.5-support-for-external-allocator.patch
-	"${FILESDIR}"/${PN}-1.2.5-mimalloc-musl-integration.patch
-	"${FILESDIR}"/${PN}-1.2.5-mimalloc-tweak-options.patch
-	"${FILESDIR}"/${PN}-1.2.5-memcpy.patch
-	"${FILESDIR}"/${PN}-1.2.5-musl-locales.patch
-	"${FILESDIR}"/${PN}-1.2.5-lto.patch
-	"${FILESDIR}"/${PN}-1.2.5-mimalloc-errno.patch
+	"${CPORTS_MUSL_PATCHES}/0001-plumb-in-support-for-externally-provided-allocator-l.patch"
+	"${CPORTS_MUSL_PATCHES}/0001-implement-necessary-bits-for-musl-integration.patch"
+	"${CPORTS_MUSL_PATCHES}/mimalloc-tweak-options.patch"
+	"${CPORTS_MUSL_PATCHES}/memcpy.patch"
+	"${CPORTS_MUSL_PATCHES}/default-locpath.patch"
+	"${CPORTS_MUSL_PATCHES}/lto.patch"
+	"${CPORTS_MUSL_PATCHES}/mimalloc-errno.patch"
 )
 
 just_headers() {
