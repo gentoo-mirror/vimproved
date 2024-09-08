@@ -32,6 +32,13 @@ esac
 # Defaults to "archive".
 : "${RENPY_LAYOUT:=archive}"
 
+# @ECLASS_VARIABLE: RENPY_ARCHIVE_PATH
+# @DESCRIPTION:
+# The location of the main rpa archive of the Visual Novel, raelative to ${S}.
+# Used only when RENPY_LAYOUT is equal to "archive". Defaults to
+# "game/archive.rpa".
+: "${RENPY_ARCHIVE_PATH:=game/archive.rpa}"
+
 # @ECLASS_VARIABLE: RENPY_WINDOW_ICON
 # @DEFAULT_UNSET
 # @DESCRIPTION:
@@ -75,7 +82,7 @@ renpy_src_prepare() {
 	if [[ "${RENPY_LAYOUT}" = archive ]]; then
 		mkdir "${T}/unpacked" || die
 		pushd "${T}/unpacked" > /dev/null || die
-		rpatool -x "${S}/game/archive.rpa" || die
+		rpatool -x "${S}/${RENPY_ARCHIVE_PATH}" || die
 		popd > /dev/null || die
 	fi
 
