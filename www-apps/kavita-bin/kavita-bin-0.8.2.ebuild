@@ -8,8 +8,12 @@ inherit systemd
 DESCRIPTION="Kavita is a fast, feature rich, cross platform reading server."
 HOMEPAGE="https://www.kavitareader.com/"
 SRC_URI="
-	elibc_glibc? ( https://github.com/Kareadita/Kavita/releases/download/v${PV}/kavita-linux-x64.tar.gz -> ${P}.tar.gz )
-	elibc_musl? ( https://github.com/Kareadita/Kavita/releases/download/v${PV}/kavita-linux-musl-x64.tar.gz -> ${P}.tar.gz )
+	elibc_glibc? (
+		https://github.com/Kareadita/Kavita/releases/download/v${PV}/kavita-linux-x64.tar.gz -> ${P}.tar.gz
+	)
+	elibc_musl? (
+		https://github.com/Kareadita/Kavita/releases/download/v${PV}/kavita-linux-musl-x64.tar.gz -> ${P}.tar.gz
+	)
 "
 S="${WORKDIR}/Kavita"
 
