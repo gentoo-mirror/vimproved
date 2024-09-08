@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=flit
-PYTHON_COMPAT=( python3_12 )
+PYTHON_COMPAT=( python3_{12..13} )
 inherit distutils-r1 pypi
 
 DESCRIPTION="Python implementation of the Language Server Protocol."
