@@ -13,9 +13,10 @@ HOMEPAGE="https://pypi.org/project/lsprotocol/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 RDEPEND="
 	dev-python/attrs[${PYTHON_USEDEP}]
 	dev-python/cattrs[${PYTHON_USEDEP}]
 "
+
+distutils_enable_tests import-check
