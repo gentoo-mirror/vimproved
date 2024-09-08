@@ -4,12 +4,13 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=poetry
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 
-inherit distutils-r1 pypi
+inherit distutils-r1
 
 DESCRIPTION="A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer"
 HOMEPAGE="https://pypi.org/project/streamrip/"
+SRC_URI="https://github.com/nathom/streamrip/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -45,3 +46,5 @@ src_prepare() {
 
 	default
 }
+
+distutils_enable_tests pytest

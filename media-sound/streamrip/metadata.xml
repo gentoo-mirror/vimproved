@@ -7,5 +7,6 @@
 	</maintainer>
 	<upstream>
 		<remote-id type="pypi">streamrip</remote-id>
+		<remote-id type="github">nathom/streamrip</remote-id>
 	</upstream>
 </pkgmetadata>

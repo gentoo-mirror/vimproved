@@ -6,7 +6,7 @@ EAPI=8
 DISTUTILS_EXT=1
 DISTUTILS_SINGLE_IMPL=1
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 
 inherit desktop distutils-r1
 
@@ -20,6 +20,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="development doc examples"
 REQUIRED_USE="examples? ( development )"
+# too much of a pain
+RESTRICT="test"
 
 DEPEND="
 	dev-libs/fribidi

@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1 pypi
 
@@ -14,7 +14,6 @@ HOMEPAGE="https://pypi.org/project/halo/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 RDEPEND="
 	dev-python/colorama[${PYTHON_USEDEP}]
@@ -23,3 +22,5 @@ RDEPEND="
 	dev-python/spinners[${PYTHON_USEDEP}]
 	dev-python/termcolor[${PYTHON_USEDEP}]
 "
+
+distutils_enable_tests import-check
