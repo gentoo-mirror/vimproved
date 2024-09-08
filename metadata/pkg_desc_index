@@ -29,10 +29,6 @@ dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.1: A formatter for Fennel code
 dev-util/lua-language-server 3.10.5: Lua language server
 dev-util/teapot-tools 0.4.3: Replacement for depot_tools (gclient) and luci-go (cipd)
-dev-zig/zig-pixman 0.2.0: Zig bindings for pixman
-dev-zig/zig-wayland 0.2.0: Zig wayland scanner and libwayland bindings
-dev-zig/zig-wlroots 0.18.0: Zig bindings for wlroots
-dev-zig/zig-xkbcommon 0.2.0: Zig bindings for xkbcommon
 games-engines/renpy 8.2.3: Visual novel engine written in python
 games-rhythm/etterna 0.72.3: Advanced cross-platform rhythm game focused on keyboard play
 games-util/rpatool 20220823: A tool to work with Ren'Py archives.
@@ -44,7 +40,6 @@ games-vn/scheme 20220701: SCHEME (Yuki's 4P 2)
 games-vn/the-final-prize-is-soup 1.05: A survival-horror yuri visual novel.
 games-vn/yukis4p 20210811: Yuki's 4P
 gui-apps/gradience 0.8.0_beta1: Change the look of Adwaita, with ease
-gui-wm/river 0.3.5-r1: A dynamic tiling Wayland compositor
 media-fonts/fira-code-nerd-font 3.2.1: Fira Code with Nerd Fonts patches
 media-fonts/hack-nerd-font 3.2.1: Hack with Nerd Fonts patches
 media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
