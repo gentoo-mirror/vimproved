@@ -78,6 +78,8 @@ pkg_setup() {
 		SKIP_STRIPPING=true
 		USING_RTAUDIO=true
 	)
+
+	python-single-r1_pkg_setup
 }
 
 src_configure() {
@@ -91,4 +93,6 @@ src_compile() {
 src_install() {
 	emake "${emakeargs[@]}" DESTDIR="${ED}" install
 	mv "${ED}/usr/share/appdata" "${ED}/usr/share/metainfo" || die
+
+	python_fix_shebang "${ED}"
 }
