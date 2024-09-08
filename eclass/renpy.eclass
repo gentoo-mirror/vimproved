@@ -32,6 +32,11 @@ esac
 # Defaults to "archive".
 : "${RENPY_LAYOUT:=archive}"
 
+# @ECLASS_VARIABLE: RENPY_WINDOW_ICON
+# @DEFAULT_UNSET
+# @DESCRIPTION:
+# Overrides the path to the menu icon for installation.
+
 if [[ ! ${_RENPY_ECLASS} ]]; then
 _RENPY_ECLASS=1
 
@@ -89,6 +94,7 @@ renpy_src_install() {
 
 	local window_icon="${S}/game/gui/window_icon.png"
 	[[ "${RENPY_LAYOUT}" = archive ]] && window_icon="${T}/unpacked/gui/window_icon.png"
+	[[ -n "${RENPY_WINDOW_ICON}" ]] && window_icon="${RENPY_WINDOW_ICON}"
 
 	newicon -s 256 "${window_icon}" "${PN}.png"
 	make_desktop_entry "/opt/${PN}/${PN}" "${RENPY_TITLE}"
