@@ -78,6 +78,8 @@ pkg_setup() {
 		SKIP_STRIPPING=true
 		USING_RTAUDIO=true
 	)
+
+	python-single-r1_pkg_setup
 }
 
 src_configure() {
