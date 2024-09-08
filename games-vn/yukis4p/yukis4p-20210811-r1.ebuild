@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python3_{11..12} )
 
 inherit desktop python-single-r1 xdg
 
-DESCRIPTION="Yuki's 4P"
+DESCRIPTION="Help Yuki get a girlfriend!!! (or maybe three?)"
 HOMEPAGE="https://milkkylemon.itch.io/yukis-4p"
 SRC_URI="Yuki's-4P-linux.tar.bz2"
 S="${WORKDIR}/Yuki's-4P-linux"
@@ -49,5 +49,5 @@ src_install() {
 
 	newicon -s 256 "${S}/game/gui/window_icon.png" ${PN}.png
 	make_desktop_entry ${PN} \
-		"Yuki's Palpitating, Passionate, Phenomenal, and quite frankly Proficient quest for a (hot) girlfriend!!!"
+		"Yuki's 4P!!!"
 }
