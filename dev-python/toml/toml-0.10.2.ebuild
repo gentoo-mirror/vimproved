@@ -10,8 +10,17 @@ inherit distutils-r1 pypi
 
 DESCRIPTION="Python Library for Tom's Obvious, Minimal Language"
 HOMEPAGE="https://pypi.org/project/toml/"
+TOML_TEST_PV="1.5.0"
+SRC_URI+=" https://github.com/toml-lang/toml-test/archive/refs/tags/v${TOML_TEST_PV}.tar.gz -> toml-test-${TOML_TEST_PV}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
+
+src_prepare() {
+	mv "${WORKDIR}/toml-test-${TOML_TEST_PV}" toml-test || die
+
+	distutils-r1_src_prepare
+}
+
+distutils_enable_tests pytest
