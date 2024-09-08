@@ -14,7 +14,6 @@ HOMEPAGE="https://pypi.org/project/halo/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 RDEPEND="
 	dev-python/colorama[${PYTHON_USEDEP}]
@@ -23,3 +22,5 @@ RDEPEND="
 	dev-python/spinners[${PYTHON_USEDEP}]
 	dev-python/termcolor[${PYTHON_USEDEP}]
 "
+
+distutils_enable_tests import-check
