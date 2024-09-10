@@ -16,7 +16,7 @@ S="${WORKDIR}"
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
+RESTRICT="strip test"
 
 RDEPEND="
 	acct-group/slskd
