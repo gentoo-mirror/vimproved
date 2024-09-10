@@ -1,0 +1,16 @@
+[Unit]
+Description=slskd
+After=network.target
+ 
+[Service]
+User=slskd
+Group=slskd
+Type=simple
+WorkingDirectory=/var/lib/slskd
+ExecStart=/opt/slskd/slskd
+TimeoutStopSec=20
+KillMode=process
+Restart=on-failure
+ 
+[Install]
+WantedBy=multi-user.target
