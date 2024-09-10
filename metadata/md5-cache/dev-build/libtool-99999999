@@ -1,9 +1,0 @@
-DEFINED_PHASES=install
-DEPEND=dev-build/slibtool
-DESCRIPTION=Dummy libtool package providing symlinks to dev-build/slibtool.
-EAPI=8
-HOMEPAGE=https://dev.midipix.org/cross/slibtool
-LICENSE=metapackage
-RDEPEND=dev-build/slibtool
-SLOT=2
-_md5_=15e76d355abdff448841d1f107bdefc9

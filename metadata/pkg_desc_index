@@ -3,7 +3,6 @@ acct-group/slskd 0: System group: slskd
 acct-user/kavita 0: System user: kavita
 acct-user/slskd 0: System user: slskd
 app-admin/blahajdots 0.2.0: Bespoke dotfile management for sharkgirls.
-dev-build/libtool 99999999: Dummy libtool package providing symlinks to dev-build/slibtool.
 dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
 dev-libs/libbacktrace 20240715: Library to produce symbolic backtraces
 dev-libs/libcyaml 1.4.1: C library for reading and writing YAML.
