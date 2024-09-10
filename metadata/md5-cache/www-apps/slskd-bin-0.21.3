@@ -1,0 +1,14 @@
+BDEPEND=app-arch/unzip virtual/pkgconfig
+DEFINED_PHASES=install
+DESCRIPTION=A modern client-server application for the Soulseek file sharing network.
+EAPI=8
+HOMEPAGE=https://github.com/slskd/slskd/
+INHERIT=systemd
+KEYWORDS=~amd64
+LICENSE=AGPL-3
+RDEPEND=acct-group/slskd acct-user/slskd
+RESTRICT=strip test
+SLOT=0
+SRC_URI=elibc_glibc? ( https://github.com/slskd/slskd/releases/download/0.21.3/slskd-0.21.3-linux-x64.zip ) elibc_musl? ( https://github.com/slskd/slskd/releases/download/0.21.3/slskd-0.21.3-linux-musl-x64.zip )
+_eclasses_=toolchain-funcs	948855ec7ad9f11351edf9066708dfa9	multilib	7e1347c006a76bb812f3a9f663b79991	systemd	0f241b5c9f3758c3d3423df59a7f655a
+_md5_=27c4b2e3442be9a2d218cece2040a6fe
