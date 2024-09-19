@@ -12,93 +12,78 @@ CRATES="
 	anstyle-query@1.1.1
 	anstyle-wincon@3.0.4
 	anstyle@1.0.8
-	bitflags@2.6.0
 	block-buffer@0.10.4
 	byteorder@1.5.0
 	cfg-if@1.0.0
 	clap-verbosity-flag@2.2.1
-	clap@4.5.16
-	clap_builder@4.5.15
+	clap@4.5.17
+	clap_builder@4.5.17
 	clap_derive@4.5.13
 	clap_lex@0.7.2
 	colorchoice@1.0.2
-	cpufeatures@0.2.13
+	cpufeatures@0.2.14
 	crypto-common@0.1.6
 	digest@0.10.7
-	dirs-sys@0.4.1
-	dirs@5.0.1
 	env_filter@0.1.2
 	env_logger@0.11.5
 	equivalent@1.0.1
 	generic-array@0.14.7
 	getrandom@0.2.15
 	glob@0.3.1
-	handlebars@6.0.0
+	handlebars@6.1.0
 	hashbrown@0.14.5
 	heck@0.5.0
 	home@0.5.9
 	humantime@2.1.0
-	indexmap@2.4.0
+	indexmap@2.5.0
 	is_terminal_polyfill@1.70.1
 	itoa@1.0.11
 	libc@0.2.158
-	libredox@0.1.3
 	log@0.4.22
 	memchr@2.7.4
 	once_cell@1.19.0
-	option-ext@0.2.0
-	pest@2.7.11
-	pest_derive@2.7.11
-	pest_generator@2.7.11
-	pest_meta@2.7.11
+	pest@2.7.13
+	pest_derive@2.7.13
+	pest_generator@2.7.13
+	pest_meta@2.7.13
 	ppv-lite86@0.2.20
 	proc-macro2@1.0.86
-	quote@1.0.36
+	quote@1.0.37
 	rand@0.8.5
 	rand_chacha@0.3.1
 	rand_core@0.6.4
-	redox_users@0.4.6
 	regex-automata@0.4.7
 	regex-syntax@0.8.4
 	regex@1.10.6
 	ryu@1.0.18
-	serde@1.0.208
-	serde_derive@1.0.208
-	serde_json@1.0.127
+	serde@1.0.210
+	serde_derive@1.0.210
+	serde_json@1.0.128
 	serde_spanned@0.6.7
 	sha2@0.10.8
-	shellexpand@3.1.0
 	strsim@0.11.1
-	syn@2.0.75
+	syn@2.0.77
 	thiserror-impl@1.0.63
 	thiserror@1.0.63
 	toml@0.8.19
 	toml_datetime@0.6.8
-	toml_edit@0.22.20
+	toml_edit@0.22.21
 	typenum@1.17.0
 	ucd-trie@0.1.6
-	unicode-ident@1.0.12
+	unicode-ident@1.0.13
+	untildify@0.1.1
 	utf8parse@0.2.2
 	version_check@0.9.5
 	wasi@0.11.0+wasi-snapshot-preview1
-	windows-sys@0.48.0
 	windows-sys@0.52.0
-	windows-targets@0.48.5
 	windows-targets@0.52.6
-	windows_aarch64_gnullvm@0.48.5
 	windows_aarch64_gnullvm@0.52.6
-	windows_aarch64_msvc@0.48.5
 	windows_aarch64_msvc@0.52.6
-	windows_i686_gnu@0.48.5
 	windows_i686_gnu@0.52.6
 	windows_i686_gnullvm@0.52.6
-	windows_i686_msvc@0.48.5
 	windows_i686_msvc@0.52.6
-	windows_x86_64_gnu@0.48.5
 	windows_x86_64_gnu@0.52.6
-	windows_x86_64_gnullvm@0.48.5
 	windows_x86_64_gnullvm@0.52.6
-	windows_x86_64_msvc@0.48.5
 	windows_x86_64_msvc@0.52.6
 	winnow@0.6.18
 	zerocopy-derive@0.7.35
@@ -118,7 +103,7 @@ S="${WORKDIR}/${PN}"
 LICENSE="GPL-3+"
 # Dependent crate licenses
 LICENSE+="
-	MIT MPL-2.0 Unicode-DFS-2016
+	MIT Unicode-DFS-2016
 	|| ( Apache-2.0 Boost-1.0 )
 "
 SLOT="0"
