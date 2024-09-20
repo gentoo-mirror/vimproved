@@ -2,10 +2,10 @@ acct-group/kavita 0: System group: kavita
 acct-group/slskd 0: System group: slskd
 acct-user/kavita 0: System user: kavita
 acct-user/slskd 0: System user: slskd
-app-admin/blahajdots 0.2.2: Bespoke dotfile management for sharkgirls.
+app-admin/blahajdots 0.2.2 9999: Bespoke dotfile management for sharkgirls.
 dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
 dev-libs/libbacktrace 20240805: Library to produce symbolic backtraces
-dev-libs/libcyaml 1.4.1: C library for reading and writing YAML.
+dev-libs/libcyaml 1.4.2: C library for reading and writing YAML.
 dev-libs/libxo 1.7.5: Generate text, XML, JSON, and HTML output using a common set of function calls.
 dev-python/aiolimiter 1.1.0: An efficient implementation of a rate limiter for asyncio.
 dev-python/deezer-py 1.3.7: A wrapper for all Deezer's APIs
@@ -17,20 +17,19 @@ dev-python/jellyfin-apiclient-python 1.10.0: Python API Client for Jellyfin
 dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
 dev-python/lsprotocol 2023.0.1: Python implementation of the Language Server Protocol.
 dev-python/m3u8 6.0.0: Python m3u8 parser
-dev-python/material-color-utilities-python 0.1.5: Python port of material-color-utilities used for Material You colors
 dev-python/milc 1.8.0: Opinionated Batteries-Included Python 3 CLI Framework
 dev-python/mitogen 0.3.9 9999: Distributed self-replicating programs in Python
-dev-python/pygame_sdl2 8.2.3: Reimplementation of portions of the pygame API using SDL2
+dev-python/pygame_sdl2 8.3.2: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
 dev-python/python-lsp-ruff 2.2.2: Ruff linting plugin for pylsp
 dev-python/ruyaml 0.91.0: An openly maintained fork of elusive ruamel-yaml package.
 dev-python/simple-term-menu 1.6.4: A Python package which creates simple interactive menus on the command line.
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
-dev-util/fnlfmt 0.3.1: A formatter for Fennel code
-dev-util/lua-language-server 3.10.5: Lua language server
+dev-util/fnlfmt 0.3.2: A formatter for Fennel code
+dev-util/lua-language-server 3.10.6: Lua language server
 dev-util/teapot-tools 0.4.3: Replacement for depot_tools (gclient) and luci-go (cipd)
-games-engines/renpy 8.2.3: Visual novel engine written in python
+games-engines/renpy 8.3.2: Visual novel engine written in python
 games-rhythm/etterna 0.72.3: Advanced cross-platform rhythm game focused on keyboard play
 games-util/rpatool 20220823: A tool to work with Ren'Py archives.
 games-vn/amelie 20230929-r1: In the middle of a field, far out in the countryside, sits a lone manor.
@@ -46,8 +45,6 @@ games-vn/the-moon-looks-beautiful-tonight 1: Two girls must travel to the moon's
 games-vn/walk-in-the-sun 1.2: Claire's got one goal - to spend time with her friend Jamie after school.
 games-vn/without-a-voice 2.0.3: a dark fantasy yuri visual novel
 games-vn/yukis4p 20210811-r2: Help Yuki get a girlfriend!!! (or maybe three?)
-media-fonts/fira-code-nerd-font 3.2.1: Fira Code with Nerd Fonts patches
-media-fonts/hack-nerd-font 3.2.1: Hack with Nerd Fonts patches
 media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
 media-libs/lsp-common-lib 1.0.37: Common library for basic language definitions used by LSP Project
 media-libs/lsp-dsp-lib 1.0.25: DSP library for signal processing
@@ -55,7 +52,7 @@ media-libs/lsp-test-fw 1.0.26: Simple test framework for writing and executing t
 media-plugins/distrho-ports 20240427-r1: Linux audio plugins and LV2 ports
 media-plugins/sfizz 1.2.3: SFZ parser and synth c++ library, providing a JACK standalone client
 media-sound/aida-x 1.1.0-r1: AIDA-X, an Amp Model Player leveraging AI
-media-sound/carla 2.6.0_pre20240820-r2: Audio plugin host
+media-sound/carla 2.6.0_pre20240915: Audio plugin host
 media-sound/geonkick 3.4.0: A free software percussion synthesizer for GNU/Linux
 media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-sound/zrythm 1.0.0_rc1: A highly automated and intuitive digital audio workstation
