@@ -1,0 +1,156 @@
+From 64a1d09e030bd3bd5603c9a0ae067bd87a26632d Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Fri, 20 Sep 2024 13:24:26 -0400
+Subject: [PATCH] port from future to six
+
+--- a/module/generate_styles.py
++++ b/module/generate_styles.py
+@@ -21,9 +21,6 @@
+ 
+ from __future__ import print_function, unicode_literals, division, absolute_import
+ 
+-from future import standard_library
+-standard_library.install_aliases()
+-
+ from builtins import str
+ 
+ import collections
+--- a/module/setup.py
++++ b/module/setup.py
+@@ -28,8 +28,6 @@ import sys
+ import os
+ import subprocess
+ 
+-import future
+-
+ # Change to the directory containing this file.
+ BASE = os.path.abspath(os.path.dirname(sys.argv[0]))
+ os.chdir(BASE)
+--- a/renpy/audio/audio.py
++++ b/renpy/audio/audio.py
+@@ -28,7 +28,7 @@ from __future__ import division, absolute_import, with_statement, print_function
+ from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+ 
+ 
+-from future.utils import raise_
++from six import reraise
+ 
+ import time
+ import pygame_sdl2 # @UnusedImport
+@@ -1234,7 +1234,7 @@ def periodic():
+             exc = periodic_exc
+             periodic_exc = None
+ 
+-            raise_(exc[0], exc[1], exc[2])
++            reraise(exc[0], exc[1], exc[2])
+ 
+         run_periodic = True
+         periodic_condition.notify()
+--- a/renpy/common/00updater.rpy
++++ b/renpy/common/00updater.rpy
+@@ -41,7 +41,7 @@ init -1500 python in updater:
+     import zlib
+     import codecs
+     import io
+-    import future.utils
++    import six
+ 
+     def urlopen(url):
+         import requests
+@@ -1054,9 +1054,9 @@ init -1500 python in updater:
+             if "RENPY_TEST_MONKEYPATCH" in os.environ:
+                 with open(os.environ["RENPY_TEST_MONKEYPATCH"], "r") as f:
+                     monkeypatch = f.read()
+-                    future.utils.exec_(monkeypatch, globals(), globals())
++                    six.exec_(monkeypatch, globals(), globals())
+             elif verified and "monkeypatch" in self.updates:
+-                future.utils.exec_(self.updates["monkeypatch"], globals(), globals())
++                six.exec_(self.updates["monkeypatch"], globals(), globals())
+ 
+         def add_dlc_state(self, name):
+ 
+--- a/renpy/compat/__init__.py
++++ b/renpy/compat/__init__.py
+@@ -58,8 +58,7 @@ Right now, it does the following things:
+ 
+ from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+ 
+-import future.standard_library
+-import future.utils
++import six
+ import builtins
+ 
+ import io
+@@ -68,15 +67,10 @@ import operator
+ 
+ python_open = open
+ 
+-################################################################################
+-# Alias the Python 3 standard library.
+-
+-future.standard_library.install_aliases()
+-
+ ################################################################################
+ # Determine if this is Python2.
+ 
+-PY2 = future.utils.PY2
++PY2 = six.PY2
+ 
+ ################################################################################
+ # Make open mimic Python 3.
+@@ -114,24 +108,24 @@ renpy.update_path()
+ ################################################################################
+ # String (text and binary) types and functions.
+ 
+-basestring = future.utils.string_types
++basestring = six.string_types
+ pystr = str
+-unicode = future.utils.text_type
++unicode = six.text_type
+ 
+ # This tries to help pylance get the types right.
+-str = builtins.str; globals()["str"] = future.utils.text_type
++str = builtins.str; globals()["str"] = six.text_type
+ 
+ 
+-bord = future.utils.bord
++bord = six.byte2int
+ 
+ if PY2:
+     bchr = chr # type: ignore
+ else:
+     def bchr(i): # type: (int) -> bytes
+         return bytes([i])
+-tobytes = future.utils.tobytes
++tobytes = six.b
+ 
+-from future.builtins import chr
++chr = six.unichr
+ 
+ ################################################################################
+ # Dictionary views.
+--- a/renpy/execution.py
++++ b/renpy/execution.py
+@@ -25,7 +25,7 @@
+ from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+ from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+ 
+-from future.utils import reraise
++from six import reraise
+ 
+ import sys
+ import time
+--- a/renpy/loadsave.py
++++ b/renpy/loadsave.py
+@@ -24,7 +24,7 @@
+ from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+ from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+ 
+-from future.utils import reraise
++from six import reraise
+ 
+ from typing import Optional
+ 
+-- 
+2.46.0
+
