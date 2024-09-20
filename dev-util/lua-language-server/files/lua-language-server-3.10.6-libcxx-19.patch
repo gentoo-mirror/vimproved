@@ -1,0 +1,23 @@
+Seems like libc++ 19 shuffled around some includes. Make the bundled libfmt
+explicitly include <algorithm>.
+
+--- a/3rd/bee.lua/3rd/fmt/fmt/format.h
++++ b/3rd/bee.lua/3rd/fmt/fmt/format.h
+@@ -39,6 +39,7 @@
+ #endif
+ 
+ #ifndef FMT_IMPORT_STD
++#  include <algorithm>         // std::copy
+ #  include <cmath>             // std::signbit
+ #  include <cstdint>           // uint32_t
+ #  include <cstring>           // std::memcpy
+--- a/3rd/luamake/bee.lua/3rd/fmt/fmt/format.h
++++ b/3rd/luamake/bee.lua/3rd/fmt/fmt/format.h
+@@ -39,6 +39,7 @@
+ #endif
+ 
+ #ifndef FMT_IMPORT_STD
++#  include <algorithm>         // std::copy
+ #  include <cmath>             // std::signbit
+ #  include <cstdint>           // uint32_t
+ #  include <cstring>           // std::memcpy

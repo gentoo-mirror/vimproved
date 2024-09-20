@@ -26,14 +26,18 @@ BDEPEND="
 "
 RESTRICT="!test? ( test )"
 
+PATCHES=( "${FILESDIR}/${PN}-3.10.6-libcxx-19.patch" )
+
 src_prepare() {
 	# Remove hardcoded gcc references
 	sed -i "/lm.cxx/a lm.cc = '$(tc-getCC)'" \
 		make.lua || die
 	sed -i "s/CC = gcc/ CC = ${tc-getCC}/" \
 		3rd/lpeglabel/makefile || die
+
+	default
+
 	# Shipped file doesn't respect CFLAGS/CXXFLAGS/LDFLAGS
-	eapply_user
 	sed -i -e "s/^cc = gcc/cc = $(tc-getCC)/" \
 		-e "s/^ar = ar/ar = $(tc-getAR)/" \
 		-e "s/-std=c11 -O2 -Wall/-std=c11 ${CFLAGS}/" \
