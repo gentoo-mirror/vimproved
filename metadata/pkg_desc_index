@@ -60,7 +60,7 @@ media-sound/geonkick 3.4.0: A free software percussion synthesizer for GNU/Linux
 media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-sound/zrythm 1.0.0_rc1: A highly automated and intuitive digital audio workstation
 media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
-sys-kernel/scx 1.0.3: sched_ext schedulers and tools
+sys-kernel/scx 1.0.4: sched_ext schedulers and tools
 www-apps/kavita-bin 0.8.3: Kavita is a fast, feature rich, cross platform reading server.
 www-apps/slskd-bin 0.21.3: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
