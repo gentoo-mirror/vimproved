@@ -4,7 +4,7 @@ acct-user/kavita 0: System user: kavita
 acct-user/slskd 0: System user: slskd
 app-admin/blahajdots 0.2.2: Bespoke dotfile management for sharkgirls.
 dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
-dev-libs/libbacktrace 20240715: Library to produce symbolic backtraces
+dev-libs/libbacktrace 20240805: Library to produce symbolic backtraces
 dev-libs/libcyaml 1.4.1: C library for reading and writing YAML.
 dev-libs/libxo 1.7.5: Generate text, XML, JSON, and HTML output using a common set of function calls.
 dev-python/aiolimiter 1.1.0: An efficient implementation of a rate limiter for asyncio.
