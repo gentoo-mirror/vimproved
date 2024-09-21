@@ -28,6 +28,10 @@ LICENSE+="
 	|| ( Apache-2.0 Boost-1.0 )
 "
 SLOT="0"
+IUSE="+gsettings"
+
+DEPEND="gsettings? ( dev-libs/glib:2= )"
+RDEPEND="${DEPEND}"
 
 QA_FLAGS_IGNORED="usr/bin/blahaj"
 
@@ -38,4 +42,12 @@ src_unpack() {
 	else
 		cargo_src_unpack
 	fi
+}
+
+src_configure() {
+	local myfeatures=(
+		$(usev gsettings)
+	)
+
+	cargo_src_configure --no-default-features
 }
