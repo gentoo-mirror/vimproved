@@ -29,6 +29,13 @@ PATCHES=(
 	"${FILESDIR}/${P}-root-dir-env.patch"
 )
 
+src_prepare() {
+	sed -i "s|add_subdirectory(boost/nowide)||" extern/CMakeLists.txt || die "sed failed"
+	sed -i "s|target_link_libraries(Etterna PRIVATE nowide::nowide)||" CMakeLists.txt || die "sed failed"
+
+	cmake_src_prepare
+}
+
 src_configure() {
 	append-cppflags -DASIO_HAS_STD_INVOKE_RESULT
 
