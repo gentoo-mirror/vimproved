@@ -10,13 +10,16 @@ CRATES="
 	anstyle-query@1.1.1
 	anstyle-wincon@3.0.4
 	anstyle@1.0.8
+	autocfg@1.3.0
+	bitflags@2.6.0
 	block-buffer@0.10.4
 	byteorder@1.5.0
+	cfg-expr@0.16.0
 	cfg-if@1.0.0
 	clap-verbosity-flag@2.2.1
-	clap@4.5.17
-	clap_builder@4.5.17
-	clap_derive@4.5.13
+	clap@4.5.18
+	clap_builder@4.5.18
+	clap_derive@4.5.18
 	clap_lex@0.7.2
 	colorchoice@1.0.2
 	cpufeatures@0.2.14
@@ -25,9 +28,22 @@ CRATES="
 	env_filter@0.1.2
 	env_logger@0.11.5
 	equivalent@1.0.1
+	futures-channel@0.3.30
+	futures-core@0.3.30
+	futures-executor@0.3.30
+	futures-io@0.3.30
+	futures-macro@0.3.30
+	futures-task@0.3.30
+	futures-util@0.3.30
 	generic-array@0.14.7
 	getrandom@0.2.15
+	gio-sys@0.20.1
+	gio@0.20.1
+	glib-macros@0.20.3
+	glib-sys@0.20.2
+	glib@0.20.3
 	glob@0.3.1
+	gobject-sys@0.20.1
 	handlebars@6.1.0
 	hashbrown@0.14.5
 	heck@0.5.0
@@ -44,7 +60,11 @@ CRATES="
 	pest_derive@2.7.13
 	pest_generator@2.7.13
 	pest_meta@2.7.13
+	pin-project-lite@0.2.14
+	pin-utils@0.1.0
+	pkg-config@0.3.30
 	ppv-lite86@0.2.20
+	proc-macro-crate@3.2.0
 	proc-macro2@1.0.86
 	quote@1.0.37
 	rand@0.8.5
@@ -60,8 +80,12 @@ CRATES="
 	serde_json@1.0.128
 	serde_spanned@0.6.7
 	sha2@0.10.8
+	slab@0.4.9
+	smallvec@1.13.2
 	strsim@0.11.1
 	syn@2.0.77
+	system-deps@7.0.2
+	target-lexicon@0.12.16
 	thiserror-impl@1.0.63
 	thiserror@1.0.63
 	toml@0.8.19
@@ -72,6 +96,7 @@ CRATES="
 	unicode-ident@1.0.13
 	untildify@0.1.1
 	utf8parse@0.2.2
+	version-compare@0.2.0
 	version_check@0.9.5
 	walkdir@2.5.0
 	wasi@0.11.0+wasi-snapshot-preview1
@@ -110,10 +135,14 @@ fi
 LICENSE="GPL-3+"
 # Dependent crate licenses
 LICENSE+="
-	MIT Unicode-DFS-2016
+	Apache-2.0-with-LLVM-exceptions MIT Unicode-DFS-2016
 	|| ( Apache-2.0 Boost-1.0 )
 "
 SLOT="0"
+IUSE="+gsettings"
+
+DEPEND="gsettings? ( dev-libs/glib:2= )"
+RDEPEND="${DEPEND}"
 
 QA_FLAGS_IGNORED="usr/bin/blahaj"
 
@@ -124,4 +153,12 @@ src_unpack() {
 	else
 		cargo_src_unpack
 	fi
+}
+
+src_configure() {
+	local myfeatures=(
+		$(usev gsettings)
+	)
+
+	cargo_src_configure --no-default-features
 }
