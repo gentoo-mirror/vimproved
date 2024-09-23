@@ -72,6 +72,10 @@ src_configure() {
 	meson_src_configure
 }
 
+src_test() {
+	meson_src_test --no-suite "zrythm:data"
+}
+
 src_install() {
 	meson_src_install
 	rm -rf "${ED}/usr/$(get_libdir)/${PN}/carla" || die
