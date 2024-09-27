@@ -17,8 +17,8 @@ dev-python/jellyfin-apiclient-python 1.10.0: Python API Client for Jellyfin
 dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
 dev-python/lsprotocol 2023.0.1: Python implementation of the Language Server Protocol.
 dev-python/m3u8 6.0.0: Python m3u8 parser
-dev-python/milc 1.8.0: Opinionated Batteries-Included Python 3 CLI Framework
-dev-python/mitogen 0.3.9 9999: Distributed self-replicating programs in Python
+dev-python/milc 1.9.0: Opinionated Batteries-Included Python 3 CLI Framework
+dev-python/mitogen 0.3.10 9999: Distributed self-replicating programs in Python
 dev-python/pygame_sdl2 8.3.2: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
 dev-python/python-lsp-ruff 2.2.2: Ruff linting plugin for pylsp
@@ -52,12 +52,12 @@ media-libs/lsp-test-fw 1.0.26: Simple test framework for writing and executing t
 media-plugins/distrho-ports 20240427-r1: Linux audio plugins and LV2 ports
 media-plugins/sfizz 1.2.3: SFZ parser and synth c++ library, providing a JACK standalone client
 media-sound/aida-x 1.1.0-r1: AIDA-X, an Amp Model Player leveraging AI
-media-sound/carla 2.6.0_pre20240915: Audio plugin host
+media-sound/carla 2.6.0_pre20240922: Audio plugin host
 media-sound/geonkick 3.4.0: A free software percussion synthesizer for GNU/Linux
 media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-sound/zrythm 1.0.0_rc1: A highly automated and intuitive digital audio workstation
 media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
 sys-kernel/scx 1.0.4: sched_ext schedulers and tools
-www-apps/kavita-bin 0.8.3: Kavita is a fast, feature rich, cross platform reading server.
+www-apps/kavita-bin 0.8.3.2: Kavita is a fast, feature rich, cross platform reading server.
 www-apps/slskd-bin 0.21.3: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
