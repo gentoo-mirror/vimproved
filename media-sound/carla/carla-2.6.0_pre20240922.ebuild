@@ -46,52 +46,30 @@ PATCHES=(
 	"${FILESDIR}/${PN}-2.6.0_pre20231023-Add-logic-to-automatically-link-against-fts-standalone.patch"
 )
 
-pkg_setup() {
-	emakeargs=(
-		DEBUG=$(usex debug true false)
-		HAVE_ALSA=$(usex alsa true false)
-		HAVE_DBUS=false
-		HAVE_DGL=$(usex gui true false)
-		HAVE_FFMPEG=false
-		HAVE_FLUIDSYNTH=$(usex fluidsynth true false)
-		HAVE_FRONTEND=$(usex gui true false)
-		HAVE_FTS_STANDALONE=$(usex elibc_musl true false)
-		HAVE_LIBLO=false
-		HAVE_PULSEAUDIO=$(usex pulseaudio true false)
-		HAVE_PYQT=$(usex gui true false)
-		HAVE_QT4=false
-		HAVE_QT5=false
-		HAVE_QT5PKG=false
-		HAVE_QT6=$(usex gui true false)
-		HAVE_SDL1=false
-		HAVE_SDL2=$(usex sdl true false)
-		HAVE_SNDFILE=$(usex sndfile true false)
-		HAVE_X11=$(usex gui true false)
-		HAVE_XCURSOR=$(usex gui true false)
-		HAVE_XEXT=$(usex gui true false)
-		HAVE_XRANDR=$(usex gui true false)
-		HAVE_YSFX=true
-		JACKBRIDGE_DIRECT=true
-		LIBDIR="/usr/$(get_libdir)"
-		PREFIX="/usr"
-		PYUIC="pyuic6"
-		SKIP_STRIPPING=true
-		USING_RTAUDIO=true
-	)
-
-	python-single-r1_pkg_setup
-}
-
-src_configure() {
-	emake "${emakeargs[@]}" features
-}
-
 src_compile() {
-	emake "${emakeargs[@]}"
+	emake \
+		BASE_OPTS= \
+		DEBUG="$(usex debug true false)" \
+		HAVE_ALSA="$(usex alsa true false)" \
+		HAVE_FFMPEG=false \
+		HAVE_FLUIDSYNTH="$(usex fluidsynth true false)" \
+		HAVE_FRONTEND="$(usex gui true false)" \
+		HAVE_HYLIA=true \
+		HAVE_LIBLO=false \
+		HAVE_LIBMAGIC=true \
+		HAVE_PULSEAUDIO="$(usex pulseaudio true false)" \
+		HAVE_QT4=false \
+		HAVE_QT5=false \
+		HAVE_SDL="$(usex sdl true false)" \
+		HAVE_SDL2="$(usex sdl true false)" \
+		HAVE_SNDFILE="$(usex sndfile true false)" \
+		HAVE_X11="$(usex gui true false)" \
+		SKIP_STRIPPING=true \
+		VERBOSE=1
 }
 
 src_install() {
-	emake "${emakeargs[@]}" DESTDIR="${ED}" install
+	emake DESTDIR="${ED}" LIBDIR="/usr/$(get_libdir)" PREFIX="/usr" install
 	mv "${ED}/usr/share/appdata" "${ED}/usr/share/metainfo" || die
 
 	python_fix_shebang "${ED}"
