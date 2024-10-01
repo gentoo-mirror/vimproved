@@ -217,6 +217,8 @@ LICENSE+="
 "
 SLOT="0"
 KEYWORDS="~amd64"
+# Tests require network
+RESTRICT="test"
 
 DEPEND="${PYTHON_DEPS}"
 BDEPEND="dev-libs/protobuf"
