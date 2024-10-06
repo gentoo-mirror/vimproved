@@ -358,7 +358,7 @@ CRATES="
 	zvariant_derive@4.2.0
 	zvariant_utils@2.1.0
 "
-LLVM_COMPAT=( {16..19} )
+LLVM_COMPAT=( {16..18} )
 
 inherit cargo check-reqs flag-o-matic linux-info llvm-r1 meson
 
