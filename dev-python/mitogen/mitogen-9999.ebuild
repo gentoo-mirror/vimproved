@@ -22,7 +22,6 @@ fi
 LICENSE="BSD"
 SLOT="0"
 IUSE="+ansible"
-RESTRICT="test"
 
 RDEPEND="ansible? ( app-admin/ansible[${PYTHON_USEDEP}] )"
 
@@ -40,4 +39,15 @@ python_install() {
 
 		python_optimize "${D}/$(python_get_sitedir)/ansible/plugins/strategy/"
 	fi
+}
+
+python_test() {
+	local EPYTEST_IGNORE=(
+		# TODO: investigate
+		"${BUILD_DIR}/install$(python_get_sitedir)/ansible_mitogen/plugins/connection/mitogen_kubectl.py"
+		# python2 compat module
+		"${BUILD_DIR}/install$(python_get_sitedir)/mitogen/compat/pkgutil.py"
+	)
+
+	epytest --import-check "${BUILD_DIR}/install$(python_get_sitedir)"
 }
