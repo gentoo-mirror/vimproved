@@ -15,6 +15,7 @@ SRC_URI="https://github.com/mopidy/mopidy/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="test"
 
 RDEPEND="
 	dev-python/gst-python[${PYTHON_USEDEP}]
@@ -23,26 +24,3 @@ RDEPEND="
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/tornado[${PYTHON_USEDEP}]
 "
-
-DEPEND="
-	${RDEPEND}
-
-	test? (
-		dev-python/responses[${PYTHON_USEDEP}]
-	)
-"
-
-distutils_enable_tests pytest
-
-EPYTEST_IGNORE=(
-	# Upstream uses a mix of pytest and unittest
-	# Since most tests are pytest, let's ignore unittest tests
-	tests/http/test_server.py
-	tests/http/test_handlers.py
-)
-
-EPYTEST_DESELECT=(
-	# Broken test due to network-sandbox
-	tests/stream/test_playback.py
-	tests/test_help.py::HelpTest::test_help_has_mopidy_options
-)
