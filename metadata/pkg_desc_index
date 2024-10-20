@@ -59,6 +59,7 @@ media-sound/mopidy 3.4.2: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.5: Jellyfin Extension for Mopidy
 media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling playback from MPD clients
 media-sound/mopidy-scrobbler 2.0.1: Mopidy extension for scrobbling played tracks to Last.fm
+media-sound/plattenalbum 2.1.1: Connect to your music
 media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-sound/zrythm 1.0.0_rc1: A highly automated and intuitive digital audio workstation
 media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
