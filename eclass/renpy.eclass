@@ -93,18 +93,18 @@ renpy_src_prepare() {
 # @DESCRIPTION:
 # This is the renpy_src_install function.
 renpy_src_install() {
-	insinto "/opt/${PN}"
+	insinto "/usr/share/renpy/${PN}"
 	doins -r game
 
-	dosym "$(python_get_sitedir)/renpy" "/opt/${PN}/renpy"
-	dosym "$(python_get_scriptdir)/renpy" "/opt/${PN}/${PN}"
+	dosym "$(python_get_sitedir)/renpy" "/usr/share/renpy/${PN}/renpy"
+	dosym "$(python_get_scriptdir)/renpy" "/usr/share/renpy/${PN}/${PN}"
 
 	local window_icon="${S}/game/gui/window_icon.png"
 	[[ "${RENPY_LAYOUT}" = archive ]] && window_icon="${T}/unpacked/gui/window_icon.png"
 	[[ -n "${RENPY_WINDOW_ICON}" ]] && window_icon="${RENPY_WINDOW_ICON}"
 
 	newicon -s 256 "${window_icon}" "${PN}.png"
-	make_desktop_entry "/opt/${PN}/${PN}" "${RENPY_TITLE}"
+	make_desktop_entry "/usr/share/renpy/${PN}/${PN}" "${RENPY_TITLE}"
 }
 
 fi
