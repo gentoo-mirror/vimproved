@@ -3,6 +3,7 @@ acct-group/slskd 0: System group: slskd
 acct-user/kavita 0: System user: kavita
 acct-user/slskd 0: System user: slskd
 app-admin/blahajdots 0.4.0 9999: Bespoke dotfile management for sharkgirls.
+app-misc/sptlrx 1.2.2: Synchronized lyrics in your terminal
 dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
 dev-libs/libbacktrace 20240805: Library to produce symbolic backtraces
 dev-libs/libcyaml 1.4.2: C library for reading and writing YAML.
