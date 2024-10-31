@@ -1,0 +1,14 @@
+# Violet Purcell <vimproved@inventati.org> (2024-10-31)
+# Packages I do not use anymore and don't really want to maintain.
+# Removal on 2024-11-07
+games-rhythm/etterna
+media-libs/lsp-common-lib
+media-libs/lsp-dsp-lib
+media-libs/lsp-test-fw
+media-plugins/distrho-ports
+media-plugins/sfizz
+media-sound/TauonMusicBox
+media-sound/aida-x
+media-sound/carla
+media-sound/geonkick
+media-sound/zrythm
