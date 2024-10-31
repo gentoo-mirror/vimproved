@@ -4,7 +4,7 @@ acct-user/kavita 0: System user: kavita
 acct-user/slskd 0: System user: slskd
 app-admin/blahajdots 0.4.0 9999: Bespoke dotfile management for sharkgirls.
 app-misc/sptlrx 1.2.2: Synchronized lyrics in your terminal
-dev-embedded/qmk 1.1.5-r1: A program to help users work with QMK Firmware.
+dev-embedded/qmk 1.1.6: A program to help users work with QMK Firmware.
 dev-libs/libbacktrace 20240805: Library to produce symbolic backtraces
 dev-libs/libcyaml 1.4.2: C library for reading and writing YAML.
 dev-libs/libxo 1.7.5: Generate text, XML, JSON, and HTML output using a common set of function calls.
@@ -19,7 +19,7 @@ dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
 dev-python/lsprotocol 2023.0.1: Python implementation of the Language Server Protocol.
 dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/milc 1.9.0: Opinionated Batteries-Included Python 3 CLI Framework
-dev-python/mitogen 0.3.14 9999: Distributed self-replicating programs in Python
+dev-python/mitogen 0.3.15 9999: Distributed self-replicating programs in Python
 dev-python/pydbus 0.6.0-r1: Pythonic DBus library
 dev-python/pygame_sdl2 8.3.2: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
@@ -29,7 +29,7 @@ dev-python/simple-term-menu 1.6.4: A Python package which creates simple interac
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
-dev-util/lua-language-server 3.10.6: Lua language server
+dev-util/lua-language-server 3.12.0: Lua language server
 dev-util/teapot-tools 0.4.3: Replacement for depot_tools (gclient) and luci-go (cipd)
 games-engines/renpy 8.3.2: Visual novel engine written in python
 games-rhythm/etterna 0.72.3: Advanced cross-platform rhythm game focused on keyboard play
