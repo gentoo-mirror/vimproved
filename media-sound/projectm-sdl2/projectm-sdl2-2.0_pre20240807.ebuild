@@ -19,7 +19,7 @@ S="${WORKDIR}/frontend-sdl2-${COMMIT}"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~arm64"
+KEYWORDS="~amd64"
 
 RDEPEND="
 	dev-libs/poco
