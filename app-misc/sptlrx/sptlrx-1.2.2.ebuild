@@ -20,6 +20,11 @@ src_compile() {
 	ego build
 }
 
+src_test() {
+	einfo "Running basic sanity-check"
+	./sptlrx help || die "sanity-check failed"
+}
+
 src_install() {
 	dobin sptlrx
 

@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1 pypi udev
 
@@ -14,8 +14,6 @@ HOMEPAGE="https://qmk.fm/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-# All tests require network
-RESTRICT="test"
 
 RDEPEND="
 	app-mobilephone/dfu-util
@@ -32,6 +30,13 @@ RDEPEND="
 	dev-python/pyusb[${PYTHON_USEDEP}]
 	!dev-embedded/qmk-udev-rules
 "
+
+distutils_enable_tests import-check
+
+src_test() {
+	export QMK_HOME="${T}"
+	distutils-r1_src_test
+}
 
 src_install() {
 	distutils-r1_src_install

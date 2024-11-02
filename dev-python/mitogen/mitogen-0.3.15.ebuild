@@ -21,9 +21,11 @@ fi
 
 LICENSE="BSD"
 SLOT="0"
-IUSE="+ansible"
+IUSE="+ansible test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="ansible? ( app-admin/ansible[${PYTHON_USEDEP}] )"
+BDEPEND="test? ( dev-python/pytest-import-check[${PYTHON_USEDEP}] )"
 
 python_install() {
 	distutils-r1_python_install
