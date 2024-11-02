@@ -32,7 +32,6 @@ dev-util/fnlfmt 0.3.2: A formatter for Fennel code
 dev-util/lua-language-server 3.12.0: Lua language server
 dev-util/teapot-tools 0.4.3: Replacement for depot_tools (gclient) and luci-go (cipd)
 games-engines/renpy 8.3.2: Visual novel engine written in python
-games-rhythm/etterna 0.72.3: Advanced cross-platform rhythm game focused on keyboard play
 games-util/rpatool 20220823: A tool to work with Ren'Py archives.
 games-vn/amelie 20230929-r2: In the middle of a field, far out in the countryside, sits a lone manor.
 games-vn/butterfly-soup 2.20-r1: A visual novel about gay asian girls playing baseball and falling in love.
@@ -48,15 +47,6 @@ games-vn/walk-in-the-sun 1.2-r1: Claire's got one goal - to spend time with her 
 games-vn/without-a-voice 2.0.3-r1: a dark fantasy yuri visual novel
 games-vn/yukis4p 20210811-r3: Help Yuki get a girlfriend!!! (or maybe three?)
 media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
-media-libs/lsp-common-lib 1.0.37: Common library for basic language definitions used by LSP Project
-media-libs/lsp-dsp-lib 1.0.25: DSP library for signal processing
-media-libs/lsp-test-fw 1.0.26: Simple test framework for writing and executing tests used by LSP Project
-media-plugins/distrho-ports 20240427-r1: Linux audio plugins and LV2 ports
-media-plugins/sfizz 1.2.3: SFZ parser and synth c++ library, providing a JACK standalone client
-media-sound/TauonMusicBox 7.8.3: The desktop music player of today!
-media-sound/aida-x 1.1.0-r1: AIDA-X, an Amp Model Player leveraging AI
-media-sound/carla 2.6.0_pre20240922: Audio plugin host
-media-sound/geonkick 3.4.0: A free software percussion synthesizer for GNU/Linux
 media-sound/mopidy 3.4.2: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.5: Jellyfin Extension for Mopidy
 media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling playback from MPD clients
@@ -64,7 +54,6 @@ media-sound/mopidy-mpris 3.0.3: Mopidy extension for controlling playback from M
 media-sound/mopidy-scrobbler 2.0.1: Mopidy extension for scrobbling played tracks to Last.fm
 media-sound/projectm-sdl2 2.0_pre20240807: Application based on SDL2 that turns your desktop audio into awesome visuals
 media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
-media-sound/zrythm 1.0.0_rc1: A highly automated and intuitive digital audio workstation
 media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
 www-apps/kavita-bin 0.8.3.2: Kavita is a fast, feature rich, cross platform reading server.
 www-apps/slskd-bin 0.21.4: A modern client-server application for the Soulseek file sharing network.

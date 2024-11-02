@@ -4,10 +4,3 @@
 
 dev-python/mitogen:ansible - Install symlinks for Ansible strategy plugins
 games-engines/renpy:development - Install IDE for game developers and an empty game template
-media-plugins/distrho-ports:lv2 - Build LV2 plugin
-media-plugins/distrho-ports:vst2 - Build VST2 plugin
-media-plugins/distrho-ports:vst3 - Build VST3 plugin
-media-sound/carla:fluidsynth - Enable FluidSynth support for sf2 soundfonts
-media-sound/geonkick:lv2 - Build LV2 plugin
-media-sound/geonkick:standalone - Build standalone Jack program
-media-sound/zrythm:plugins - Build extra plugins for Zrythm
