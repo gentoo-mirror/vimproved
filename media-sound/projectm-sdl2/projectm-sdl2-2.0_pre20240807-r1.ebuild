@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake
+inherit cmake desktop xdg
 
 DESCRIPTION="Application based on SDL2 that turns your desktop audio into awesome visuals"
 HOMEPAGE="https://github.com/projectM-visualizer/frontend-sdl2"
@@ -41,4 +41,11 @@ src_configure() {
 	)
 
 	cmake_src_configure
+}
+
+src_install() {
+	cmake_src_install
+
+	doicon -s scalable "${FILESDIR}/projectMSDL.svg"
+	domenu src/resources/projectMSDL.desktop
 }
