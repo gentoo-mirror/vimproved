@@ -14,8 +14,6 @@ HOMEPAGE="https://qmk.fm/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-# All tests require network
-RESTRICT="test"
 
 RDEPEND="
 	app-mobilephone/dfu-util
@@ -32,6 +30,13 @@ RDEPEND="
 	dev-python/pyusb[${PYTHON_USEDEP}]
 	!dev-embedded/qmk-udev-rules
 "
+
+distutils_enable_tests import-check
+
+src_test() {
+	export QMK_HOME="${T}"
+	distutils-r1_src_test
+}
 
 src_install() {
 	distutils-r1_src_install
