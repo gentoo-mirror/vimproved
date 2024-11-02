@@ -25,7 +25,7 @@ dev-python/simple-term-menu 1.6.4: A Python package which creates simple interac
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
-dev-util/lua-language-server 3.12.0: Lua language server
+dev-util/lua-language-server 3.12.0-r1: Lua language server
 dev-util/teapot-tools 0.4.3: Replacement for depot_tools (gclient) and luci-go (cipd)
 games-engines/renpy 8.3.2: Visual novel engine written in python
 games-util/rpatool 20220823: A tool to work with Ren'Py archives.
