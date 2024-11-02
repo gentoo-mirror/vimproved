@@ -3,9 +3,7 @@
 
 EAPI=8
 
-LUA_COMPAT=( lua{5-{1,3,4},jit} )
-
-inherit lua-single ninja-utils prefix toolchain-funcs
+inherit ninja-utils prefix toolchain-funcs
 
 DESCRIPTION="Lua language server"
 HOMEPAGE="https://github.com/LuaLS/lua-language-server"
@@ -16,10 +14,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
-REQUIRED_USE="${LUA_REQUIRED_USE}"
 
-DEPEND="${LUA_DEPS}"
-RDEPEND="${DEPEND}"
 BDEPEND="
 	app-alternatives/ninja
 	app-arch/unzip
