@@ -5,9 +5,6 @@ acct-user/slskd 0: System user: slskd
 app-admin/blahajdots 0.4.0 9999: Bespoke dotfile management for sharkgirls.
 app-misc/sptlrx 1.2.2: Synchronized lyrics in your terminal
 dev-embedded/qmk 1.1.6: A program to help users work with QMK Firmware.
-dev-libs/libbacktrace 20240805: Library to produce symbolic backtraces
-dev-libs/libcyaml 1.4.2: C library for reading and writing YAML.
-dev-libs/libxo 1.7.5: Generate text, XML, JSON, and HTML output using a common set of function calls.
 dev-python/aiolimiter 1.1.0: An efficient implementation of a rate limiter for asyncio.
 dev-python/deezer-py 1.3.7: A wrapper for all Deezer's APIs
 dev-python/dotty-dict 1.3.1: Dictionary wrapper for quick access to deeply nested keys.
@@ -24,7 +21,6 @@ dev-python/pydbus 0.6.0-r1: Pythonic DBus library
 dev-python/pygame_sdl2 8.3.2: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
 dev-python/python-lsp-ruff 2.2.2: Ruff linting plugin for pylsp
-dev-python/ruyaml 0.91.0: An openly maintained fork of elusive ruamel-yaml package.
 dev-python/simple-term-menu 1.6.4: A Python package which creates simple interactive menus on the command line.
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
@@ -54,7 +50,7 @@ media-sound/mopidy-mpris 3.0.3: Mopidy extension for controlling playback from M
 media-sound/mopidy-scrobbler 2.0.1: Mopidy extension for scrobbling played tracks to Last.fm
 media-sound/projectm-sdl2 2.0_pre20240807: Application based on SDL2 that turns your desktop audio into awesome visuals
 media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
-media-video/jellyfin-mpv-shim 2.8.0: MPV Cast Client for Jellyfin
+media-video/jellyfin-mpv-shim 2.8.0-r1: MPV Cast Client for Jellyfin
 www-apps/kavita-bin 0.8.3.2: Kavita is a fast, feature rich, cross platform reading server.
 www-apps/slskd-bin 0.21.4: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
