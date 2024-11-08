@@ -49,7 +49,7 @@ RDEPEND="
 	games-engines/renpy[${PYTHON_SINGLE_USEDEP}]
 	${PYTHON_DEPS}
 "
-BDEPEND="games-util/rpatool"
+BDEPEND="app-arch/unrpa"
 
 # @FUNCTION: renpy_pkg_nofetch
 # @DESCRIPTION:
@@ -65,7 +65,7 @@ renpy_pkg_nofetch() {
 # This is the renpy_src_prepare function.
 renpy_src_prepare() {
 	for archive in $(find game -name "*.rpa"); do
-		rpatool -o game -x "${archive}" || die
+		unrpa -p game "${archive}" || die
 	done
 
 	find game -name "*.rpa" -delete || die
