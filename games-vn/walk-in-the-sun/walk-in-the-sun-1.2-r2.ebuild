@@ -14,5 +14,5 @@ KEYWORDS="~amd64"
 
 BDEPEND+=" app-arch/unzip"
 
-RENPY_WINDOW_ICON="${T}/unpacked/window_icon.png"
+RENPY_WINDOW_ICON="game/window_icon.png"
 RENPY_TITLE="walk in the sun"
