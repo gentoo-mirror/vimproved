@@ -1,0 +1,13 @@
+--- a/game/MelanieKit.rpy
++++ b/game/MelanieKit.rpy
+@@ -820,8 +820,8 @@ python early:
+         return (
+             # [akemi] On Windows, we require the use of deriveAbsoluteRootDirectoryPath() because otherwise the CWD is the SDK root…
+             # Why are you like this, Windows?
+-            os.path.isdir("%s/MelanieInternal" % deriveAbsoluteRootDirectoryPath()) or
+-            os.path.isdir("%s/game/MelanieInternal" % deriveAbsoluteRootDirectoryPath())
++            os.path.isdir("%s/MelanieInternal") or
++            os.path.isdir("%s/game/MelanieInternal")
+         )
+ 
+     def isDeveloperMode():
