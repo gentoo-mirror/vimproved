@@ -17,6 +17,11 @@ BDEPEND+=" app-arch/unzip"
 
 RENPY_WINDOW_ICON="${S}/game/AppIcon.png"
 
+PATCHES=(
+	"${FILESDIR}/highway-blossoms-1.2.4-syntax.patch"
+	"${FILESDIR}/highway-blossoms-1.2.4-version.patch"
+)
+
 src_unpack() {
 	default
 	unpack "${WORKDIR}"/*.zip

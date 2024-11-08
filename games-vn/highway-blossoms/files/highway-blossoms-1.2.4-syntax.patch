@@ -1,0 +1,33 @@
+--- a/game/script/hwb_s01.rpy
++++ b/game/script/hwb_s01.rpy
+@@ -740,7 +740,7 @@ show amber driving neutral tilt onlayer
+ 
+ "Careful not to hit her car, I back the RV up and turn it around, sending us in my original direction."
+ 
+-show amber driving neutral front onlayer middle with dissolve:
++show amber driving neutral front onlayer middle with dissolve
+ 
+ # show sunglass front onlayer middle:
+ #     xpos 960
+--- a/game/script/hwb_s09.rpy
++++ b/game/script/hwb_s09.rpy
+@@ -170,7 +170,7 @@ $ layer_move("middle", 1000, duration=1.
+ 
+ Amber "Want anything?"
+ 
+-show marina leanover cheerful onlayer middle with dissolve:
++show marina leanover cheerful onlayer middle with dissolve
+ 
+ Marina "Duh. Let’s see…"
+ 
+--- a/game/script/hwb_s10b.rpy
++++ b/game/script/hwb_s10b.rpy
+@@ -51,7 +51,7 @@ Amber "We wanna join up without them not
+ 
+ Amber "If anyone notices us show up, they might notice when we leave."
+ 
+-show marina concerned nervous night onlayer middle with dissolve:
++show marina concerned nervous night onlayer middle with dissolve
+ 
+ Marina "Why do we have to join up in the first place?"
+ 
