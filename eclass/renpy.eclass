@@ -24,25 +24,10 @@ esac
 # The title of the VN to be used in the desktop entry. Defaults to ${PN}.
 : "${RENPY_TITLE:="${PN}"}"
 
-# @ECLASS_VARIABLE: RENPY_LAYOUT
-# @PRE_INHERIT
-# @DESCRIPTION:
-# The layout of the renpy VN. Set to "archive" for newer VNs that store data in
-# an rpa archive. Set to "plain" for older VNs that store assets uncompressed.
-# Defaults to "archive".
-: "${RENPY_LAYOUT:=archive}"
-
-# @ECLASS_VARIABLE: RENPY_ARCHIVE_PATH
-# @DESCRIPTION:
-# The location of the main rpa archive of the Visual Novel, raelative to ${S}.
-# Used only when RENPY_LAYOUT is equal to "archive". Defaults to
-# "game/archive.rpa".
-: "${RENPY_ARCHIVE_PATH:=game/archive.rpa}"
-
 # @ECLASS_VARIABLE: RENPY_WINDOW_ICON
-# @DEFAULT_UNSET
 # @DESCRIPTION:
-# Overrides the path to the menu icon for installation.
+# Path to the menu icon for installation.
+: "${RENPY_WINDOW_ICON:="game/gui/window_icon.png"}"
 
 if [[ ! ${_RENPY_ECLASS} ]]; then
 _RENPY_ECLASS=1
@@ -64,7 +49,7 @@ RDEPEND="
 	games-engines/renpy[${PYTHON_SINGLE_USEDEP}]
 	${PYTHON_DEPS}
 "
-[[ "${RENPY_LAYOUT}" = archive ]] && BDEPEND="games-util/rpatool"
+BDEPEND="games-util/rpatool"
 
 # @FUNCTION: renpy_pkg_nofetch
 # @DESCRIPTION:
@@ -79,12 +64,13 @@ renpy_pkg_nofetch() {
 # @DESCRIPTION:
 # This is the renpy_src_prepare function.
 renpy_src_prepare() {
-	if [[ "${RENPY_LAYOUT}" = archive ]]; then
-		mkdir "${T}/unpacked" || die
-		pushd "${T}/unpacked" > /dev/null || die
-		rpatool -x "${S}/${RENPY_ARCHIVE_PATH}" || die
-		popd > /dev/null || die
-	fi
+	for archive in $(find game -name "*.rpa"); do
+		rpatool -o game -x "${archive}" || die
+	done
+
+	find game -name "*.rpa" -delete || die
+	find game -name "*.rpyc" -delete || die
+	find game -name "*.rpyb" -delete || die
 
 	default
 }
@@ -99,11 +85,7 @@ renpy_src_install() {
 	dosym "$(python_get_sitedir)/renpy" "/usr/share/renpy/${PN}/renpy"
 	dosym "$(python_get_scriptdir)/renpy" "/usr/share/renpy/${PN}/${PN}"
 
-	local window_icon="${S}/game/gui/window_icon.png"
-	[[ "${RENPY_LAYOUT}" = archive ]] && window_icon="${T}/unpacked/gui/window_icon.png"
-	[[ -n "${RENPY_WINDOW_ICON}" ]] && window_icon="${RENPY_WINDOW_ICON}"
-
-	newicon -s 256 "${window_icon}" "${PN}.png"
+	newicon -s 256 "${RENPY_WINDOW_ICON}" "${PN}.png"
 	make_desktop_entry "/usr/share/renpy/${PN}/${PN}" "${RENPY_TITLE}"
 }
 
