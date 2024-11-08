@@ -27,18 +27,17 @@ dev-util/fnlfmt 0.3.2: A formatter for Fennel code
 dev-util/lua-language-server 3.12.0-r1: Lua language server
 dev-util/teapot-tools 0.4.3: Replacement for depot_tools (gclient) and luci-go (cipd)
 games-engines/renpy 8.3.2: Visual novel engine written in python
-games-util/rpatool 20220823: A tool to work with Ren'Py archives.
-games-vn/amelie 20230929-r2: In the middle of a field, far out in the countryside, sits a lone manor.
-games-vn/butterfly-soup 2.20-r1: A visual novel about gay asian girls playing baseball and falling in love.
-games-vn/highway-blossoms 1.2.4-r2: A short yuri Visual Novel set in the American Southwest.
-games-vn/life-after-magic 1.2.0-r1: lgbt+, retired magical girls in 1999
-games-vn/lonely 1.0-r3: A yandere yuri visual novel with a fairytale theme.
-games-vn/moon-archer-shooting-stars 1.23-r1: A gatekeeper of the elevator to the moon meets a girl without papers
-games-vn/obsession 1.0: A yandere yuri VN about being a witch's obedient pet.
-games-vn/the-final-prize-is-soup 1.05-r2: A survival-horror yuri visual novel.
-games-vn/the-moon-looks-beautiful-tonight 1-r1: Two girls must travel to the moon's core to fix its broken heart.
-games-vn/walk-in-the-sun 1.2-r1: Claire's got one goal - to spend time with her friend Jamie after school.
-games-vn/wav 2.0.3-r2: a dark fantasy yuri visual novel
+games-vn/amelie 20230929-r3: In the middle of a field, far out in the countryside, sits a lone manor.
+games-vn/butterfly-soup 2.20-r2: A visual novel about gay asian girls playing baseball and falling in love.
+games-vn/highway-blossoms 1.2.4-r3: A short yuri Visual Novel set in the American Southwest.
+games-vn/life-after-magic 1.2.0-r2: lgbt+, retired magical girls in 1999
+games-vn/lonely 1.0-r4: A yandere yuri visual novel with a fairytale theme.
+games-vn/moon-archer-shooting-stars 1.23-r2: A gatekeeper of the elevator to the moon meets a girl without papers
+games-vn/obsession 1.0-r1: A yandere yuri VN about being a witch's obedient pet.
+games-vn/the-final-prize-is-soup 1.05-r3: A survival-horror yuri visual novel.
+games-vn/the-moon-looks-beautiful-tonight 1-r2: Two girls must travel to the moon's core to fix its broken heart.
+games-vn/walk-in-the-sun 1.2-r2: Claire's got one goal - to spend time with her friend Jamie after school.
+games-vn/wav 2.0.3-r3: a dark fantasy yuri visual novel
 media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
 media-sound/mopidy 3.4.2: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.5: Jellyfin Extension for Mopidy
