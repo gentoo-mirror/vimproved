@@ -14,4 +14,5 @@ KEYWORDS="~amd64"
 
 BDEPEND+=" app-arch/unzip"
 
+RENPY_KEEP_COMPILED=1
 RENPY_TITLE="Life After Magic"
