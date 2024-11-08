@@ -16,7 +16,7 @@ dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
 dev-python/lsprotocol 2023.0.1: Python implementation of the Language Server Protocol.
 dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/milc 1.9.0: Opinionated Batteries-Included Python 3 CLI Framework
-dev-python/mitogen 0.3.15 9999: Distributed self-replicating programs in Python
+dev-python/mitogen 0.3.18 9999: Distributed self-replicating programs in Python
 dev-python/pydbus 0.6.0-r1: Pythonic DBus library
 dev-python/pygame_sdl2 8.3.2: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
@@ -31,16 +31,14 @@ games-util/rpatool 20220823: A tool to work with Ren'Py archives.
 games-vn/amelie 20230929-r2: In the middle of a field, far out in the countryside, sits a lone manor.
 games-vn/butterfly-soup 2.20-r1: A visual novel about gay asian girls playing baseball and falling in love.
 games-vn/highway-blossoms 1.2.4-r2: A short yuri Visual Novel set in the American Southwest.
-games-vn/icbtmpgisialjlm 1.4-r1: I Can't Believe the Most Popular Girl in School is a Lesbian, Just Like Me!
-games-vn/it-gets-so-lonely-here 1.0-r2: A yandere yuri visual novel with a fairytale theme.
 games-vn/life-after-magic 1.2.0-r1: lgbt+, retired magical girls in 1999
+games-vn/lonely 1.0-r3: A yandere yuri visual novel with a fairytale theme.
 games-vn/moon-archer-shooting-stars 1.23-r1: A gatekeeper of the elevator to the moon meets a girl without papers
-games-vn/scheme 20220701-r3: Yuki gets kidnapped??
+games-vn/obsession 1.0: A yandere yuri VN about being a witch's obedient pet.
 games-vn/the-final-prize-is-soup 1.05-r2: A survival-horror yuri visual novel.
 games-vn/the-moon-looks-beautiful-tonight 1-r1: Two girls must travel to the moon's core to fix its broken heart.
 games-vn/walk-in-the-sun 1.2-r1: Claire's got one goal - to spend time with her friend Jamie after school.
-games-vn/without-a-voice 2.0.3-r1: a dark fantasy yuri visual novel
-games-vn/yukis4p 20210811-r3: Help Yuki get a girlfriend!!! (or maybe three?)
+games-vn/wav 2.0.3-r2: a dark fantasy yuri visual novel
 media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
 media-sound/mopidy 3.4.2: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.5: Jellyfin Extension for Mopidy
