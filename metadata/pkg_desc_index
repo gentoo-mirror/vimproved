@@ -25,7 +25,7 @@ dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
 dev-util/lua-language-server 3.12.0-r1: Lua language server
-dev-util/teapot-tools 0.4.3: Replacement for depot_tools (gclient) and luci-go (cipd)
+dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
 games-engines/renpy 8.3.2: Visual novel engine written in python
 games-vn/amelie 20230929-r3: In the middle of a field, far out in the countryside, sits a lone manor.
 games-vn/butterfly-soup 2.20-r2: A visual novel about gay asian girls playing baseball and falling in love.
