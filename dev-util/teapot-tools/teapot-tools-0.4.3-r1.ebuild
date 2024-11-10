@@ -222,3 +222,8 @@ RESTRICT="test"
 
 DEPEND="${PYTHON_DEPS}"
 BDEPEND="dev-libs/protobuf"
+
+pkg_setup() {
+	python-any-r1_pkg_setup
+	rust_pkg_setup
+}
