@@ -8,7 +8,7 @@ inherit renpy
 
 DESCRIPTION="A short yuri Visual Novel set in the American Southwest."
 HOMEPAGE="https://vnstudioelan.itch.io/highway-blossoms"
-SRC_URI="Highway_Blossoms_1.2.4_Unified_[268ABFDB].zip"
+SRC_URI="Highway_Blossoms_${PV}_Unified_[268ABFDB].zip"
 S="${WORKDIR}/Highway Blossoms ${PV} - Unified"
 
 KEYWORDS="~amd64"
@@ -20,12 +20,8 @@ RENPY_WINDOW_ICON="${S}/game/AppIcon.png"
 PATCHES=(
 	"${FILESDIR}/highway-blossoms-1.2.4-syntax.patch"
 	"${FILESDIR}/highway-blossoms-1.2.4-version.patch"
+	"${FILESDIR}/highway-blossoms-1.2.5-isMelanieInternal.patch"
 )
-
-src_unpack() {
-	default
-	unpack "${WORKDIR}"/*.zip
-}
 
 pkg_nofetch() {
 	einfo "Please buy and download"
