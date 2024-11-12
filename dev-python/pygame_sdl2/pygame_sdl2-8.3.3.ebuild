@@ -39,13 +39,14 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-8.2.1-cython-3.patch"
+	"${FILESDIR}/pygame_sdl2-8.2.1-cython-3.patch"
+	"${FILESDIR}/pygame_sdl2-8.3.3-install-headers.patch"
 )
 
 python_prepare_all() {
 	# PyGame distribution for this version has some pregenerated files;
 	# we need to remove them
-	rm -r gen{,3,-static} || die
+	rm -r gen3 || die
 
 	distutils-r1_python_prepare_all
 }
