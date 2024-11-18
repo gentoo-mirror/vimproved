@@ -42,7 +42,7 @@ _RENPY_ECLASS=1
 # @INTERNAL
 # @DESCRIPTION:
 # This is the PYTHON_COMPAT variable.
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..13} )
 
 inherit desktop python-single-r1 xdg
 
