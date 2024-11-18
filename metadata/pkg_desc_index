@@ -7,6 +7,7 @@ app-misc/sptlrx 1.2.2: Synchronized lyrics in your terminal
 dev-embedded/qmk 1.1.6: A program to help users work with QMK Firmware.
 dev-python/aiolimiter 1.1.0: An efficient implementation of a rate limiter for asyncio.
 dev-python/deezer-py 1.3.7: A wrapper for all Deezer's APIs
+dev-python/discord-rpc-py 1.3.0: A Discord Rich Presence library for Python 2 & 3
 dev-python/dotty-dict 1.3.1: Dictionary wrapper for quick access to deeply nested keys.
 dev-python/halo 0.0.31: Beautiful terminal spinners in Python
 dev-python/hid 1.0.6: ctypes bindings for hidapi
@@ -37,6 +38,7 @@ games-vn/heart-of-the-woods 2.1.5: A yuri VN about a love between two girls that
 games-vn/hello-girl 1.2.1: Rabbit with a telephone
 games-vn/highway-blossoms 1.2.5: A short yuri Visual Novel set in the American Southwest.
 games-vn/its-a-promise 1.0: A short girls love kinetic novel.
+games-vn/lachesis-or-atropos 1.20: This world is woven of strings, of fate and of hate.
 games-vn/life-after-magic 1.2.0-r2: lgbt+, retired magical girls in 1999
 games-vn/lonely 1.0-r4: A yandere yuri visual novel with a fairytale theme.
 games-vn/moon-archer-shooting-stars 1.23-r2: A gatekeeper of the elevator to the moon meets a girl without papers
@@ -44,9 +46,11 @@ games-vn/obsession 1.0-r1: A yandere yuri VN about being a witch's obedient pet.
 games-vn/shut-in-vampire 1.0: A lesbian vampire tries to land a date while hustling to pay her rent.
 games-vn/spellbroken 1.0: A Sci-Fantasy Adventure Yuri VN
 games-vn/the-final-prize-is-soup 1.05-r3: A survival-horror yuri visual novel.
+games-vn/the-five-steps 20220921: magical girl helps burnt out high school student graduate?
 games-vn/the-moon-looks-beautiful-tonight 1-r2: Two girls must travel to the moon's core to fix its broken heart.
 games-vn/walk-in-the-sun 1.2-r2: Claire's got one goal - to spend time with her friend Jamie after school.
 games-vn/wav 2.0.3-r3: a dark fantasy yuri visual novel
+games-vn/who-is-the-red-queen 1.13: Alice, Alice, the Red Queen is missing.
 games-vn/yukis4p 20210811: useless lesbian tries to get a girlfriend
 games-vn/yukis4p2 20220701: useless lesbian gets kidnapped??
 media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
