@@ -1,0 +1,76 @@
+--- a/game/day1.rpy
++++ b/game/day1.rpy
+@@ -49,7 +49,7 @@ label intro:
+ 
+     """
+     play music distant_rumble
+-    scene cg adelle with Dissolve(3):
++    scene cg adelle with Dissolve(3)
+     show bubble
+     show bubble2
+     $renpy.pause(1)
+@@ -536,7 +536,7 @@ label miriam_initial:
+     "Her figure stood in that unfamiliar lab, her jagged image some twisted mockery of what I’m supposed to be. {p} But the memory doesn’t linger too long before light threatens to invade my sealed eyelids."
+ 
+     window hide
+-    scene bg miriamroom with Dissolve(3):
++    scene bg miriamroom with Dissolve(3)
+ 
+     "I’m flat on my back on a plush bed. {w}I glance to my right, honing the source of the noise."
+ 
+@@ -2051,7 +2051,7 @@ label decision:
+     play sound keyunlock
+     show blue:
+         alpha 0.1
+-    show bg miriamfirstfloor night behind blue with blinds:
++    show bg miriamfirstfloor night behind blue with blinds
+     $renpy.pause(1)
+     window show
+     show mm hip 10 behind blue with dissolve:
+@@ -2684,7 +2684,7 @@ label OH_SHIT:
+ 
+ label akira_initial:
+ 
+-    scene bg miriamfirstfloor night:
++    scene bg miriamfirstfloor night
+     show screen clock
+     stop music
+     play sound doki
+@@ -2867,7 +2867,7 @@ label akira_initial:
+ 
+     """
+     hide black with dissolve
+-    show bg park night 2 behind distortion with ImageDissolve("bg park night 2.png",2):
++    show bg park night 2 behind distortion with ImageDissolve("bg park night 2.png",2)
+ 
+     "It’s when my sight returns again in some empty park that finally I'm hit by an indisputable truth--that {i}all of it{/i}{w=0.2} is real.{w} The duel I woke up from, my untimely demise, this shabby town, my exhausting existence, these senses that invade me and overflow, I know I am Adelle."
+     play music submarine_magma
+@@ -3104,7 +3104,7 @@ label akirainitial_2:
+ 
+     stop music fadeout 2.0
+     play nature nightambience
+-    scene bg park night 2 with fadehold:
++    scene bg park night 2 with fadehold
+     $renpy.pause(2)
+     show blue:
+         alpha 0.3
+--- a/game/day2.rpy
++++ b/game/day2.rpy
+@@ -1,7 +1,7 @@
+ label myoelectric_morning:
+     $ persistent.day = 2
+     $ mm = "[[ Miriam ]"
+-    scene black with blinds:
++    scene black with blinds
+     scene bg sky day with dissolve
+     show screen clock with e
+     play ambience "audio/se/morning_streets.mp3"
+@@ -3106,7 +3106,7 @@ label tactical_hallucination:
+     play sound blow3
+     d"Son of a bitch, I'm not the chick-magnet protagonist at all. . . I'm the skirt flip girl?"
+     play sound button06
+-    show akjk -3 with e:
++    show akjk -3 with e
+     a"Adelle, this fantasy is way too vague. You're never going to remember me by dreaming up fake galge in your head. At this rate, you'll probably end up choosing a different route, anyway."
+     show adjk -3 with e
+     d"Says who? You're the one who led this on."
