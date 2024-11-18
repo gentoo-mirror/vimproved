@@ -1,5 +1,5 @@
 # vimproved's Portage Overlay
-Bringing you Pro Audio Software, Wayland ricing, and Yuri Visual Novels since 2023!
+Bringing you Wayland ricing and Yuri Visual Novels since 2023!
 
 ## A couple notes on the Visual Novels in this overlay
 ### Users:
