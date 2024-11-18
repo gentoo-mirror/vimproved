@@ -1,0 +1,51 @@
+Copy over the reset transformations from The Final Prize is Soup, since these
+seem to cause issues with renpy 8.
+--- a/game/cgs.rpy
++++ b/game/cgs.rpy
+@@ -1358,4 +1358,4 @@ image cg8_girls _3:
+     zzoom True zpos -8000
+ image cg8_girls _4:
+     "images/CG/cg8_wqueenkiss/cg_08_c_4.png"
+-    zzoom True zpos -8000
+\ No newline at end of file
++    zzoom True zpos -8000
+--- a/game/characters.rpy
++++ b/game/characters.rpy
+@@ -159,21 +159,26 @@ transform day:
+ ##
+ ## Easy camera reset. If the images aren't showing
+ ## then reset the camera e.g. camera at reset
+-
+ transform reset:
+     perspective True
+-    zpos 0 yalign 0.0 xalign 0.5 xoffset 0 yoffset 0
+-    matrixtransform RotateMatrix(0, 0, 0)
+-
+-transform smoothreset:
+-    perspective True
+-    easein 1.0 zpos 0 yalign 0.0 xalign 0.5 xoffset 0 yoffset 0
+-    matrixtransform RotateMatrix(0, 0, 0)
++    zpos 0 
++    xpos 0 
++    ypos 0
++    xoffset 0 
++    yoffset 0
++    rotate 0
++    zrotate 0 xrotate 0 yrotate 0
++    blur 0
++    zoom 1.0 
++    matrixcolor BrightnessMatrix(0)
+ 
+-transform fastreset:
++transform smoothreset(seconds=2.0):
+     perspective True
+-    easein 0.2 zpos 0 yalign 0.0 xalign 0.5 xoffset 0 yoffset 0
+-    matrixtransform RotateMatrix(0, 0, 0)
++    ease seconds zpos 0 xpos 0 ypos 0 xoffset 0 yoffset 0 rotate 0 zrotate 0 xrotate 0 yrotate 0 blur 0 zoom 1.0 matrixcolor BrightnessMatrix(0)
++    reset
++    # The reset tells renpy where the transform is supposed to end
++    # in case the player is skipping ahead/rolling back
++    # and it's taking too long.
+ 
+ 
+ ################################################################################
