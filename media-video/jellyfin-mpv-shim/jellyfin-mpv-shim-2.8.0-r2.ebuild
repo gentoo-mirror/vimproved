@@ -20,8 +20,11 @@ RESTRICT="test"
 
 RDEPEND="
 	dev-python/jellyfin-apiclient-python[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
+	dev-python/pypresence[${PYTHON_USEDEP}]
 	dev-python/pystray[${PYTHON_USEDEP}]
 	dev-python/python-mpv[${PYTHON_USEDEP}]
+	dev-python/python-mpv-jsonipc[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 "
 
