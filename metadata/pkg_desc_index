@@ -61,7 +61,7 @@ games-vn/wav 2.0.3-r3: a dark fantasy yuri visual novel
 games-vn/who-is-the-red-queen 1.13: Alice, Alice, the Red Queen is missing.
 games-vn/yukis4p 20210811: useless lesbian tries to get a girlfriend
 games-vn/yukis4p2 20220701: useless lesbian gets kidnapped??
-media-fonts/symbols-nerd-font 3.2.1: Collection of symbols from nerd-fonts.
+media-fonts/symbols-nerd-font 3.3.0: Collection of symbols from nerd-fonts.
 media-sound/mopidy 3.4.2: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.5: Jellyfin Extension for Mopidy
 media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling playback from MPD clients

@@ -9,6 +9,6 @@ KEYWORDS=~amd64
 LICENSE=MIT OFL-1.1
 RESTRICT=test
 SLOT=0
-SRC_URI=https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/NerdFontsSymbolsOnly.tar.xz -> symbols-nerd-font-3.2.1.tar.xz
+SRC_URI=https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/NerdFontsSymbolsOnly.tar.xz -> symbols-nerd-font-3.3.0.tar.xz
 _eclasses_=font	aa113a3df9cd0a9693a1c1ee7c34a6eb
 _md5_=5d2b445d6bc553aa45db8af71d842f01
