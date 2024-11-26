@@ -39,6 +39,8 @@ RDEPEND="
 	${PYTHON_DEPS}
 "
 
+PATCHES=( "${FILESDIR}/${P}-fix-deezer-last-byte-missing.patch" )
+
 src_prepare() {
 	sed -i 's/Cryptodome/Crypto/' \
 		"${S}/${PN}/client/deezer.py" \
