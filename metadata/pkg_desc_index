@@ -68,7 +68,7 @@ media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling playback from MPD
 media-sound/mopidy-mpris 3.0.3: Mopidy extension for controlling playback from MPD clients
 media-sound/mopidy-scrobbler 2.0.1: Mopidy extension for scrobbling played tracks to Last.fm
 media-sound/projectm-sdl2 2.0_pre20240807-r1: Application based on SDL2 that turns your desktop audio into awesome visuals
-media-sound/streamrip 2.0.5: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
+media-sound/streamrip 2.0.5-r1: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-video/jellyfin-mpv-shim 2.8.0-r2: MPV Cast Client for Jellyfin
 www-apps/kavita-bin 0.8.4: Kavita is a fast, feature rich, cross platform reading server.
 www-apps/slskd-bin 0.21.4: A modern client-server application for the Soulseek file sharing network.
