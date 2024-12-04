@@ -27,10 +27,6 @@ RESTRICT="!test? ( test )"
 RDEPEND="ansible? ( app-admin/ansible[${PYTHON_USEDEP}] )"
 BDEPEND="test? ( dev-python/pytest-import-check[${PYTHON_USEDEP}] )"
 
-PATCHES=(
-	"${FILESDIR}/${P}-ansible-11.patch"
-)
-
 python_install() {
 	distutils-r1_python_install
 
