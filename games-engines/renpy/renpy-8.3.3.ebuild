@@ -20,7 +20,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="development doc examples"
 REQUIRED_USE="examples? ( development )"
-# too much of a pain
+# TODO
 RESTRICT="test"
 
 DEPEND="
