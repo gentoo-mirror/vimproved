@@ -19,7 +19,6 @@ KEYWORDS="~amd64"
 
 src_prepare() {
 	mv "${WORKDIR}/toml-test-${TOML_TEST_PV}" toml-test || die
-
 	distutils-r1_src_prepare
 }
 
