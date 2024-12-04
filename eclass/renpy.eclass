@@ -76,7 +76,24 @@ renpy_src_prepare() {
 	default
 }
 
-# @FUNCTION: renpy_src_install:
+# @FUNCTION: renpy_src_compile
+# @DESCRIPTION:
+# Attempts to run game to compile renpy scripts.
+renpy_src_compile() {
+	mkdir "${WORKDIR}/${P}_build"
+	pushd "${WORKDIR}/${P}_build" &> /dev/null || die
+	cp -r "${S}/game" . || die
+	cp -r "$(python_get_sitedir)/renpy" renpy || die
+	cp "$(python_get_scriptdir)/renpy" "${PN}" || die
+
+	einfo "Compiling game scripts"
+	"./${PN}" . compile || die "Compile failed"
+	find game -name "*.bak" -delete || die
+	cp -r game "${S}" || die
+	popd &> /dev/null || die
+}
+
+# @FUNCTION: renpy_src_install
 # @DESCRIPTION:
 # This is the renpy_src_install function.
 renpy_src_install() {
@@ -92,4 +109,4 @@ renpy_src_install() {
 
 fi
 
-EXPORT_FUNCTIONS pkg_nofetch src_prepare src_install
+EXPORT_FUNCTIONS pkg_nofetch src_prepare src_compile src_install
