@@ -27,6 +27,5 @@ src_test() {
 
 src_install() {
 	dobin sptlrx
-
 	default
 }

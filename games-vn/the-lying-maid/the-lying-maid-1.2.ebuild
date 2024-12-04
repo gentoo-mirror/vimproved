@@ -10,8 +10,11 @@ HOMEPAGE="https://omure.itch.io/the-lying-maid"
 SRC_URI="tsunmeido-${PV}-pc.zip"
 S="${WORKDIR}/tsunmeido-${PV}-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 RENPY_TITLE="The Vampire(?) Detective and the Case of the Lying Maid"

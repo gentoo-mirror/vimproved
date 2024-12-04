@@ -10,7 +10,10 @@ HOMEPAGE="https://ebihime.itch.io/lonely"
 SRC_URI="Itgetssolonelyhere-${PV}-pc.zip"
 S="${WORKDIR}/Itgetssolonelyhere-${PV}-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
 BDEPEND+="app-arch/unzip"
 

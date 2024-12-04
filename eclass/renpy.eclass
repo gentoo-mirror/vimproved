@@ -24,12 +24,6 @@ esac
 # The title of the VN to be used in the desktop entry. Defaults to ${PN}.
 : "${RENPY_TITLE:="${PN}"}"
 
-# @ECLASS_VARIABLE: RENPY_KEEP_COMPILED
-# @DEFAULT_UNSET
-# @DESCRIPTION:
-# If set, the installation will keep rpyc and rpyb files in place instead of
-# deleting them.
-
 # @ECLASS_VARIABLE: RENPY_WINDOW_ICON
 # @DESCRIPTION:
 # Path to the menu icon for installation.
@@ -46,10 +40,7 @@ PYTHON_COMPAT=( python3_{12..13} )
 
 inherit desktop python-single-r1 xdg
 
-LICENSE="all-rights-reserved"
-SLOT="0"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-RESTRICT="bindist fetch splitdebug test"
 
 RDEPEND="
 	games-engines/renpy[${PYTHON_SINGLE_USEDEP}]
@@ -75,15 +66,34 @@ renpy_src_prepare() {
 	done
 
 	find game -name "*.rpa" -delete || die
-	if [[ -z "${RENPY_KEEP_COMPILED}" ]]; then
-		find game -name "*.rpyc" -delete || die
-		find game -name "*.rpyb" -delete || die
-	fi
+	for file in $(find game -name "*.rpyc"); do
+		if [[ -f "${file/.rpyc/.rpy}" ]]; then
+			rm "${file}" || die
+		fi
+	done
+	find game -name "*.rpyb" -delete || die
 
 	default
 }
 
-# @FUNCTION: renpy_src_install:
+# @FUNCTION: renpy_src_compile
+# @DESCRIPTION:
+# Attempts to run game to compile renpy scripts.
+renpy_src_compile() {
+	mkdir "${WORKDIR}/${P}_build"
+	pushd "${WORKDIR}/${P}_build" &> /dev/null || die
+	cp -r "${S}/game" . || die
+	cp -r "$(python_get_sitedir)/renpy" renpy || die
+	cp "$(python_get_scriptdir)/renpy" "${PN}" || die
+
+	einfo "Compiling game scripts"
+	"./${PN}" . compile || die "Compile failed"
+	find game -name "*.bak" -delete || die
+	cp -r game "${S}" || die
+	popd &> /dev/null || die
+}
+
+# @FUNCTION: renpy_src_install
 # @DESCRIPTION:
 # This is the renpy_src_install function.
 renpy_src_install() {
@@ -99,4 +109,4 @@ renpy_src_install() {
 
 fi
 
-EXPORT_FUNCTIONS pkg_nofetch src_prepare src_install
+EXPORT_FUNCTIONS pkg_nofetch src_prepare src_compile src_install

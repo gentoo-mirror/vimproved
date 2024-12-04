@@ -10,6 +10,9 @@ HOMEPAGE="https://milkkylemon.itch.io/the-five-steps"
 SRC_URI="magicalgirl-linux.tar.bz2"
 S="${WORKDIR}/magicalgirl-linux"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
 RENPY_TITLE="The Five Steps To Ensuring Momo Graduates Successfully!!!"

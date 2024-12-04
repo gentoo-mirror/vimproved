@@ -10,16 +10,19 @@ HOMEPAGE="https://vnstudioelan.itch.io/heart-of-the-woods"
 SRC_URI="Heart_of_the_Woods_${PV}_Unified_[5630C1F1].zip"
 S="${WORKDIR}/Heart of the Woods ${PV} - Unified"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 PATCHES=(
 	"${FILESDIR}/heart-of-the-woods-2.1.5-newer-renpy.patch"
 )
 
-RENPY_WINDOW_ICON="game/AppIcon.png"
 RENPY_TITLE="Heart of the Woods"
+RENPY_WINDOW_ICON="game/AppIcon.png"
 
 pkg_nofetch() {
 	einfo "Please buy and download"

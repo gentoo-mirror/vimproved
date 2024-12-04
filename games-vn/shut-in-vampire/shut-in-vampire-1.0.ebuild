@@ -10,8 +10,11 @@ HOMEPAGE="https://ebihime.itch.io/shut-in-vampire"
 SRC_URI="ShutInVampire-${PV}-pc.zip"
 S="${WORKDIR}/ShutInVampire-${PV}-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 RENPY_TITLE="Shut-in Vampire"

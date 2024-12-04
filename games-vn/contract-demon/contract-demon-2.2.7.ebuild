@@ -10,8 +10,11 @@ HOMEPAGE="https://nomnomnami.itch.io/contract-demon"
 SRC_URI="contractdemon-${PV}-pc.zip"
 S="${WORKDIR}/contractdemon-${PV}-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 RENPY_TITLE="CONTRACT DEMON"

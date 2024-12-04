@@ -10,6 +10,9 @@ HOMEPAGE="https://brianna-lei.itch.io/butterfly-soup-2"
 SRC_URI="ButterflySoup2-${PV}-linux.tar.bz2"
 S="${WORKDIR}/ButterflySoup2-${PV}-linux"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
 RENPY_TITLE="Butterfly Soup 2"

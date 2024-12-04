@@ -10,8 +10,11 @@ HOMEPAGE="https://4noki.itch.io/she-neglected-the-world"
 SRC_URI="she-neglected-the-world-win-linux.zip"
 S="${WORKDIR}/SheNeglectedTheWorld-${PV}-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 RENPY_TITLE="from that moment she neglected the world"

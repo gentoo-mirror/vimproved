@@ -10,9 +10,11 @@ HOMEPAGE="https://rosesrot.itch.io/seraphim-slum"
 SRC_URI="SeraphimSlum-Definitivepc.zip"
 S="${WORKDIR}/SeraphimSlum-${PV}-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
-RENPY_KEEP_COMPILED=1
 RENPY_TITLE="Seraphim Slum"

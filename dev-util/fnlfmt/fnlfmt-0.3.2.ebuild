@@ -20,19 +20,10 @@ RESTRICT="test"
 DEPEND="${LUA_DEPS}"
 RDEPEND="${DEPEND}"
 
-pkg_setup() {
-	lua-single_pkg_setup
-
-	emakeargs=(
-		LUA="${ELUA}"
-		PREFIX="/usr"
-	)
-}
-
 src_compile() {
-	emake "${emakeargs[@]}"
+	emake LUA="${ELUA}"
 }
 
 src_install() {
-	emake "${emakeargs[@]}" DESTDIR="${ED}" install
+	emake LUA="${ELUA}" DESTDIR="${ED}" PREFIX="/usr" install
 }

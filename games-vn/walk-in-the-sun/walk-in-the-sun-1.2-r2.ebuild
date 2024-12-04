@@ -10,9 +10,12 @@ HOMEPAGE="https://gg8473.itch.io/walk-in-the-sun"
 SRC_URI="WalkintheSun-${PV}-pc.zip"
 S="${WORKDIR}/WalkintheSun-1.1-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 RENPY_WINDOW_ICON="game/window_icon.png"
 RENPY_TITLE="walk in the sun"
