@@ -11,9 +11,12 @@ HOMEPAGE="https://vnstudioelan.itch.io/highway-blossoms"
 SRC_URI="Highway_Blossoms_${PV}_Unified_[268ABFDB].zip"
 S="${WORKDIR}/Highway Blossoms ${PV} - Unified"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 RENPY_WINDOW_ICON="${S}/game/AppIcon.png"
 

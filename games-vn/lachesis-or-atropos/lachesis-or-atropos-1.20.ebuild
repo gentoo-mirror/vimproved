@@ -11,10 +11,13 @@ HOMEPAGE="https://4noki.itch.io/lachesis-or-atropos"
 SRC_URI="lachesis-or-atropos-win-linux.zip"
 S="${WORKDIR}/lachesisoratropos-${PV}-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-RDEPEND+=" $(python_gen_cond_dep 'dev-python/discord-rpc-py[${PYTHON_USEDEP}]')"
-BDEPEND+=" app-arch/unzip"
+RDEPEND="$(python_gen_cond_dep 'dev-python/discord-rpc-py[${PYTHON_USEDEP}]')"
+BDEPEND="app-arch/unzip"
 
 PATCHES=(
 	"${FILESDIR}/lachesis-or-atropos-1.20-reset-transformations.patch"

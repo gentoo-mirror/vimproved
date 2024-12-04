@@ -3,7 +3,6 @@
 
 EAPI=8
 
-RENPY_TITLE="Amelie"
 inherit renpy
 
 DESCRIPTION="In the middle of a field, far out in the countryside, sits a lone manor."
@@ -11,6 +10,11 @@ HOMEPAGE="https://twoandahalfstudios.itch.io/amelie"
 SRC_URI="Amelie.zip"
 S="${WORKDIR}"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
+
+RENPY_TITLE="Amelie"

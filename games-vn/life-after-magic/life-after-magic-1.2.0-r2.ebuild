@@ -10,9 +10,12 @@ HOMEPAGE="https://eveenova.itch.io/life-after-magic"
 SRC_URI="LifeAfterMagic-${PV}-pc.zip"
 S="${WORKDIR}/LifeAfterMagic-${PV}-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 RENPY_KEEP_COMPILED=1
 RENPY_TITLE="Life After Magic"

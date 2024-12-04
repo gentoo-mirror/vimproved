@@ -10,9 +10,12 @@ HOMEPAGE="https://l3.itch.io/wav"
 SRC_URI="Without-a-Voice-${PV}-Unified.zip"
 S="${WORKDIR}/Without a Voice ${PV} - Unified"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 RENPY_WINDOW_ICON="game/AppIcon.png"
 RENPY_TITLE="Without a Voice"

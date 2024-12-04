@@ -11,8 +11,11 @@ HOMEPAGE="https://mokadevs.itch.io/the-moon-looks-beautiful-tonight"
 SRC_URI="themoonlooksbeautifultonight-pc.zip"
 S="${WORKDIR}/themoonlooksbeautifultonight-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 RENPY_TITLE="The Moon Looks Beautiful Tonight"

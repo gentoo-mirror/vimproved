@@ -10,9 +10,12 @@ HOMEPAGE="https://kolulu.itch.io/operation-eventide"
 SRC_URI="operation-eventide-pc.zip"
 S="${WORKDIR}/OperationEventide-${PV}-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 PATCHES=(
 	"${FILESDIR}/operation-eventide-1.3-scene-block.patch"

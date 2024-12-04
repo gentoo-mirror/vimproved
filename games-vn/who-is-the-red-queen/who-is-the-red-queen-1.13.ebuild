@@ -10,9 +10,12 @@ HOMEPAGE="https://4noki.itch.io/who-is-the-red-queen"
 SRC_URI="who-is-the-red-queen-win-linux.zip"
 S="${WORKDIR}/WhoIsTheRedQueen-${PV}-pc"
 
+LICENSE="all-rights-reserved"
+SLOT="0"
 KEYWORDS="~amd64"
+RESTRICT="bindist fetch"
 
-BDEPEND+=" app-arch/unzip"
+BDEPEND="app-arch/unzip"
 
 PATCHES=(
 	"${FILESDIR}/who-is-the-red-queen-1.13-reset-transformations.patch"
