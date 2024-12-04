@@ -17,5 +17,4 @@ RESTRICT="bindist fetch"
 
 BDEPEND="app-arch/unzip"
 
-RENPY_KEEP_COMPILED=1
 RENPY_TITLE="Seraphim Slum"
