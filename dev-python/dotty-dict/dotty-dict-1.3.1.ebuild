@@ -10,7 +10,7 @@ inherit distutils-r1 pypi
 
 DESCRIPTION="Dictionary wrapper for quick access to deeply nested keys."
 HOMEPAGE="https://pypi.org/project/dotty-dict/"
-SRC_URI="https://github.com/pawelzny/$(pypi_normalize_name "${PN}")/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+SRC_URI="https://github.com/pawelzny/dotty_dict/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
