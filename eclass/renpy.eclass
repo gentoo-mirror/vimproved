@@ -24,12 +24,6 @@ esac
 # The title of the VN to be used in the desktop entry. Defaults to ${PN}.
 : "${RENPY_TITLE:="${PN}"}"
 
-# @ECLASS_VARIABLE: RENPY_KEEP_COMPILED
-# @DEFAULT_UNSET
-# @DESCRIPTION:
-# If set, the installation will keep rpyc and rpyb files in place instead of
-# deleting them.
-
 # @ECLASS_VARIABLE: RENPY_WINDOW_ICON
 # @DESCRIPTION:
 # Path to the menu icon for installation.
@@ -72,10 +66,12 @@ renpy_src_prepare() {
 	done
 
 	find game -name "*.rpa" -delete || die
-	if [[ -z "${RENPY_KEEP_COMPILED}" ]]; then
-		find game -name "*.rpyc" -delete || die
-		find game -name "*.rpyb" -delete || die
-	fi
+	for file in $(find game -name "*.rpyc"); do
+		if [[ -f "${file/.rpyc/.rpy}" ]]; then
+			rm "${file}" || die
+		fi
+	done
+	find game -name "*.rpyb" -delete || die
 
 	default
 }
