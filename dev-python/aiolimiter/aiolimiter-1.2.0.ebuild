@@ -24,11 +24,6 @@ BDEPEND="test? (
 	dev-python/toml[${PYTHON_USEDEP}]
 )"
 
-python_install() {
-	distutils-r1_python_install
-	rm "${ED}/usr/lib/${EPYTHON}/site-packages/CHANGELOG.md" || die
-}
-
 python_test() {
 	epytest -o addopts=
 }
