@@ -46,10 +46,7 @@ PYTHON_COMPAT=( python3_{12..13} )
 
 inherit desktop python-single-r1 xdg
 
-LICENSE="all-rights-reserved"
-SLOT="0"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-RESTRICT="bindist fetch splitdebug test"
 
 RDEPEND="
 	games-engines/renpy[${PYTHON_SINGLE_USEDEP}]
