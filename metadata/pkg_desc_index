@@ -2,7 +2,7 @@ acct-group/kavita 0: System group: kavita
 acct-group/slskd 0: System group: slskd
 acct-user/kavita 0: System user: kavita
 acct-user/slskd 0: System user: slskd
-app-admin/blahajdots 0.4.0 9999: Bespoke dotfile management for sharkgirls.
+app-admin/blahajdots 0.5.0 9999: Bespoke dotfile management for sharkgirls.
 app-misc/sptlrx 1.2.2: Synchronized lyrics in your terminal
 dev-embedded/qmk 1.1.6: A program to help users work with QMK Firmware.
 dev-python/aiolimiter 1.2.0: An efficient implementation of a rate limiter for asyncio.
