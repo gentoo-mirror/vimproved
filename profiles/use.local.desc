@@ -4,3 +4,6 @@
 
 dev-python/mitogen:ansible - Install symlinks for Ansible strategy plugins
 games-engines/renpy:development - Install IDE for game developers and an empty game template
+media-libs/lodepng:benchmark - Benchmark for lodepng
+media-libs/lodepng:pngdetail - Prints detailed info of PNG images, including filter types and huffman symbols
+media-libs/lodepng:showpng - Show PNG image
