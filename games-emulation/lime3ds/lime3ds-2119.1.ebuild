@@ -42,7 +42,8 @@ DEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/lime3ds-2119.1-boost-fix.patch"
+	"${FILESDIR}/${P}-boost-fix.patch"
+	"${FILESDIR}/${P}-boost-1.87.patch"
 )
 
 src_prepare() {
