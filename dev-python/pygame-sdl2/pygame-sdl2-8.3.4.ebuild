@@ -11,7 +11,7 @@ inherit distutils-r1
 
 DESCRIPTION="Reimplementation of portions of the pygame API using SDL2"
 HOMEPAGE="https://github.com/renpy/pygame_sdl2"
-MY_P="${PN}-2.1.0+renpy${PV}"
+MY_P="${PN/-/_}-2.1.0+renpy${PV}"
 SRC_URI="https://www.renpy.org/dl/${PV}/${MY_P}.tar.gz"
 S="${WORKDIR}/${MY_P}"
 
