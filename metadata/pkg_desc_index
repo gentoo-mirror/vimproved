@@ -12,7 +12,7 @@ dev-libs/oaknut 2.0.2: Yet another AArch64 emitter
 dev-libs/xbyak 7.22: A JIT assembler for x86/x64
 dev-libs/zycore 1.5.0: Zyan Core Library for C
 dev-libs/zydis 4.1.0: Fast and lightweight x86/x86-64 disassembler and code generation library
-dev-python/aiolimiter 1.2.0: An efficient implementation of a rate limiter for asyncio.
+dev-python/aiolimiter 1.2.1: An efficient implementation of a rate limiter for asyncio.
 dev-python/deezer-py 1.3.7: A wrapper for all Deezer's APIs
 dev-python/discord-rpc-py 1.3.0: A Discord Rich Presence library for Python 2 & 3
 dev-python/dotty-dict 1.3.1: Dictionary wrapper for quick access to deeply nested keys.
@@ -26,17 +26,17 @@ dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/milc 1.9.0: Opinionated Batteries-Included Python 3 CLI Framework
 dev-python/mitogen 0.3.19 9999: Distributed self-replicating programs in Python
 dev-python/pydbus 0.6.0-r1: Pythonic DBus library
-dev-python/pygame_sdl2 8.3.3: Reimplementation of portions of the pygame API using SDL2
+dev-python/pygame-sdl2 8.3.4: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
 dev-python/python-mpv-jsonipc 1.2.0: Python API to MPV using JSON IPC
 dev-python/simple-term-menu 1.6.6: A Python package which creates simple interactive menus on the command line.
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
-dev-util/lua-language-server 3.13.2: Lua language server
+dev-util/lua-language-server 3.13.5: Lua language server
 dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
 games-emulation/lime3ds 2119.1: Open-source Nintendo 3DS emulator
-games-engines/renpy 8.3.3: Visual novel engine written in python
+games-engines/renpy 8.3.4: Visual novel engine written in python
 games-vn/amelie 20230929-r3: In the middle of a field, far out in the countryside, sits a lone manor.
 games-vn/bloom-for-me 20201002: Show me how you bloom, in your darkest moment.
 games-vn/butterfly-soup 2.20-r2: A visual novel about gay asian girls playing baseball and falling in love.
@@ -81,5 +81,5 @@ media-sound/projectm-sdl2 2.0_pre20240807-r1: Application based on SDL2 that tur
 media-sound/streamrip 2.0.5-r1: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-video/jellyfin-mpv-shim 2.8.0-r2: MPV Cast Client for Jellyfin
 www-apps/kavita-bin 0.8.4.2: Kavita is a fast, feature rich, cross platform reading server.
-www-apps/slskd-bin 0.21.4: A modern client-server application for the Soulseek file sharing network.
+www-apps/slskd-bin 0.22.1: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
