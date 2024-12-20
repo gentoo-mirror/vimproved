@@ -11,7 +11,7 @@ inherit distutils-r1
 
 DESCRIPTION="Reimplementation of portions of the pygame API using SDL2"
 HOMEPAGE="https://github.com/renpy/pygame_sdl2"
-MY_P="${PN}-2.1.0+renpy${PV}"
+MY_P="${PN/-/_}-2.1.0+renpy${PV}"
 SRC_URI="https://www.renpy.org/dl/${PV}/${MY_P}.tar.gz"
 S="${WORKDIR}/${MY_P}"
 
@@ -38,11 +38,6 @@ BDEPEND="
 	test? ( dev-python/pytest-import-check[${PYTHON_USEDEP}] )
 "
 
-PATCHES=(
-	"${FILESDIR}/pygame_sdl2-8.2.1-cython-3.patch"
-	"${FILESDIR}/pygame_sdl2-8.3.3-install-headers.patch"
-)
-
 python_prepare_all() {
 	# PyGame distribution for this version has some pregenerated files;
 	# we need to remove them
@@ -53,4 +48,15 @@ python_prepare_all() {
 
 python_test() {
 	epytest --import-check "${BUILD_DIR}/install$(python_get_sitedir)/pygame_sdl2/__init__.py"
+}
+
+src_compile() {
+	# Access violation fix, set VIRTUAL_ENV to ${T}
+	local -x VIRTUAL_ENV="${T}"
+	distutils-r1_src_compile
+}
+
+src_install() {
+	distutils-r1_src_install
+	doheader -r "${T}/include/pygame_sdl2"
 }

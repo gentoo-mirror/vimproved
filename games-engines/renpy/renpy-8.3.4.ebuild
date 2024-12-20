@@ -26,7 +26,7 @@ RESTRICT="test"
 DEPEND="
 	dev-libs/fribidi
 	$(python_gen_cond_dep '
-		>=dev-python/pygame_sdl2-8.2.0[${PYTHON_USEDEP}]
+		>=dev-python/pygame-sdl2-8.2.0[${PYTHON_USEDEP}]
 		>=dev-lang/python-exec-0.3[${PYTHON_USEDEP}]
 		dev-python/ecdsa[${PYTHON_USEDEP}]
 		dev-python/six[${PYTHON_USEDEP}]
