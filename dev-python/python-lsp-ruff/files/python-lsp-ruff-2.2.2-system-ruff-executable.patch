@@ -1,0 +1,250 @@
+From 9117709fd74bf82c59dea09d31bb3d628929ac03 Mon Sep 17 00:00:00 2001
+From: KMohZaid <68484509+KMohZaid@users.noreply.github.com>
+Date: Sun, 25 Aug 2024 01:28:52 +0530
+Subject: [PATCH] notfy: give ack. about ruff linter and formatter (#94)
+
+* notfy: give ack. about ruff linter and formatter
+--- a/pylsp_ruff/plugin.py
++++ b/pylsp_ruff/plugin.py
+@@ -116,6 +116,7 @@ def pylsp_format_document(workspace: Workspace, document: Document) -> Generator
+         Document to apply ruff on.
+ 
+     """
++
+     log.debug(f"textDocument/formatting: {document}")
+     outcome = yield
+     result = outcome.get_result()
+@@ -128,34 +129,37 @@ def pylsp_format_document(workspace: Workspace, document: Document) -> Generator
+     if not settings.format_enabled:
+         return
+ 
+-    new_text = run_ruff_format(
+-        settings=settings, document_path=document.path, document_source=source
+-    )
+-
+-    if settings.format:
+-        # A second pass through the document with `ruff check` and only the rules
+-        # enabled via the format config property. This allows for things like
+-        # specifying `format = ["I"]` to get import sorting as part of formatting.
+-        new_text = run_ruff(
+-            settings=PluginSettings(
+-                ignore=["ALL"], select=settings.format, executable=settings.executable
+-            ),
+-            document_path=document.path,
+-            document_source=new_text,
+-            fix=True,
++    with workspace.report_progress("format: ruff"):
++        new_text = run_ruff_format(
++            settings=settings, document_path=document.path, document_source=source
+         )
+ 
+-    # Avoid applying empty text edit
+-    if not new_text or new_text == source:
+-        return
++        if settings.format:
++            # A second pass through the document with `ruff check` and only the rules
++            # enabled via the format config property. This allows for things like
++            # specifying `format = ["I"]` to get import sorting as part of formatting.
++            new_text = run_ruff(
++                settings=PluginSettings(
++                    ignore=["ALL"],
++                    select=settings.format,
++                    executable=settings.executable,
++                ),
++                document_path=document.path,
++                document_source=new_text,
++                fix=True,
++            )
+ 
+-    range = Range(
+-        start=Position(line=0, character=0),
+-        end=Position(line=len(document.lines), character=0),
+-    )
+-    text_edit = TextEdit(range=range, new_text=new_text)
++        # Avoid applying empty text edit
++        if not new_text or new_text == source:
++            return
++
++        range = Range(
++            start=Position(line=0, character=0),
++            end=Position(line=len(document.lines), character=0),
++        )
++        text_edit = TextEdit(range=range, new_text=new_text)
+ 
+-    outcome.force_result(converter.unstructure([text_edit]))
++        outcome.force_result(converter.unstructure([text_edit]))
+ 
+ 
+ @hookimpl
+@@ -174,10 +178,12 @@ def pylsp_lint(workspace: Workspace, document: Document) -> List[Dict]:
+     List of dicts containing the diagnostics.
+ 
+     """
+-    settings = load_settings(workspace, document.path)
+-    checks = run_ruff_check(document=document, settings=settings)
+-    diagnostics = [create_diagnostic(check=c, settings=settings) for c in checks]
+-    return converter.unstructure(diagnostics)
++
++    with workspace.report_progress("lint: ruff"):
++        settings = load_settings(workspace, document.path)
++        checks = run_ruff_check(document=document, settings=settings)
++        diagnostics = [create_diagnostic(check=c, settings=settings) for c in checks]
++        return converter.unstructure(diagnostics)
+ 
+ 
+ def create_diagnostic(check: RuffCheck, settings: PluginSettings) -> Diagnostic:
+
+From 46dadcc0b6fcb0103fbc1ca7791a813c7c622b60 Mon Sep 17 00:00:00 2001
+From: Jonas Jelten <jj@sft.lol>
+Date: Tue, 3 Sep 2024 17:14:08 +0200
+Subject: [PATCH] support for system ruff executable
+
+--- a/pylsp_ruff/plugin.py
++++ b/pylsp_ruff/plugin.py
+@@ -1,8 +1,11 @@
+ import enum
++import importlib.util
+ import json
+ import logging
+ import re
++import shutil
+ import sys
++from functools import lru_cache
+ from pathlib import PurePath
+ from subprocess import PIPE, Popen
+ from typing import Dict, Generator, List, Optional
+@@ -116,7 +119,6 @@ def pylsp_format_document(workspace: Workspace, document: Document) -> Generator
+         Document to apply ruff on.
+ 
+     """
+-
+     log.debug(f"textDocument/formatting: {document}")
+     outcome = yield
+     result = outcome.get_result()
+@@ -178,7 +180,6 @@ def pylsp_lint(workspace: Workspace, document: Document) -> List[Dict]:
+     List of dicts containing the diagnostics.
+ 
+     """
+-
+     with workspace.report_progress("lint: ruff"):
+         settings = load_settings(workspace, document.path)
+         checks = run_ruff_check(document=document, settings=settings)
+@@ -487,6 +488,36 @@ def run_ruff_format(
+     )
+ 
+ 
++@lru_cache
++def find_executable(executable) -> List[str]:
++    cmd = None
++    # use the explicit executable configuration
++    if executable is not None:
++        exe_path = shutil.which(executable)
++        if exe_path is not None:
++            cmd = [exe_path]
++        else:
++            raise RuntimeError(f"configured ruff executable not found: {executable!r}")
++
++    # try the python module
++    if cmd is None:
++        if importlib.util.find_spec("ruff") is not None:
++            cmd = [sys.executable, "-m", "ruff"]
++
++    # try system's ruff executable
++    if cmd is None:
++        system_exe = shutil.which("ruff")
++        if system_exe is not None:
++            cmd = [system_exe]
++
++    if cmd is None:
++        raise RuntimeError(
++            "no suitable ruff invocation could be found (executable, python module)"
++        )
++
++    return cmd
++
++
+ def run_ruff(
+     settings: PluginSettings,
+     document_path: str,
+@@ -522,27 +553,14 @@ def run_ruff(
+ 
+     arguments = subcommand.build_args(document_path, settings, fix, extra_arguments)
+ 
+-    p = None
+-    if executable is not None:
+-        log.debug(f"Calling {executable} with args: {arguments} on '{document_path}'")
+-        try:
+-            cmd = [executable, str(subcommand)]
+-            cmd.extend(arguments)
+-            p = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+-        except Exception:
+-            log.error(f"Can't execute ruff with given executable '{executable}'.")
+-    if p is None:
+-        log.debug(
+-            f"Calling ruff via '{sys.executable} -m ruff'"
+-            f" with args: {arguments} on '{document_path}'"
+-        )
+-        cmd = [sys.executable, "-m", "ruff", str(subcommand)]
+-        cmd.extend(arguments)
+-        p = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
++    cmd = [*find_executable(executable), str(subcommand), *arguments]
++
++    log.debug(f"Calling {cmd} on '{document_path}'")
++    p = Popen(cmd, stdin=PIPE, stdout=PIPE)
+     (stdout, stderr) = p.communicate(document_source.encode())
+ 
+     if p.returncode != 0:
+-        log.error(f"Error running ruff: {stderr.decode()}")
++        log.error(f"Ruff returned {p.returncode} != 0")
+ 
+     return stdout.decode()
+ 
+From c0ed81d8cc5eafa91e3975a69a6aae1481dc5603 Mon Sep 17 00:00:00 2001
+From: Jonas Jelten <jj@sft.lol>
+Date: Thu, 12 Sep 2024 17:55:23 +0200
+Subject: [PATCH] fake a ruff executable for testing the executable parameter
+
+--- a/tests/test_ruff_lint.py
++++ b/tests/test_ruff_lint.py
+@@ -2,6 +2,7 @@
+ # Copyright 2021- Python Language Server Contributors.
+ 
+ import os
++import stat
+ import sys
+ import tempfile
+ from unittest.mock import Mock, patch
+@@ -100,17 +101,24 @@ def test_ruff_config_param(workspace):
+ 
+ def test_ruff_executable_param(workspace):
+     with patch("pylsp_ruff.plugin.Popen") as popen_mock:
+-        mock_instance = popen_mock.return_value
+-        mock_instance.communicate.return_value = [bytes(), bytes()]
++        with tempfile.NamedTemporaryFile() as ruff_exe:
++            mock_instance = popen_mock.return_value
++            mock_instance.communicate.return_value = [bytes(), bytes()]
+ 
+-        ruff_executable = "/tmp/ruff"
+-        workspace._config.update({"plugins": {"ruff": {"executable": ruff_executable}}})
++            ruff_executable = ruff_exe.name
++            # chmod +x the file
++            st = os.stat(ruff_executable)
++            os.chmod(ruff_executable, st.st_mode | stat.S_IEXEC)
+ 
+-        _name, doc = temp_document(DOC, workspace)
+-        ruff_lint.pylsp_lint(workspace, doc)
++            workspace._config.update(
++                {"plugins": {"ruff": {"executable": ruff_executable}}}
++            )
+ 
+-        (call_args,) = popen_mock.call_args[0]
+-        assert ruff_executable in call_args
++            _name, doc = temp_document(DOC, workspace)
++            ruff_lint.pylsp_lint(workspace, doc)
++
++            (call_args,) = popen_mock.call_args[0]
++            assert ruff_executable in call_args
+ 
+ 
+ def get_ruff_settings(workspace, doc, config_str):
+
