@@ -10,7 +10,10 @@ inherit distutils-r1
 
 DESCRIPTION="A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer"
 HOMEPAGE="https://pypi.org/project/streamrip/"
-SRC_URI="https://github.com/nathom/streamrip/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+COMMIT="45252651eceeee73b734452ae4e0a9e26de55ca0"
+SRC_URI="https://github.com/nathom/streamrip/archive/45252651eceeee73b734452ae4e0a9e26de55ca0.tar.gz ->
+	${PN}-${COMMIT}.tar.gz"
+S="${WORKDIR}/${PN}-${COMMIT}"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -38,8 +41,6 @@ RDEPEND="
 	media-libs/mutagen[${PYTHON_USEDEP}]
 	${PYTHON_DEPS}
 "
-
-PATCHES=( "${FILESDIR}/${P}-fix-deezer-last-byte-missing.patch" )
 
 src_prepare() {
 	sed -i 's/Cryptodome/Crypto/' \
