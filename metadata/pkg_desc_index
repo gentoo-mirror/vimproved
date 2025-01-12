@@ -72,14 +72,14 @@ games-vn/yukis4p 20210811: useless lesbian tries to get a girlfriend
 games-vn/yukis4p2 20220701: useless lesbian gets kidnapped??
 media-fonts/symbols-nerd-font 3.3.0: Collection of symbols from nerd-fonts.
 media-libs/lodepng 20210627-r1: PNG encoder and decoder
-media-libs/vma 3.1.0: Easy to integrate Vulkan memory allocation library
+media-libs/vma 3.2.0: Easy to integrate Vulkan memory allocation library
 media-sound/mopidy 3.4.2: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.5: Jellyfin Extension for Mopidy
 media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling playback from MPD clients
 media-sound/mopidy-mpris 3.0.3: Mopidy extension for controlling playback from MPD clients
 media-sound/mopidy-scrobbler 2.0.1: Mopidy extension for scrobbling played tracks to Last.fm
 media-sound/projectm-sdl2 2.0_pre20240807-r1: Application based on SDL2 that turns your desktop audio into awesome visuals
-media-sound/streamrip 2.0.5-r1: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
+media-sound/streamrip 2.0.6_pre20250105: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-video/jellyfin-mpv-shim 2.8.0-r2: MPV Cast Client for Jellyfin
 www-apps/kavita-bin 0.8.4.2: Kavita is a fast, feature rich, cross platform reading server.
 www-apps/slskd-bin 0.22.1: A modern client-server application for the Soulseek file sharing network.
