@@ -14,9 +14,13 @@ S="${WORKDIR}/lachesisoratropos-${PV}-pc"
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RESTRICT="bindist fetch"
 
-RDEPEND="$(python_gen_cond_dep 'dev-python/discord-rpc-py[${PYTHON_USEDEP}]')"
+RDEPEND="
+	games-engines/renpy[${PYTHON_SINGLE_USEDEP}]
+	$(python_gen_cond_dep 'dev-python/discord-rpc-py[${PYTHON_USEDEP}]')
+"
 BDEPEND="app-arch/unzip"
 
 PATCHES=(

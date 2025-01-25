@@ -32,18 +32,10 @@ esac
 if [[ ! ${_RENPY_ECLASS} ]]; then
 _RENPY_ECLASS=1
 
-# @ECLASS_VARIABLE: PYTHON_COMPAT
-# @INTERNAL
-# @DESCRIPTION:
-# This is the PYTHON_COMPAT variable.
-PYTHON_COMPAT=( python3_{12..13} )
-
-inherit desktop python-single-r1 xdg
-
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+inherit desktop xdg
 
 RDEPEND="
-	games-engines/renpy[${PYTHON_SINGLE_USEDEP}]
+	>=games-engines/renpy-8.3.4-r1
 	${PYTHON_DEPS}
 "
 BDEPEND="
@@ -78,6 +70,14 @@ renpy_src_prepare() {
 	done < <(find "${S}" -name "*.rpyc" -print0)
 	find game -name "*.rpyb" -delete || die
 
+	if [[ -d lib ]]; then
+		rm -rf lib || die
+	fi
+
+	if [[ -d renpy ]]; then
+		rm -rf renpy || die
+	fi
+
 	default
 }
 
@@ -85,17 +85,12 @@ renpy_src_prepare() {
 # @DESCRIPTION:
 # Attempts to run game to compile renpy scripts.
 renpy_src_compile() {
-	mkdir "${WORKDIR}/${P}_build"
-	pushd "${WORKDIR}/${P}_build" &> /dev/null || die
-	cp -r "${S}/game" . || die
-	cp -r "$(python_get_sitedir)/renpy" renpy || die
-	cp "$(python_get_scriptdir)/renpy" "${PN}" || die
+	addpredict /usr/bin/steam_appid.txt
+	addpredict /usr/lib/python3.*/site-packages/renpy
 
 	einfo "Compiling game scripts"
-	"./${PN}" . compile || die "Compile failed"
+	renpy "${S}/game" compile || die "Compile failed"
 	find game -name "*.bak" -delete || die
-	cp -r game "${S}" || die
-	popd &> /dev/null || die
 	einfo "Deleting source scripts"
 	find game -name "*.rpy" -delete || die "Deleting source scripts failed"
 }
@@ -104,14 +99,19 @@ renpy_src_compile() {
 # @DESCRIPTION:
 # This is the renpy_src_install function.
 renpy_src_install() {
-	insinto "/usr/share/renpy/${PN}"
-	doins -r game
-
-	dosym "$(python_get_sitedir)/renpy" "/usr/share/renpy/${PN}/renpy"
-	dosym "$(python_get_scriptdir)/renpy" "/usr/share/renpy/${PN}/${PN}"
-
 	newicon -s 256 "${RENPY_WINDOW_ICON}" "${PN}.png"
-	make_desktop_entry "/usr/share/renpy/${PN}/${PN}" "${RENPY_TITLE}"
+
+	mv game "${PN}" || die "failed to move game directory"
+
+	insinto "/usr/share/renpy"
+	doins -r "${PN}"
+
+	newbin - "${PN}" <<-EOF
+		#!/bin/sh
+		exec renpy "/usr/share/renpy/${PN}"
+	EOF
+
+	make_desktop_entry "${PN}" "${RENPY_TITLE}"
 }
 
 fi

@@ -50,6 +50,7 @@ PATCHES=(
 	"${FILESDIR}/renpy-8.1.0-ignore_rpyc_errors.patch"
 	"${FILESDIR}/renpy-8.3.2-cython-3.patch"
 	"${FILESDIR}/renpy-8.3.2-six.patch"
+	"${FILESDIR}/renpy-8.3.4-system-location.patch"
 )
 
 python_prepare_all() {
@@ -60,8 +61,13 @@ python_prepare_all() {
 }
 
 python_compile() {
-	cd "${S}"/module || die
+	addpredict /usr/bin/steam_appid.txt
+
+	pushd "${S}"/module || die
 	distutils-r1_python_compile
+	popd || die
+
+	"${EPYTHON}" ./renpy.py renpy compile
 }
 
 python_install() {
