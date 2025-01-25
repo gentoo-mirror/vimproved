@@ -1,0 +1,38 @@
+--- a/game/defines/macros.rpy
++++ b/game/defines/macros.rpy
+@@ -521,8 +521,9 @@ label tone(level, color, *args):
+ 
+     if level > 0:
+         $ tone_color = "black" if color == 0 else "white"
++        $ alpha_level = level / 100
+         show expression tone_color as tone zorder tonedep:
+-            alpha level / 100.
++            alpha alpha_level
+     else:
+ 
+         hide tone
+--- a/game/planner/planner.rpy
++++ b/game/planner/planner.rpy
+@@ -88,7 +88,7 @@ screen planner(page=nums[PAGE_C]):
+ 
+     default hovered_day = None
+     for i in range(42):
+-        $ week = i / 7
++        $ week = int(i / 7)
+         $ day  = i % 7
+         $ flag = B_1MON + (week * 10) + day
+ 
+@@ -157,11 +157,11 @@ screen planner_list(month, week, day):
+ 
+ 
+             if i % 2 == 0:
+-                $ x = 234 + (5 * i / 2)
++                $ x = 234 + (5 * int(i / 2))
+                 $ y = 181 + 38 * i
+ 
+             else:
+-                $ x = 286 + (6 * (i - 1) / 2)
++                $ x = 286 + (6 * int((i - 1) / 2))
+                 $ y = 215 + 38 * (i - 1)
+ 
+             $ img = "images/sys3/%04d.png" % img

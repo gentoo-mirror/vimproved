@@ -46,7 +46,10 @@ RDEPEND="
 	games-engines/renpy[${PYTHON_SINGLE_USEDEP}]
 	${PYTHON_DEPS}
 "
-BDEPEND="app-arch/unrpa"
+BDEPEND="
+	app-arch/unrpa
+	games-util/unrpyc
+"
 
 # @FUNCTION: renpy_pkg_nofetch
 # @DESCRIPTION:
@@ -67,9 +70,11 @@ renpy_src_prepare() {
 
 	find game -name "*.rpa" -delete || die
 	for file in $(find game -name "*.rpyc"); do
-		if [[ -f "${file/.rpyc/.rpy}" ]]; then
-			rm "${file}" || die
+		if ! [[ -f "${file/.rpyc/.rpy}" ]]; then
+			unrpyc "${file}" || die "unrpyc failed"
 		fi
+
+		rm "${file}" || die
 	done
 	find game -name "*.rpyb" -delete || die
 
@@ -91,6 +96,8 @@ renpy_src_compile() {
 	find game -name "*.bak" -delete || die
 	cp -r game "${S}" || die
 	popd &> /dev/null || die
+	einfo "Deleting source scripts"
+	find game -name "*.rpy" -delete || die "Deleting source scripts failed"
 }
 
 # @FUNCTION: renpy_src_install
