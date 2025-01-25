@@ -1,0 +1,66 @@
+--- a/renpy.py
++++ b/renpy.py
+@@ -28,11 +28,16 @@
+ from __future__ import print_function, absolute_import
+ 
+ import os
++import site
+ import sys
+ import warnings
+ 
+ # Functions to be customized by distributors. ################################
+ 
++if len(sys.argv) < 2:
++    print("Please supply the game directory as an argument.")
++    sys.exit(1)
++
+ def path_to_gamedir(basedir, name):
+     """
+     Returns the absolute path to the directory containing the game
+@@ -44,36 +49,7 @@ def path_to_gamedir(basedir, name):
+         The basename of the executable, with the extension removed.
+     """
+ 
+-    # A list of candidate game directory names.
+-    candidates = [ name ]
+-
+-    # Add candidate names that are based on the name of the executable,
+-    # split at spaces and underscores.
+-    game_name = name
+-
+-    while game_name:
+-        prefix = game_name[0]
+-        game_name = game_name[1:]
+-
+-        if prefix == ' ' or prefix == '_':
+-            candidates.append(game_name)
+-
+-    # Add default candidates.
+-    candidates.extend([ 'game', 'data', 'launcher/game' ])
+-
+-    # Take the first candidate that exists.
+-    for i in candidates:
+-
+-        if i == "renpy":
+-            continue
+-
+-        gamedir = os.path.join(basedir, i)
+-
+-        if os.path.isdir(gamedir):
+-            break
+-
+-    else:
+-        gamedir = basedir
++    gamedir = sys.argv[1]
+ 
+     return gamedir
+ 
+@@ -86,7 +62,7 @@ def path_to_common(renpy_base):
+         The absolute path to the Ren'Py base directory, the directory
+         containing this file.
+     """
+-    path = renpy_base + "/renpy/common"
++    path = site.getsitepackages()[0] + "/renpy/common"
+ 
+     if os.path.isdir(path):
+         return path
