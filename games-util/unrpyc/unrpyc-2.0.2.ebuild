@@ -19,5 +19,6 @@ RESTRICT="test"
 
 python_install() {
 	python_domodule decompiler
+	python_domodule deobfuscate.py
 	python_newscript unrpyc.py unrpyc
 }
