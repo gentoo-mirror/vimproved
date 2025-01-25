@@ -55,12 +55,16 @@
  
      return gamedir
  
-@@ -86,7 +62,7 @@ def path_to_common(renpy_base):
+@@ -86,7 +62,11 @@ def path_to_common(renpy_base):
          The absolute path to the Ren'Py base directory, the directory
          containing this file.
      """
 -    path = renpy_base + "/renpy/common"
-+    path = site.getsitepackages()[0] + "/renpy/common"
++    cwd = os.getcwd()
++    if os.path.isdir(cwd + "/renpy/common"):
++        path = cwd + "/renpy/common"
++    else:
++        path = site.getsitepackages()[0] + "/renpy/common"
  
      if os.path.isdir(path):
          return path
