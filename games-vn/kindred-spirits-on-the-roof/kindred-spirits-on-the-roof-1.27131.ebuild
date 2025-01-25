@@ -20,6 +20,10 @@ BDEPEND="app-arch/unzip"
 RENPY_TITLE="Kindred Spirits on the Roof"
 RENPY_WINDOW_ICON="game/icon.png"
 
+PATCHES=(
+	"${FILESDIR}/${PN}-1.27131-float-fixes.patch"
+)
+
 src_unpack() {
 	unpack_zip "${DISTDIR}/${A}"
 }
