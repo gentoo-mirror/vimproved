@@ -69,13 +69,13 @@ renpy_src_prepare() {
 	done
 
 	find game -name "*.rpa" -delete || die
-	for file in $(find game -name "*.rpyc"); do
+	while IFS="" read -d $'\0' -r file; do
 		if ! [[ -f "${file/.rpyc/.rpy}" ]]; then
 			unrpyc "${file}" || die "unrpyc failed"
 		fi
 
 		rm "${file}" || die
-	done
+	done < <(find "${S}" -name "*.rpyc" -print0)
 	find game -name "*.rpyb" -delete || die
 
 	default
