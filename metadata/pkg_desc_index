@@ -24,7 +24,7 @@ dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
 dev-python/lsprotocol 2023.0.1: Python implementation of the Language Server Protocol.
 dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/milc 1.9.1: Opinionated Batteries-Included Python 3 CLI Framework
-dev-python/mitogen 0.3.21 9999: Distributed self-replicating programs in Python
+dev-python/mitogen 0.3.22 9999: Distributed self-replicating programs in Python
 dev-python/pydbus 0.6.0-r1: Pythonic DBus library
 dev-python/pygame-sdl2 8.3.4: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
@@ -34,7 +34,7 @@ dev-python/simple-term-menu 1.6.6: A Python package which creates simple interac
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
-dev-util/lua-language-server 3.13.5: Lua language server
+dev-util/lua-language-server 3.13.6: Lua language server
 dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
 games-emulation/lime3ds 2119.1: Open-source Nintendo 3DS emulator
 games-engines/renpy 8.3.4-r1: Visual novel engine written in python
@@ -74,7 +74,7 @@ games-vn/yukis4p 20210811-r1: useless lesbian tries to get a girlfriend
 games-vn/yukis4p2 20220701-r1: useless lesbian gets kidnapped??
 media-fonts/symbols-nerd-font 3.3.0: Collection of symbols from nerd-fonts.
 media-libs/lodepng 20210627-r1: PNG encoder and decoder
-media-libs/vma 3.2.0: Easy to integrate Vulkan memory allocation library
+media-libs/vma 3.2.1: Easy to integrate Vulkan memory allocation library
 media-sound/mopidy 3.4.2: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.5: Jellyfin Extension for Mopidy
 media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling playback from MPD clients
