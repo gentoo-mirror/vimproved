@@ -22,6 +22,7 @@ RENPY_WINDOW_ICON="game/icon.png"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.27131-float-fixes.patch"
+	"${FILESDIR}/${PN}-1.27131-leading-zero.patch"
 )
 
 src_unpack() {
