@@ -1,0 +1,29 @@
+--- a/game/scenario/1608.rpy
++++ b/game/scenario/1608.rpy
+@@ -468,7 +468,7 @@ label start_1608:
+ 
+     call cgcls (0, 0) from _call_1608_00304
+ 
+-    call cgload (11, 2004, 070, 300, 0, 0) from _call_1608_00305
++    call cgload (11, 2004, 70, 300, 0, 0) from _call_1608_00305
+ 
+     call cgload (12, 1001, 200, 300, 0, 0) from _call_1608_00306
+ 
+@@ -606,7 +606,7 @@ label start_1608:
+     $ batch_display = True
+     $ batch_wait = 0.0
+ 
+-    call cgload (11, 2004, 070, 300, 0, 0) from _call_1608_00380
++    call cgload (11, 2004, 70, 300, 0, 0) from _call_1608_00380
+ 
+     with ef(1, 8, 8)
+     pause batch_wait
+@@ -682,7 +682,7 @@ label start_1608:
+     $ batch_display = True
+     $ batch_wait = 0.0
+ 
+-    call cgload (11, 2051, 070, 300, 0, 0) from _call_1608_00421
++    call cgload (11, 2051, 70, 300, 0, 0) from _call_1608_00421
+ 
+ 
+     with ef(1, 8, 8)
