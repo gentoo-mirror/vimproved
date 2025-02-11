@@ -9,8 +9,8 @@ dev-libs/biscuit 0.15.0: A runtime code generator for RISC-V
 dev-libs/dynarmic 6.7.0: A dynamic recompiler for ARM.
 dev-libs/mcl 0.1.12: merry's common library
 dev-libs/oaknut 2.0.2: Yet another AArch64 emitter
-dev-libs/xbyak 7.23: A JIT assembler for x86/x64
-dev-libs/zycore 1.5.1: Zyan Core Library for C
+dev-libs/xbyak 7.23.1: A JIT assembler for x86/x64
+dev-libs/zycore 1.5.2: Zyan Core Library for C
 dev-libs/zydis 4.1.0: Fast and lightweight x86/x86-64 disassembler and code generation library
 dev-python/aiolimiter 1.2.1: An efficient implementation of a rate limiter for asyncio.
 dev-python/deezer-py 1.3.7: A wrapper for all Deezer's APIs
@@ -84,5 +84,5 @@ media-sound/projectm-sdl2 2.0_pre20240807-r1: Application based on SDL2 that tur
 media-sound/streamrip 2.0.6_pre20250105: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-video/jellyfin-mpv-shim 2.8.0-r2: MPV Cast Client for Jellyfin
 www-apps/kavita-bin 0.8.4.2: Kavita is a fast, feature rich, cross platform reading server.
-www-apps/slskd-bin 0.22.1: A modern client-server application for the Soulseek file sharing network.
+www-apps/slskd-bin 0.22.2: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
