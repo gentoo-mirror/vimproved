@@ -72,7 +72,6 @@ games-vn/wav 2.0.3-r4: a dark fantasy yuri visual novel
 games-vn/who-is-the-red-queen 1.13-r1: Alice, Alice, the Red Queen is missing.
 games-vn/yukis4p 20210811-r1: useless lesbian tries to get a girlfriend
 games-vn/yukis4p2 20220701-r1: useless lesbian gets kidnapped??
-media-fonts/symbols-nerd-font 3.3.0: Collection of symbols from nerd-fonts.
 media-libs/lodepng 20210627-r1: PNG encoder and decoder
 media-libs/vma 3.2.1: Easy to integrate Vulkan memory allocation library
 media-sound/mopidy 3.4.2: An extensible music server written in Python.
