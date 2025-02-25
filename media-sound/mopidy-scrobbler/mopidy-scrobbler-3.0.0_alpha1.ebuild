@@ -14,10 +14,11 @@ HOMEPAGE="https://mopidy.com/ext/scrobbler/"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 RDEPEND="
 	dev-python/pykka[${PYTHON_USEDEP}]
 	>=dev-python/pylast-4.2[${PYTHON_USEDEP}]
 	>=media-sound/mopidy-4.0.0_alpha3[${PYTHON_USEDEP}]
 "
+
+distutils_enable_tests import-check
