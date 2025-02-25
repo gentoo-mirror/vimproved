@@ -6,21 +6,22 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..13} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="An extensible music server written in Python."
 HOMEPAGE="https://mopidy.com/"
-SRC_URI="https://github.com/mopidy/mopidy/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 RDEPEND="
-	dev-python/gst-python[${PYTHON_USEDEP}]
+	>=dev-python/pydantic-2.9[${PYTHON_USEDEP}]
+	>=dev-python/pygobject-3.42[${PYTHON_USEDEP}]
+	>=dev-python/pykka-4.1[${PYTHON_USEDEP}]
+	>=dev-python/requests-2.28[${PYTHON_USEDEP}]
+	>=dev-python/tornado-6.2[${PYTHON_USEDEP}]
 	media-plugins/gst-plugins-meta[mp3,ogg,flac]
-	dev-python/pykka[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/tornado[${PYTHON_USEDEP}]
 "
+
+distutils_enable_tests import-check

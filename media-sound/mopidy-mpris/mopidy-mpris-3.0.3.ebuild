@@ -16,7 +16,6 @@ HOMEPAGE="https://mopidy.com/ext/mpd/"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 RDEPEND="
 	dev-python/pydbus[${PYTHON_USEDEP}]
@@ -24,3 +23,5 @@ RDEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	media-sound/mopidy[${PYTHON_USEDEP}]
 "
+
+distutils_enable_tests import-check

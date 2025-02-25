@@ -4,22 +4,23 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYPI_NO_NORMALIZE=1
-PYPI_PN=Mopidy-Scrobbler
 PYTHON_COMPAT=( python3_{12..13} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION="Mopidy extension for scrobbling played tracks to Last.fm"
-HOMEPAGE="https://mopidy.com/ext/scrobbler/"
+DESCRIPTION="Jellyfin Extension for Mopidy"
+HOMEPAGE="https://jellyfin.org/"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 RDEPEND="
 	dev-python/pykka[${PYTHON_USEDEP}]
-	dev-python/pylast[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/unidecode[${PYTHON_USEDEP}]
+	dev-python/websocket-client[${PYTHON_USEDEP}]
 	media-sound/mopidy[${PYTHON_USEDEP}]
 "
+
+distutils_enable_tests import-check
