@@ -4,8 +4,6 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYPI_NO_NORMALIZE=1
-PYPI_PN=Mopidy-Scrobbler
 PYTHON_COMPAT=( python3_{12..13} )
 
 inherit distutils-r1 pypi
@@ -20,6 +18,6 @@ RESTRICT="test"
 
 RDEPEND="
 	dev-python/pykka[${PYTHON_USEDEP}]
-	dev-python/pylast[${PYTHON_USEDEP}]
-	media-sound/mopidy[${PYTHON_USEDEP}]
+	>=dev-python/pylast-4.2[${PYTHON_USEDEP}]
+	>=media-sound/mopidy-4.0.0_alpha3[${PYTHON_USEDEP}]
 "
