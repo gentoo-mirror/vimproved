@@ -14,7 +14,6 @@ HOMEPAGE="https://mopidy.com/"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 RDEPEND="
 	>=dev-python/pydantic-2.9[${PYTHON_USEDEP}]
@@ -24,3 +23,5 @@ RDEPEND="
 	>=dev-python/tornado-6.2[${PYTHON_USEDEP}]
 	media-plugins/gst-plugins-meta[mp3,ogg,flac]
 "
+
+distutils_enable_tests import-check
