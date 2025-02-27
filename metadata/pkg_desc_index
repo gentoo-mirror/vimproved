@@ -9,7 +9,7 @@ dev-libs/biscuit 0.16.0: A runtime code generator for RISC-V
 dev-libs/dynarmic 6.7.0: A dynamic recompiler for ARM.
 dev-libs/mcl 0.1.12: merry's common library
 dev-libs/oaknut 2.0.2: Yet another AArch64 emitter
-dev-libs/xbyak 7.24: A JIT assembler for x86/x64
+dev-libs/xbyak 7.24.1: A JIT assembler for x86/x64
 dev-libs/zycore 1.5.2: Zyan Core Library for C
 dev-libs/zydis 4.1.1: Fast and lightweight x86/x86-64 disassembler and code generation library
 dev-python/aiolimiter 1.2.1: An efficient implementation of a rate limiter for asyncio.
