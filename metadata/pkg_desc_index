@@ -75,9 +75,9 @@ games-vn/yukis4p2 20220701-r1: useless lesbian gets kidnapped??
 gui-apps/inhibridge 0.3.0: Daemon that bridges freedesktop.org ScreenSaver inhibitions to systemd-inhibit
 media-libs/lodepng 20210627-r1: PNG encoder and decoder
 media-libs/vma 3.2.1: Easy to integrate Vulkan memory allocation library
-media-sound/mopidy 4.0.0_alpha3: An extensible music server written in Python.
+media-sound/mopidy 4.0.0_alpha4: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.6: Jellyfin Extension for Mopidy
-media-sound/mopidy-mpd 3.3.0: Mopidy extension for controlling playback from MPD clients
+media-sound/mopidy-mpd 4.0.0_alpha1: Mopidy extension for controlling playback from MPD clients
 media-sound/mopidy-mpris 3.0.3: Mopidy extension for controlling playback from MPD clients
 media-sound/mopidy-scrobbler 3.0.0_alpha1: Mopidy extension for scrobbling played tracks to Last.fm
 media-sound/streamrip 2.0.6_pre20250105: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
