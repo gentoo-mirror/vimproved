@@ -4,8 +4,6 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYPI_NO_NORMALIZE=1
-PYPI_PN=Mopidy-MPD
 PYTHON_COMPAT=( python3_{12..13} )
 
 inherit distutils-r1 pypi
@@ -21,7 +19,7 @@ RDEPEND="
 	dev-python/pygobject[${PYTHON_USEDEP}]
 	dev-python/pykka[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
-	media-sound/mopidy[${PYTHON_USEDEP}]
+	>=media-sound/mopidy-4.0.0_alpha4[${PYTHON_USEDEP}]
 "
 
 distutils_enable_tests import-check
