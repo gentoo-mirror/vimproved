@@ -7,8 +7,8 @@ inherit renpy
 
 DESCRIPTION="A yandere yuri visual novel with a fairytale theme."
 HOMEPAGE="https://ebihime.itch.io/lonely"
-SRC_URI="Itgetssolonelyhere-${PV}-pc.zip"
-S="${WORKDIR}/Itgetssolonelyhere-${PV}-pc"
+SRC_URI="Itgetssolonelyhere-$(ver_cut 1-2)-pc.zip"
+S="${WORKDIR}/Itgetssolonelyhere-$(ver_cut 1-2)-pc"
 
 LICENSE="all-rights-reserved"
 SLOT="0"

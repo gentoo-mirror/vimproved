@@ -7,8 +7,8 @@ inherit renpy
 
 DESCRIPTION="A yandere yuri VN about being a witch's obedient pet."
 HOMEPAGE="https://ebihime.itch.io/obsession"
-SRC_URI="Theendofanobsession-${PV}-market.zip"
-S="${WORKDIR}"
+SRC_URI="Theendofanobsession-$(ver_cut 1-2)-pc.zip"
+S="${WORKDIR}/Theendofanobsession-$(ver_cut 1-2)-pc/"
 
 LICENSE="all-rights-reserved"
 SLOT="0"
