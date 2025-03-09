@@ -12,4 +12,4 @@ RESTRICT=bindist fetch
 SLOT=0
 SRC_URI=Itgetssolonelyhere-1.0-pc.zip
 _eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	79ec4eaf75f5a018500c9fce8455ddbd
-_md5_=cfc1c7eb26a4e88b9bdacfcf45a842f5
+_md5_=0f3bd08f5973e90bffb22c4cd08305a8

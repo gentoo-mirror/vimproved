@@ -56,9 +56,9 @@ games-vn/kindred-spirits-on-the-roof 1.27131-r2: Let’s Make This a Yuritopia!
 games-vn/lachesis-or-atropos 1.20-r1: This world is woven of strings, of fate and of hate.
 games-vn/lake-of-voices 1.1-r1: Anyone can be saved, but not everyone can be. A free horror Visual Novel.
 games-vn/life-after-magic 1.2.0-r3: lgbt+, retired magical girls in 1999
-games-vn/lonely 1.0-r5: A yandere yuri visual novel with a fairytale theme.
+games-vn/lonely 1.0_p1: A yandere yuri visual novel with a fairytale theme.
 games-vn/moon-archer-shooting-stars 1.23-r3: A gatekeeper of the elevator to the moon meets a girl without papers
-games-vn/obsession 1.0-r2: A yandere yuri VN about being a witch's obedient pet.
+games-vn/obsession 1.0_p1: A yandere yuri VN about being a witch's obedient pet.
 games-vn/operation-eventide 1.3-r1: authenticating ultrapsychoinflammasis. . . .
 games-vn/seraphim-slum 1.0-r1: A liminal sapphic visual novel that explores just how far an angel can fall.
 games-vn/she-neglected-the-world 1.11-r1: Before the fairy picked up a disciple, the monster fell in love.
@@ -83,6 +83,6 @@ media-sound/mopidy-mpris 3.0.3: Mopidy extension for controlling playback from M
 media-sound/mopidy-scrobbler 3.0.0_alpha1: Mopidy extension for scrobbling played tracks to Last.fm
 media-sound/streamrip 2.0.6_pre20250105: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-video/jellyfin-mpv-shim 2.8.0-r2: MPV Cast Client for Jellyfin
-www-apps/kavita-bin 0.8.4.2: Kavita is a fast, feature rich, cross platform reading server.
+www-apps/kavita-bin 0.8.5: Kavita is a fast, feature rich, cross platform reading server.
 www-apps/slskd-bin 0.22.2: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
