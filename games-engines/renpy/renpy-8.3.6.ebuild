@@ -50,6 +50,7 @@ PATCHES=(
 	"${FILESDIR}/renpy-8.1.0-ignore_rpyc_errors.patch"
 	"${FILESDIR}/renpy-8.3.2-six.patch"
 	"${FILESDIR}/renpy-8.3.4-system-location.patch"
+	"${FILESDIR}/renpy-8.3.6-ffmpeg-7.patch"
 )
 
 python_prepare_all() {
