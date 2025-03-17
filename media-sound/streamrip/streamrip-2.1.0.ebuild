@@ -10,10 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer"
 HOMEPAGE="https://pypi.org/project/streamrip/"
-COMMIT="45252651eceeee73b734452ae4e0a9e26de55ca0"
-SRC_URI="https://github.com/nathom/streamrip/archive/45252651eceeee73b734452ae4e0a9e26de55ca0.tar.gz ->
-	${PN}-${COMMIT}.tar.gz"
-S="${WORKDIR}/${PN}-${COMMIT}"
+SRC_URI="https://github.com/nathom/streamrip/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
