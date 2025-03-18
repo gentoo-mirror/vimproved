@@ -19,6 +19,11 @@ case ${EAPI} in
 	*) die "${ECLASS}: EAPI ${EAPI:-0} not supported" ;;
 esac
 
+# @ECLASS_VARIABLE: RENPY_NO_DECOMPILE
+# @DEFAULT_UNSET
+# @DESCRIPTION:
+# Set to any value to skip decompilation of rpyc scripts.
+
 # @ECLASS_VARIABLE: RENPY_TITLE
 # @DESCRIPTION:
 # The title of the VN to be used in the desktop entry. Defaults to ${PN}.
@@ -62,7 +67,7 @@ renpy_src_prepare() {
 
 	find game -name "*.rpa" -delete || die
 	while IFS="" read -d $'\0' -r file; do
-		if ! [[ -f "${file/.rpyc/.rpy}" ]]; then
+		if ! [[ -f "${file/.rpyc/.rpy}" ]] && [[ -z "${RENPY_NO_DECOMPILE}" ]]; then
 			unrpyc "${file}" || die "unrpyc failed"
 		fi
 
