@@ -7,16 +7,13 @@ inherit renpy
 
 DESCRIPTION="Rabbit with a telephone"
 HOMEPAGE="https://imoteam.itch.io/hello-girl"
-SRC_URI="hello_girl-${PV}-linux.tar.bz2"
-S="${WORKDIR}/hello_girl-${PV}-linux"
+SRC_URI="hello-girl-linux.tar.bz2"
+S="${WORKDIR}/hello-girl-linux/"
 
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64"
 RESTRICT="bindist fetch"
 
-PATCHES=(
-	"${FILESDIR}/hello-girl-${PV}-newer-renpy.patch"
-)
-
+RENPY_NO_DECOMPILE=1
 RENPY_TITLE="Hello Girl"
