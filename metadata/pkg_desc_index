@@ -27,7 +27,7 @@ dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/milc 1.9.1: Opinionated Batteries-Included Python 3 CLI Framework
 dev-python/mitogen 0.3.22 9999: Distributed self-replicating programs in Python
 dev-python/pydbus 0.6.0-r1: Pythonic DBus library
-dev-python/pygame-sdl2 8.3.6: Reimplementation of portions of the pygame API using SDL2
+dev-python/pygame-sdl2 8.3.7: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
 dev-python/python-lsp-ruff 2.2.2: Linter plugin for pylsp based on ruff.
 dev-python/python-mpv-jsonipc 1.2.0: Python API to MPV using JSON IPC
@@ -38,7 +38,7 @@ dev-util/fnlfmt 0.3.2: A formatter for Fennel code
 dev-util/lua-language-server 3.13.9: Lua language server
 dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
 games-emulation/lime3ds 2119.1: Open-source Nintendo 3DS emulator
-games-engines/renpy 8.3.6: Visual novel engine written in python
+games-engines/renpy 8.3.7: Visual novel engine written in python
 games-util/unrpyc 2.0.2: A ren'py script decompiler
 games-vn/amelie 20230929-r4: In the middle of a field, far out in the countryside, sits a lone manor.
 games-vn/bloom-for-me 20201002-r1: Show me how you bloom, in your darkest moment.
@@ -48,7 +48,7 @@ games-vn/contract-demon 2.2.7-r1: an angel summons a demon. they fall in love.
 games-vn/crystal-colors 20210115-r1: A romance buds in cold snow.
 games-vn/disaster-log-c 1.5.0-r1: It has been raining ceaselessly for 7 days...
 games-vn/heart-of-the-woods 2.1.5-r1: A yuri VN about a love between two girls that transcends life and death.
-games-vn/hello-girl 1.2.1-r1: Rabbit with a telephone
+games-vn/hello-girl 2.0.9: Rabbit with a telephone
 games-vn/highway-blossoms 1.2.5-r1: A short yuri Visual Novel set in the American Southwest.
 games-vn/if-you-stay 1.0-r1: One choice. With her or without.
 games-vn/its-a-promise 1.0-r1: A short girls love kinetic novel.
@@ -82,7 +82,7 @@ media-sound/mopidy-mpd 4.0.0_alpha1: Mopidy extension for controlling playback f
 media-sound/mopidy-mpris 3.0.3: Mopidy extension for controlling playback from MPD clients
 media-sound/mopidy-scrobbler 3.0.0_alpha1: Mopidy extension for scrobbling played tracks to Last.fm
 media-sound/streamrip 2.1.0: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
-media-video/jellyfin-mpv-shim 2.8.0-r2: MPV Cast Client for Jellyfin
+media-video/jellyfin-mpv-shim 2.9.0: MPV Cast Client for Jellyfin
 www-apps/kavita-bin 0.8.5.11: Kavita is a fast, feature rich, cross platform reading server.
 www-apps/slskd-bin 0.22.2: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
