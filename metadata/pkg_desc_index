@@ -7,7 +7,7 @@ app-misc/sptlrx 1.2.2: Synchronized lyrics in your terminal
 dev-embedded/qmk 1.1.6: A program to help users work with QMK Firmware.
 dev-libs/biscuit 0.16.0: A runtime code generator for RISC-V
 dev-libs/dynarmic 6.7.0: A dynamic recompiler for ARM.
-dev-libs/mcl 0.1.12: merry's common library
+dev-libs/mcl 0.1.13: merry's common library
 dev-libs/oaknut 2.0.2: Yet another AArch64 emitter
 dev-libs/xbyak 7.24.2: A JIT assembler for x86/x64
 dev-libs/zycore 1.5.2: Zyan Core Library for C
@@ -37,7 +37,6 @@ dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
 dev-util/lua-language-server 3.13.9: Lua language server
 dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
-games-emulation/lime3ds 2119.1: Open-source Nintendo 3DS emulator
 games-engines/renpy 8.3.7: Visual novel engine written in python
 games-util/unrpyc 2.0.2: A ren'py script decompiler
 games-vn/amelie 20230929-r4: In the middle of a field, far out in the countryside, sits a lone manor.
