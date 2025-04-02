@@ -3,7 +3,7 @@ acct-group/slskd 0: System group: slskd
 acct-user/kavita 0: System user: kavita
 acct-user/slskd 0: System user: slskd
 app-admin/blahajdots 0.5.0 9999: Bespoke dotfile management for sharkgirls.
-app-misc/sptlrx 1.2.2: Synchronized lyrics in your terminal
+app-misc/sptlrx 1.2.3: Synchronized lyrics in your terminal
 dev-embedded/qmk 1.1.6: A program to help users work with QMK Firmware.
 dev-libs/biscuit 0.16.0: A runtime code generator for RISC-V
 dev-libs/dynarmic 6.7.0: A dynamic recompiler for ARM.
@@ -30,13 +30,14 @@ dev-python/pydbus 0.6.0-r1: Pythonic DBus library
 dev-python/pygame-sdl2 8.3.7: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
 dev-python/python-lsp-ruff 2.2.2: Linter plugin for pylsp based on ruff.
-dev-python/python-mpv-jsonipc 1.2.0: Python API to MPV using JSON IPC
+dev-python/python-mpv-jsonipc 1.2.1: Python API to MPV using JSON IPC
 dev-python/simple-term-menu 1.6.6: A Python package which creates simple interactive menus on the command line.
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
 dev-util/lua-language-server 3.13.9: Lua language server
 dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
+games-emulation/azahar 2120.2: Open-source Nintendo 3DS emulator
 games-engines/renpy 8.3.7: Visual novel engine written in python
 games-util/unrpyc 2.0.2: A ren'py script decompiler
 games-vn/amelie 20230929-r4: In the middle of a field, far out in the countryside, sits a lone manor.
