@@ -38,6 +38,8 @@ src_prepare() {
 	rm -r externals/{catch,fmt,mcl,oaknut,robin-map,xbyak,zycore,zydis} ||
 		die "removing bundled dependencies failed"
 	cmake_src_prepare
+
+	sed -i 's/0.1.12 EXACT//' CMakeLists.txt || die
 }
 
 src_configure() {
