@@ -9,7 +9,7 @@ DESCRIPTION="Synchronized lyrics in your terminal"
 HOMEPAGE="https://github.com/raitonoberu/sptlrx"
 SRC_URI="
 	https://github.com/raitonoberu/sptlrx/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
-	https://distfiles.vimproved.dev/${P}-vendor.tar.xz
+	https://distfiles.vimproved.dev/${P}-deps.tar.xz
 "
 
 LICENSE="MIT"
