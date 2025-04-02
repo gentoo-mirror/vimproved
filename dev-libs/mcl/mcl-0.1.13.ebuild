@@ -19,6 +19,10 @@ DEPEND="
 	=dev-cpp/catch-3*
 "
 
+PATCHES=(
+	"${FILESDIR}/mcl-0.1.13-lift_sequence.patch"
+)
+
 src_configure() {
 	local mycmakeargs=(
 		-DMCL_WARNINGS_AS_ERRORS=OFF
