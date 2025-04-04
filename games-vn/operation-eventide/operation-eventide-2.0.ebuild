@@ -18,7 +18,7 @@ RESTRICT="bindist fetch"
 BDEPEND="app-arch/unzip"
 
 PATCHES=(
-	"${FILESDIR}/operation-eventide-1.3-scene-block.patch"
+	"${FILESDIR}/operation-eventide-2.0-scene-block.patch"
 )
 
 RENPY_TITLE="Operation Eventide"
