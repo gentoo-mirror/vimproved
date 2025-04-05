@@ -19,10 +19,11 @@ case ${EAPI} in
 	*) die "${ECLASS}: EAPI ${EAPI:-0} not supported" ;;
 esac
 
-# @ECLASS_VARIABLE: RENPY_NO_DECOMPILE
+# @ECLASS_VARIABLE: RENPY_USE_PRECOMPILED
 # @DEFAULT_UNSET
 # @DESCRIPTION:
-# Set to any value to skip decompilation of rpyc scripts.
+# Set to any value to use pre-compiled scripts/bytecode as-is instead of
+# attempting to decompile/recompile.
 
 # @ECLASS_VARIABLE: RENPY_TITLE
 # @DESCRIPTION:
@@ -67,7 +68,7 @@ renpy_src_prepare() {
 	done
 
 	find game -name "*.rpa" -delete || die
-	if [[ -z "${RENPY_NO_DECOMPILE}" ]]; then
+	if [[ -z "${RENPY_USE_PRECOMPILED}" ]]; then
 		while IFS="" read -d $'\0' -r file; do
 			if ! [[ -f "${file/.rpyc/.rpy}" ]]; then
 				edob -m "decompiling ${file}" unrpyc "${file}"
@@ -75,8 +76,8 @@ renpy_src_prepare() {
 
 			rm "${file}" || die
 		done < <(find "${S}" -name "*.rpyc" -print0)
+		find game -name "*.rpyb" -delete || die "failed to delete Ren'Py bytecode"
 	fi
-	find game -name "*.rpyb" -delete || die "failed to delete Ren'Py bytecode"
 
 	if [[ -d lib ]]; then
 		rm -rf lib || die
@@ -93,6 +94,8 @@ renpy_src_prepare() {
 # @DESCRIPTION:
 # Attempts to run game to compile renpy scripts.
 renpy_src_compile() {
+	[[ -n "${RENPY_USE_PRECOMPILED}" ]] && return
+
 	addpredict /usr/bin/steam_appid.txt
 	addpredict /usr/lib/python3.*/site-packages/renpy
 
