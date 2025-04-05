@@ -11,5 +11,5 @@ RDEPEND=>=games-engines/renpy-8.3.4-r1
 RESTRICT=bindist fetch
 SLOT=0
 SRC_URI=ButterflySoup2-1.11-linux.tar.bz2
-_eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	edo	367e103a74bf77e6a8da7894d999fa3c	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	345945e377424b8ea963010a56c011cd
+_eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	edo	367e103a74bf77e6a8da7894d999fa3c	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	304005e7dddfe0665deb63a64f04dd40
 _md5_=d717089379fd51ecd127bbdb0be24a4d
