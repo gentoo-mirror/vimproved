@@ -7,7 +7,7 @@ inherit renpy unpacker
 
 DESCRIPTION="Let’s Make This a Yuritopia!"
 HOMEPAGE="https://www.gog.com/en/game/kindred_spirits_on_the_roof"
-SRC_URI="/var/cache/distfiles/kindred_spirits_on_the_roof_gog_1_27131.sh"
+SRC_URI="kindred_spirits_on_the_roof_gog_1_27131.sh"
 S="${WORKDIR}/data/noarch/game/"
 
 LICENSE="all-rights-reserved"
