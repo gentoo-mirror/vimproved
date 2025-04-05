@@ -107,7 +107,7 @@ renpy_src_compile() {
 
 	if has_version app-misc/jq; then
 		local version="$(jq -r '.version' info.json || die)"
-		if [[ -n "${version}" ]] && [[ "${version}" != "${PV%_p*}" ]]; then
+		if [[ -n ${version} ]] && [[ "${version}" != "${PV%_p*}" ]]; then
 			eqawarn "Mismatch between game version and package version!"
 			eqawarn "Game version: ${version}"
 			eqawarn "Package version: ${PV}"
