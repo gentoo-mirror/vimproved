@@ -11,5 +11,5 @@ RDEPEND=>=games-engines/renpy-8.3.4-r1
 RESTRICT=bindist fetch
 SLOT=0
 SRC_URI=Yuki's-4P-linux.tar.bz2
-_eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	837bb53097fb5cc49b660e65726efaea
+_eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	170258eb6ef29e48296f5dba3b99b1c5
 _md5_=3e093375f54acc5ab6eaea954d99a7fc
