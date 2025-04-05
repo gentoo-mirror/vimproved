@@ -7,7 +7,7 @@ inherit renpy unpacker
 
 DESCRIPTION="Let’s Make This a Yuritopia!"
 HOMEPAGE="https://www.gog.com/en/game/kindred_spirits_on_the_roof"
-SRC_URI="kindred_spirits_on_the_roof_gog_$(ver_cut 1)_$(ver_cut 2).sh"
+SRC_URI="/var/cache/distfiles/kindred_spirits_on_the_roof_gog_1_27131.sh"
 S="${WORKDIR}/data/noarch/game/"
 
 LICENSE="all-rights-reserved"
@@ -21,8 +21,8 @@ RENPY_TITLE="Kindred Spirits on the Roof"
 RENPY_WINDOW_ICON="game/icon.png"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-1.27131-float-fixes.patch"
-	"${FILESDIR}/${PN}-1.27131-leading-zero.patch"
+	"${FILESDIR}/${PN}-1.0.2-float-fixes.patch"
+	"${FILESDIR}/${PN}-1.0.2-leading-zero.patch"
 )
 
 src_unpack() {
