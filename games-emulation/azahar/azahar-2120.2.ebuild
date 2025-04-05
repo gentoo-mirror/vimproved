@@ -37,6 +37,7 @@ RDEPEND="
 DEPEND="
 	${RDEPEND}
 	=dev-cpp/catch-3*
+	dev-cpp/cpp-httplib
 	media-libs/cubeb
 	media-libs/vma
 "
