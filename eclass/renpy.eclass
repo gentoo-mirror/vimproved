@@ -97,11 +97,23 @@ renpy_src_prepare() {
 renpy_src_compile() {
 	[[ -n "${RENPY_USE_PRECOMPILED}" ]] && return
 
-	addpredict /usr/bin/steam_appid.txt
+	pushd "${T}" &> /dev/null || die
 	addpredict /usr/lib/python3.*/site-packages/renpy
 
-	edob renpy "${S}/game" compile
-	find game -name "*.bak" -delete || die "failed to delete script backups"
+	local -x RENPY_NO_STEAM=1
+
+	edob renpy "${S}/game" --json-dump info.json compile
+	find "${S}/game" -name "*.bak" -delete || die "failed to delete script backups"
+
+	if has_version app-misc/jq; then
+		local version="$(jq -r '.version' info.json || die)"
+		if [[ -n "${version}" ]] && [[ "${version}" != "${PV}" ]]; then
+			eqawarn "Mismatch between game version and package version!"
+			eqawarn "Game version: ${version}"
+			eqawarn "Package version: ${PV}"
+		fi
+	fi
+	popd &> /dev/null || die
 }
 
 # @FUNCTION: renpy_src_install
