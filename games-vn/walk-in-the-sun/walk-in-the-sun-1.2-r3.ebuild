@@ -19,3 +19,10 @@ BDEPEND="app-arch/unzip"
 
 RENPY_WINDOW_ICON="game/window_icon.png"
 RENPY_TITLE="walk in the sun"
+
+src_prepare() {
+	renpy_src_prepare
+
+	# pretty sure the game version set here is just wrong!
+	sed -i "s/1.1/${PV}/" game/options.rpy || die "sed failed"
+}
