@@ -78,7 +78,8 @@ renpy_src_prepare() {
 	find game -name "*.rpa" -delete || die
 	if [[ -z "${RENPY_USE_PRECOMPILED}" ]]; then
 		while IFS="" read -d $'\0' -r file; do
-			if ! [[ -f "${file/.rpyc/.rpy}" ]]; then
+			if [[ ! -f "${file/.rpyc/.rpy}" ]] &&
+				[[ ! -f "${file/.rpyc/_ren.py}" ]]; then
 				edob -m "decompiling ${file}" unrpyc "${file}"
 			fi
 
