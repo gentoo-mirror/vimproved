@@ -100,7 +100,7 @@ renpy_src_compile() {
 	addpredict /usr/bin/steam_appid.txt
 	addpredict /usr/lib/python3.*/site-packages/renpy
 
-	edo renpy "${S}/game" compile
+	edob renpy "${S}/game" compile
 	find game -name "*.bak" -delete || die "failed to delete script backups"
 }
 
