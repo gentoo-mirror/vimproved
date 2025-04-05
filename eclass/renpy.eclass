@@ -37,7 +37,7 @@ esac
 if [[ ! ${_RENPY_ECLASS} ]]; then
 _RENPY_ECLASS=1
 
-inherit desktop xdg
+inherit desktop wrapper xdg
 
 RDEPEND="
 	>=games-engines/renpy-8.3.4-r1
@@ -111,11 +111,7 @@ renpy_src_install() {
 	insinto "/usr/share/renpy"
 	doins -r "${PN}"
 
-	newbin - "${PN}" <<-EOF
-		#!/bin/sh
-		exec renpy "/usr/share/renpy/${PN}"
-	EOF
-
+	make_wrapper "${PN}" "renpy /usr/share/renpy/${PN}" /usr/share/renpy/${PN}
 	make_desktop_entry "${PN}" "${RENPY_TITLE}"
 }
 
