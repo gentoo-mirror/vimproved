@@ -96,8 +96,6 @@ renpy_src_compile() {
 	einfo "Compiling game scripts"
 	renpy "${S}/game" compile || die "Compile failed"
 	find game -name "*.bak" -delete || die
-	einfo "Deleting source scripts"
-	find game -name "*.rpy" -delete || die "Deleting source scripts failed"
 }
 
 # @FUNCTION: renpy_src_install
