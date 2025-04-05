@@ -67,6 +67,14 @@ renpy_src_prepare() {
 		edob -m "extracting ${archive}" unrpa -p game "${archive}"
 	done
 
+	if [[ -d lib ]]; then
+		rm -rf lib || die
+	fi
+
+	if [[ -d renpy ]]; then
+		rm -rf renpy || die
+	fi
+
 	find game -name "*.rpa" -delete || die
 	if [[ -z "${RENPY_USE_PRECOMPILED}" ]]; then
 		while IFS="" read -d $'\0' -r file; do
@@ -77,14 +85,6 @@ renpy_src_prepare() {
 			rm "${file}" || die
 		done < <(find "${S}" -name "*.rpyc" -print0)
 		find game -name "*.rpyb" -delete || die "failed to delete Ren'Py bytecode"
-	fi
-
-	if [[ -d lib ]]; then
-		rm -rf lib || die
-	fi
-
-	if [[ -d renpy ]]; then
-		rm -rf renpy || die
 	fi
 
 	default
