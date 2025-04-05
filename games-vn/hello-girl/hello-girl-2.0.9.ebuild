@@ -15,5 +15,4 @@ SLOT="0"
 KEYWORDS="~amd64"
 RESTRICT="bindist fetch"
 
-RENPY_NO_DECOMPILE=1
 RENPY_TITLE="Hello Girl"

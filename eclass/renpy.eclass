@@ -19,10 +19,11 @@ case ${EAPI} in
 	*) die "${ECLASS}: EAPI ${EAPI:-0} not supported" ;;
 esac
 
-# @ECLASS_VARIABLE: RENPY_NO_DECOMPILE
+# @ECLASS_VARIABLE: RENPY_USE_PRECOMPILED
 # @DEFAULT_UNSET
 # @DESCRIPTION:
-# Set to any value to skip decompilation of rpyc scripts.
+# Set to any value to use pre-compiled scripts/bytecode as-is instead of
+# attempting to decompile/recompile.
 
 # @ECLASS_VARIABLE: RENPY_TITLE
 # @DESCRIPTION:
@@ -37,7 +38,7 @@ esac
 if [[ ! ${_RENPY_ECLASS} ]]; then
 _RENPY_ECLASS=1
 
-inherit desktop wrapper xdg
+inherit desktop edo wrapper xdg
 
 RDEPEND="
 	>=games-engines/renpy-8.3.4-r1
@@ -46,6 +47,7 @@ RDEPEND="
 BDEPEND="
 	app-arch/unrpa
 	games-util/unrpyc
+	media-gfx/imagemagick[png]
 "
 
 # @FUNCTION: renpy_pkg_nofetch
@@ -62,18 +64,8 @@ renpy_pkg_nofetch() {
 # This is the renpy_src_prepare function.
 renpy_src_prepare() {
 	for archive in $(find game -name "*.rpa"); do
-		unrpa -p game "${archive}" || die
+		edob -m "extracting ${archive}" unrpa -p game "${archive}"
 	done
-
-	find game -name "*.rpa" -delete || die
-	while IFS="" read -d $'\0' -r file; do
-		if ! [[ -f "${file/.rpyc/.rpy}" ]] && [[ -z "${RENPY_NO_DECOMPILE}" ]]; then
-			unrpyc "${file}" || die "unrpyc failed"
-		fi
-
-		rm "${file}" || die
-	done < <(find "${S}" -name "*.rpyc" -print0)
-	find game -name "*.rpyb" -delete || die
 
 	if [[ -d lib ]]; then
 		rm -rf lib || die
@@ -83,6 +75,19 @@ renpy_src_prepare() {
 		rm -rf renpy || die
 	fi
 
+	find game -name "*.rpa" -delete || die
+	if [[ -z "${RENPY_USE_PRECOMPILED}" ]]; then
+		while IFS="" read -d $'\0' -r file; do
+			if [[ ! -f "${file/.rpyc/.rpy}" ]] &&
+				[[ ! -f "${file/.rpyc/_ren.py}" ]]; then
+				edob -m "decompiling ${file}" unrpyc "${file}"
+			fi
+
+			rm "${file}" || die
+		done < <(find "${S}" -name "*.rpyc" -print0)
+		find game -name "*.rpyb" -delete || die "failed to delete Ren'Py bytecode"
+	fi
+
 	default
 }
 
@@ -90,19 +95,21 @@ renpy_src_prepare() {
 # @DESCRIPTION:
 # Attempts to run game to compile renpy scripts.
 renpy_src_compile() {
+	[[ -n "${RENPY_USE_PRECOMPILED}" ]] && return
+
 	addpredict /usr/bin/steam_appid.txt
 	addpredict /usr/lib/python3.*/site-packages/renpy
 
-	einfo "Compiling game scripts"
-	renpy "${S}/game" compile || die "Compile failed"
-	find game -name "*.bak" -delete || die
+	edo renpy "${S}/game" compile
+	find game -name "*.bak" -delete || die "failed to delete script backups"
 }
 
 # @FUNCTION: renpy_src_install
 # @DESCRIPTION:
 # This is the renpy_src_install function.
 renpy_src_install() {
-	newicon -s 256 "${RENPY_WINDOW_ICON}" "${PN}.png"
+	edo magick "${RENPY_WINDOW_ICON}" -resize 256x256 "${T}/${PN}.png"
+	doicon -s 256 "${T}/${PN}.png"
 
 	mv game "${PN}" || die "failed to move game directory"
 
