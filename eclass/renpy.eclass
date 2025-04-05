@@ -46,6 +46,7 @@ RDEPEND="
 BDEPEND="
 	app-arch/unrpa
 	games-util/unrpyc
+	media-gfx/imagemagick[png]
 "
 
 # @FUNCTION: renpy_pkg_nofetch
@@ -102,7 +103,8 @@ renpy_src_compile() {
 # @DESCRIPTION:
 # This is the renpy_src_install function.
 renpy_src_install() {
-	newicon -s 256 "${RENPY_WINDOW_ICON}" "${PN}.png"
+	magick "${RENPY_WINDOW_ICON}" -resize 256x256 "${T}/window_icon.png" || die
+	newicon -s 256 "${T}/window_icon.png" "${PN}.png"
 
 	mv game "${PN}" || die "failed to move game directory"
 
