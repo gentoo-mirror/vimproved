@@ -25,10 +25,12 @@ esac
 # Set to any value to use pre-compiled scripts/bytecode as-is instead of
 # attempting to decompile/recompile.
 
-# @ECLASS_VARIABLE: RENPY_TITLE
+# @ECLASS_VARIABLE: RENPY_OVERRIDE_TITLE
+# @DEFAULT_UNSET
 # @DESCRIPTION:
-# The title of the VN to be used in the desktop entry. Defaults to ${PN}.
-: "${RENPY_TITLE:="${PN}"}"
+# Override the title of the VN to be used in the desktop entry. By default the
+# title is retrieved using Ren'Py's JSON dump feature. This is required if using
+# RENPY_USE_PRECOMPILED.
 
 # @ECLASS_VARIABLE: RENPY_WINDOW_ICON
 # @DESCRIPTION:
@@ -46,6 +48,7 @@ RDEPEND="
 "
 BDEPEND="
 	app-arch/unrpa
+	app-misc/jq
 	games-util/unrpyc
 	media-gfx/imagemagick[png]
 "
@@ -105,13 +108,11 @@ renpy_src_compile() {
 	edob renpy "${S}/game" --json-dump info.json compile
 	find "${S}/game" -name "*.bak" -delete || die "failed to delete script backups"
 
-	if has_version app-misc/jq; then
-		local version="$(jq -r '.version' info.json || die)"
-		if [[ -n ${version} ]] && [[ "${version}" != "${PV%_p*}" ]]; then
-			eqawarn "Mismatch between game version and package version!"
-			eqawarn "Game version: ${version}"
-			eqawarn "Package version: ${PV}"
-		fi
+	local version="$(jq -r '.version' info.json || die)"
+	if [[ -n ${version} ]] && [[ "${version}" != "${PV%_p*}" ]]; then
+		eqawarn "Mismatch between game version and package version!"
+		eqawarn "Game version: ${version}"
+		eqawarn "Package version: ${PV}"
 	fi
 	popd &> /dev/null || die
 }
@@ -125,11 +126,20 @@ renpy_src_install() {
 
 	mv game "${PN}" || die "failed to move game directory"
 
+	local title
+	if [[ -f "${T}/info.json" ]]; then
+		title="$(jq -r '.name' "${T}/info.json" || die)"
+		einfo "Detected game title: ${title}"
+	fi
+	[[ -n "${RENPY_OVERRIDE_TITLE}" ]] && title="${RENPY_OVERRIDE_TITLE}"
+
+	[[ -n "${title}" ]] || die "No title was able to be detected! Please set RENPY_OVERRIDE_TITLE."
+
 	insinto "/usr/share/renpy"
 	doins -r "${PN}"
 
 	make_wrapper "${PN}" "renpy /usr/share/renpy/${PN}" /usr/share/renpy/${PN}
-	make_desktop_entry "${PN}" "${RENPY_TITLE}"
+	make_desktop_entry "${PN}" "${title}"
 }
 
 fi

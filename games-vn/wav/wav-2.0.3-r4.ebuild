@@ -18,7 +18,6 @@ RESTRICT="bindist fetch"
 BDEPEND="app-arch/unzip"
 
 RENPY_WINDOW_ICON="game/AppIcon.png"
-RENPY_TITLE="Without a Voice"
 
 PATCHES=(
 	"${FILESDIR}/wav-2.0.3-endings-syntax.patch"

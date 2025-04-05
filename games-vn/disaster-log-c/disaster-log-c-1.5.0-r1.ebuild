@@ -16,5 +16,3 @@ KEYWORDS="~amd64"
 RESTRICT="bindist fetch"
 
 BDEPEND="app-arch/unzip"
-
-RENPY_TITLE="Disaster Log C"

@@ -17,5 +17,4 @@ RESTRICT="bindist fetch"
 
 BDEPEND="app-arch/unzip"
 
-RENPY_TITLE="Bloom for me"
 RENPY_WINDOW_ICON="game/gui/icon.png"

@@ -18,7 +18,6 @@ RESTRICT="bindist fetch"
 BDEPEND="app-arch/unzip"
 
 RENPY_WINDOW_ICON="game/window_icon.png"
-RENPY_TITLE="walk in the sun"
 
 src_prepare() {
 	renpy_src_prepare

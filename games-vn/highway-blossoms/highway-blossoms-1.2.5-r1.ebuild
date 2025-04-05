@@ -3,7 +3,6 @@
 
 EAPI=8
 
-RENPY_TITLE="Highway Blossoms"
 inherit renpy
 
 DESCRIPTION="A short yuri Visual Novel set in the American Southwest."
