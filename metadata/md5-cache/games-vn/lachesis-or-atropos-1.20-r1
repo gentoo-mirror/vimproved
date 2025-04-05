@@ -1,4 +1,4 @@
-BDEPEND=app-arch/unzip app-arch/unrpa games-util/unrpyc media-gfx/imagemagick[png]
+BDEPEND=app-arch/unzip app-arch/unrpa app-misc/jq games-util/unrpyc media-gfx/imagemagick[png]
 DEFINED_PHASES=compile install nofetch postinst postrm preinst prepare setup
 DESCRIPTION=This world is woven of strings, of fate and of hate.
 EAPI=8
@@ -13,5 +13,5 @@ REQUIRED_USE=^^ ( python_single_target_python3_12 python_single_target_python3_1
 RESTRICT=bindist fetch
 SLOT=0
 SRC_URI=lachesis-or-atropos-win-linux.zip
-_eclasses_=multiprocessing	1e32df7deee68372153dca65f4a7c21f	toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96	python-utils-r1	b7726144f5af59e186d66746d0f513e5	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	edo	367e103a74bf77e6a8da7894d999fa3c	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	304005e7dddfe0665deb63a64f04dd40
-_md5_=d07da4af14e0d9aac0e836d03634715a
+_eclasses_=multiprocessing	1e32df7deee68372153dca65f4a7c21f	toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96	python-utils-r1	b7726144f5af59e186d66746d0f513e5	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	edo	367e103a74bf77e6a8da7894d999fa3c	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	56a7c938081a6e8994da6ed00c31cbf1
+_md5_=bd181fd2c588cba24d38fea8fb4db4d3

@@ -1,4 +1,4 @@
-BDEPEND=app-arch/unzip app-arch/unrpa games-util/unrpyc media-gfx/imagemagick[png]
+BDEPEND=app-arch/unzip app-arch/unrpa app-misc/jq games-util/unrpyc media-gfx/imagemagick[png]
 DEFINED_PHASES=compile install nofetch postinst postrm preinst prepare
 DESCRIPTION=A liminal sapphic visual novel that explores just how far an angel can fall.
 EAPI=8
@@ -11,5 +11,5 @@ RDEPEND=>=games-engines/renpy-8.3.4-r1
 RESTRICT=bindist fetch
 SLOT=0
 SRC_URI=SeraphimSlum-Definitivepc.zip
-_eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	edo	367e103a74bf77e6a8da7894d999fa3c	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	304005e7dddfe0665deb63a64f04dd40
-_md5_=716b760efa42a5071cec0ca4d459ba0c
+_eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	edo	367e103a74bf77e6a8da7894d999fa3c	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	56a7c938081a6e8994da6ed00c31cbf1
+_md5_=d605157230120dab029eb5824d4e157b
