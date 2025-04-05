@@ -21,7 +21,6 @@ PATCHES=(
 	"${FILESDIR}/heart-of-the-woods-2.1.5-newer-renpy.patch"
 )
 
-RENPY_TITLE="Heart of the Woods"
 RENPY_WINDOW_ICON="game/AppIcon.png"
 
 pkg_nofetch() {

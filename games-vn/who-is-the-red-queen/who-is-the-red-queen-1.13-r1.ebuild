@@ -20,5 +20,3 @@ BDEPEND="app-arch/unzip"
 PATCHES=(
 	"${FILESDIR}/who-is-the-red-queen-1.13-reset-transformations.patch"
 )
-
-RENPY_TITLE="Who is the Red Queen?"

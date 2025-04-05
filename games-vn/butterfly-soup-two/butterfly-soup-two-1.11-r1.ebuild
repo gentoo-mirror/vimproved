@@ -14,5 +14,3 @@ LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64"
 RESTRICT="bindist fetch"
-
-RENPY_TITLE="Butterfly Soup 2"

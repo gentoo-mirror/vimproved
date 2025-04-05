@@ -16,5 +16,3 @@ KEYWORDS="~amd64"
 RESTRICT="bindist fetch"
 
 BDEPEND="app-arch/unzip"
-
-RENPY_TITLE="The Vampire(?) Detective and the Case of the Lying Maid"

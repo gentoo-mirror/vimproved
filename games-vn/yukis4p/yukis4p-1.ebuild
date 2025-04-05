@@ -14,6 +14,3 @@ LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64"
 RESTRICT="bindist fetch"
-
-RENPY_TITLE="Yuki’s Palpitating, Passionate, Phenomenal, and quite frankly"
-RENPY_TITLE+=" Proficient quest for a (hot) girlfriend!!!"

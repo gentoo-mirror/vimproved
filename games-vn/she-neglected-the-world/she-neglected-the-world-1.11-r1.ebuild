@@ -16,5 +16,3 @@ KEYWORDS="~amd64"
 RESTRICT="bindist fetch"
 
 BDEPEND="app-arch/unzip"
-
-RENPY_TITLE="from that moment she neglected the world"

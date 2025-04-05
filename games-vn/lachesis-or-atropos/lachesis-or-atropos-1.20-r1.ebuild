@@ -27,8 +27,6 @@ PATCHES=(
 	"${FILESDIR}/lachesis-or-atropos-1.20-reset-transformations.patch"
 )
 
-RENPY_TITLE="Lachesis or Atropos"
-
 src_prepare() {
 	renpy_src_prepare
 	rm -r game/python-packages || die

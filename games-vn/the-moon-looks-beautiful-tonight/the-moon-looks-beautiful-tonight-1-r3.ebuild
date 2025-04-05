@@ -17,5 +17,3 @@ KEYWORDS="~amd64"
 RESTRICT="bindist fetch"
 
 BDEPEND="app-arch/unzip"
-
-RENPY_TITLE="The Moon Looks Beautiful Tonight"
