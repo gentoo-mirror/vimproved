@@ -35,7 +35,7 @@ dev-python/simple-term-menu 1.6.6: A Python package which creates simple interac
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
-dev-util/lua-language-server 3.13.9: Lua language server
+dev-util/lua-language-server 3.14.0: Lua language server
 dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
 games-emulation/azahar 2120.2: Open-source Nintendo 3DS emulator
 games-engines/renpy 8.3.7: Visual novel engine written in python
@@ -84,5 +84,5 @@ media-sound/mopidy-scrobbler 3.0.0_alpha1: Mopidy extension for scrobbling playe
 media-sound/streamrip 2.1.0: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-video/jellyfin-mpv-shim 2.9.0: MPV Cast Client for Jellyfin
 www-apps/kavita-bin 0.8.5.11: Kavita is a fast, feature rich, cross platform reading server.
-www-apps/slskd-bin 0.22.2: A modern client-server application for the Soulseek file sharing network.
+www-apps/slskd-bin 0.22.3: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
