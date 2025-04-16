@@ -4,6 +4,7 @@ acct-user/kavita 0: System user: kavita
 acct-user/slskd 0: System user: slskd
 app-admin/blahajdots 0.5.0 9999: Bespoke dotfile management for sharkgirls.
 app-misc/sptlrx 1.2.3: Synchronized lyrics in your terminal
+app-misc/urlscan 1.0.6: View/select the URLs in an email message or file
 dev-embedded/qmk 1.1.6: A program to help users work with QMK Firmware.
 dev-libs/biscuit 0.16.0: A runtime code generator for RISC-V
 dev-libs/dynarmic 6.7.0: A dynamic recompiler for ARM.
