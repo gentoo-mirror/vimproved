@@ -5,7 +5,7 @@ acct-user/slskd 0: System user: slskd
 app-admin/blahajdots 0.5.0 9999: Bespoke dotfile management for sharkgirls.
 app-misc/sptlrx 1.2.3: Synchronized lyrics in your terminal
 app-misc/urlscan 1.0.6: View/select the URLs in an email message or file
-dev-embedded/qmk 1.1.6: A program to help users work with QMK Firmware.
+dev-embedded/qmk 1.1.7: A program to help users work with QMK Firmware.
 dev-libs/biscuit 0.16.0: A runtime code generator for RISC-V
 dev-libs/dynarmic 6.7.0: A dynamic recompiler for ARM.
 dev-libs/mcl 0.1.13: merry's common library
@@ -84,6 +84,6 @@ media-sound/mopidy-mpris 3.0.3: Mopidy extension for controlling playback from M
 media-sound/mopidy-scrobbler 3.0.0_alpha1: Mopidy extension for scrobbling played tracks to Last.fm
 media-sound/streamrip 2.1.0: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-video/jellyfin-mpv-shim 2.9.0: MPV Cast Client for Jellyfin
-www-apps/kavita-bin 0.8.6.1: Kavita is a fast, feature rich, cross platform reading server.
+www-apps/kavita-bin 0.8.6.2: Kavita is a fast, feature rich, cross platform reading server.
 www-apps/slskd-bin 0.22.5: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
