@@ -1,6 +1,8 @@
---- a/renpy.py
-+++ b/renpy.py
-@@ -28,11 +28,16 @@
+Only in b: .mypy_cache
+diff -upr a/renpy.py b/renpy.py
+--- a/renpy.py	2025-03-17 10:12:07.971551700 -0400
++++ b/renpy.py	2025-04-29 15:05:16.603836696 -0400
+@@ -28,6 +28,7 @@
  from __future__ import print_function, absolute_import
  
  import os
@@ -8,16 +10,7 @@
  import sys
  import warnings
  
- # Functions to be customized by distributors. ################################
- 
-+if len(sys.argv) < 2:
-+    print("Please supply the game directory as an argument.")
-+    sys.exit(1)
-+
- def path_to_gamedir(basedir, name):
-     """
-     Returns the absolute path to the directory containing the game
-@@ -44,36 +49,7 @@ def path_to_gamedir(basedir, name):
+@@ -44,36 +45,10 @@ def path_to_gamedir(basedir, name):
          The basename of the executable, with the extension removed.
      """
  
@@ -51,11 +44,14 @@
 -
 -    else:
 -        gamedir = basedir
-+    gamedir = sys.argv[1]
++    try:
++        gamedir = sys.argv[1]
++    except IndexError:
++        gamedir = site.getsitepackages()[0] + "/launcher/game"
  
      return gamedir
  
-@@ -86,7 +62,11 @@ def path_to_common(renpy_base):
+@@ -86,7 +61,11 @@ def path_to_common(renpy_base):
          The absolute path to the Ren'Py base directory, the directory
          containing this file.
      """
@@ -68,3 +64,13 @@
  
      if os.path.isdir(path):
          return path
+@@ -211,8 +190,7 @@ def path_to_renpy_base():
+     Returns the absolute path to the Ren'Py base directory.
+     """
+ 
+-    renpy_base = os.path.dirname(os.path.abspath(__file__))
+-    renpy_base = os.path.abspath(renpy_base)
++    renpy_base = site.getsitepackages()[0]
+ 
+     return renpy_base
+ 
