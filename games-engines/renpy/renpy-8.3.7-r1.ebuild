@@ -48,9 +48,9 @@ PATCHES=(
 	"${FILESDIR}/renpy-6.99.12.4-compat-style.patch"
 	"${FILESDIR}/renpy-6.99.12.4-compat-infinite-loop.patch"
 	"${FILESDIR}/renpy-8.1.0-ignore_rpyc_errors.patch"
-	"${FILESDIR}/renpy-8.3.2-six.patch"
-	"${FILESDIR}/renpy-8.3.4-system-location.patch"
 	"${FILESDIR}/renpy-8.3.6-ffmpeg-7.patch"
+	"${FILESDIR}/renpy-8.3.7-six.patch"
+	"${FILESDIR}/renpy-8.3.7-system-location.patch"
 )
 
 python_prepare_all() {
@@ -79,6 +79,7 @@ python_install() {
 
 	python_domodule renpy
 	if use development ; then
+		python_domodule gui
 		python_domodule launcher
 	fi
 	if use examples ; then

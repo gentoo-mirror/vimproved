@@ -1,8 +1,24 @@
-From 64a1d09e030bd3bd5603c9a0ae067bd87a26632d Mon Sep 17 00:00:00 2001
-From: Violet Purcell <vimproved@inventati.org>
-Date: Fri, 20 Sep 2024 13:24:26 -0400
-Subject: [PATCH] port from future to six
-
+--- a/launcher/game/choose_theme.rpy
++++ b/launcher/game/choose_theme.rpy
+@@ -23,8 +23,8 @@ init python:
+     import random
+     import codecs
+     import re
++    import six
+     import sys
+-    import future.utils
+ 
+     def theme_names():
+         """
+@@ -98,7 +98,7 @@ init python:
+             return
+ 
+         renpy.style.restore(style_backup)
+-        future.utils.exec_(theme_data.THEME[theme][scheme], globals(), globals())
++        six.exec_(theme_data.THEME[theme][scheme], globals(), globals())
+ 
+         # Rebuild the style cache.
+         renpy.style.rebuild(False)
 --- a/module/generate_styles.py
 +++ b/module/generate_styles.py
 @@ -21,9 +21,6 @@
@@ -28,7 +44,7 @@ Subject: [PATCH] port from future to six
  os.chdir(BASE)
 --- a/renpy/audio/audio.py
 +++ b/renpy/audio/audio.py
-@@ -28,7 +28,7 @@ from __future__ import division, absolute_import, with_statement, print_function
+@@ -28,7 +28,7 @@ from __future__ import division, absolut
  from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
  
  
@@ -37,7 +53,7 @@ Subject: [PATCH] port from future to six
  
  import time
  import pygame_sdl2 # @UnusedImport
-@@ -1234,7 +1234,7 @@ def periodic():
+@@ -1253,7 +1253,7 @@ def periodic():
              exc = periodic_exc
              periodic_exc = None
  
@@ -81,16 +97,15 @@ Subject: [PATCH] port from future to six
  import builtins
  
  import io
-@@ -68,15 +67,10 @@ import operator
- 
+@@ -69,14 +68,9 @@ import operator
  python_open = open
  
--################################################################################
+ ################################################################################
 -# Alias the Python 3 standard library.
 -
 -future.standard_library.install_aliases()
 -
- ################################################################################
+-################################################################################
  # Determine if this is Python2.
  
 -PY2 = future.utils.PY2
@@ -151,6 +166,3 @@ Subject: [PATCH] port from future to six
  
  from typing import Optional
  
--- 
-2.46.0
-
