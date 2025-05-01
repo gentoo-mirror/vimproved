@@ -7,7 +7,7 @@ inherit cmake xdg
 
 DESCRIPTION="Open-source Nintendo 3DS emulator"
 HOMEPAGE="https://azahar-emu.org/"
-MY_PV="20250329-32bb14f"
+MY_PV="20250414-00e3bbb"
 SRC_URI="https://github.com/azahar-emu/azahar/releases/download/${PV}/azahar-unified-source-${MY_PV}.tar.xz
 	-> ${P}.tar.xz"
 S="${WORKDIR}/azahar-unified-source-${MY_PV}"
