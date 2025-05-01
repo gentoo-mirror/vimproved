@@ -23,10 +23,10 @@ dev-python/hjson 3.1.0: A user interface for JSON.
 dev-python/jellyfin-apiclient-python 1.11.0: Python API Client for Jellyfin
 dev-python/lap 0.5.12: Linear Assignment Problem solver (LAPJV/LAPMOD).
 dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
-dev-python/lsprotocol 2023.0.1: Python implementation of the Language Server Protocol.
+dev-python/lsprotocol 2024.0.0_beta1: Python implementation of the Language Server Protocol.
 dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/milc 1.9.1: Opinionated Batteries-Included Python 3 CLI Framework
-dev-python/mitogen 0.3.23 9999: Distributed self-replicating programs in Python
+dev-python/mitogen 0.3.23: Distributed self-replicating programs in Python
 dev-python/pydbus 0.6.0-r1: Pythonic DBus library
 dev-python/pygame-sdl2 8.3.7: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
@@ -38,7 +38,7 @@ dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
 dev-util/lua-language-server 3.14.0: Lua language server
 dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
-games-emulation/azahar 2120.2: Open-source Nintendo 3DS emulator
+games-emulation/azahar 2121_rc1: Open-source Nintendo 3DS emulator
 games-engines/renpy 8.3.7-r1: Visual novel engine written in python
 games-util/unrpyc 2.0.2: A ren'py script decompiler
 games-vn/amelie 1.5: In the middle of a field, far out in the countryside, sits a lone manor.
@@ -75,7 +75,6 @@ games-vn/who-is-the-red-queen 1.13-r1: Alice, Alice, the Red Queen is missing.
 games-vn/yukis4p 1: useless lesbian tries to get a girlfriend
 games-vn/yukis4p2 1: useless lesbian gets kidnapped??
 gui-apps/inhibridge 0.3.0: Daemon that bridges freedesktop.org ScreenSaver inhibitions to systemd-inhibit
-media-libs/lodepng 20210627-r1: PNG encoder and decoder
 media-libs/vma 3.2.1: Easy to integrate Vulkan memory allocation library
 media-sound/mopidy 4.0.0_alpha4: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.6: Jellyfin Extension for Mopidy
