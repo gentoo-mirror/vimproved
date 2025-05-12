@@ -75,7 +75,7 @@ games-vn/who-is-the-red-queen 1.13-r1: Alice, Alice, the Red Queen is missing.
 games-vn/yukis4p 1: useless lesbian tries to get a girlfriend
 games-vn/yukis4p2 1: useless lesbian gets kidnapped??
 gui-apps/inhibridge 0.3.0: Daemon that bridges freedesktop.org ScreenSaver inhibitions to systemd-inhibit
-media-libs/vma 3.2.1: Easy to integrate Vulkan memory allocation library
+media-libs/vma 3.3.0: Easy to integrate Vulkan memory allocation library
 media-sound/mopidy 4.0.0_alpha4: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.6: Jellyfin Extension for Mopidy
 media-sound/mopidy-mpd 4.0.0_alpha1: Mopidy extension for controlling playback from MPD clients
