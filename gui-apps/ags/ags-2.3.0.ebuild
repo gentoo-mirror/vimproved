@@ -21,6 +21,7 @@ RDEPEND="
 	gui-libs/astal
 	gui-libs/astal-gjs
 "
+BDEPEND="virtual/pkgconfig"
 
 src_prepare() {
 	# use sassc instead of dart-sass (unpackaged)
@@ -29,7 +30,9 @@ src_prepare() {
 }
 
 src_compile() {
-	ego build
+	ego build -ldflags "\
+		-X 'main.gtk4LayerShell=${EPREFIX}/usr/$(get_libdir)/libgtk4-layer-shell.so'
+		-X 'main.astalGjs=${EPREFIX}/usr/share/astal/gjs'"
 }
 
 src_install() {
