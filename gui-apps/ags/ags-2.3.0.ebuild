@@ -20,7 +20,6 @@ RDEPEND="
 	dev-util/blueprint-compiler
 	gui-libs/astal
 	gui-libs/astal-gjs
-	gui-libs/astal-lib
 "
 
 src_prepare() {

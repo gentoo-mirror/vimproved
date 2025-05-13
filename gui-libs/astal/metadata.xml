@@ -8,4 +8,11 @@
 	<upstream>
 		<remote-id type="github">Aylur/astal</remote-id>
 	</upstream>
+	<use>
+		<flag name="gtk3">Build the AstalGtk3 library.</flag>
+		<flag name="notifd">Build the AstalNotifd library.</flag>
+		<flag name="river">Build the AstalRiver library.</flag>
+		<flag name="tray">Build the AstalTray library.</flag>
+		<flag name="wireplumber">Build the AstalWp library.</flag>
+	</use>
 </pkgmetadata>
