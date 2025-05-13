@@ -9,6 +9,7 @@
 		<remote-id type="github">Aylur/astal</remote-id>
 	</upstream>
 	<use>
+		<flag name="cava">Build the AstalCava library.</flag>
 		<flag name="gtk3">Build Astal with GTK3 support.</flag>
 		<flag name="gtk4">Build Astal with GTK4 support.</flag>
 		<flag name="notifd">Build the AstalNotifd library.</flag>

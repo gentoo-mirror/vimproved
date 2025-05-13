@@ -17,7 +17,7 @@ S="${WORKDIR}/astal-${ASTAL_COMMIT}/"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+gtk3 +gtk4 networkmanager +notifd pam +river +tray wayland +wireplumber"
+IUSE="cava +gtk3 +gtk4 networkmanager +notifd pam +river +tray wayland +wireplumber"
 REQUIRED_USE="|| ( gtk3 gtk4 )"
 RESTRICT="test"
 
@@ -25,6 +25,7 @@ DEPEND="
 	dev-libs/glib:2
 	dev-libs/json-glib
 	~gui-libs/astal-io-${PV}
+	cava? ( media-libs/libcava )
 	gtk3? (
 		dev-libs/wayland
 		gui-libs/gtk-layer-shell[vala]
@@ -60,6 +61,7 @@ pkg_setup() {
 		$(usev pam auth)
 		battery
 		bluetooth
+		$(usev cava)
 		greet
 		hyprland
 		mpris
