@@ -17,8 +17,8 @@ S="${WORKDIR}/astal-${ASTAL_COMMIT}/"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+gtk3 networkmanager +notifd pam +river +tray wayland +wireplumber"
-REQUIRED_USE="|| ( gtk3 )"
+IUSE="+gtk3 +gtk4 networkmanager +notifd pam +river +tray wayland +wireplumber"
+REQUIRED_USE="|| ( gtk3 gtk4 )"
 RESTRICT="test"
 
 DEPEND="
@@ -30,6 +30,10 @@ DEPEND="
 		gui-libs/gtk-layer-shell[vala]
 		x11-libs/gdk-pixbuf:2
 		x11-libs/gtk+:3
+	)
+	gtk4? (
+		gui-libs/gtk:4
+		gui-libs/gtk4-layer-shell[vala]
 	)
 	notifd? ( x11-libs/gdk-pixbuf )
 	river? ( dev-libs/wayland )
@@ -51,6 +55,7 @@ pkg_setup() {
 	# - cava (needs libcava)
 	MULTIBUILD_VARIANTS=(
 		$(usev gtk3 astal/gtk3)
+		$(usev gtk4 astal/gtk4)
 		apps
 		$(usev pam auth)
 		battery
