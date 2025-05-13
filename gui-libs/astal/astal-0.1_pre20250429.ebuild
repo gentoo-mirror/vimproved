@@ -17,7 +17,7 @@ S="${WORKDIR}/astal-${ASTAL_COMMIT}/"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="cava +gtk3 +gtk4 networkmanager +notifd pam +river +tray wayland +wireplumber"
+IUSE="cava +gtk3 +gtk4 networkmanager notifd pam pipewire river tray wayland"
 REQUIRED_USE="|| ( gtk3 gtk4 )"
 RESTRICT="test"
 
@@ -37,13 +37,13 @@ DEPEND="
 		gui-libs/gtk4-layer-shell[vala]
 	)
 	notifd? ( x11-libs/gdk-pixbuf )
+	pipewire? ( media-video/wireplumber )
 	river? ( dev-libs/wayland )
 	tray? (
 		gui-libs/appmenu-glib-translator
 		x11-libs/gdk-pixbuf
 	)
 	wayland? ( dev-libs/wayland )
-	wireplumber? ( media-video/wireplumber )
 "
 RDEPEND="${DEPEND}"
 
@@ -71,7 +71,7 @@ pkg_setup() {
 		$(usev river)
 		$(usev tray)
 		$(usev wayland wayland-glib)
-		$(usev wireplumber)
+		$(usev pipewire wireplumber)
 	)
 }
 

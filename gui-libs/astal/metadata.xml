@@ -13,8 +13,8 @@
 		<flag name="gtk3">Build Astal with GTK3 support.</flag>
 		<flag name="gtk4">Build Astal with GTK4 support.</flag>
 		<flag name="notifd">Build the AstalNotifd library.</flag>
+		<flag name="pipewire">Build the AstalWp library.</flag>
 		<flag name="river">Build the AstalRiver library.</flag>
 		<flag name="tray">Build the AstalTray library.</flag>
-		<flag name="wireplumber">Build the AstalWp library.</flag>
 	</use>
 </pkgmetadata>
