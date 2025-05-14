@@ -21,6 +21,7 @@ RESTRICT="test"
 
 DEPEND="dev-libs/glib:2"
 RDEPEND="${DEPEND}"
+BDEPEND="$(vala_depend)"
 
 src_configure() {
 	vala_setup
