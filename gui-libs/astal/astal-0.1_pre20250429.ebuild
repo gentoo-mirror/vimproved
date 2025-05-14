@@ -46,6 +46,7 @@ DEPEND="
 	wayland? ( dev-libs/wayland )
 "
 RDEPEND="${DEPEND}"
+BDEPEND="$(vala_depend)"
 
 astal_env() {
 	EMESON_SOURCE="${S}/lib/${MULTIBUILD_VARIANT}" "${@}"
