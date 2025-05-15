@@ -1,0 +1,10 @@
+when:
+  - event: push
+    branch: master
+
+steps:
+  - name: pkgcheck
+    image: ghcr.io/pkgcore/pkgcheck
+    commands:
+      - pmaint sync gentoo
+      - pkgcheck scan
