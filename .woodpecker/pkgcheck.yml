@@ -6,4 +6,5 @@ steps:
   - name: pkgcheck
     image: ghcr.io/pkgcore/pkgcheck
     commands:
+      - emerge --sync gentoo
       - pkgcheck scan
