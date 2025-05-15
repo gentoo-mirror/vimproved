@@ -5,4 +5,6 @@ EAPI=8
 
 inherit acct-group
 
+KEYWORDS="~amd64"
+
 ACCT_GROUP_ID=-1
