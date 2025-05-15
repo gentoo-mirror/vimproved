@@ -1,0 +1,5 @@
+steps:
+  - name: pkgcheck
+    image: ghcr.io/pkgcore/pkgcheck
+    commands:
+      - pkgcheck scan
