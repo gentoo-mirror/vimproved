@@ -3,7 +3,7 @@ acct-group/slskd 0: System group: slskd
 acct-user/kavita 0: System user: kavita
 acct-user/slskd 0: System user: slskd
 app-misc/sptlrx 1.2.3: Synchronized lyrics in your terminal
-app-misc/urlscan 1.0.6: View/select the URLs in an email message or file
+app-misc/urlscan 1.0.7: View/select the URLs in an email message or file
 dev-embedded/qmk 1.1.7: A program to help users work with QMK Firmware.
 dev-libs/biscuit 0.16.0: A runtime code generator for RISC-V
 dev-libs/dynarmic 6.7.0: A dynamic recompiler for ARM.
