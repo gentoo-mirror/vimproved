@@ -9,7 +9,7 @@ inherit meson multibuild vala
 
 DESCRIPTION="Building blocks for creating custom desktop shells"
 HOMEPAGE="https://aylur.github.io/astal/"
-ASTAL_COMMIT="4820a3e37cc8eb81db6ed991528fb23472a8e4de"
+ASTAL_COMMIT="7d28889727b80e0a68c20c2f0f1926ddc96a7be6"
 SRC_URI="https://github.com/Aylur/astal/archive/${ASTAL_COMMIT}.tar.gz
 	-> astal-${ASTAL_COMMIT}.tar.gz"
 S="${WORKDIR}/astal-${ASTAL_COMMIT}/"
