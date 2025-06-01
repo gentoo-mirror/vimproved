@@ -13,6 +13,7 @@ S="${WORKDIR}/azahar-unified-source-${PV/_/-}"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
+IUSE="cpu_flags_x86_sse4_2"
 
 RDEPEND="
 	app-arch/zstd:=
@@ -51,6 +52,8 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
+		-DENABLE_SSE42=$(usex cpu_flags_x86_sse4_2)
+
 		-DBUILD_SHARED_LIBS=OFF
 		-DENABLE_LTO=OFF
 		-DENABLE_WEB_SERVICE=OFF
