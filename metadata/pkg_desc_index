@@ -4,7 +4,7 @@ acct-user/kavita 0: System user: kavita
 acct-user/slskd 0: System user: slskd
 app-misc/sptlrx 1.2.3: Synchronized lyrics in your terminal
 app-misc/urlscan 1.0.7: View/select the URLs in an email message or file
-dev-embedded/qmk 1.1.7: A program to help users work with QMK Firmware.
+dev-embedded/qmk 1.1.8: A program to help users work with QMK Firmware.
 dev-libs/biscuit 0.16.0: A runtime code generator for RISC-V
 dev-libs/dynarmic 6.7.0: A dynamic recompiler for ARM.
 dev-libs/mcl 0.1.13: merry's common library
@@ -25,7 +25,7 @@ dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
 dev-python/lsprotocol 2024.0.0_beta1: Python implementation of the Language Server Protocol.
 dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/milc 1.9.1: Opinionated Batteries-Included Python 3 CLI Framework
-dev-python/mitogen 0.3.23: Distributed self-replicating programs in Python
+dev-python/mitogen 0.3.24: Distributed self-replicating programs in Python
 dev-python/pydbus 0.6.0-r1: Pythonic DBus library
 dev-python/pygame-sdl2 8.3.7: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
@@ -37,7 +37,7 @@ dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
 dev-util/lua-language-server 3.14.0: Lua language server
 dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
-games-emulation/azahar 2121.1: Open-source Nintendo 3DS emulator
+games-emulation/azahar 2122_alpha1: Open-source Nintendo 3DS emulator
 games-engines/renpy 8.3.7-r1: Visual novel engine written in python
 games-util/unrpyc 2.0.2: A ren'py script decompiler
 games-vn/amelie 1.5: In the middle of a field, far out in the countryside, sits a lone manor.
@@ -76,9 +76,9 @@ games-vn/yukis4p2 1: useless lesbian gets kidnapped??
 gui-apps/ags 2.3.0: Scaffolding CLI for Astal+TypeScript
 gui-apps/inhibridge 0.3.0: Daemon that bridges freedesktop.org ScreenSaver inhibitions to systemd-inhibit
 gui-libs/appmenu-glib-translator 25.04: A translator from DBusMenu to GMenuModel
-gui-libs/astal 0.1_pre20250512: Building blocks for creating custom desktop shells
-gui-libs/astal-gjs 0.1_pre20250512: Building blocks for creating custom desktop shells
-gui-libs/astal-io 0.1_pre20250512: Building blocks for creating custom desktop shells
+gui-libs/astal 0.1_pre20250530: Building blocks for creating custom desktop shells
+gui-libs/astal-gjs 0.1_pre20250530: Building blocks for creating custom desktop shells
+gui-libs/astal-io 0.1_pre20250530: Building blocks for creating custom desktop shells
 gui-libs/gtk4-layer-shell 1.1.1: A library for using the Layer Shell Wayland protocol with GTK4.
 media-libs/libcava 0.10.4: Console-based Audio Visualizer for Alsa
 media-libs/vma 3.3.0: Easy to integrate Vulkan memory allocation library
