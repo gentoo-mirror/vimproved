@@ -1,15 +1,15 @@
 BDEPEND=>=dev-build/meson-1.2.3 app-alternatives/ninja dev-build/meson-format-array
 DEFINED_PHASES=compile configure install test
-DEPEND=dev-libs/gjs dev-libs/glib:2 ~gui-libs/astal-0.1_pre20250530 ~gui-libs/astal-io-0.1_pre20250530
+DEPEND=dev-libs/gjs dev-libs/glib:2 ~gui-libs/astal-0.1_pre20250610 ~gui-libs/astal-io-0.1_pre20250610
 DESCRIPTION=Building blocks for creating custom desktop shells
 EAPI=8
 HOMEPAGE=https://aylur.github.io/astal/
 INHERIT=meson
 KEYWORDS=~amd64
 LICENSE=LGPL-2.1
-RDEPEND=dev-libs/gjs dev-libs/glib:2 ~gui-libs/astal-0.1_pre20250530 ~gui-libs/astal-io-0.1_pre20250530
+RDEPEND=dev-libs/gjs dev-libs/glib:2 ~gui-libs/astal-0.1_pre20250610 ~gui-libs/astal-io-0.1_pre20250610
 RESTRICT=test
 SLOT=0
-SRC_URI=https://github.com/Aylur/astal/archive/7d28889727b80e0a68c20c2f0f1926ddc96a7be6.tar.gz -> astal-7d28889727b80e0a68c20c2f0f1926ddc96a7be6.tar.gz
+SRC_URI=https://github.com/Aylur/astal/archive/dd8a4662f2f17fb4326a7bd0fb2d054f5d477ba3.tar.gz -> astal-dd8a4662f2f17fb4326a7bd0fb2d054f5d477ba3.tar.gz
 _eclasses_=toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	flag-o-matic	b892042b2667b8ac69ec8a2571dc290a	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	python-utils-r1	b043191f3a82642545249acea7318e03	meson	99466844dd8d4fcfb07578a76f5a9922
-_md5_=714ae46d26db69548fb6bc70085bdc7d
+_md5_=e6eb8d52116d84de9260c572d024cee5
