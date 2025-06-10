@@ -36,6 +36,7 @@ DEPEND="
 		gui-libs/gtk:4
 		gui-libs/gtk4-layer-shell[vala]
 	)
+	networkmanager? ( net-misc/networkmanager[vala] )
 	notifd? ( x11-libs/gdk-pixbuf )
 	pipewire? ( media-video/wireplumber )
 	river? ( dev-libs/wayland )
