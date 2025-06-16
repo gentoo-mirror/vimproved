@@ -51,6 +51,7 @@ PATCHES=(
 	"${FILESDIR}/renpy-8.3.6-ffmpeg-7.patch"
 	"${FILESDIR}/renpy-8.3.7-six.patch"
 	"${FILESDIR}/renpy-8.3.7-system-location.patch"
+	"${FILESDIR}/renpy-8.3.7-gl-bytestring.patch"
 )
 
 python_prepare_all() {
