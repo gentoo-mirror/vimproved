@@ -1,0 +1,11 @@
+--- a/renpy/gl/glenviron_shader.pyx
++++ b/renpy/gl/glenviron_shader.pyx
+@@ -278,7 +278,7 @@ def check_status(shader, handle, type):
+     else:
+         glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &log_length)
+ 
+-    log = ' ' * log_length
++    log = b' ' * log_length
+ 
+     if shader:
+         glGetShaderInfoLog(handle, log_length, &log_length, <char *> log)
