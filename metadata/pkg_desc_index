@@ -5,7 +5,7 @@ acct-user/slskd 0: System user: slskd
 app-misc/sptlrx 1.2.3: Synchronized lyrics in your terminal
 app-misc/urlscan 1.0.7: View/select the URLs in an email message or file
 dev-embedded/qmk 1.1.8: A program to help users work with QMK Firmware.
-dev-libs/biscuit 0.16.0: A runtime code generator for RISC-V
+dev-libs/biscuit 0.17.0: A runtime code generator for RISC-V
 dev-libs/dynarmic 6.7.0: A dynamic recompiler for ARM.
 dev-libs/mcl 0.1.13: merry's common library
 dev-libs/oaknut 2.0.2: Yet another AArch64 emitter
@@ -17,15 +17,15 @@ dev-python/deezer-py 1.3.7: A wrapper for all Deezer's APIs
 dev-python/discord-rpc-py 1.3.0: A Discord Rich Presence library for Python 2 & 3
 dev-python/dotty-dict 1.3.1: Dictionary wrapper for quick access to deeply nested keys.
 dev-python/halo 0.0.31: Beautiful terminal spinners in Python
-dev-python/hid 1.0.7: ctypes bindings for hidapi
+dev-python/hid 1.0.8: ctypes bindings for hidapi
 dev-python/hjson 3.1.0: A user interface for JSON.
 dev-python/jellyfin-apiclient-python 1.11.0: Python API Client for Jellyfin
 dev-python/lap 0.5.12: Linear Assignment Problem solver (LAPJV/LAPMOD).
 dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
-dev-python/lsprotocol 2025.0.0_rc1: Python implementation of the Language Server Protocol.
+dev-python/lsprotocol 2025.0.0: Python implementation of the Language Server Protocol.
 dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/milc 1.9.1: Opinionated Batteries-Included Python 3 CLI Framework
-dev-python/mitogen 0.3.25_alpha1: Distributed self-replicating programs in Python
+dev-python/mitogen 0.3.25_alpha2: Distributed self-replicating programs in Python
 dev-python/pydbus 0.6.0-r1: Pythonic DBus library
 dev-python/pygame-sdl2 8.3.7: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
@@ -35,9 +35,9 @@ dev-python/simple-term-menu 1.6.6: A Python package which creates simple interac
 dev-python/spinners 0.0.24: Spinners for terminals
 dev-python/toml 0.10.2: Python Library for Tom's Obvious, Minimal Language
 dev-util/fnlfmt 0.3.2: A formatter for Fennel code
-dev-util/lua-language-server 3.14.0: Lua language server
+dev-util/lua-language-server 3.15.0: Lua language server
 dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
-games-emulation/azahar 2122_rc2: Open-source Nintendo 3DS emulator
+games-emulation/azahar 2122.1: Open-source Nintendo 3DS emulator
 games-engines/renpy 8.3.7-r1: Visual novel engine written in python
 games-util/unrpyc 2.0.2: A ren'py script decompiler
 games-vn/amelie 1.5: In the middle of a field, far out in the countryside, sits a lone manor.
