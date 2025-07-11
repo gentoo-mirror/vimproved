@@ -9,7 +9,7 @@ dev-libs/biscuit 0.17.0: A runtime code generator for RISC-V
 dev-libs/dynarmic 6.7.0: A dynamic recompiler for ARM.
 dev-libs/mcl 0.1.13: merry's common library
 dev-libs/oaknut 2.0.2: Yet another AArch64 emitter
-dev-libs/xbyak 7.26: A JIT assembler for x86/x64
+dev-libs/xbyak 7.27: A JIT assembler for x86/x64
 dev-libs/zycore 1.5.2: Zyan Core Library for C
 dev-libs/zydis 4.1.1: Fast and lightweight x86/x86-64 disassembler and code generation library
 dev-python/aiolimiter 1.2.1: An efficient implementation of a rate limiter for asyncio.
@@ -25,7 +25,7 @@ dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
 dev-python/lsprotocol 2025.0.0: Python implementation of the Language Server Protocol.
 dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/milc 1.9.1: Opinionated Batteries-Included Python 3 CLI Framework
-dev-python/mitogen 0.3.25_alpha2: Distributed self-replicating programs in Python
+dev-python/mitogen 0.3.25_alpha3: Distributed self-replicating programs in Python
 dev-python/pydbus 0.6.0-r1: Pythonic DBus library
 dev-python/pygame-sdl2 8.3.7: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
@@ -90,6 +90,6 @@ media-sound/mopidy-scrobbler 3.0.0_alpha1: Mopidy extension for scrobbling playe
 media-sound/streamrip 2.1.0: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-video/jellyfin-mpv-shim 2.9.0: MPV Cast Client for Jellyfin
 net-misc/jellyfin-rpc 1.3.3: Displays the content you're currently watching on Discord!
-www-apps/kavita-bin 0.8.6.2: Kavita is a fast, feature rich, cross platform reading server.
-www-apps/slskd-bin 0.22.5: A modern client-server application for the Soulseek file sharing network.
+www-apps/kavita-bin 0.8.7: Kavita is a fast, feature rich, cross platform reading server.
+www-apps/slskd-bin 0.23.1: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors
