@@ -1,6 +1,8 @@
 acct-group/kavita 0: System group: kavita
+acct-group/shoko 0: System group: shoko
 acct-group/slskd 0: System group: slskd
 acct-user/kavita 0: System user: kavita
+acct-user/shoko 0: System user: shoko
 acct-user/slskd 0: System user: slskd
 app-misc/sptlrx 1.2.3: Synchronized lyrics in your terminal
 app-misc/urlscan 1.0.7: View/select the URLs in an email message or file
@@ -91,5 +93,6 @@ media-sound/streamrip 2.1.0: A scriptable music downloader for Qobuz, Tidal, Sou
 media-video/jellyfin-mpv-shim 2.9.0: MPV Cast Client for Jellyfin
 net-misc/jellyfin-rpc 1.3.3: Displays the content you're currently watching on Discord!
 www-apps/kavita-bin 0.8.7: Kavita is a fast, feature rich, cross platform reading server.
+www-apps/shoko-bin 5.1.0: Shoko makes managing your anime collection effortless.
 www-apps/slskd-bin 0.23.1: A modern client-server application for the Soulseek file sharing network.
 x11-themes/rose-pine-xcursors 1.1.0: Soho vibes for Cursors

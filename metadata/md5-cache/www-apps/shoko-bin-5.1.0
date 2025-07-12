@@ -1,0 +1,15 @@
+BDEPEND=acct-user/shoko app-arch/unzip virtual/pkgconfig
+DEFINED_PHASES=install
+DEPEND=acct-user/shoko
+DESCRIPTION=Shoko makes managing your anime collection effortless.
+EAPI=8
+HOMEPAGE=https://shokoanime.com/
+INHERIT=systemd
+KEYWORDS=-* ~amd64
+LICENSE=MIT
+RDEPEND=acct-user/shoko
+RESTRICT=mirror test
+SLOT=0
+SRC_URI=https://github.com/ShokoAnime/ShokoServer/releases/download/v5.1.0/Shoko.CLI_Framework_any-x64.zip -> shoko-bin-5.1.0.zip
+_eclasses_=toolchain-funcs	a6df79c1e9bc84369dbf3d44206ac772	systemd	a964c0cbe818b5729da1dbfcee5be861
+_md5_=14861feeb89bef99b311258fd65b48df
