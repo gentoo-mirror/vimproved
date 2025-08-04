@@ -40,6 +40,7 @@ dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-g
 games-emulation/azahar 2122.1: Open-source Nintendo 3DS emulator
 games-engines/renpy 8.3.7-r1: Visual novel engine written in python
 games-util/unrpyc 2.0.2: A ren'py script decompiler
+games-vn/ad-nauseam-the-wrong-side 1.1.9: Did you wake up on the wrong side?
 games-vn/amelie 1.5: In the middle of a field, far out in the countryside, sits a lone manor.
 games-vn/bloom-for-me 1: Show me how you bloom, in your darkest moment.
 games-vn/butterfly-soup 2.20-r3: A visual novel about gay asian girls playing baseball and falling in love.
