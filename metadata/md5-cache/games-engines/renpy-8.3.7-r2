@@ -1,0 +1,18 @@
+BDEPEND=python_single_target_python3_13? ( dev-python/cython[python_targets_python3_13(-)] ) virtual/pkgconfig python_single_target_python3_13? ( dev-lang/python:3.13 ) python_single_target_python3_13? ( >=dev-python/gpep517-16[python_targets_python3_13(-)] >=dev-python/setuptools-78.1.0[python_targets_python3_13(-)] )
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare setup test
+DEPEND=dev-libs/fribidi python_single_target_python3_13? ( dev-python/legacy-cgi[python_targets_python3_13(-)] >=dev-python/pygame-sdl2-8.2.0[python_targets_python3_13(-)] >=dev-lang/python-exec-0.3[python_targets_python3_13(-)] dev-python/ecdsa[python_targets_python3_13(-)] dev-python/six[python_targets_python3_13(-)] ) media-libs/glew:0 media-libs/libpng:0 media-libs/libsdl2[video] media-libs/freetype:2 sys-libs/zlib media-video/ffmpeg:= python_single_target_python3_13? ( dev-lang/python:3.13 )
+DESCRIPTION=Visual novel engine written in python
+EAPI=8
+HOMEPAGE=https://www.renpy.org
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=edo desktop distutils-r1 xdg
+IUSE=development doc examples +python_single_target_python3_13 debug
+KEYWORDS=~amd64 ~x86
+LICENSE=MIT
+RDEPEND=dev-libs/fribidi python_single_target_python3_13? ( dev-python/legacy-cgi[python_targets_python3_13(-)] >=dev-python/pygame-sdl2-8.2.0[python_targets_python3_13(-)] >=dev-lang/python-exec-0.3[python_targets_python3_13(-)] dev-python/ecdsa[python_targets_python3_13(-)] dev-python/six[python_targets_python3_13(-)] ) media-libs/glew:0 media-libs/libpng:0 media-libs/libsdl2[video] media-libs/freetype:2 sys-libs/zlib media-video/ffmpeg:= python_single_target_python3_13? ( dev-lang/python:3.13 )
+REQUIRED_USE=examples? ( development ) ^^ ( python_single_target_python3_13 )
+RESTRICT=test
+SLOT=0
+SRC_URI=https://www.renpy.org/dl/8.3.7/renpy-8.3.7-source.tar.bz2
+_eclasses_=edo	a5e294016aa84979fcb2459749eb80b2	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	out-of-source-utils	dbf9e34ee8964084651e25907fa8f52c	multibuild	4650a65187015567b4e041bb9bfdb364	multilib	b2a329026f2e404e9e371097dda47f96	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	python-utils-r1	8a006695bc0db22490452dd06914dda5	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57	distutils-r1	2b2c8cb98d56555491868decc50e5a56	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575
+_md5_=54f282ba11706757d9bc8aa58bffe7f8
