@@ -189,8 +189,6 @@ def path_to_renpy_base():
 
     renpy_base = os.getenv("RENPY_BASE", site.getsitepackages()[0])
 
-    print(renpy_base)
-
     return os.path.abspath(renpy_base)
 
 def path_to_logdir(basedir):
