@@ -3,8 +3,6 @@
 
 EAPI=8
 
-RENPY_OVERRIDE_TITLE="National Park Girls: Love Our Parks Edition"
-
 inherit renpy
 
 DESCRIPTION="All 5 episodes of National Park Girls in one release with improvements!"
