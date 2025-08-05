@@ -104,6 +104,7 @@ renpy_src_compile() {
 	addpredict /usr/lib/python3.*/site-packages/renpy
 
 	local -x RENPY_NO_STEAM=1
+	local -x SDL_VIDEODRIVER=dummy
 
 	edob renpy "${S}/game" --json-dump info.json compile
 	find "${S}/game" -name "*.bak" -delete || die "failed to delete script backups"
