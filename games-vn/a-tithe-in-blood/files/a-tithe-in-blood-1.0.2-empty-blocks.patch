@@ -1,0 +1,20 @@
+--- a/game/script/A1S1.rpy
++++ b/game/script/A1S1.rpy
+@@ -92,7 +92,7 @@ pause 1
+ 
+ show bg modern train day at trainShakeTrainBody()
+ show subwaycrowds
+-show honoka neutral right at tint_train_day, trainShakeHonoka():
++show honoka neutral right at tint_train_day, trainShakeHonoka()
+ with fastdisright
+ # with dissolve
+ window show
+@@ -285,7 +285,7 @@ with dissolve
+ # Optional cutin Magic circle drawing
+ window show Dissolve(0.0)
+ window hide dissolve
+-show bg black:
++show bg black
+ with dissolve
+ if (not shouldSanitiseHeartbeats()):
+     play ambience2 heartbeat fadein 10.0
