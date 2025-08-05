@@ -19,4 +19,5 @@ BDEPEND="app-arch/unzip"
 
 PATCHES=(
 	"${FILESDIR}/operation-eventide-2.0-scene-block.patch"
+	"${FILESDIR}/operation-eventide-2.1-glitch-int.patch"
 )
