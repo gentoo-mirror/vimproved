@@ -40,6 +40,7 @@ dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-g
 games-emulation/azahar 2122.1: Open-source Nintendo 3DS emulator
 games-engines/renpy 8.3.7-r1: Visual novel engine written in python
 games-util/unrpyc 2.0.2: A ren'py script decompiler
+games-vn/a-tithe-in-blood 1.0.2: A yuri romance visual novel about depression, grieving, and blood magic.
 games-vn/ad-nauseam-the-wrong-side 1.1.9: Did you wake up on the wrong side?
 games-vn/amelie 1.5: In the middle of a field, far out in the countryside, sits a lone manor.
 games-vn/heart-of-the-woods 2.1.5-r1: A yuri VN about a love between two girls that transcends life and death.
