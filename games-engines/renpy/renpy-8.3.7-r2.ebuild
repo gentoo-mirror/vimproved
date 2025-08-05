@@ -6,9 +6,9 @@ EAPI=8
 DISTUTILS_EXT=1
 DISTUTILS_SINGLE_IMPL=1
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_13 )
 
-inherit desktop distutils-r1
+inherit edo desktop distutils-r1 xdg
 
 DESCRIPTION="Visual novel engine written in python"
 HOMEPAGE="https://www.renpy.org"
@@ -26,6 +26,7 @@ RESTRICT="test"
 DEPEND="
 	dev-libs/fribidi
 	$(python_gen_cond_dep '
+		dev-python/legacy-cgi[${PYTHON_USEDEP}]
 		>=dev-python/pygame-sdl2-8.2.0[${PYTHON_USEDEP}]
 		>=dev-lang/python-exec-0.3[${PYTHON_USEDEP}]
 		dev-python/ecdsa[${PYTHON_USEDEP}]
@@ -50,13 +51,14 @@ PATCHES=(
 	"${FILESDIR}/renpy-8.1.0-ignore_rpyc_errors.patch"
 	"${FILESDIR}/renpy-8.3.6-ffmpeg-7.patch"
 	"${FILESDIR}/renpy-8.3.7-six.patch"
-	"${FILESDIR}/renpy-8.3.7-system-location.patch"
 	"${FILESDIR}/renpy-8.3.7-gl-bytestring.patch"
 )
 
 python_prepare_all() {
 	einfo "Deleting precompiled python files"
 	find . -name '*.py[co]' -print -delete || die
+
+	cp "${FILESDIR}/renpy.py" . || die
 
 	distutils-r1_python_prepare_all
 }
@@ -68,7 +70,8 @@ python_compile() {
 	distutils-r1_python_compile
 	popd || die
 
-	"${EPYTHON}" ./renpy.py renpy compile
+	local -x RENPY_BASE="${S}"
+	edo "${EPYTHON}" renpy.py renpy/common compile
 }
 
 python_install() {
@@ -100,25 +103,4 @@ python_install_all() {
 		doins -r doc/*
 	fi
 	newman "${FILESDIR}/${PN}.1" "${P}.1"
-}
-
-pkg_preinst() {
-	use development && gnome2_icon_savelist
-}
-
-pkg_postinst() {
-	use development && gnome2_icon_cache_update
-
-	local v
-	for v in ${REPLACING_VERSIONS}; do
-		ver_test "${v}" -ge 7 && continue
-		einfo "Starting from ${PN}-7 slots are dropped."
-		einfo "RenPy natively supports compatibility with games made for older versions."
-		einfo "Report bugs upstream on such problems, usually they are easy to fix."
-		break
-	done
-}
-
-pkg_postrm() {
-	use development && gnome2_icon_cache_update
 }
