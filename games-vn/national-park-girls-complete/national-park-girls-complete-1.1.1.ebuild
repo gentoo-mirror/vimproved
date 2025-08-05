@@ -4,7 +4,6 @@
 EAPI=8
 
 RENPY_OVERRIDE_TITLE="National Park Girls: Love Our Parks Edition"
-RENPY_USE_PRECOMPILED=1
 
 inherit renpy
 
