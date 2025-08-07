@@ -21,6 +21,7 @@ BDEPEND="app-arch/unzip"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.0.2-empty-blocks.patch"
+	"${FILESDIR}/${PN}-1.0.2-version.patch"
 )
 
 pkg_nofetch() {
