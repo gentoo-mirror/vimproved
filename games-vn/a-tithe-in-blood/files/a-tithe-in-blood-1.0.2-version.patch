@@ -1,0 +1,11 @@
+--- a/game/AkemiLegacySupport.rpy
++++ b/game/AkemiLegacySupport.rpy
+@@ -19,7 +19,7 @@ init -73 python:
+     def isRenpy74xOrHigher():
+         # ratapy reports as SDK version 7.4.0.0 despite being mostly based off of 7.3.5.606.
+         # As a result, we will depend against a minimum SDK version of specifically 7.4.0.1167 instead of simply 7.4 as a workaround.
+-        return (compareExplodedSemver(renpy.version_only, "7.4.0.1167") >= 0)
++        return True
+ 
+     def legacyOpenFile(filename, encoding=None):
+         return renpy.file(filename)
