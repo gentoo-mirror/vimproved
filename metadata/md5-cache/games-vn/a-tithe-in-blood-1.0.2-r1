@@ -12,4 +12,4 @@ RESTRICT=bindist fetch
 SLOT=0
 SRC_URI=a-tithe-in-blood-1.0.2.zip
 _eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	edo	a5e294016aa84979fcb2459749eb80b2	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	91ea942ff477988b07866378ea3a80a2
-_md5_=1b8daabd2ce1c0ace0dd22b65b7e34a1
+_md5_=c38f67c373719ac8ac2153d2b4adb2f5
