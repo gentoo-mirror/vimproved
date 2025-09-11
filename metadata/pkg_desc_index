@@ -67,9 +67,9 @@ media-libs/libcava 0.10.4: Console-based Audio Visualizer for Alsa
 media-libs/vma 3.3.0: Easy to integrate Vulkan memory allocation library
 media-sound/mopidy 4.0.0_alpha4: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.6: Jellyfin Extension for Mopidy
+media-sound/mopidy-listenbrainz 0.3.0: Mopidy extension for ListenBrainz
 media-sound/mopidy-mpd 4.0.0_alpha1: Mopidy extension for controlling playback from MPD clients
 media-sound/mopidy-mpris 3.0.3: Mopidy extension for controlling playback from MPD clients
-media-sound/mopidy-scrobbler 3.0.0_alpha1: Mopidy extension for scrobbling played tracks to Last.fm
 media-sound/streamrip 2.1.0: A scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 media-video/jellyfin-mpv-shim 2.9.0: MPV Cast Client for Jellyfin
 net-misc/jellyfin-rpc 1.3.3: Displays the content you're currently watching on Discord!
