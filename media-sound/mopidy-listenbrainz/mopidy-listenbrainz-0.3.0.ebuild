@@ -8,17 +8,17 @@ PYTHON_COMPAT=( python3_{12..13} )
 
 inherit distutils-r1 pypi
 
-DESCRIPTION="Mopidy extension for scrobbling played tracks to Last.fm"
-HOMEPAGE="https://mopidy.com/ext/scrobbler/"
+DESCRIPTION="Mopidy extension for ListenBrainz"
+HOMEPAGE="https://mopidy.com/ext/listenbrainz/"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	dev-python/pykka[${PYTHON_USEDEP}]
-	>=dev-python/pylast-4.2[${PYTHON_USEDEP}]
-	>=media-sound/mopidy-4.0.0_alpha3[${PYTHON_USEDEP}]
+	>=dev-python/musicbrainzngs-0.7.1[${PYTHON_USEDEP}]
+	>=dev-python/pykka-2.0.1[${PYTHON_USEDEP}]
+	>=media-sound/mopidy-3.0.0[${PYTHON_USEDEP}]
 "
 
 distutils_enable_tests import-check
