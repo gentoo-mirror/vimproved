@@ -38,10 +38,6 @@ BDEPEND="
 	test? ( dev-python/pytest-import-check[${PYTHON_USEDEP}] )
 "
 
-PATCHES=(
-	"${FILESDIR}/${PN}-8.3.7-cython-3.1.patch"
-)
-
 python_prepare_all() {
 	# PyGame distribution for this version has some pregenerated files;
 	# we need to remove them
