@@ -43,7 +43,7 @@ _RENPY_ECLASS=1
 inherit desktop edo wrapper xdg
 
 RDEPEND="
-	>=games-engines/renpy-8.3.4-r1
+	>=games-engines/renpy-8.3.4-r1:=
 	${PYTHON_DEPS}
 "
 BDEPEND="

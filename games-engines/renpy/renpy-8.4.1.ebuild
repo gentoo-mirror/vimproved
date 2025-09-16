@@ -8,7 +8,7 @@ DISTUTILS_SINGLE_IMPL=1
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_13 )
 
-inherit edo desktop distutils-r1 xdg
+inherit desktop distutils-r1 flag-o-matic xdg
 
 DESCRIPTION="Visual novel engine written in python"
 HOMEPAGE="https://www.renpy.org"
@@ -16,7 +16,7 @@ SRC_URI="https://www.renpy.org/dl/${PV}/${P}-source.tar.bz2"
 S="${WORKDIR}/${P}-source"
 
 LICENSE="MIT"
-SLOT="0"
+SLOT="0/${PV}"
 KEYWORDS="~amd64 ~x86"
 IUSE="development doc examples"
 REQUIRED_USE="examples? ( development )"
@@ -32,6 +32,7 @@ DEPEND="
 		dev-python/ecdsa[${PYTHON_USEDEP}]
 		dev-python/six[${PYTHON_USEDEP}]
 	')
+	media-libs/assimp
 	media-libs/glew:0
 	media-libs/libpng:0
 	media-libs/libsdl2[video]
@@ -49,9 +50,6 @@ PATCHES=(
 	"${FILESDIR}/renpy-6.99.12.4-compat-style.patch"
 	"${FILESDIR}/renpy-6.99.12.4-compat-infinite-loop.patch"
 	"${FILESDIR}/renpy-8.1.0-ignore_rpyc_errors.patch"
-	"${FILESDIR}/renpy-8.3.6-ffmpeg-7.patch"
-	"${FILESDIR}/renpy-8.3.7-six.patch"
-	"${FILESDIR}/renpy-8.3.7-gl-bytestring.patch"
 )
 
 python_prepare_all() {
@@ -66,19 +64,19 @@ python_prepare_all() {
 python_compile() {
 	addpredict /usr/bin/steam_appid.txt
 
-	pushd "${S}"/module || die
+	# build doesn't pick up on freetype2 include dir
+	append-cppflags "-I${EPREFIX}/usr/include/freetype2"
+
 	distutils-r1_python_compile
-	popd || die
 
 	local -x RENPY_BASE="${S}"
-	edo "${EPYTHON}" renpy.py renpy/common compile
+	PYTHONPATH="${BUILD_DIR}/install/$(python_get_sitedir)" "${EPYTHON}" renpy.py renpy/common compile ||
+		die "renpy compile failed"
 }
 
 python_install() {
-	cd "${S}"/module || die
 	distutils-r1_python_install
 
-	cd "${S}" || die
 	python_newscript renpy.py ${PN}
 
 	python_domodule renpy
