@@ -18,7 +18,7 @@ dev-python/log-symbols 0.0.14: Colored symbols for various log levels for Python
 dev-python/lsprotocol 2025.0.0: Python implementation of the Language Server Protocol.
 dev-python/m3u8 6.0.0: Python m3u8 parser
 dev-python/milc 1.9.1: Opinionated Batteries-Included Python 3 CLI Framework
-dev-python/mitogen 0.3.27: Distributed self-replicating programs in Python
+dev-python/mitogen 0.3.28: Distributed self-replicating programs in Python
 dev-python/pydbus 0.6.0-r1: Pythonic DBus library
 dev-python/pygame-sdl2 8.4.1: Reimplementation of portions of the pygame API using SDL2
 dev-python/pystray 0.19.5: Provides systray integration
