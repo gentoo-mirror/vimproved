@@ -32,11 +32,11 @@ dev-util/lua-language-server 3.15.0: Lua language server
 dev-util/teapot-tools 0.4.3-r1: Replacement for depot_tools (gclient) and luci-go (cipd)
 games-engines/renpy 8.4.1: Visual novel engine written in python
 games-util/unrpyc 2.0.2: A ren'py script decompiler
-games-vn/a-tithe-in-blood 1.0.2-r2: A yuri romance visual novel about depression, grieving, and blood magic.
+games-vn/a-tithe-in-blood 1.0.3: A yuri romance visual novel about depression, grieving, and blood magic.
 games-vn/ad-nauseam-the-wrong-side 1.1.9-r1: Did you wake up on the wrong side?
 games-vn/amelie 1.5-r1: In the middle of a field, far out in the countryside, sits a lone manor.
 games-vn/coquette-dragoon 4.031-r1: Girls love eternal mech war VN.
-games-vn/heart-of-the-woods 2.1.5-r2: A yuri VN about a love between two girls that transcends life and death.
+games-vn/heart-of-the-woods 2.1.7: A yuri VN about a love between two girls that transcends life and death.
 games-vn/hello-girl 2.0.9-r1: Rabbit with a telephone
 games-vn/highway-blossoms 1.3.1-r1: A short yuri Visual Novel set in the American Southwest.
 games-vn/idni 1.0.5-r1: [[>SCRUB AWAY THE GUILT<]]
