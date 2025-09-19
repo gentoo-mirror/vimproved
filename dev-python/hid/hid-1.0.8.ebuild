@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_13 )
 
 inherit distutils-r1 pypi
 
@@ -14,7 +14,8 @@ HOMEPAGE="https://pypi.org/project/hid/"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 DEPEND="dev-libs/hidapi"
 RDEPEND="${DEPEND}"
+
+distutils_enable_tests import-check
