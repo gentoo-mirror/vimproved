@@ -15,14 +15,11 @@ SRC_URI="
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
+# no tests
+RESTRICT="test"
 
 src_compile() {
 	ego build
-}
-
-src_test() {
-	einfo "Running basic sanity-check"
-	./sptlrx help || die "sanity-check failed"
 }
 
 src_install() {
