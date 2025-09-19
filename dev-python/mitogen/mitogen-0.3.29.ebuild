@@ -6,21 +6,14 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..13} )
 
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Distributed self-replicating programs in Python"
 HOMEPAGE="https://pypi.org/project/mitogen/"
 
-if [[ ${PV} == 9999 ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/mitogen-hq/mitogen.git"
-else
-	inherit pypi
-	KEYWORDS="~amd64"
-fi
-
 LICENSE="BSD"
 SLOT="0"
+KEYWORDS="~amd64"
 IUSE="+ansible test"
 RESTRICT="!test? ( test )"
 
@@ -49,6 +42,7 @@ python_test() {
 		"${BUILD_DIR}/install$(python_get_sitedir)/ansible_mitogen/plugins/connection/mitogen_kubectl.py"
 		# python2 compat module
 		"${BUILD_DIR}/install$(python_get_sitedir)/mitogen/compat/pkgutil.py"
+		"${BUILD_DIR}/install$(python_get_sitedir)/mitogen/imports/_py314.py"
 	)
 
 	epytest --import-check "${BUILD_DIR}/install$(python_get_sitedir)"
