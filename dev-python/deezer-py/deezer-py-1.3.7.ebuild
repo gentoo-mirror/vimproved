@@ -5,7 +5,7 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
 PYPI_NO_NORMALIZE=1
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_13 )
 
 inherit distutils-r1 pypi
 
@@ -15,6 +15,7 @@ HOMEPAGE="https://pypi.org/project/deezer-py/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="test"
 
 RDEPEND="dev-python/requests[${PYTHON_USEDEP}]"
+
+distutils_enable_tests import-check
