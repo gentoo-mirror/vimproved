@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=poetry
-PYTHON_COMPAT=( python3_13 )
+PYTHON_COMPAT=( python3_{13..14} )
 
 inherit distutils-r1
 
@@ -15,15 +15,5 @@ SRC_URI="https://github.com/mjpieters/aiolimiter/archive/refs/tags/v${PV}.tar.gz
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="test"
-RESTRICT="!test? ( test )"
 
-BDEPEND="test? (
-	dev-python/pytest[${PYTHON_USEDEP}]
-	dev-python/pytest-asyncio[${PYTHON_USEDEP}]
-	dev-python/toml[${PYTHON_USEDEP}]
-)"
-
-python_test() {
-	epytest -o addopts=
-}
+distutils_enable_tests import-check
