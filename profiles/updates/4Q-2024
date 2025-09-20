@@ -1,3 +1,1 @@
-move games-vn/it-gets-so-lonely-here games-vn/lonely
-move games-vn/without-a-voice games-vn/wav
 move dev-python/pygame_sdl2 dev-python/pygame-sdl2
