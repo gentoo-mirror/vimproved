@@ -198,7 +198,7 @@ CRATES="
 	winreg@0.10.1
 	zip@0.6.4
 "
-PYTHON_COMPAT=( python3_13 )
+PYTHON_COMPAT=( python3_{13..14} )
 
 inherit cargo python-any-r1
 
