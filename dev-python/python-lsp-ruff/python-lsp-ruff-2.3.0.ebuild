@@ -24,10 +24,7 @@ RDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${P}-system-ruff-executable.patch"
+	"${FILESDIR}/${PN}-2.3.0-system-ruff-tests.patch"
 )
-
-# broken with the system ruff patch
-EPYTEST_IGNORE=( tests/test_ruff_lint.py )
 
 distutils_enable_tests pytest
