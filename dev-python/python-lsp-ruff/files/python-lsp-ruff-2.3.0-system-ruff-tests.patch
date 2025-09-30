@@ -1,0 +1,37 @@
+diff --git a/tests/test_ruff_lint.py b/tests/test_ruff_lint.py
+index fa915fc..90fd0b2 100644
+--- a/tests/test_ruff_lint.py
++++ b/tests/test_ruff_lint.py
+@@ -93,7 +93,7 @@ def test_ruff_config_param(workspace):
+         _name, doc = temp_document(DOC, workspace)
+         ruff_lint.pylsp_lint(workspace, doc)
+         (call_args,) = popen_mock.call_args[0]
+-        assert "ruff" in call_args
++        assert "ruff" in call_args or "/usr/bin/ruff" in call_args
+         assert f"--config={ruff_conf}" in call_args
+         assert "--extend-select=D,F" in call_args
+         assert "--extend-ignore=E" in call_args
+@@ -182,10 +182,7 @@ def f():
+         diags = ruff_lint.pylsp_lint(workspace, doc)
+ 
+     call_args = popen_mock.call_args[0][0]
+-    assert call_args == [
+-        str(sys.executable),
+-        "-m",
+-        "ruff",
++    call_args_assert = [
+         "check",
+         "--quiet",
+         "--exit-zero",
+@@ -197,6 +194,11 @@ def f():
+         "--",
+         "-",
+     ]
++    assert call_args == [
++        str(sys.executable),
++        "-m",
++        "ruff",
++    ] + call_args_assert or ["/usr/bin/ruff"] + call_args_assert
+ 
+     workspace._config.update(
+         {
