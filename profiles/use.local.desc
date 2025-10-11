@@ -12,5 +12,3 @@ gui-libs/astal:pipewire - Build the AstalWp library.
 gui-libs/astal:river - Build the AstalRiver library.
 gui-libs/astal:tray - Build the AstalTray library.
 gui-libs/gtk4-layer-shell:smoke-tests - Test that all examples can run
-media-libs/libcava:pipewire - Build with PipeWire input support.
-media-libs/libcava:sndio - Build with libsndio input support.

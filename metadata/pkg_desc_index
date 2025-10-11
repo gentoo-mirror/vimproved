@@ -53,7 +53,6 @@ gui-libs/astal 0.1_pre20250610: Building blocks for creating custom desktop shel
 gui-libs/astal-gjs 0.1_pre20250610: Building blocks for creating custom desktop shells
 gui-libs/astal-io 0.1_pre20250610: Building blocks for creating custom desktop shells
 gui-libs/gtk4-layer-shell 1.2.0: A library for using the Layer Shell Wayland protocol with GTK4.
-media-libs/libcava 0.10.4: Console-based Audio Visualizer for Alsa
 media-sound/mopidy 4.0.0_alpha4: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.6: Jellyfin Extension for Mopidy
 media-sound/mopidy-listenbrainz 0.3.0: Mopidy extension for ListenBrainz
