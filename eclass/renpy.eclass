@@ -40,10 +40,14 @@ esac
 if [[ ! ${_RENPY_ECLASS} ]]; then
 _RENPY_ECLASS=1
 
-inherit desktop edo wrapper xdg
+# keep in sync with games-engines/renpy
+PYTHON_COMPAT=( python3_{13..14} )
+inherit desktop edo python-single-r1 wrapper xdg
+
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="
-	>=games-engines/renpy-8.3.4-r1:=
+	>=games-engines/renpy-8.3.4-r1:=[${PYTHON_SINGLE_USEDEP}]
 	${PYTHON_DEPS}
 "
 BDEPEND="
