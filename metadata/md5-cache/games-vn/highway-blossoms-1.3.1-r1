@@ -1,15 +1,17 @@
 BDEPEND=app-arch/unzip app-arch/unrpa app-misc/jq games-util/unrpyc media-gfx/imagemagick[png]
-DEFINED_PHASES=compile install nofetch postinst postrm preinst prepare unpack
+DEFINED_PHASES=compile install nofetch postinst postrm preinst prepare setup unpack
 DESCRIPTION=A short yuri Visual Novel set in the American Southwest.
 EAPI=8
 HOMEPAGE=https://vnstudioelan.itch.io/highway-blossoms
 IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
 INHERIT=renpy
+IUSE=python_single_target_python3_13 python_single_target_python3_14
 KEYWORDS=~amd64
 LICENSE=all-rights-reserved
-RDEPEND=>=games-engines/renpy-8.3.4-r1:=
+RDEPEND=>=games-engines/renpy-8.3.4-r1:=[python_single_target_python3_13(-)?,python_single_target_python3_14(-)?] python_single_target_python3_13? ( dev-lang/python:3.13 ) python_single_target_python3_14? ( dev-lang/python:3.14 )
+REQUIRED_USE=^^ ( python_single_target_python3_13 python_single_target_python3_14 )
 RESTRICT=bindist fetch
 SLOT=0
 SRC_URI=highway-blossoms-unified-zip.zip
-_eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	edo	a5e294016aa84979fcb2459749eb80b2	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	1aeb4cd1b8be923a25b43d6145322ce6
+_eclasses_=desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	edo	a5e294016aa84979fcb2459749eb80b2	multiprocessing	1e32df7deee68372153dca65f4a7c21f	toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	python-utils-r1	0b620dd604ab8af0bc9cd1bcc66d4f7c	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	renpy	c721ff62c7d13bee77a28a3a6576a103
 _md5_=0f95f4ad844c74676136a989f6e28feb
