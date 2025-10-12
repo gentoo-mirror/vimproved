@@ -105,7 +105,9 @@ renpy_src_compile() {
 	[[ -n "${RENPY_USE_PRECOMPILED}" ]] && return
 
 	pushd "${T}" &> /dev/null || die
-	addpredict /usr/lib/python3.*/site-packages/renpy
+	for i in "${EPREFIX}"/usr/lib/python3.*/site-packages/renpy; do
+		addpredict "${i}"
+	done
 
 	local -x RENPY_NO_STEAM=1
 	local -x SDL_VIDEODRIVER=dummy
