@@ -46,13 +46,7 @@ games-vn/operation-eventide 2.1-r2: authenticating ultrapsychoinflammasis. . . .
 games-vn/seraphim-slum 1.0-r2: A liminal sapphic visual novel that explores just how far an angel can fall.
 games-vn/the-final-prize-is-soup 1.05-r5: A survival-horror yuri visual novel.
 games-vn/who-is-the-red-queen 1.13-r2: Alice, Alice, the Red Queen is missing.
-gui-apps/ags 2.3.0: Scaffolding CLI for Astal+TypeScript
 gui-apps/inhibridge 0.3.0: Daemon that bridges freedesktop.org ScreenSaver inhibitions to systemd-inhibit
-gui-libs/appmenu-glib-translator 25.04: A translator from DBusMenu to GMenuModel
-gui-libs/astal 0.1_pre20250610: Building blocks for creating custom desktop shells
-gui-libs/astal-gjs 0.1_pre20250610: Building blocks for creating custom desktop shells
-gui-libs/astal-io 0.1_pre20250610: Building blocks for creating custom desktop shells
-gui-libs/gtk4-layer-shell 1.2.0: A library for using the Layer Shell Wayland protocol with GTK4.
 media-sound/mopidy 4.0.0_alpha4: An extensible music server written in Python.
 media-sound/mopidy-jellyfin 1.0.6: Jellyfin Extension for Mopidy
 media-sound/mopidy-listenbrainz 0.3.0: Mopidy extension for ListenBrainz

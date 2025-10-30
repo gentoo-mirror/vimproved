@@ -4,11 +4,3 @@
 
 dev-python/mitogen:ansible - Install symlinks for Ansible strategy plugins
 games-engines/renpy:development - Install IDE for game developers and an empty game template
-gui-libs/astal:cava - Build the AstalCava library.
-gui-libs/astal:gtk3 - Build Astal with GTK3 support.
-gui-libs/astal:gtk4 - Build Astal with GTK4 support.
-gui-libs/astal:notifd - Build the AstalNotifd library.
-gui-libs/astal:pipewire - Build the AstalWp library.
-gui-libs/astal:river - Build the AstalRiver library.
-gui-libs/astal:tray - Build the AstalTray library.
-gui-libs/gtk4-layer-shell:smoke-tests - Test that all examples can run
